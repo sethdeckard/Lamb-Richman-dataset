@@ -1,0 +1,39 @@
+#developer specific
+*.Publish.xml
+
+#vim backup/swap files
+*.*~
+*.swp
+
+#log files
+log.*.txt
+log.txt
+
+#StyleCop Cache
+*.Cache
+
+#output
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
