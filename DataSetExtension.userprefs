@@ -1,25 +1,32 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtention.TestConsole/Main.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/StationImport.cs">
     <Files>
       <File FileName="DataSetExtension/TemperatureStation.cs" Line="1" Column="1" />
       <File FileName="DataSetExtension.Tests/StationImportTest.cs" Line="3" Column="7" />
       <File FileName="DataSetExtension.Tests/StationTest.cs" Line="20" Column="23" />
       <File FileName="DataSetExtension.Tests/TemperatureStationTest.cs" Line="2" Column="7" />
-      <File FileName="DataSetExtention.TestConsole/Main.cs" Line="12" Column="4" />
+      <File FileName="DataSetExtension/StationImport.cs" Line="44" Column="18" />
+      <File FileName="DataSetExtension.TestConsole/Main.cs" Line="15" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="DataSetExtension" expanded="True" />
-          <Node name="DataSetExtension.Tests" expanded="True" />
-          <Node name="DataSetExtention.TestConsole" expanded="True">
-            <Node name="Main.cs" selected="True" />
+          <Node name="DataSetExtension" expanded="True">
+            <Node name="StationImport.cs" selected="True" />
           </Node>
+          <Node name="DataSetExtension.TestConsole" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="DataSetExtension" expanded="True">
+            <Node name="DataSetExtension" expanded="True">
+              <Node name="DataSetExtension.StationImport" expanded="True" selected="True" />
+            </Node>
+          </Node>
+          <Node name="DataSetExtension.Tests" expanded="True" />
+        </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State />

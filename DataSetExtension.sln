@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension", "DataSet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.Tests", "DataSetExtension.Tests\DataSetExtension.Tests.csproj", "{5E112BB1-16DD-400D-8B79-3643C28826C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtention.TestConsole", "DataSetExtention.TestConsole\DataSetExtention.TestConsole.csproj", "{A70C7236-F8F4-432A-A25F-3292351624E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.TestConsole", "DataSetExtension.TestConsole\DataSetExtension.TestConsole.csproj", "{1D1FD57A-D735-4A40-A35A-A30657D51006}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D1FD57A-D735-4A40-A35A-A30657D51006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1FD57A-D735-4A40-A35A-A30657D51006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1FD57A-D735-4A40-A35A-A30657D51006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1FD57A-D735-4A40-A35A-A30657D51006}.Release|Any CPU.Build.0 = Release|Any CPU
 		{319D852D-23EB-4818-B320-DFB7808E6621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{319D852D-23EB-4818-B320-DFB7808E6621}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{319D852D-23EB-4818-B320-DFB7808E6621}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -21,12 +25,8 @@ Global
 		{5E112BB1-16DD-400D-8B79-3643C28826C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E112BB1-16DD-400D-8B79-3643C28826C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E112BB1-16DD-400D-8B79-3643C28826C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A70C7236-F8F4-432A-A25F-3292351624E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A70C7236-F8F4-432A-A25F-3292351624E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A70C7236-F8F4-432A-A25F-3292351624E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A70C7236-F8F4-432A-A25F-3292351624E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = DataSetExtention.TestConsole\DataSetExtention.TestConsole.csproj
+		StartupItem = DataSetExtension.TestConsole\DataSetExtension.TestConsole.csproj
 	EndGlobalSection
 EndGlobal

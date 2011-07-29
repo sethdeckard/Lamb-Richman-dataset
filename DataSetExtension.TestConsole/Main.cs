@@ -1,7 +1,8 @@
+using System;
 using System.IO;
 using DataSetExtension;
 
-namespace DataSetExtention.TestConsole
+namespace DataSetExtension.TestConsole
 {
 	class MainClass
 	{
@@ -12,4 +13,3 @@ namespace DataSetExtention.TestConsole
 		}
 	}
 }
-
