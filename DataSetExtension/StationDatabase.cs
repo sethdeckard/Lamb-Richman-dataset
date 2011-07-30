@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Text;
-using Dapper;
+using DataSetExtension.Dapper;
 
 namespace DataSetExtension
 {

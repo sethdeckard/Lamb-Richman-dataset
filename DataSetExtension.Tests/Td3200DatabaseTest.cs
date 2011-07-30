@@ -1,13 +1,13 @@
 ﻿using System.Data;
 using System.Data.SQLite;
 using DataSetExtension;
-using Dapper;
+using DataSetExtension.Dapper;
 using NUnit.Framework;
 
 namespace DataSetExtension.Test
 {
     [TestFixture]
-    class Td3200DatabaseTest
+    public class Td3200DatabaseTest
     {
         private const string TemperatureMaxQuery = "select Id, StationId, StationNumber, Date, Value from TemperatureMaxTd3200";
         private const string TemperatureMinQuery = "select Id, StationId, StationNumber, Date, Value from TemperatureMinTd3200";

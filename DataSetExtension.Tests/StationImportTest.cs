@@ -5,7 +5,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using DataSetExtension;
-using Dapper;
+using DataSetExtension.Dapper;
 using NUnit.Framework;
 
 namespace DataSetExtension.Test

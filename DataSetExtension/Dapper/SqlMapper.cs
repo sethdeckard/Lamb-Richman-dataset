@@ -17,7 +17,7 @@ using System.Text;
 using System.Threading;
 using System.Text.RegularExpressions;
 
-namespace Dapper
+namespace DataSetExtension.Dapper
 {
     public static partial class SqlMapper
     {

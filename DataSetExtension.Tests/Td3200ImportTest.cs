@@ -4,13 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using DataSetExtension;
-using Dapper;
+using DataSetExtension.Dapper;
 using NUnit.Framework;
 
 namespace DataSetExtension.Test
 {
     [TestFixture]
-    class Td3200ImportTest
+    public class Td3200ImportTest
     {
         [Test]
         public void Import()

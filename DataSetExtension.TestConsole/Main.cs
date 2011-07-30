@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using Mono.Data.Sqlite;
 using System.Diagnostics;
 using System.IO;
 using DataSetExtension;
@@ -16,7 +16,7 @@ namespace DataSetExtension.TestConsole
 
         private static void ImportStations()
         {
-            using (IDbConnection connection = new SQLiteConnection(@"Data Source=C:\Users\sdeckard\Documents\stations.sqlite;Version=3"))
+            using (IDbConnection connection = new SqliteConnection(@"Data Source=/Users/seth/Documents/LRDataSet/stations.sqlite;Version=3"))
             {
                 connection.Open();
 
@@ -24,12 +24,12 @@ namespace DataSetExtension.TestConsole
                 database.CreateTables();
 
                 var import = new StationImport();
-                import.Import(new FileStream(@"C:\Users\sdeckard\Documents\prcpinfo.txt", FileMode.Open, FileAccess.Read), connection, StationDatabase.PrecipitationStationTable);
+                import.Import(new FileStream(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt", FileMode.Open, FileAccess.Read), connection, StationDatabase.PrecipitationStationTable);
 
                 var percipStations = import.Imported;
 
                 import = new StationImport();
-                import.Import(new FileStream(@"C:\Users\sdeckard\Documents\tmaxinfo.txt", FileMode.Open, FileAccess.Read), connection, StationDatabase.TemperatureStationtable);
+                import.Import(new FileStream(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt", FileMode.Open, FileAccess.Read), connection, StationDatabase.TemperatureStationtable);
 
                 var tempStations = import.Imported;
 
@@ -41,7 +41,7 @@ namespace DataSetExtension.TestConsole
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                rawImport.Import(new FileStream(@"C:\Users\sdeckard\Documents\co05stn.dat", FileMode.Open, FileAccess.Read), connection);
+                rawImport.Import(new FileStream(@"/Users/seth/Documents/LRDataSet/co05stn.dat", FileMode.Open, FileAccess.Read), connection);
 
                 stopwatch.Stop();
             }

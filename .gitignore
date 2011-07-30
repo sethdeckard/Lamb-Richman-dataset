@@ -37,3 +37,4 @@ log.txt
 *.sbr
 obj/
 [Rr]elease*/
+test-result*

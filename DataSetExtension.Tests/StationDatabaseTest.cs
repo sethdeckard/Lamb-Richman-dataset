@@ -2,12 +2,12 @@
 using System.Data.SQLite;
 using DataSetExtension;
 using NUnit.Framework;
-using Dapper;
+using DataSetExtension.Dapper;
 
 namespace DataSetExtension.Test
 {
     [TestFixture]
-    class StationDatabaseTest
+    public class StationDatabaseTest
     {
         private const string PrecipitationQuery = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
             "HistoricalRecordCount, RecordCount from PrecipitationStation";
