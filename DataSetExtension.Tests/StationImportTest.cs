@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
+using Mono.Data.Sqlite;
 using System.IO;
 using System.Linq;
 using DataSetExtension;
@@ -33,7 +33,7 @@ namespace DataSetExtension.Test
 
             writer.BaseStream.Position = 0;
 
-            using (IDbConnection connection = new SQLiteConnection("Data source=:memory:"))
+            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
             {
                 connection.Open();
 
@@ -42,7 +42,7 @@ namespace DataSetExtension.Test
 
                 var import = new StationImport();
                 import.Import(writer.BaseStream, connection, StationDatabase.PrecipitationStationTable);
-
+				
                 var count = connection.Query<long>("select count(*) from PrecipitationStation;").First();
 
                 Assert.That(count, Is.EqualTo(6));

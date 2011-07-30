@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using System.Data.SQLite;
+using Mono.Data.Sqlite;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,7 +30,7 @@ namespace DataSetExtension.Test
 
             var temperatureStation = new Station { Id = 1, Number = "051458" }; 
             var precipitationStation = new Station { Id = 2, Number = "071458" };
-            using (IDbConnection connection = new SQLiteConnection("Data source=:memory:"))
+            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
             {
                 connection.Open();
 

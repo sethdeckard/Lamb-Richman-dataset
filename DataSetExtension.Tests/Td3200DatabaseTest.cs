@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using System.Data.SQLite;
+using Mono.Data.Sqlite;
 using DataSetExtension;
 using DataSetExtension.Dapper;
 using NUnit.Framework;
@@ -16,7 +16,7 @@ namespace DataSetExtension.Test
         [Test]
         public void CreateDatabase()
         {
-            using (IDbConnection connection = new SQLiteConnection("Data source=:memory:"))
+            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
             {
                 connection.Open();
 
@@ -28,8 +28,6 @@ namespace DataSetExtension.Test
                 connection.Query<Td3200>(TemperatureMinQuery);
 
                 connection.Query<Td3200>(PrecipitationQuery);
-
-                Assert.Pass();
             }
         }
     }
