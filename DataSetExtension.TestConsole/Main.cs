@@ -16,7 +16,7 @@ namespace DataSetExtension.TestConsole
 
         private static void ImportStations()
         {
-            using (IDbConnection connection = new SqliteConnection(@"Data Source=/Users/seth/Documents/LRDataSet/stations.sqlite;Version=3"))
+            using (IDbConnection connection = new SqliteConnection(@"Data Source=/Users/seth/Documents/LRDataSet/DataSetExtension.sqlite;Version=3"))
             {
                 connection.Open();
 

@@ -3,7 +3,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using DataSetExtension.Dapper;
+using Dapper;
 
 namespace DataSetExtension
 {
@@ -38,65 +38,78 @@ namespace DataSetExtension
 
                     if (line.Contains("TMAX"))
                     {
-                        var results = (from record in Td3200.Parse(line)
-                                    join station in temperatureStations on record.StationNumber equals station.Number
-                                    select new {record, station}).ToList();
-
-                        results.ForEach(result => result.record.StationId = result.station.Id);
-
-                        foreach (var result in results)
-                        {
-                            var record = result.record;
-                            var query = "insert into " + Td3200Database.TemperatureMaxTd3200Table + "(StationId,StationNumber,Date,Value)";
-                            query += "values(@StationId,@StationNumber,@Date,@Value)";
-
-                            connection.Execute(query, new { record.StationId, record.StationNumber, record.Date, record.Value });
-                        }
-
-                        TemperatureMax.AddRange((from result in results select result.record).ToArray());
+                       ImportTemperatureMax(connection, line);
                     }
 
                     if (line.Contains("TMIN"))
                     {
-                        var results = (from record in Td3200.Parse(line)
-                                       join station in temperatureStations on record.StationNumber equals station.Number
-                                       select new { record, station }).ToList();
-
-                        results.ForEach(r => r.record.StationId = r.station.Id);
-
-                        foreach (var result in results)
-                        {
-                            var record = result.record;
-                            var query = "insert into " + Td3200Database.TemperatureMinTd3200Table + "(StationId,StationNumber,Date,Value)";
-                            query += "values(@StationId,@StationNumber,@Date,@Value)";
-
-                            connection.Execute(query, new { record.StationId, record.StationNumber, record.Date, record.Value });
-                        }
-
-                        TemperatureMin.AddRange((from result in results select result.record).ToArray());
+						ImportTemperatureMin(connection, line);
                     }
 
                     if (line.Contains("PRCP"))
                     {
-                        var results = (from record in Td3200.Parse(line)
-                                       join station in precipitationStations on record.StationNumber equals station.Number
-                                       select new { record, station }).ToList();
-
-                        results.ForEach(r => r.record.StationId = r.station.Id);
-
-                        foreach (var result in results)
-                        {
-                            var record = result.record;
-                            var query = "insert into " + Td3200Database.PrecipitationTd3200Table + "(StationId,StationNumber,Date,Value)";
-                            query += "values(@StationId,@StationNumber,@Date,@Value)";
-
-                            connection.Execute(query, new { record.StationId, record.StationNumber, record.Date, record.Value });
-                        }
-
-                        Precipitation.AddRange((from result in results select result.record).ToArray());
+						ImportPrecipitation(connection, line);
                     }
                 }
             }
         }
+		
+		private void ImportTemperatureMax(IDbConnection connection, string line)
+		{
+			var results = (from record in Td3200.Parse(line)
+        	            join station in temperatureStations on record.StationNumber equals station.Number
+        	            select new {record, station}).ToList();
+        	
+        	results.ForEach(result => result.record.StationId = result.station.Id);
+        	
+        	foreach (var result in results)
+        	{
+        	    var record = result.record;
+        	    var query = "insert into " + Td3200Database.TemperatureMaxTd3200Table + "(StationId,StationNumber,Date,Value)";
+        	    query += "values(@StationId,@StationNumber,@Date,@Value)";
+        	
+        	    connection.Execute(query, new { record.StationId, record.StationNumber, record.Date, record.Value });
+        	}
+        	
+        	TemperatureMax.AddRange((from result in results select result.record).ToArray());
+		}
+		
+		private void ImportTemperatureMin(IDbConnection connection, string line) 
+		{
+			var results = (from record in Td3200.Parse(line)
+                                       join station in temperatureStations on record.StationNumber equals station.Number
+                                       select new { record, station }).ToList ();
+
+			results.ForEach (r => r.record.StationId = r.station.Id);
+
+			foreach (var result in results) {
+				var record = result.record;
+				var query = "insert into " + Td3200Database.TemperatureMinTd3200Table + "(StationId,StationNumber,Date,Value)";
+				query += "values(@StationId,@StationNumber,@Date,@Value)";
+
+				connection.Execute (query, new { record.StationId, record.StationNumber, record.Date, record.Value });
+			}
+
+			TemperatureMin.AddRange ((from result in results select result.record).ToArray ());
+		}
+		
+		private void ImportPrecipitation(IDbConnection connection, string line) 
+		{
+			var results = (from record in Td3200.Parse(line)
+                                       join station in precipitationStations on record.StationNumber equals station.Number
+                                       select new { record, station }).ToList ();
+
+			results.ForEach (r => r.record.StationId = r.station.Id);
+
+			foreach (var result in results) {
+				var record = result.record;
+				var query = "insert into " + Td3200Database.PrecipitationTd3200Table + "(StationId,StationNumber,Date,Value)";
+				query += "values(@StationId,@StationNumber,@Date,@Value)";
+
+				connection.Execute (query, new { record.StationId, record.StationNumber, record.Date, record.Value });
+			}
+
+			Precipitation.AddRange ((from result in results select result.record).ToArray ());			
+		}
     }
 }

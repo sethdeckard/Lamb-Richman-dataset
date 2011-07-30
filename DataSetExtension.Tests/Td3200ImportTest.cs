@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using DataSetExtension;
-using DataSetExtension.Dapper;
+using Dapper;
 using NUnit.Framework;
 
 namespace DataSetExtension.Test

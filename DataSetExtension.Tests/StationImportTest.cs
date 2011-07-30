@@ -5,7 +5,7 @@ using Mono.Data.Sqlite;
 using System.IO;
 using System.Linq;
 using DataSetExtension;
-using DataSetExtension.Dapper;
+using Dapper;
 using NUnit.Framework;
 
 namespace DataSetExtension.Test

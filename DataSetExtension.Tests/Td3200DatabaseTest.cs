@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Mono.Data.Sqlite;
 using DataSetExtension;
-using DataSetExtension.Dapper;
+using Dapper;
 using NUnit.Framework;
 
 namespace DataSetExtension.Test

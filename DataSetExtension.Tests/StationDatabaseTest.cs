@@ -2,7 +2,7 @@
 using Mono.Data.Sqlite;
 using DataSetExtension;
 using NUnit.Framework;
-using DataSetExtension.Dapper;
+using Dapper;
 
 namespace DataSetExtension.Test
 {
