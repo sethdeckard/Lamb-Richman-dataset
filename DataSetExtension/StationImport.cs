@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.IO;
+using Dapper;
 
 namespace DataSetExtension
 {
@@ -12,7 +14,7 @@ namespace DataSetExtension
             Imported = new List<Station>();
         }
 
-        public void Import(Stream stream)
+        public void Import(Stream stream, IDbConnection connection, string table)
         {
             using (var reader = new StreamReader(stream))
             {
@@ -39,10 +41,33 @@ namespace DataSetExtension
 
                         previous = station;
 
+                        SaveStation(station, table, connection);
+
                         Imported.Add(station);
                     }
                 }
             }
+        }
+
+        private static void SaveStation(Station station, string table, IDbConnection connection)
+        {
+            var query = "insert into " + table +
+                        "(Number,Name,GridPoint,Sequence,Latitude,Longitude,GridPointLatitude,GridPointLongitude,HistoricalRecordCount,RecordCount)";
+            query += "values(@Number,@Name,@GridPoint,@Sequence,@Latitude,@Longitude,@GridPointLatitude,@GridPointLongitude,@HistoricalRecordCount,@RecordCount)";
+
+            connection.Execute(query, new
+                                          {
+                                              station.Number, 
+                                              station.Name, 
+                                              station.GridPoint, 
+                                              station.Sequence, 
+                                              station.Latitude, 
+                                              station.Longitude, 
+                                              station.GridPointLatitude,
+                                              station.GridPointLongitude,
+                                              station.HistoricalRecordCount,
+                                              station.RecordCount
+                                          });
         }
     }
 }

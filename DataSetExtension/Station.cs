@@ -31,12 +31,12 @@
         /// <summary>
         /// Rounded Latitude of the Grid Point
         /// </summary>
-        public int RoundedLatitude { get; set; }
+        public int GridPointLatitude { get; set; }
 
         /// <summary>
         /// Rounded Longitude of the Grid Point
         /// </summary>
-        public int RoundedLongitude { get; set; }
+        public int GridPointLongitude { get; set; }
 
         public int HistoricalRecordCount { get; set; }
 
@@ -48,8 +48,8 @@
             if (gridpoint != "")
             {
                 GridPoint = int.Parse(record.Substring(0, 3).Trim());
-                RoundedLatitude = int.Parse(record.Substring(4, 3).Trim());
-                RoundedLongitude = int.Parse(record.Substring(7, 3));
+                GridPointLatitude = int.Parse(record.Substring(4, 3).Trim());
+                GridPointLongitude = int.Parse(record.Substring(7, 3));
             }
 
             Name = record.Substring(10, 30).Trim();
@@ -64,8 +64,8 @@
             Parse(record);
 
             GridPoint = parent.GridPoint;
-            RoundedLatitude = parent.RoundedLatitude;
-            RoundedLongitude = parent.RoundedLongitude;
+            GridPointLatitude = parent.GridPointLatitude;
+            GridPointLongitude = parent.GridPointLongitude;
             Sequence = parent.Sequence + 1;
         }
     }

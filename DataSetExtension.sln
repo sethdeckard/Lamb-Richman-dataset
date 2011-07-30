@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension", "DataSetExtension\DataSetExtension.csproj", "{319D852D-23EB-4818-B320-DFB7808E6621}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.Tests", "DataSetExtension.Tests\DataSetExtension.Tests.csproj", "{5E112BB1-16DD-400D-8B79-3643C28826C5}"

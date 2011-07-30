@@ -1,5 +1,11 @@
-﻿using System.IO;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
+using System.IO;
+using System.Linq;
 using DataSetExtension;
+using Dapper;
 using NUnit.Framework;
 
 namespace DataSetExtension.Test
@@ -27,10 +33,20 @@ namespace DataSetExtension.Test
 
             writer.BaseStream.Position = 0;
 
-            var import = new StationImport();
-            import.Import(writer.BaseStream);
+            using (IDbConnection connection = new SQLiteConnection("Data source=:memory:"))
+            {
+                connection.Open();
 
-            Assert.That(import.Imported.Count, Is.EqualTo(6));
+                var database = new StationDatabase(connection);
+                database.CreateTables();
+
+                var import = new StationImport();
+                import.Import(writer.BaseStream, connection, StationDatabase.PrecipitationStationTable);
+
+                var count = connection.Query<long>("select count(*) from PrecipitationStation;").First();
+
+                Assert.That(count, Is.EqualTo(6));
+            }
         }
     }
 }

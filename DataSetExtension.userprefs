@@ -1,30 +1,36 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/StationImport.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.TestConsole/Main.cs">
     <Files>
-      <File FileName="DataSetExtension/TemperatureStation.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension.Tests/StationImportTest.cs" Line="3" Column="7" />
-      <File FileName="DataSetExtension.Tests/StationTest.cs" Line="20" Column="23" />
-      <File FileName="DataSetExtension.Tests/TemperatureStationTest.cs" Line="2" Column="7" />
-      <File FileName="DataSetExtension/StationImport.cs" Line="44" Column="18" />
-      <File FileName="DataSetExtension.TestConsole/Main.cs" Line="15" Column="2" />
+      <File FileName="DataSetExtension.TestConsole/Main.cs" Line="17" Column="138" />
+      <File FileName="DataSetExtension.Tests/StationImportTest.cs" Line="47" Column="29" />
+      <File FileName="DataSetExtension.Tests/TemperatureStationTest.cs" Line="13" Column="98" />
+      <File FileName="DataSetExtension.Tests/Td3200ImportTest.cs" Line="43" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
-            <Node name="StationImport.cs" selected="True" />
+            <Option id="ShowVersionControlOverlays" value="True" />
+            <Option id="ShowAllFiles" value="True" />
+            <Node name="References" expanded="True" />
+            <Node name="Dapper" expanded="True" />
           </Node>
-          <Node name="DataSetExtension.TestConsole" expanded="True" />
+          <Node name="DataSetExtension.TestConsole" expanded="True" selected="True">
+            <Option id="ShowVersionControlOverlays" value="True" />
+            <Option id="ShowAllFiles" value="True" />
+            <Node name="References" expanded="True" />
+          </Node>
+          <Node name="DataSetExtension.Tests" expanded="True">
+            <Option id="ShowVersionControlOverlays" value="True" />
+            <Option id="ShowAllFiles" value="True" />
+            <Node name="References" expanded="True" />
+          </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True">
-          <Node name="DataSetExtension" expanded="True">
-            <Node name="DataSetExtension" expanded="True">
-              <Node name="DataSetExtension.StationImport" expanded="True" selected="True" />
-            </Node>
-          </Node>
+          <Node name="DataSetExtension" expanded="True" />
           <Node name="DataSetExtension.Tests" expanded="True" />
         </State>
       </Pad>
