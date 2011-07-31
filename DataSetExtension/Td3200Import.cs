@@ -25,6 +25,7 @@ namespace DataSetExtension
 
         public void Import(Stream stream, IDbConnection connection)
         {
+			var total = 0;
 			var count = 0;
 			statement = new StringBuilder();
 			
@@ -49,6 +50,7 @@ namespace DataSetExtension
                     }
 					
 					count += 1;
+					total += 1;
 					
 					if (count == batchSize) 
 					{
@@ -56,6 +58,8 @@ namespace DataSetExtension
 						
 						statement = new StringBuilder();
 						count = 0;
+						
+						System.Diagnostics.Debug.WriteLine(total + " TD3200 records imported.");
 					}
                 }
 				

@@ -6,15 +6,15 @@ namespace DataSetExtension
 {
     public class Td3200
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        public int StationId { get; set; }
+        public long StationId { get; set; }
 
         public string StationNumber { get; set; }
         
         public DateTime Date { get; set; }
 
-        public int Value { get; set; }
+        public long Value { get; set; }
 
         public static Td3200[] Parse(string record)
         {
