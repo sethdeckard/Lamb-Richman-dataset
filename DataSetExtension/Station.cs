@@ -1,4 +1,6 @@
-﻿namespace DataSetExtension
+﻿using System;
+
+namespace DataSetExtension
 {
     public class Station
     {
@@ -68,5 +70,12 @@
             GridPointLongitude = parent.GridPointLongitude;
             Sequence = parent.Sequence + 1;
         }
+		
+		public Station[] FindAll(string table) 
+		{
+			//connection.Query<Station>("select Id=@Id,Number=@Number,GridPoint=@GridPoint from " + 
+			
+			throw new NotImplementedException();
+		}
     }
 }

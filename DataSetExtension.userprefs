@@ -1,25 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/Td3200Import.cs">
-    <Files>
-      <File FileName="DataSetExtension/Td3200Import.cs" Line="12" Column="33" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="DataSetExtension" expanded="True">
-            <Option id="ShowVersionControlOverlays" value="True" />
-            <Option id="ShowAllFiles" value="False" />
-            <Node name="Td3200Import.cs" selected="True" />
-          </Node>
-          <Node name="DataSetExtension.TestConsole" expanded="True">
-            <Option id="ShowVersionControlOverlays" value="True" />
-            <Option id="ShowAllFiles" value="False" />
-          </Node>
-          <Node name="DataSetExtension.Tests" expanded="True">
-            <Option id="ShowVersionControlOverlays" value="True" />
-            <Option id="ShowAllFiles" value="False" />
-          </Node>
+          <Node name="DataSetExtension" expanded="True" />
+          <Node name="DataSetExtension.ConsoleApp" expanded="True" selected="True" />
+          <Node name="DataSetExtension.TestConsole" expanded="True" />
+          <Node name="DataSetExtension.Tests" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
@@ -44,27 +32,13 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True">
-          <Node name="DataSetExtension.Tests" expanded="True">
-            <Node name="DataSetExtension" expanded="True">
-              <Node name="Test" expanded="True">
-                <Node name="StationDatabaseTest" expanded="True" />
-                <Node name="StationImportTest" expanded="True" />
-                <Node name="StationTest" expanded="True" />
-                <Node name="Td3200DatabaseTest" expanded="True" />
-                <Node name="Td3200ImportTest" expanded="True" />
-                <Node name="Td3200Test" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint enabled="false" file="/Users/seth/Projects/DataSetExtension/DataSetExtention.TestConsole/Main.cs" line="12" />
-      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension/Td3200Import.cs" line="122" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

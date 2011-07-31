@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.Tests", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.TestConsole", "DataSetExtension.TestConsole\DataSetExtension.TestConsole.csproj", "{1D1FD57A-D735-4A40-A35A-A30657D51006}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.ConsoleApp", "DataSetExtension.ConsoleApp\DataSetExtension.ConsoleApp.csproj", "{7304A7F1-5B05-4F5B-86E6-095171E930D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +27,12 @@ Global
 		{5E112BB1-16DD-400D-8B79-3643C28826C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E112BB1-16DD-400D-8B79-3643C28826C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E112BB1-16DD-400D-8B79-3643C28826C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7304A7F1-5B05-4F5B-86E6-095171E930D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7304A7F1-5B05-4F5B-86E6-095171E930D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7304A7F1-5B05-4F5B-86E6-095171E930D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7304A7F1-5B05-4F5B-86E6-095171E930D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = DataSetExtension.TestConsole\DataSetExtension.TestConsole.csproj
+		StartupItem = DataSetExtension.ConsoleApp\DataSetExtension.ConsoleApp.csproj
 	EndGlobalSection
 EndGlobal
