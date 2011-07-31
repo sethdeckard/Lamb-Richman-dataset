@@ -7,7 +7,7 @@ namespace DataSetExtension.Test
     public class StationTest 
     { 
         [Test]
-        public void ParseTest()
+        public void Parse()
         {
             var station = new Station();
             station.Parse("  1 25  81 Flamingo Rngr Stat, FL         083020 2509  8055   10913");
@@ -36,7 +36,7 @@ namespace DataSetExtension.Test
         }
     
         [Test]
-        public void ParseWithParentTest()
+        public void ParseWithParent()
         {
             var parent = new Station();
             parent.Parse("  1 25  81 Flamingo Rngr Stat, FL         083020 2509  8055   10913");

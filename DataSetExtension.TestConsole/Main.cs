@@ -21,7 +21,7 @@ namespace DataSetExtension.TestConsole
                 connection.Open();
 
                 var database = new StationDatabase(connection);
-                database.CreateTables();
+                database.CreateSchema();
 
                 var import = new StationImport();
                 import.Import(new FileStream(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt", FileMode.Open, FileAccess.Read), connection, StationDatabase.PrecipitationStationTable);
@@ -33,10 +33,10 @@ namespace DataSetExtension.TestConsole
 
                 var tempStations = import.Imported;
 
-                var rawImport = new Td3200Import(tempStations.ToArray(), percipStations.ToArray());
+                var rawImport = new Td3200Import(tempStations.ToArray(), percipStations.ToArray()) { Year = 2001 };
 
                 var rawDatabase = new Td3200Database(connection);
-                rawDatabase.CreateTables();
+                rawDatabase.CreateSchema();
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();

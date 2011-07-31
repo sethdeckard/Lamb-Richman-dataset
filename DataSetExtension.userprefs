@@ -1,19 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.Tests/StationImportTest.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/Td3200Import.cs">
     <Files>
-      <File FileName="DataSetExtension/Dapper/SqlMapper.cs" Line="12" Column="19" />
-      <File FileName="DataSetExtension.Tests/StationDatabaseTest.cs" Line="18" Column="9" />
-      <File FileName="DataSetExtension.TestConsole/Main.cs" Line="34" Column="43" />
-      <File FileName="DataSetExtension/StationImport.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/StationDatabase.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/Station.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/AssemblyInfo.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/Td3200Import.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/Td3200Database.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension.Tests/StationImportTest.cs" Line="35" Column="1" />
-      <File FileName="DataSetExtension.Tests/Td3200DatabaseTest.cs" Line="19" Column="54" />
-      <File FileName="DataSetExtension.Tests/Td3200ImportTest.cs" Line="13" Column="34" />
+      <File FileName="DataSetExtension/Td3200Import.cs" Line="12" Column="33" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,19 +10,15 @@
           <Node name="DataSetExtension" expanded="True">
             <Option id="ShowVersionControlOverlays" value="True" />
             <Option id="ShowAllFiles" value="False" />
-            <Node name="References" expanded="True" />
-            <Node name="Dapper" expanded="True" />
+            <Node name="Td3200Import.cs" selected="True" />
           </Node>
           <Node name="DataSetExtension.TestConsole" expanded="True">
             <Option id="ShowVersionControlOverlays" value="True" />
             <Option id="ShowAllFiles" value="False" />
-            <Node name="References" expanded="True" />
           </Node>
           <Node name="DataSetExtension.Tests" expanded="True">
             <Option id="ShowVersionControlOverlays" value="True" />
             <Option id="ShowAllFiles" value="False" />
-            <Node name="References" expanded="True" />
-            <Node name="StationImportTest.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -61,7 +46,16 @@
       <Pad Id="MonoDevelop.NUnit.TestPad">
         <State expanded="True" selected="True">
           <Node name="DataSetExtension.Tests" expanded="True">
-            <Node name="DataSetExtension" expanded="True" />
+            <Node name="DataSetExtension" expanded="True">
+              <Node name="Test" expanded="True">
+                <Node name="StationDatabaseTest" expanded="True" />
+                <Node name="StationImportTest" expanded="True" />
+                <Node name="StationTest" expanded="True" />
+                <Node name="Td3200DatabaseTest" expanded="True" />
+                <Node name="Td3200ImportTest" expanded="True" />
+                <Node name="Td3200Test" expanded="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -69,8 +63,8 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtention.TestConsole/Main.cs" line="12" />
-      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension.TestConsole/Main.cs" line="48" />
+      <Breakpoint enabled="false" file="/Users/seth/Projects/DataSetExtension/DataSetExtention.TestConsole/Main.cs" line="12" />
+      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension/Td3200Import.cs" line="122" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -16,7 +16,7 @@ namespace DataSetExtension
             this.connection = connection;
         }
 
-        public void CreateTables()
+        public void CreateSchema()
         {
             connection.Execute(GenerateCreateTableStatement(PrecipitationStationTable));
             connection.Execute(GenerateCreateTableStatement(TemperatureStationtable));

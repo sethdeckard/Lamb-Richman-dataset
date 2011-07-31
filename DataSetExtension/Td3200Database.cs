@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using System.Text;
 using Dapper;
 
@@ -6,9 +6,9 @@ namespace DataSetExtension
 {
     public class Td3200Database
     {
-        public const string PrecipitationTd3200Table = "PrecipitationTd3200";
-        public const string TemperatureMaxTd3200Table = "TemperatureMaxTd3200";
-        public const string TemperatureMinTd3200Table = "TemperatureMinTd3200";
+        public const string PrecipitationTable = "Precipitation";
+        public const string TemperatureMaxTable = "TemperatureMax";
+        public const string TemperatureMinTable = "TemperatureMin";
 
         private readonly IDbConnection connection;
 
@@ -17,11 +17,11 @@ namespace DataSetExtension
             this.connection = connection;
         }
 
-        public void CreateTables()
+        public void CreateSchema()
         {
-            connection.Execute(GenerateCreateTableStatement(PrecipitationTd3200Table));
-            connection.Execute(GenerateCreateTableStatement(TemperatureMaxTd3200Table));
-            connection.Execute(GenerateCreateTableStatement(TemperatureMinTd3200Table));
+            connection.Execute(GenerateCreateTableStatement(PrecipitationTable));
+            connection.Execute(GenerateCreateTableStatement(TemperatureMaxTable));
+            connection.Execute(GenerateCreateTableStatement(TemperatureMinTable));
         }
 
         private static string GenerateCreateTableStatement(string table)
@@ -33,6 +33,7 @@ namespace DataSetExtension
             statement.AppendLine("StationId INTEGER,");
             statement.AppendLine("StationNumber TEXT,");
             statement.AppendLine("Date INTEGER,");
+			statement.AppendLine("DateString TEXT,");
             statement.AppendLine("Value INTEGER");
             statement.AppendLine(");");
 

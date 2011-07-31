@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using Mono.Data.Sqlite;
 using DataSetExtension;
 using NUnit.Framework;
@@ -22,7 +22,7 @@ namespace DataSetExtension.Test
                 connection.Open();
 
                 var database = new StationDatabase(connection);
-                database.CreateTables();
+                database.CreateSchema();
 
                 connection.Query<Station>(PrecipitationQuery);
 

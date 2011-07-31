@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using Mono.Data.Sqlite;
 using System.IO;
 using System.Linq;
@@ -24,7 +24,8 @@ namespace DataSetExtension.Test
             writer.WriteLine("DLY06145805TMAX F19890399990310108 00042 00208 00048 00308 00048 00408 00041 00508 00042 00608 00044 00708 00050 00808 00058 N0908 00058 01008 00064 01108 00068 01208 00068 01308 00065 01408 00062 01508 00050 01608 00055 01708 00061 01808 00057 01908 00062 02008 00061 02108 00035 02208 00051 02308 00058 02408 00063 02508 00062 02608 00063 02708 00063 02808 00057 02908 00064 03008 00063 03108 00064 0");
             writer.WriteLine("DLY06145805PRCPHI19890399990310108 00000 R0208 00000 R0308 00000 R0408 00001 00508 00000 R0608 00000 R0708 00000 R0808 00000 R0908 00000 R1008 00000 R1108 00000 R1208 00000 R1308 00000 R1408 00000 R1508 00000 R1608 00000 R1708 00000 R1808 00000 R1908 00000 R2008 00008 02108 00003 02208 00000 R2308 00000 R2408 00000 R2508 00000 R2608 00000 R2708 00000 R2808 00000 R2908 00000 R3008 00007 03108 00000 R");
             writer.WriteLine("DLY08145805TMIN F19890399990310108 00014 00208 00019 00308 00022 00408 00015 00508 00002 00608 00005 00708 00020 00808 00028 00908 00026 01008 00029 01108 00027 01208 00025 01308 00021 01408 00013 01508 00015 01608 00022 01708 00024 01808 00025 01908 00025 02008 00022 02108 00016 02208 00019 02308 00023 02408 00025 02508 00030 02608 00029 02708 00030 02808 00025 02908 00025 03008 00020 03108 00022 0");
-            writer.Flush();
+            writer.WriteLine("DLY08145805TMIN F19990399990310108 00014 00208 00019 00308 00022 00408 00015 00508 00002 00608 00005 00708 00020 00808 00028 00908 00026 01008 00029 01108 00027 01208 00025 01308 00021 01408 00013 01508 00015 01608 00022 01708 00024 01808 00025 01908 00025 02008 00022 02108 00016 02208 00019 02308 00023 02408 00025 02508 00030 02608 00029 02708 00030 02808 00025 02908 00025 03008 00020 03108 00022 0");
+			writer.Flush();
 
             writer.BaseStream.Position = 0;
 
@@ -35,29 +36,28 @@ namespace DataSetExtension.Test
                 connection.Open();
 
                 var database = new Td3200Database(connection);
-                database.CreateTables();
+                database.CreateSchema();
 
-                var import = new Td3200Import(new[] { temperatureStation }, new[] { precipitationStation });
+                var import = new Td3200Import(new[] { temperatureStation }, new[] { precipitationStation }) { Year = 1989 };
                 import.Import(writer.BaseStream, connection);
 
-                var count = connection.Query<long>("select count(*) from TemperatureMaxTd3200;").First();
-
+                var count = connection.Query<long>("select count(*) from TemperatureMax;").First();
                 Assert.That(count, Is.EqualTo(30));
-
-                count = connection.Query<long>("select count(*) from TemperatureMinTd3200;").First();
-
+				
+                count = connection.Query<long>("select count(*) from TemperatureMin;").First();
                 Assert.That(count, Is.EqualTo(31));
 
-                count = connection.Query<long>("select count(*) from PrecipitationTd3200;").First();
-
+                count = connection.Query<long>("select count(*) from Precipitation;").First();
                 Assert.That(count, Is.EqualTo(4));
 
-                Assert.That(import.TemperatureMax[0].StationId, Is.EqualTo(1));
+				var id = connection.Query<long>("select StationId from TemperatureMax;").First();
+                Assert.That(id, Is.EqualTo(1));
 
-                Assert.That(import.TemperatureMin[0].StationId, Is.EqualTo(1));
-
-                Assert.That(import.Precipitation[0].StationId, Is.EqualTo(2));
-
+				id = connection.Query<long>("select StationId from TemperatureMin;").First();
+                Assert.That(id, Is.EqualTo(1));
+				
+				id = connection.Query<long>("select StationId from Precipitation;").First();
+                Assert.That(id, Is.EqualTo(2));
             }
         }
     }

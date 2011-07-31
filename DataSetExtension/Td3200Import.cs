@@ -9,33 +9,30 @@ namespace DataSetExtension
 {
     public class Td3200Import
     {
+		private const int batchSize = 200;
+		
         private readonly Station[] temperatureStations;
         private readonly Station[] precipitationStations;
+		private StringBuilder statement;
 
         public Td3200Import(Station[] temperatureStations, Station[] precipitationStations)
         {
             this.temperatureStations = temperatureStations;
             this.precipitationStations = precipitationStations;
-
-            TemperatureMin = new List<Td3200>();
-            TemperatureMax = new List<Td3200>();
-            Precipitation = new List<Td3200>();
         }
-
-        public List<Td3200> TemperatureMin { get; set; }
-
-        public List<Td3200> TemperatureMax { get; set; }
-
-        public List<Td3200> Precipitation { get; set; }
+		
+		public int Year { get; set; }
 
         public void Import(Stream stream, IDbConnection connection)
         {
+			var count = 0;
+			statement = new StringBuilder();
+			
             using (var reader = new StreamReader(stream, Encoding.ASCII))
             {
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-
                     if (line.Contains("TMAX"))
                     {
                        ImportTemperatureMax(connection, line);
@@ -50,7 +47,22 @@ namespace DataSetExtension
                     {
 						ImportPrecipitation(connection, line);
                     }
+					
+					count += 1;
+					
+					if (count == batchSize) 
+					{
+						CommitBatch(connection);
+						
+						statement = new StringBuilder();
+						count = 0;
+					}
                 }
+				
+				if (count > 0) 
+				{
+					CommitBatch(connection);
+				}
             }
         }
 		
@@ -58,58 +70,60 @@ namespace DataSetExtension
 		{
 			var results = (from record in Td3200.Parse(line)
         	            join station in temperatureStations on record.StationNumber equals station.Number
-        	            select new {record, station}).ToList();
-        	
-        	results.ForEach(result => result.record.StationId = result.station.Id);
+						where record.Date.Year == Year || Year == 0
+        	            select new {record, station}).ToArray();
         	
         	foreach (var result in results)
         	{
-        	    var record = result.record;
-        	    var query = "insert into " + Td3200Database.TemperatureMaxTd3200Table + "(StationId,StationNumber,Date,Value)";
-        	    query += "values(@StationId,@StationNumber,@Date,@Value)";
-        	
-        	    connection.Execute(query, new { record.StationId, record.StationNumber, record.Date, record.Value });
+				result.record.StationId = result.station.Id;
+				AppendInsertStatement(Td3200Database.TemperatureMaxTable, result.record);
         	}
-        	
-        	TemperatureMax.AddRange((from result in results select result.record).ToArray());
 		}
 		
 		private void ImportTemperatureMin(IDbConnection connection, string line) 
 		{
 			var results = (from record in Td3200.Parse(line)
-                                       join station in temperatureStations on record.StationNumber equals station.Number
-                                       select new { record, station }).ToList ();
+                          join station in temperatureStations on record.StationNumber equals station.Number
+						  where record.Date.Year == Year || Year == 0
+                          select new { record, station }).ToArray();
 
-			results.ForEach (r => r.record.StationId = r.station.Id);
-
-			foreach (var result in results) {
-				var record = result.record;
-				var query = "insert into " + Td3200Database.TemperatureMinTd3200Table + "(StationId,StationNumber,Date,Value)";
-				query += "values(@StationId,@StationNumber,@Date,@Value)";
-
-				connection.Execute (query, new { record.StationId, record.StationNumber, record.Date, record.Value });
+			foreach(var result in results) 
+			{
+				result.record.StationId = result.station.Id;
+				AppendInsertStatement(Td3200Database.TemperatureMinTable, result.record);
 			}
-
-			TemperatureMin.AddRange ((from result in results select result.record).ToArray ());
 		}
 		
 		private void ImportPrecipitation(IDbConnection connection, string line) 
 		{
 			var results = (from record in Td3200.Parse(line)
-                                       join station in precipitationStations on record.StationNumber equals station.Number
-                                       select new { record, station }).ToList ();
+                           join station in precipitationStations on record.StationNumber equals station.Number
+							where record.Date.Year == Year || Year == 0
+                           select new { record, station }).ToArray();
 
-			results.ForEach (r => r.record.StationId = r.station.Id);
-
-			foreach (var result in results) {
-				var record = result.record;
-				var query = "insert into " + Td3200Database.PrecipitationTd3200Table + "(StationId,StationNumber,Date,Value)";
-				query += "values(@StationId,@StationNumber,@Date,@Value)";
-
-				connection.Execute (query, new { record.StationId, record.StationNumber, record.Date, record.Value });
-			}
-
-			Precipitation.AddRange ((from result in results select result.record).ToArray ());			
+			foreach(var result in results) 
+			{
+				result.record.StationId = result.station.Id;
+				AppendInsertStatement(Td3200Database.PrecipitationTable, result.record);
+			}		
+		}
+		
+		private void AppendInsertStatement(string table, Td3200 record)  
+		{
+			statement.AppendLine("insert into " + table + "(StationId,StationNumber,Date,DateString,Value)");
+			statement.AppendFormat("values({0},'{1}',{2},'{3}',{4});", record.StationId, record.StationNumber, record.Date.ToFileTime(), record.Date.ToString(), record.Value);
+			statement.AppendLine();
+		}
+		
+		private void CommitBatch(IDbConnection connection)
+		{
+			var command = connection.CreateCommand();
+        	command.CommandText = statement.ToString();
+        	command.Transaction = connection.BeginTransaction();
+        	
+        	command.ExecuteNonQuery();
+        	
+        	command.Transaction.Commit();
 		}
     }
 }
