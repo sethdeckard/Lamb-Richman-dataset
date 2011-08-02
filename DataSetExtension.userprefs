@@ -1,30 +1,36 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.Tests/Td3200Test.cs">
+    <Files>
+      <File FileName="DataSetExtension/Td3200Import.cs" Line="74" Column="30" />
+      <File FileName="DataSetExtension/Station.cs" Line="47" Column="34" />
+      <File FileName="DataSetExtension/StationDatabase.cs" Line="13" Column="3" />
+      <File FileName="DataSetExtension/StationImport.cs" Line="1" Column="1" />
+      <File FileName="DataSetExtension/Td3200.cs" Line="25" Column="51" />
+      <File FileName="DataSetExtension.Tests/Td3200Test.cs" Line="11" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True" />
-          <Node name="DataSetExtension.ConsoleApp" expanded="True" selected="True" />
-          <Node name="DataSetExtension.TestConsole" expanded="True" />
-          <Node name="DataSetExtension.Tests" expanded="True" />
+          <Node name="DataSetExtension.ConsoleApp" expanded="True" />
+          <Node name="DataSetExtension.Tests" expanded="True">
+            <Node name="Td3200Test.cs" selected="True" />
+          </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="DataSetExtension" expanded="True" selected="True" />
-          </Node>
-          <Node name="DataSetExtension.TestConsole" expanded="True">
             <Node name="DataSetExtension" expanded="True">
-              <Node name="TestConsole" expanded="True" />
+              <Node name="DataSetExtension.Precipitation" expanded="True" />
+              <Node name="DataSetExtension.Td3200" expanded="True" />
+              <Node name="DataSetExtension.Td3200Database" expanded="True" selected="True" />
             </Node>
           </Node>
           <Node name="DataSetExtension.Tests" expanded="True">
-            <Node name="DataSetExtension" expanded="True">
-              <Node name="Test" expanded="True" />
-            </Node>
+            <Node name="DataSetExtension" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -32,7 +38,26 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="DataSetExtension.Tests" expanded="True">
+            <Node name="DataSetExtension" expanded="True">
+              <Node name="Tests" expanded="True">
+                <Option id="ShowTestCounters" value="False" />
+                <Option id="ShowTestTime" value="False" />
+                <Node name="PrecipitationTest" expanded="True" />
+                <Node name="StationDatabaseTest" expanded="True" />
+                <Node name="StationImportTest" expanded="True" />
+                <Node name="StationTest" expanded="True" />
+                <Node name="Td3200DatabaseTest" expanded="True" />
+                <Node name="Td3200ImportTest" expanded="True" />
+                <Node name="Td3200Test" expanded="True">
+                  <Node name="ParseTemperatureMax" selected="True" />
+                </Node>
+                <Node name="TemperatureTest" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

@@ -48,8 +48,6 @@ namespace DataSetExtension
                         }
 
                         previous = station;
-
-                        //SaveStation(station, table, connection);
 						
 						AppendInsertStatement(table, station);
 
