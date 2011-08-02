@@ -21,11 +21,12 @@ namespace DataSetExtension
             this.precipitationStations = precipitationStations;
         }
 		
+		public int Total { get; set; }
+		
 		public int Year { get; set; }
 
         public void Import(Stream stream, IDbConnection connection)
         {
-			var total = 0;
 			var count = 0;
 			statement = new StringBuilder();
 			
@@ -50,7 +51,7 @@ namespace DataSetExtension
                     }
 					
 					count += 1;
-					total += 1;
+					Total += 1;
 					
 					if (count == batchSize) 
 					{
@@ -58,8 +59,6 @@ namespace DataSetExtension
 						
 						statement = new StringBuilder();
 						count = 0;
-						
-						System.Diagnostics.Debug.WriteLine(total + " TD3200 records imported.");
 					}
                 }
 				

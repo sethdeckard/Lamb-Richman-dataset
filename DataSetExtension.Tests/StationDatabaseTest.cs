@@ -4,7 +4,7 @@ using DataSetExtension;
 using NUnit.Framework;
 using Dapper;
 
-namespace DataSetExtension.Test
+namespace DataSetExtension.Tests
 {
     [TestFixture]
     public class StationDatabaseTest

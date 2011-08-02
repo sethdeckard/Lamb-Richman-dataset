@@ -13,7 +13,7 @@ namespace DataSetExtension.ConsoleApp
 	{
 		private const string DatabaseName = "DataSetExtension.sqlite";
 		
-		public static void Main (string[] args)
+		public static void Main(string[] args)
 		{
 			ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
 			ImportTemperatureStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
@@ -74,6 +74,8 @@ namespace DataSetExtension.ConsoleApp
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection);
 				
 				stopwatch.Stop();
+				
+				Console.WriteLine(import.Total + " TD3200 records imported.");
             }
 		}
 	}

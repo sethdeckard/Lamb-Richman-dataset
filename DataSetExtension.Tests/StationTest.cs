@@ -1,7 +1,7 @@
 ﻿using DataSetExtension;
 using NUnit.Framework;
 
-namespace DataSetExtension.Test
+namespace DataSetExtension.Tests
 {
     [TestFixture]
     public class StationTest 

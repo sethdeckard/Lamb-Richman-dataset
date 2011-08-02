@@ -47,6 +47,8 @@
     <Compile Include="Td3200DatabaseTest.cs" />
     <Compile Include="Td3200ImportTest.cs" />
     <Compile Include="Td3200Test.cs" />
+    <Compile Include="TemperatureTest.cs" />
+    <Compile Include="PrecipitationTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -46,6 +46,8 @@
     <Compile Include="Td3200.cs" />
     <Compile Include="Td3200Database.cs" />
     <Compile Include="Td3200Import.cs" />
+    <Compile Include="Temperature.cs" />
+    <Compile Include="Precipitation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
