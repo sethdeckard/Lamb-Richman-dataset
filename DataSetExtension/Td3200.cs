@@ -22,16 +22,15 @@ namespace DataSetExtension
             var station = header.Substring(3, 6);
             var year = int.Parse(header.Substring(17, 4));
             var month = int.Parse(header.Substring(21, 2));
-            var temperature = header.Contains("TMAX") || header.Contains("TMIN");
 
             var list = new List<Td3200>();
 
-            ParseItems(record.Remove(0, 30), station, year, month, list, temperature);
+            ParseItems(record.Remove(0, 30), station, year, month, list);
 
             return list.ToArray();
         }
 
-        private static void ParseItems(string records, string station, int year, int month, List<Td3200> list, bool temperature)
+        private static void ParseItems(string records, string station, int year, int month, List<Td3200> list)
         {
             var buffer = new char[12];
             var reader = new StringReader(records);
@@ -51,18 +50,9 @@ namespace DataSetExtension
                     continue;
                 }
 
-                var value = int.Parse(record.Substring(5, 5));
-                if (temperature)
-                {
-                    var sign = record.Substring(4, 1);
-                    if (sign == "-")
-                    {
-                        value *= -1;
-                    }
-                }
-
                 var day = int.Parse(record.Substring(0, 2));
                 var date = new DateTime(year, month, day);
+				var value = int.Parse(record.Substring(4, 6));
                 var result = new Td3200 { StationNumber = station, Date = date, Value = value };
                 list.Add(result);
             }

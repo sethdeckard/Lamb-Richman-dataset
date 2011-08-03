@@ -12,6 +12,10 @@ log.txt
 #StyleCop Cache
 *.Cache
 
+#monodevelop
+*.pidb
+*.test-cache
+
 #output
 *.obj
 *.exe
