@@ -4,7 +4,7 @@ namespace DataSetExtension
 {
 	public class Temperature : Td3200
 	{
-		public string ToString(long sequence)
+		public override string ToString(long sequence)
 		{
 			var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			var value = ConvertFahrenheitToCelsius(Convert.ToDouble(Value));

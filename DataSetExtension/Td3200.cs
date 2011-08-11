@@ -4,7 +4,7 @@ using System.IO;
 
 namespace DataSetExtension
 {
-    public class Td3200
+    public class Td3200 : IMeasurement
     {
         public long Id { get; set; }
 
@@ -29,6 +29,11 @@ namespace DataSetExtension
 
             return list.ToArray();
         }
+		
+		public virtual string ToString(long sequence) 
+		{
+			return sequence.ToString();
+		}
 
         private static void ParseItems(string records, string station, int year, int month, List<Td3200> list)
         {
