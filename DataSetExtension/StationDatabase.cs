@@ -21,6 +21,11 @@ namespace DataSetExtension
             connection.Execute(GenerateCreateTableStatement(PrecipitationStationTable));
             connection.Execute(GenerateCreateTableStatement(TemperatureStationtable));
         }
+		
+		public void Save(Station station) 
+		{
+			
+		}
 
         private static string GenerateCreateTableStatement(string table)
         {

@@ -71,27 +71,6 @@ namespace DataSetExtension
 				}
             }
         }
-
-        private static void SaveStation(Station station, string table, IDbConnection connection)
-        {
-            var query = "insert into " + table +
-                        "(Number,Name,GridPoint,Sequence,Latitude,Longitude,GridPointLatitude,GridPointLongitude,HistoricalRecordCount,RecordCount)";
-            query += "values(@Number,@Name,@GridPoint,@Sequence,@Latitude,@Longitude,@GridPointLatitude,@GridPointLongitude,@HistoricalRecordCount,@RecordCount)";
-
-            connection.Execute(query, new
-                                          {
-                                              station.Number, 
-                                              station.Name, 
-                                              station.GridPoint, 
-                                              station.Sequence, 
-                                              station.Latitude, 
-                                              station.Longitude, 
-                                              station.GridPointLatitude,
-                                              station.GridPointLongitude,
-                                              station.HistoricalRecordCount,
-                                              station.RecordCount
-                                          });
-        }
 		
 		private void AppendInsertStatement(string table, Station station) 
 		{

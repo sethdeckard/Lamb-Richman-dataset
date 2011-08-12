@@ -50,6 +50,7 @@
     <Compile Include="Precipitation.cs" />
     <Compile Include="IMeasurement.cs" />
     <Compile Include="MeasurementExport.cs" />
+    <Compile Include="ExportController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using Dapper;
 
 namespace DataSetExtension
 {
@@ -71,11 +73,25 @@ namespace DataSetExtension
             Sequence = parent.Sequence + 1;
         }
 		
-		public Station[] FindAll(string table) 
+		public virtual void Save(IDbConnection connection, string table)
 		{
-			//connection.Query<Station>("select Id=@Id,Number=@Number,GridPoint=@GridPoint from " + 
-			
-			throw new NotImplementedException();
+            var query = "insert into " + table +
+                        "(Number,Name,GridPoint,Sequence,Latitude,Longitude,GridPointLatitude,GridPointLongitude,HistoricalRecordCount,RecordCount)";
+            query += "values(@Number,@Name,@GridPoint,@Sequence,@Latitude,@Longitude,@GridPointLatitude,@GridPointLongitude,@HistoricalRecordCount,@RecordCount)";
+
+            connection.Execute(query, new
+                                          {
+                                              Number, 
+                                              Name, 
+                                              GridPoint, 
+                                              Sequence, 
+                                              Latitude, 
+                                              Longitude, 
+                                              GridPointLatitude,
+                                              GridPointLongitude,
+                                              HistoricalRecordCount,
+                                              RecordCount
+                                          });			
 		}
     }
 }

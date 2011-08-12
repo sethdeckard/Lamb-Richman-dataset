@@ -1,11 +1,18 @@
-﻿using DataSetExtension;
+﻿using System.Data;
+using System.Linq;
+using Mono.Data.Sqlite;
+using DataSetExtension;
 using NUnit.Framework;
+using Dapper;
 
 namespace DataSetExtension.Tests
 {
     [TestFixture]
     public class StationTest 
     { 
+		private const string Query = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
+            "HistoricalRecordCount, RecordCount from TemperatureStation";
+		
         [Test]
         public void Parse()
         {
@@ -54,5 +61,31 @@ namespace DataSetExtension.Tests
             Assert.That(station.Longitude, Is.EqualTo(8103));
             Assert.That(station.Sequence, Is.EqualTo(1));
         }
+		
+		[Test]
+		public void Save() 
+		{
+            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
+            {
+                connection.Open();
+				
+				var database = new StationDatabase(connection);
+				database.CreateSchema();
+
+                var station = new Station() 
+				{
+					GridPoint = 2,
+					GridPointLatitude = 1001,
+					GridPointLongitude = 1002
+				};
+				
+				station.Save(connection, "TemperatureStation");
+
+                var result = connection.Query<Station>(Query).First();
+				
+				Assert.That(result.Id, Is.GreaterThan(0));
+				Assert.That(result.GridPoint, Is.EqualTo(2));
+            }			
+		}
     }
 }

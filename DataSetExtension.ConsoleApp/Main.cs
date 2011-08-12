@@ -18,7 +18,7 @@ namespace DataSetExtension.ConsoleApp
 			ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
 			ImportTemperatureStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
 			
-			for (int year = 2001; year <= 2010; year++) 
+			for (int year = 2001; year <= 2001; year++) 
 			{
 				ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_" + year + ".txt", year);
 			}

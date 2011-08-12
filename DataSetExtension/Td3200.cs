@@ -18,14 +18,14 @@ namespace DataSetExtension
 
         public static Td3200[] Parse(string record)
         {
-            var header = record.Substring(0, 30);
+            var header = record.Substring(4, 30);
             var station = header.Substring(3, 6);
             var year = int.Parse(header.Substring(17, 4));
             var month = int.Parse(header.Substring(21, 2));
 
             var list = new List<Td3200>();
 
-            ParseItems(record.Remove(0, 30), station, year, month, list);
+            ParseItems(record.Remove(0, 34), station, year, month, list);
 
             return list.ToArray();
         }
