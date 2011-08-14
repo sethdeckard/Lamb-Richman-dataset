@@ -49,8 +49,8 @@
     <Compile Include="Temperature.cs" />
     <Compile Include="Precipitation.cs" />
     <Compile Include="IMeasurement.cs" />
-    <Compile Include="MeasurementExport.cs" />
     <Compile Include="ExportController.cs" />
+    <Compile Include="MeasurementWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

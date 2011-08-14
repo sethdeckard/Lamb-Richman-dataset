@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace DataSetExtension
 {
-	public class MeasurementExport
+	public class MeasurementWriter
 	{
         private readonly int year;
         private readonly Station[] stations;
         private readonly StreamWriter writer;
 
-        public MeasurementExport(Stream stream, Station[] stations, int year)
+        public MeasurementWriter(Stream stream, Station[] stations, int year)
         {
             this.stations = stations;
             this.year = year;
@@ -22,7 +22,7 @@ namespace DataSetExtension
 
         public List<DateTime> Missing { get; set; }
 
-        public void Export(IMeasurement[] records, int month)
+        public void Write(IMeasurement[] records, int month)
         {
             for (var day = 1; day <= DateTime.DaysInMonth(year, month); day++)
             {

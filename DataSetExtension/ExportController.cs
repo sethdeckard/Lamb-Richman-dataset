@@ -35,10 +35,10 @@ namespace DataSetExtension
 	                using (var stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
 						var stations = GetStations(grid, StationDatabase.TemperatureStationtable);
-		                var export = new MeasurementExport(stream, stations, year);
+		                var export = new MeasurementWriter(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1).ToFileTime();
-						var end = new DateTime(year, 12, DateTime.DaysInMonth(year, 12)).ToFileTime();
+						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, Td3200Database.TemperatureMinTable, StationDatabase.TemperatureStationtable);
 						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 		
@@ -59,10 +59,10 @@ namespace DataSetExtension
 	                using (var stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
 						var stations = GetStations(grid, StationDatabase.TemperatureStationtable);
-		                var export = new MeasurementExport(stream, stations, year);
+		                var export = new MeasurementWriter(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1).ToFileTime();
-						var end = new DateTime(year, 12, DateTime.DaysInMonth(year, 12)).ToFileTime();
+						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, Td3200Database.TemperatureMaxTable, StationDatabase.TemperatureStationtable);
 						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 						
@@ -83,10 +83,10 @@ namespace DataSetExtension
 	                using (var stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
 						var stations = GetStations(grid, StationDatabase.PrecipitationStationTable);
-		                var export = new MeasurementExport(stream, stations, year);
+		                var export = new MeasurementWriter(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1).ToFileTime();
-						var end = new DateTime(year, 12, DateTime.DaysInMonth(year, 12)).ToFileTime();
+						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, Td3200Database.PrecipitationTable, StationDatabase.PrecipitationStationTable);
 						var measurements = connection.Query<Precipitation>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 		
@@ -101,7 +101,7 @@ namespace DataSetExtension
 			return new StreamWriter(File.Create(Path.Combine(basePath, file)));
 		}
 
-		private void ProcessMeasurements(int year, int grid, MeasurementExport export, IMeasurement[] measurements)
+		private void ProcessMeasurements(int year, int grid, MeasurementWriter export, IMeasurement[] measurements)
 		{
 			for (var month = 1; month <= 12; month++)
         	{
@@ -110,7 +110,7 @@ namespace DataSetExtension
         			measurement.Date <= new DateTime(year, month, DateTime.DaysInMonth(year, month)).ToFileTime()
         			select measurement;
         			
-        	    export.Export(subset.ToArray(), month);
+        	    export.Write(subset.ToArray(), month);
         	}
         	
 			if (export.Missing.Count > 0) 
@@ -121,11 +121,11 @@ namespace DataSetExtension
 		
 		private void LogMissing(int grid, List<DateTime> missing) 
 		{
-			log.WriteLine("GridPoint: " + grid);
+			log.WriteLine("GridPoint " + grid);
 			
 			foreach (DateTime date in missing) 
 			{
-				log.WriteLine("    Date: " + date.ToShortDateString());
+				log.WriteLine("    " + date.ToShortDateString());
 			}
 			
 			log.Flush();
@@ -146,6 +146,11 @@ namespace DataSetExtension
 		{
 			var query = "select Id, Sequence, GridPoint from " + table + " where GridPoint = @GridPoint";
             return connection.Query<Station>(query, new { GridPoint = grid }).ToArray();
+		}
+
+		private long GetEndDate (int year)
+		{
+			return new DateTime(year, 12, DateTime.DaysInMonth(year, 12)).ToFileTime();;
 		}
 	}
 }

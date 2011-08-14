@@ -7,10 +7,10 @@ using NUnit.Framework;
 namespace DataSetExtension.Tests
 {
 	[TestFixture]
-	public class MeasurementExportTest
+	public class MeasurementWriterTest
 	{
         [Test]
-        public void Export()
+        public void Write()
         {
             var stream = new MemoryStream();
 
@@ -31,8 +31,8 @@ namespace DataSetExtension.Tests
                                   new Td3200 { StationId = 1, DateTime = DateTime.Parse("1/3/2001"), Value = 3 },
                               };
 
-            var export = new MeasurementExport(stream, stations.ToArray(), 2001);
-            export.Export(records.ToArray(), 1);
+            var writer = new MeasurementWriter(stream, stations.ToArray(), 2001);
+            writer.Write(records.ToArray(), 1);
 
             stream.Position = 0;
 
@@ -43,7 +43,7 @@ namespace DataSetExtension.Tests
                 Assert.That(reader.ReadLine(), Is.EqualTo("0"));
             }
 
-            Assert.That(export.Missing.Count, Is.EqualTo(28));
+            Assert.That(writer.Missing.Count, Is.EqualTo(28));
         }
 	}
 }
