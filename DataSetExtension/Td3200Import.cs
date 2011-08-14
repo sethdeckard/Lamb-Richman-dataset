@@ -9,7 +9,7 @@ namespace DataSetExtension
 {
     public class Td3200Import
     {
-		private const int batchSize = 200;
+		private const int batchSize = 2200;
 		
         private readonly Station[] temperatureStations;
         private readonly Station[] precipitationStations;

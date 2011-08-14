@@ -22,7 +22,7 @@ namespace DataSetExtension
 
         public List<DateTime> Missing { get; set; }
 
-        public void Export(IMeasurement[] records, int month) //gr00x
+        public void Export(IMeasurement[] records, int month)
         {
             for (var day = 1; day <= DateTime.DaysInMonth(year, month); day++)
             {

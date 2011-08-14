@@ -88,9 +88,27 @@ namespace DataSetExtension.ConsoleApp
                 connection.Open();
 				
 				var controller = new ExportController(connection, basePath);
+				
+				Console.WriteLine("Exporting TemperatureMin...");
+				var stopwatch = new Stopwatch();
+                stopwatch.Start();
 				controller.ExportTemperatureMin(year);
+				stopwatch.Stop();
+				Console.WriteLine("Total TemperatureMin export time: " + stopwatch.Elapsed.ToString());
+				
+				Console.WriteLine("Exporting TemperatureMax...");
+				stopwatch = new Stopwatch();
+                stopwatch.Start();
 				controller.ExportTemperatureMax(year);
+				stopwatch.Stop();
+				Console.WriteLine("Total TemperatureMax export time: " + stopwatch.Elapsed.ToString());
+				
+				Console.WriteLine("Exporting Precipitation...");
+				stopwatch = new Stopwatch();
+                stopwatch.Start();
 				controller.ExportPrecipitation(year);
+				stopwatch.Stop();
+				Console.WriteLine("Total Precipitation export time: " + stopwatch.Elapsed.ToString());
 			}
 		}
 	}

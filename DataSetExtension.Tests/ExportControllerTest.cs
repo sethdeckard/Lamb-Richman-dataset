@@ -13,6 +13,12 @@ namespace DataSetExtension.Tests
 	{
 		private const string testPath = "exportcontroller-test";
 		
+		[SetUp]
+		public void SetUp() 
+		{
+			Directory.CreateDirectory(testPath);
+		}
+		
         [Test]
         public void ExportTemperatureMin()
         {
@@ -41,6 +47,8 @@ namespace DataSetExtension.Tests
 				Assert.That(directories.Length, Is.EqualTo(1));
 
 				Assert.That(File.Exists(Path.Combine(testPath, "tmin", "gr002")));
+				
+				Assert.That(File.Exists(Path.Combine(testPath, "tmin-missing.log")));
             }
         }
 		
@@ -72,6 +80,8 @@ namespace DataSetExtension.Tests
 				Assert.That(directories.Length, Is.EqualTo(1));
 
 				Assert.That(File.Exists(Path.Combine(testPath, "tmax", "gr005")));
+				
+				Assert.That(File.Exists(Path.Combine(testPath, "tmax-missing.log")));
             }
         }
 		
@@ -103,6 +113,8 @@ namespace DataSetExtension.Tests
 				Assert.That(directories.Length, Is.EqualTo(1));
 
 				Assert.That(File.Exists(Path.Combine(testPath, "prcp", "gr007")));
+				
+				Assert.That(File.Exists(Path.Combine(testPath, "prcp-missing.log")));
             }
         }
 		
