@@ -73,7 +73,7 @@ namespace DataSetExtension
 		{
 			var results = (from record in Td3200.Parse(line)
         	            join station in temperatureStations on record.StationNumber equals station.Number
-						where record.Date.Year == Year || Year == 0
+						where record.DateTime.Year == Year || Year == 0
         	            select new {record, station}).ToArray();
         	
         	foreach (var result in results)
@@ -87,7 +87,7 @@ namespace DataSetExtension
 		{
 			var results = (from record in Td3200.Parse(line)
                           join station in temperatureStations on record.StationNumber equals station.Number
-						  where record.Date.Year == Year || Year == 0
+						  where record.DateTime.Year == Year || Year == 0
                           select new { record, station }).ToArray();
 
 			foreach(var result in results) 
@@ -101,7 +101,7 @@ namespace DataSetExtension
 		{
 			var results = (from record in Td3200.Parse(line)
                            join station in precipitationStations on record.StationNumber equals station.Number
-							where record.Date.Year == Year || Year == 0
+							where record.DateTime.Year == Year || Year == 0
                            select new { record, station }).ToArray();
 
 			foreach(var result in results) 
@@ -114,7 +114,7 @@ namespace DataSetExtension
 		private void AppendInsertStatement(string table, Td3200 record)  
 		{
 			statement.AppendLine("insert into " + table + "(StationId,StationNumber,Date,DateString,Value)");
-			statement.AppendFormat("values({0},'{1}',{2},'{3}',{4});", record.StationId, record.StationNumber, record.Date.ToFileTime(), record.Date.ToString(), record.Value);
+			statement.AppendFormat("values({0},'{1}',{2},'{3}',{4});", record.StationId, record.StationNumber, record.Date, record.DateTime.ToShortDateString(), record.Value);
 			statement.AppendLine();
 		}
 		

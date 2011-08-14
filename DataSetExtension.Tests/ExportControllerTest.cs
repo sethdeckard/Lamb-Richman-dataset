@@ -11,11 +11,7 @@ namespace DataSetExtension.Tests
 	[TestFixture]
 	public class ExportControllerTest
 	{
-		[Test]
-		public void SetUp() 
-		{
-			new DirectoryInfo(Path.GetTempPath()).CreateSubdirectory("datasetextension-export-test");
-		}
+		private const string testPath = "exportcontroller-test";
 		
         [Test]
         public void ExportTemperatureMin()
@@ -37,23 +33,86 @@ namespace DataSetExtension.Tests
 				var td3200Db = new Td3200Database(connection);
 				td3200Db.CreateSchema();
 				
-               	
-				
-                var path = new DirectoryInfo(Path.GetTempPath()).CreateSubdirectory(Guid.NewGuid() + "export-test").FullName;
-
-                var export = new ExportController(connection, path);
-
+                var export = new ExportController(connection, testPath);
                 export.ExportTemperatureMin(2006);
 
-                //inspect files
+                var directories = new DirectoryInfo(testPath).GetDirectories("tmin");
+				
+				Assert.That(directories.Length, Is.EqualTo(1));
+
+				Assert.That(File.Exists(Path.Combine(testPath, "tmin", "gr002")));
             }
         }
 		
 		[Test]
+        public void ExportTemperatureMax()
+        {
+            using (var connection = new SqliteConnection("Data Source=:memory:;Version=3;New=True"))
+            {
+                connection.Open();
+
+				var stationDb = new StationDatabase(connection);
+				stationDb.CreateSchema();
+				
+				var station = new Station() 
+				{
+					Id = 4,
+					GridPoint = 5
+				};
+			    station.Save(connection, StationDatabase.TemperatureStationtable);
+				
+				var td3200Db = new Td3200Database(connection);
+				td3200Db.CreateSchema();
+				
+                var export = new ExportController(connection, testPath);
+                export.ExportTemperatureMax(2006);
+
+                var directories = new DirectoryInfo(testPath).GetDirectories("tmax");
+				
+				Assert.That(directories.Length, Is.EqualTo(1));
+
+				Assert.That(File.Exists(Path.Combine(testPath, "tmax", "gr005")));
+            }
+        }
+		
+		[Test]
+        public void ExportPrecipitation()
+        {
+            using (var connection = new SqliteConnection("Data Source=:memory:;Version=3;New=True"))
+            {
+                connection.Open();
+
+				var stationDb = new StationDatabase(connection);
+				stationDb.CreateSchema();
+				
+				var station = new Station() 
+				{
+					Id = 4,
+					GridPoint = 7
+				};
+			    station.Save(connection, StationDatabase.PrecipitationStationTable);
+				
+				var td3200Db = new Td3200Database(connection);
+				td3200Db.CreateSchema();
+				
+                var export = new ExportController(connection, testPath);
+                export.ExportPrecipitation(2006);
+
+                var directories = new DirectoryInfo(testPath).GetDirectories("prcp");
+				
+				Assert.That(directories.Length, Is.EqualTo(1));
+
+				Assert.That(File.Exists(Path.Combine(testPath, "prcp", "gr007")));
+            }
+        }
+		
+		[TearDown]
 		public void TearDown() 
 		{
-			new DirectoryInfo(Path.GetTempPath()).CreateSubdirectory("datasetextension-export-test");
+			if (Directory.Exists(testPath)) 
+			{
+				Directory.Delete(testPath, true);
+			}
 		}
 	}
 }
-

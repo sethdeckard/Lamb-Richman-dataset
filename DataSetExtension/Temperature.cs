@@ -7,13 +7,15 @@ namespace DataSetExtension
 		public override string ToString(long sequence)
 		{
 			var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			var value = ConvertFahrenheitToCelsius(Convert.ToDouble(Value));
+			var celsius = ConvertFahrenheitToCelsius(Convert.ToDouble(Value));
+			
+			var formatted = decimal.Round(Convert.ToDecimal(celsius), 1).ToString("#.0").PadLeft(5, ' ').Replace(".","");
 			
 			return string.Format(
 				"{0} 00 {1} {2}", 
-				Date.ToString("y M d"), 
+				DateTime.ToString("yyMMdd"), 
 				alphabet.Substring((int)sequence, 1), 
-				decimal.Truncate(Convert.ToDecimal(value * 10)));
+				formatted);
 		}
 		
 		private static double ConvertFahrenheitToCelsius(double f)

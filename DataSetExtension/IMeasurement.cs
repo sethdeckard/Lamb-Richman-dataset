@@ -6,7 +6,9 @@ namespace DataSetExtension
 	{
 		long StationId { get; set; }
 		
-		DateTime Date { get; set; }
+		long Date { get; set; }
+		
+		DateTime DateTime { get; set; }
 
         long Value { get; set; }
 

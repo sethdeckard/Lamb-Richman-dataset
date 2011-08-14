@@ -15,13 +15,11 @@ namespace DataSetExtension.ConsoleApp
 		
 		public static void Main(string[] args)
 		{
-			ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
+			/*ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
 			ImportTemperatureStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
+			ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2001.txt", 2001);*/
 			
-			for (int year = 2001; year <= 2001; year++) 
-			{
-				ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_" + year + ".txt", year);
-			}
+			Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
 		}
 		
 		private static void ImportPrecipitationStations(string file) 
@@ -79,7 +77,21 @@ namespace DataSetExtension.ConsoleApp
 				stopwatch.Stop();
 				
 				Console.WriteLine(import.Total + " TD3200 records imported.");
+				Console.WriteLine("Total TD3200 Import time: " + stopwatch.Elapsed.ToString());
             }
+		}
+		
+		private static void Export(string basePath, int year) 
+		{
+			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3"))
+            {
+                connection.Open();
+				
+				var controller = new ExportController(connection, basePath);
+				controller.ExportTemperatureMin(year);
+				controller.ExportTemperatureMax(year);
+				controller.ExportPrecipitation(year);
+			}
 		}
 	}
 }
