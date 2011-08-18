@@ -9,15 +9,15 @@ namespace DataSetExtension
 {
     public class Td3200Import
     {
-		private const int batchSize = 2200;
-		
-        private readonly Station[] temperatureStations;
+        private readonly Station[] temperatureMinStations;
+		private readonly Station[] temperatureMaxStations;
         private readonly Station[] precipitationStations;
-		private StringBuilder statement;
+		private IDbCommand command;
 
-        public Td3200Import(Station[] temperatureStations, Station[] precipitationStations)
+        public Td3200Import(Station[] temperatureMinStations, Station[] temperatureMaxStations, Station[] precipitationStations)
         {
-            this.temperatureStations = temperatureStations;
+            this.temperatureMinStations = temperatureMinStations;
+			this.temperatureMaxStations = temperatureMaxStations;
             this.precipitationStations = precipitationStations;
         }
 		
@@ -27,9 +27,8 @@ namespace DataSetExtension
 
         public void Import(Stream stream, IDbConnection connection)
         {
-			var count = 0;
-			statement = new StringBuilder();
-			
+			CreateCommand(connection, Td3200Database.TemperatureMinTable);
+
             using (var reader = new StreamReader(stream, Encoding.ASCII))
             {
                 while (!reader.EndOfStream)
@@ -50,55 +49,61 @@ namespace DataSetExtension
 						ImportPrecipitation(connection, line);
                     }
 					
-					count += 1;
 					Total += 1;
-					
-					if (count == batchSize) 
-					{
-						CommitBatch(connection);
-						
-						statement = new StringBuilder();
-						count = 0;
-					}
                 }
 				
-				if (count > 0) 
-				{
-					CommitBatch(connection);
-				}
+				command.Transaction.Commit();
             }
         }
 		
 		private void ImportTemperatureMax(IDbConnection connection, string line)
 		{
+			SetCommandText(Td3200Database.TemperatureMaxTable);
+			
 			var results = (from record in Td3200.Parse(line)
-        	            join station in temperatureStations on record.StationNumber equals station.Number
+        	            join station in temperatureMaxStations on record.StationNumber equals station.Number
 						where record.DateTime.Year == Year || Year == 0
         	            select new {record, station}).ToArray();
         	
         	foreach (var result in results)
         	{
 				result.record.StationId = result.station.Id;
-				AppendInsertStatement(Td3200Database.TemperatureMaxTable, result.record);
+				((IDataParameter)command.Parameters[":id"]).Value = result.record.StationId;
+				((IDataParameter)command.Parameters[":number"]).Value = result.record.StationNumber;
+				((IDataParameter)command.Parameters[":date"]).Value = result.record.Date;
+				((IDataParameter)command.Parameters[":dateString"]).Value = result.record.DateTime.ToShortDateString();
+				((IDataParameter)command.Parameters[":value"]).Value = result.record.Value;
+				
+				command.ExecuteNonQuery();
         	}
 		}
 		
 		private void ImportTemperatureMin(IDbConnection connection, string line) 
 		{
+			SetCommandText(Td3200Database.TemperatureMinTable);
+			
 			var results = (from record in Td3200.Parse(line)
-                          join station in temperatureStations on record.StationNumber equals station.Number
+                          join station in temperatureMinStations on record.StationNumber equals station.Number
 						  where record.DateTime.Year == Year || Year == 0
                           select new { record, station }).ToArray();
 
 			foreach(var result in results) 
 			{
 				result.record.StationId = result.station.Id;
-				AppendInsertStatement(Td3200Database.TemperatureMinTable, result.record);
+				((IDataParameter)command.Parameters[":id"]).Value = result.record.StationId;
+				((IDataParameter)command.Parameters[":number"]).Value = result.record.StationNumber;
+				((IDataParameter)command.Parameters[":date"]).Value = result.record.Date;
+				((IDataParameter)command.Parameters[":dateString"]).Value = result.record.DateTime.ToShortDateString();
+				((IDataParameter)command.Parameters[":value"]).Value = result.record.Value;
+				
+				command.ExecuteNonQuery();
 			}
 		}
 		
 		private void ImportPrecipitation(IDbConnection connection, string line) 
 		{
+			SetCommandText(Td3200Database.PrecipitationTable);
+			
 			var results = (from record in Td3200.Parse(line)
                            join station in precipitationStations on record.StationNumber equals station.Number
 							where record.DateTime.Year == Year || Year == 0
@@ -107,26 +112,45 @@ namespace DataSetExtension
 			foreach(var result in results) 
 			{
 				result.record.StationId = result.station.Id;
-				AppendInsertStatement(Td3200Database.PrecipitationTable, result.record);
+				((IDataParameter)command.Parameters[":id"]).Value = result.record.StationId;
+				((IDataParameter)command.Parameters[":number"]).Value = result.record.StationNumber;
+				((IDataParameter)command.Parameters[":date"]).Value = result.record.Date;
+				((IDataParameter)command.Parameters[":dateString"]).Value = result.record.DateTime.ToShortDateString();
+				((IDataParameter)command.Parameters[":value"]).Value = result.record.Value;
+				
+				command.ExecuteNonQuery();
 			}		
 		}
 		
-		private void AppendInsertStatement(string table, Td3200 record)  
+		private void CreateCommand(IDbConnection connection, string table)
 		{
-			statement.AppendLine("insert into " + table + "(StationId,StationNumber,Date,DateString,Value)");
-			statement.AppendFormat("values({0},'{1}',{2},'{3}',{4});", record.StationId, record.StationNumber, record.Date, record.DateTime.ToShortDateString(), record.Value);
-			statement.AppendLine();
+			command = connection.CreateCommand();
+			command.Transaction = connection.BeginTransaction();
+			
+			var idParameter = command.CreateParameter();
+			idParameter.ParameterName = ":id";
+			command.Parameters.Add(idParameter);
+			
+			var numberParameter = command.CreateParameter();
+			numberParameter.ParameterName = ":number";
+			command.Parameters.Add(numberParameter);
+			
+			var dateParameter = command.CreateParameter();
+			dateParameter.ParameterName = ":date";
+			command.Parameters.Add(dateParameter);
+			
+			var dateString = command.CreateParameter();
+			dateString.ParameterName = ":dateString";
+			command.Parameters.Add(dateString);
+			
+			var valueParameter = command.CreateParameter();
+			valueParameter.ParameterName = ":value";
+			command.Parameters.Add(valueParameter);
 		}
 		
-		private void CommitBatch(IDbConnection connection)
+		private void SetCommandText(string table) 
 		{
-			var command = connection.CreateCommand();
-        	command.CommandText = statement.ToString();
-        	command.Transaction = connection.BeginTransaction();
-        	
-        	command.ExecuteNonQuery();
-        	
-        	command.Transaction.Commit();
+			command.CommandText = "insert into " + table + "(StationId,StationNumber,Date,DateString,Value) Values(:id, :number, :date, :dateString, :value);";
 		}
     }
 }

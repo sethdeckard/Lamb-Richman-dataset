@@ -34,7 +34,7 @@ namespace DataSetExtension.Tests
 					Id = 4,
 					GridPoint = 2
 				};
-			    station.Save(connection, StationDatabase.TemperatureStationtable);
+			    station.Save(connection, StationDatabase.TemperatureMinStationTable);
 				
 				var td3200Db = new Td3200Database(connection);
 				td3200Db.CreateSchema();
@@ -67,7 +67,7 @@ namespace DataSetExtension.Tests
 					Id = 4,
 					GridPoint = 5
 				};
-			    station.Save(connection, StationDatabase.TemperatureStationtable);
+			    station.Save(connection, StationDatabase.TemperatureMaxStationTable);
 				
 				var td3200Db = new Td3200Database(connection);
 				td3200Db.CreateSchema();

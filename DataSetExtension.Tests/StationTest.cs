@@ -11,7 +11,7 @@ namespace DataSetExtension.Tests
     public class StationTest 
     { 
 		private const string Query = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
-            "HistoricalRecordCount, RecordCount from TemperatureStation";
+            "HistoricalRecordCount, RecordCount from TemperatureMinStation";
 		
         [Test]
         public void Parse()
@@ -79,7 +79,7 @@ namespace DataSetExtension.Tests
 					GridPointLongitude = 1002
 				};
 				
-				station.Save(connection, "TemperatureStation");
+				station.Save(connection, "TemperatureMinStation");
 
                 var result = connection.Query<Station>(Query).First();
 				

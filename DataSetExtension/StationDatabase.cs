@@ -7,7 +7,8 @@ namespace DataSetExtension
     public class StationDatabase
     {
         public const string PrecipitationStationTable = "PrecipitationStation";
-        public const string TemperatureStationtable = "TemperatureStation";
+		public const string TemperatureMinStationTable = "TemperatureMinStation";
+		public const string TemperatureMaxStationTable = "TemperatureMaxStation";
 
         private readonly IDbConnection connection;
 
@@ -19,14 +20,10 @@ namespace DataSetExtension
         public void CreateSchema()
         {
             connection.Execute(GenerateCreateTableStatement(PrecipitationStationTable));
-            connection.Execute(GenerateCreateTableStatement(TemperatureStationtable));
+            connection.Execute(GenerateCreateTableStatement(TemperatureMaxStationTable));
+			connection.Execute(GenerateCreateTableStatement(TemperatureMinStationTable));
         }
 		
-		public void Save(Station station) 
-		{
-			
-		}
-
         private static string GenerateCreateTableStatement(string table)
         {
             var statement = new StringBuilder();

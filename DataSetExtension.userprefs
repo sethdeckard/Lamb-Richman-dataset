@@ -1,17 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.Tests/TemperatureTest.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ConsoleApp/Main.cs">
     <Files>
-      <File FileName="DataSetExtension.Tests/TemperatureTest.cs" Line="38" Column="4" />
+      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="16" Column="19" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True" />
-          <Node name="DataSetExtension.ConsoleApp" expanded="True" />
-          <Node name="DataSetExtension.Tests" expanded="True">
-            <Node name="TemperatureTest.cs" selected="True" />
+          <Node name="DataSetExtension.ConsoleApp" expanded="True">
+            <Node name="Main.cs" selected="True" />
           </Node>
+          <Node name="DataSetExtension.Tests" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
@@ -31,14 +31,12 @@
         </State>
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
           <Node name="DataSetExtension.Tests" expanded="True">
             <Node name="DataSetExtension" expanded="True">
               <Node name="Tests" expanded="True">
-                <Node name="ExportControllerTest" expanded="True">
-                  <Node name="ExportTemperatureMin" selected="True" />
-                </Node>
-                <Node name="MeasurementExportTest" expanded="True" />
+                <Node name="ExportControllerTest" expanded="True" />
+                <Node name="MeasurementWriterTest" expanded="True" />
                 <Node name="PrecipitationTest" expanded="True" />
                 <Node name="StationDatabaseTest" expanded="True" />
                 <Node name="StationImportTest" expanded="True" />
@@ -57,8 +55,6 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint enabled="false" file="/Users/seth/Projects/DataSetExtension/DataSetExtention.TestConsole/Main.cs" line="12" />
-      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension/ExportController.cs" line="37" />
-      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension/ExportController.cs" line="48" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

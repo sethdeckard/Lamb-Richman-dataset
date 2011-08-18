@@ -16,31 +16,37 @@ namespace DataSetExtension.ConsoleApp
 		public static void Main(string[] args)
 		{
 			/*ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
-			ImportTemperatureStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
-			ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2001.txt", 2001);*/
+			ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/tmininfo.txt");
+			ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");*/
 			
-			Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
+			for (int year = 2002; year < 2007; year++) {
+				ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_" + year + ".txt", year);
+			}
+			
+			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
 		}
 		
 		private static void ImportPrecipitationStations(string file) 
 		{
-			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3"))
-            {
-                connection.Open();
-
-                var database = new StationDatabase(connection);
-                database.CreateSchema();
-
-                var import = new StationImport();
-                import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, StationDatabase.PrecipitationStationTable);
-				
-				Console.WriteLine(import.Imported.Count + " precipitation stations imported");
-			}
+			var count = ImportStations(file, StationDatabase.PrecipitationStationTable);
+			Console.WriteLine(count + " precipitation stations imported");
 		}
 		
-		private static void ImportTemperatureStations(string file) 
+		private static void ImportTemperatureMinStations(string file) 
 		{
-			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3"))
+			var count = ImportStations(file, StationDatabase.TemperatureMinStationTable);
+			Console.WriteLine(count + " temperature min stations imported");
+		}
+		
+		private static void ImportTemperatureMaxStations(string file) 
+		{
+			var count = ImportStations(file, StationDatabase.TemperatureMaxStationTable);
+			Console.WriteLine(count + " temperature max stations imported");
+		}
+		
+		private static int ImportStations(string file, string table) 
+		{
+			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
             {
                 connection.Open();
 
@@ -48,23 +54,25 @@ namespace DataSetExtension.ConsoleApp
                 database.CreateSchema();
 
                 var import = new StationImport();
-                import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, StationDatabase.TemperatureStationtable);	
+                import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, table);	
 				
-				Console.WriteLine(import.Imported.Count + " temperature stations imported");
-			}
+				return import.Imported.Count;
+			}	
 		}
 		
 		private static void ImportTd3200(string file, int year) 
 		{
-            using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3"))
+            using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
             {
                 connection.Open();
 				
-				var tempStations = connection.Query<Station>("select Id, Number, GridPoint from " + StationDatabase.TemperatureStationtable).ToArray();
+				var tempMinStations = connection.Query<Station>("select Id, Number, GridPoint from " + StationDatabase.TemperatureMinStationTable).ToArray();
+				
+				var tempMaxStations = connection.Query<Station>("select Id, Number, GridPoint from " + StationDatabase.TemperatureMaxStationTable).ToArray();
 				
 				var percipStations = connection.Query<Station>("select Id, Number, GridPoint from " + StationDatabase.PrecipitationStationTable).ToArray();
 				
-                var import = new Td3200Import(tempStations.ToArray(), percipStations.ToArray()) { Year = year };
+                var import = new Td3200Import(tempMinStations, tempMaxStations, percipStations) { Year = year };
 
                 var database = new Td3200Database(connection);
                 database.CreateSchema();

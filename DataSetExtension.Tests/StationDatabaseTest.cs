@@ -11,8 +11,10 @@ namespace DataSetExtension.Tests
     {
         private const string PrecipitationQuery = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
             "HistoricalRecordCount, RecordCount from PrecipitationStation";
-        private const string TemperatureQuery = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
-            "HistoricalRecordCount, RecordCount from TemperatureStation";
+        private const string TemperatureMinQuery = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
+            "HistoricalRecordCount, RecordCount from TemperatureMinStation";
+		private const string TemperatureMaxQuery = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
+            "HistoricalRecordCount, RecordCount from TemperatureMaxStation";
     
         [Test]
         public void CreateDatabase()
@@ -25,8 +27,8 @@ namespace DataSetExtension.Tests
                 database.CreateSchema();
 
                 connection.Query<Station>(PrecipitationQuery);
-
-                connection.Query<Station>(TemperatureQuery);
+                connection.Query<Station>(TemperatureMinQuery);			
+				connection.Query<Station>(TemperatureMaxQuery);
             }
         }
     }

@@ -29,17 +29,15 @@ namespace DataSetExtension
 			using (log = CreateLogWriter("tmin-missing.log"))
 			{
 	            for (var grid = GridMin; grid <= GridMax; grid++)
-	            {
-					var path = CreateDirectory("tmin");
-					var file = Path.Combine(path, "gr" + grid.ToString().PadLeft(3, '0'));				
-	                using (var stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write)) 
+	            {			
+	                using (var stream = new FileStream(GetFile(grid, "tmin"), FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
-						var stations = GetStations(grid, StationDatabase.TemperatureStationtable);
+						var stations = GetStations(grid, StationDatabase.TemperatureMinStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1).ToFileTime();
 						var end = GetEndDate(year);
-						var query = string.Format(QueryFormat, Td3200Database.TemperatureMinTable, StationDatabase.TemperatureStationtable);
+						var query = string.Format(QueryFormat, Td3200Database.TemperatureMinTable, StationDatabase.TemperatureMinStationTable);
 						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 		
 		               ProcessMeasurements(year, grid, export, measurements);
@@ -53,17 +51,15 @@ namespace DataSetExtension
 			using (log = CreateLogWriter("tmax-missing.log"))
 			{
 	            for (var grid = GridMin; grid <= GridMax; grid++)
-	            {
-					var path = CreateDirectory("tmax");                
-					var file = Path.Combine(path, "gr" + grid.ToString().PadLeft(3, '0'));				
-	                using (var stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write)) 
+	            {			
+	                using (var stream = new FileStream(GetFile(grid, "tmax"), FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
-						var stations = GetStations(grid, StationDatabase.TemperatureStationtable);
+						var stations = GetStations(grid, StationDatabase.TemperatureMaxStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1).ToFileTime();
 						var end = GetEndDate(year);
-						var query = string.Format(QueryFormat, Td3200Database.TemperatureMaxTable, StationDatabase.TemperatureStationtable);
+						var query = string.Format(QueryFormat, Td3200Database.TemperatureMaxTable, StationDatabase.TemperatureMaxStationTable);
 						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 						
 						ProcessMeasurements(year, grid, export, measurements);
@@ -78,9 +74,7 @@ namespace DataSetExtension
 			{
 	            for (var grid = GridMin; grid <= GridMax; grid++)
 	            {
-					var path = CreateDirectory("prcp"); 
-					var file = Path.Combine(path, "gr" + grid.ToString().PadLeft(3, '0'));				
-	                using (var stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write)) 
+	                using (var stream = new FileStream(GetFile(grid, "prcp"), FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
 						var stations = GetStations(grid, StationDatabase.PrecipitationStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
@@ -94,6 +88,11 @@ namespace DataSetExtension
 					}
 	            }
 			}
+		}
+		
+		private string GetFile(int grid, string directory)
+		{ 
+			return Path.Combine(GetDirectory(directory), "gr" + grid.ToString().PadLeft(3, '0'));
 		}
 		
 		private StreamWriter CreateLogWriter(string file)
@@ -121,7 +120,7 @@ namespace DataSetExtension
 		
 		private void LogMissing(int grid, List<DateTime> missing) 
 		{
-			log.WriteLine("GridPoint " + grid);
+			log.WriteLine(grid);
 			
 			foreach (DateTime date in missing) 
 			{
@@ -131,7 +130,7 @@ namespace DataSetExtension
 			log.Flush();
 		}
 		
-		private string CreateDirectory(string path) 
+		private string GetDirectory(string path) 
 		{
 			var directory = Path.Combine(basePath, path);
 			if (!Directory.Exists(directory)) 
