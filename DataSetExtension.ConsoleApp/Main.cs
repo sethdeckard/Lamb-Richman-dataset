@@ -19,11 +19,9 @@ namespace DataSetExtension.ConsoleApp
 			ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/tmininfo.txt");
 			ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");*/
 			
-			for (int year = 2002; year < 2007; year++) {
-				ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_" + year + ".txt", year);
-			}
-			
-			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
+			//ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2010.txt", 0);
+			//Export(@"/Users/seth/Documents/LRDataSet/output", 2009);
+			//Export(@"/Users/seth/Documents/LRDataSet/output", 2010);
 		}
 		
 		private static void ImportPrecipitationStations(string file) 
@@ -62,6 +60,8 @@ namespace DataSetExtension.ConsoleApp
 		
 		private static void ImportTd3200(string file, int year) 
 		{
+			Console.WriteLine("Importing TD3200 data...");
+			
             using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
             {
                 connection.Open();
@@ -86,6 +86,10 @@ namespace DataSetExtension.ConsoleApp
 				
 				Console.WriteLine(import.Total + " TD3200 records imported.");
 				Console.WriteLine("Total TD3200 Import time: " + stopwatch.Elapsed.ToString());
+				
+				Console.WriteLine("Running VACUUM command on database file...");
+				connection.Execute("vacuum;");
+				Console.WriteLine("Finished.");
             }
 		}
 		

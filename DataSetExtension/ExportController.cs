@@ -26,12 +26,14 @@ namespace DataSetExtension
 
         public void ExportTemperatureMin(int year)
         {
-			using (log = CreateLogWriter("tmin-missing.log"))
+			using (log = CreateLogWriter(string.Format("tmin-missing-{0}.log", year)))
 			{
 	            for (var grid = GridMin; grid <= GridMax; grid++)
 	            {			
 	                using (var stream = new FileStream(GetFile(grid, "tmin"), FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
+						stream.Seek(0, SeekOrigin.End);
+						
 						var stations = GetStations(grid, StationDatabase.TemperatureMinStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
@@ -48,12 +50,14 @@ namespace DataSetExtension
 
         public void ExportTemperatureMax(int year)
         {
-			using (log = CreateLogWriter("tmax-missing.log"))
+			using (log = CreateLogWriter(string.Format("tmax-missing-{0}.log", year)))
 			{
 	            for (var grid = GridMin; grid <= GridMax; grid++)
 	            {			
 	                using (var stream = new FileStream(GetFile(grid, "tmax"), FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
+						stream.Seek(0, SeekOrigin.End);
+						
 						var stations = GetStations(grid, StationDatabase.TemperatureMaxStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
@@ -70,12 +74,14 @@ namespace DataSetExtension
 		
 		public void ExportPrecipitation(int year) 
 		{
-			using (log = CreateLogWriter("prcp-missing.log"))
+			using (log = CreateLogWriter(string.Format("prcp-missing-{0}.log", year)))
 			{
 	            for (var grid = GridMin; grid <= GridMax; grid++)
 	            {
 	                using (var stream = new FileStream(GetFile(grid, "prcp"), FileMode.OpenOrCreate, FileAccess.Write)) 
 					{
+						stream.Seek(0, SeekOrigin.End);
+						
 						var stations = GetStations(grid, StationDatabase.PrecipitationStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						

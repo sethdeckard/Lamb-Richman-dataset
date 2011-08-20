@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.Tests", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.ConsoleApp", "DataSetExtension.ConsoleApp\DataSetExtension.ConsoleApp.csproj", "{7304A7F1-5B05-4F5B-86E6-095171E930D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.ImportConsole", "DataSetExtension.ImportConsole\DataSetExtension.ImportConsole.csproj", "{A90F86AF-8941-4D26-99FB-FB0924B4D8DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExtension.ExportConsole", "DataSetExtension.ExportConsole\DataSetExtension.ExportConsole.csproj", "{A5E24699-C83C-4912-9327-DE1280CF3229}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{7304A7F1-5B05-4F5B-86E6-095171E930D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7304A7F1-5B05-4F5B-86E6-095171E930D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7304A7F1-5B05-4F5B-86E6-095171E930D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5E24699-C83C-4912-9327-DE1280CF3229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5E24699-C83C-4912-9327-DE1280CF3229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5E24699-C83C-4912-9327-DE1280CF3229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5E24699-C83C-4912-9327-DE1280CF3229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A90F86AF-8941-4D26-99FB-FB0924B4D8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90F86AF-8941-4D26-99FB-FB0924B4D8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A90F86AF-8941-4D26-99FB-FB0924B4D8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A90F86AF-8941-4D26-99FB-FB0924B4D8DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = DataSetExtension.ConsoleApp\DataSetExtension.ConsoleApp.csproj

@@ -1,16 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ConsoleApp/Main.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ImportConsole/Main.cs">
     <Files>
-      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="16" Column="19" />
+      <File FileName="DataSetExtension.ImportConsole/Main.cs" Line="30" Column="27" />
+      <File FileName="DataSetExtension.ExportConsole/Main.cs" Line="1" Column="1" />
+      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="24" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True" />
-          <Node name="DataSetExtension.ConsoleApp" expanded="True">
-            <Node name="Main.cs" selected="True" />
-          </Node>
+          <Node name="DataSetExtension.ConsoleApp" expanded="True" />
+          <Node name="DataSetExtension.ExportConsole" expanded="True" selected="True" />
+          <Node name="DataSetExtension.ImportConsole" expanded="True" />
           <Node name="DataSetExtension.Tests" expanded="True" />
         </State>
       </Pad>
@@ -31,24 +33,7 @@
         </State>
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True">
-          <Node name="DataSetExtension.Tests" expanded="True">
-            <Node name="DataSetExtension" expanded="True">
-              <Node name="Tests" expanded="True">
-                <Node name="ExportControllerTest" expanded="True" />
-                <Node name="MeasurementWriterTest" expanded="True" />
-                <Node name="PrecipitationTest" expanded="True" />
-                <Node name="StationDatabaseTest" expanded="True" />
-                <Node name="StationImportTest" expanded="True" />
-                <Node name="StationTest" expanded="True" />
-                <Node name="Td3200DatabaseTest" expanded="True" />
-                <Node name="Td3200ImportTest" expanded="True" />
-                <Node name="Td3200Test" expanded="True" />
-                <Node name="TemperatureTest" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

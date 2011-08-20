@@ -81,5 +81,30 @@ namespace DataSetExtension.Tests
 
             Assert.That(second.Value, Is.EqualTo(10));
         }
+		
+		[Test]
+        public void ParsePrecipitation2007()
+        {
+            var record = "0406DLY50231609PRCPHI20071288990310124 00000T00224 00000T00324 00000T00424 002E6 10524" +
+				" 00000 00624 00000T00724 00000 00824 00000 00924 00000T01024 00000T01124 00000T01224 00000T01324" + 
+				" 00000T01424 00000T01524 00000T01624 00000T01724 00000T01824 00000T01924 00000T02024 00000 02124" +
+				" 00000T12224 00000T02324 001E6 12424 00000 02524 00001 02624 00000T02724 00000T02824 00000T02924 00000T03024 00000T03124 00000T0";
+
+            var results = Td3200.Parse(record);
+
+            Assert.That(results.Length, Is.EqualTo(30));
+
+            var first = results[0];
+
+            Assert.That(first.StationNumber, Is.EqualTo("051609"));
+
+            Assert.That(first.DateTime, Is.EqualTo(DateTime.Parse("09/01/1971")));
+
+            Assert.That(first.Value, Is.EqualTo(0));
+
+            var second = results[1];
+
+            Assert.That(second.Value, Is.EqualTo(10));
+        }
     }
 }
