@@ -51,6 +51,8 @@
     <Compile Include="IMeasurement.cs" />
     <Compile Include="ExportController.cs" />
     <Compile Include="MeasurementWriter.cs" />
+    <Compile Include="CanadaDelimited.cs" />
+    <Compile Include="CanadaImport.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

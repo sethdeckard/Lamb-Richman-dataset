@@ -16,6 +16,8 @@ namespace DataSetExtension
         public string Name { get; set; }
 
         public long GridPoint { get; set; }
+		
+		public long StationId { get; set; }
 
         /// <summary>
         /// Denotes the sequence of this station in relation to GridPoint (0 = Primary, 1 = secondary, 2...n)
