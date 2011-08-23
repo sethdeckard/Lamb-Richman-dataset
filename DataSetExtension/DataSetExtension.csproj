@@ -39,10 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Station.cs" />
-    <Compile Include="StationImport.cs" />
     <Compile Include="Dapper\SqlMapper.cs" />
-    <Compile Include="StationDatabase.cs" />
     <Compile Include="Td3200.cs" />
     <Compile Include="Td3200Database.cs" />
     <Compile Include="Td3200Import.cs" />
@@ -51,8 +48,12 @@
     <Compile Include="IMeasurement.cs" />
     <Compile Include="ExportController.cs" />
     <Compile Include="MeasurementWriter.cs" />
-    <Compile Include="CanadaDelimited.cs" />
     <Compile Include="CanadaImport.cs" />
+    <Compile Include="GridStation.cs" />
+    <Compile Include="GridStationImport.cs" />
+    <Compile Include="GridStationDatabase.cs" />
+    <Compile Include="Station.cs" />
+    <Compile Include="CanadaMeasurement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

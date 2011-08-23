@@ -29,9 +29,9 @@ namespace DataSetExtension.Tests
 
             writer.BaseStream.Position = 0;
 
-            var temperatureMaxStation = new Station { Id = 1, Number = "051458" }; 
-            var precipitationStation = new Station { Id = 2, Number = "071458" };
-			var temperatureMinStation = new Station { Id = 1, Number = "051468" };
+            var temperatureMaxStation = new GridStation { Id = 1, Number = "051458" }; 
+            var precipitationStation = new GridStation { Id = 2, Number = "071458" };
+			var temperatureMinStation = new GridStation { Id = 1, Number = "051468" };
             using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
             {
                 connection.Open();

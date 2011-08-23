@@ -100,19 +100,19 @@ namespace DataSetExtension.ImportConsole
 		
 		private static void ImportPrecipitationStations(string file) 
 		{
-			var count = ImportStations(file, StationDatabase.PrecipitationStationTable);
+			var count = ImportStations(file, GridStationDatabase.PrecipitationStationTable);
 			Console.WriteLine(count + " precipitation stations imported");
 		}
 		
 		private static void ImportTemperatureMinStations(string file) 
 		{
-			var count = ImportStations(file, StationDatabase.TemperatureMinStationTable);
+			var count = ImportStations(file, GridStationDatabase.TemperatureMinStationTable);
 			Console.WriteLine(count + " temperature min stations imported");
 		}
 		
 		private static void ImportTemperatureMaxStations(string file) 
 		{
-			var count = ImportStations(file, StationDatabase.TemperatureMaxStationTable);
+			var count = ImportStations(file, GridStationDatabase.TemperatureMaxStationTable);
 			Console.WriteLine(count + " temperature max stations imported");
 		}
 		
@@ -122,10 +122,10 @@ namespace DataSetExtension.ImportConsole
             {
                 connection.Open();
 
-                var database = new StationDatabase(connection);
+                var database = new GridStationDatabase(connection);
                 database.CreateSchema();
 
-                var import = new StationImport();
+                var import = new GridStationImport();
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, table);	
 				
 				return import.Imported.Count;
@@ -140,11 +140,11 @@ namespace DataSetExtension.ImportConsole
             {
                 connection.Open();
 				
-				var tempMinStations = connection.Query<Station>("select Id, Number, GridPoint from " + StationDatabase.TemperatureMinStationTable).ToArray();
+				var tempMinStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMinStationTable).ToArray();
 				
-				var tempMaxStations = connection.Query<Station>("select Id, Number, GridPoint from " + StationDatabase.TemperatureMaxStationTable).ToArray();
+				var tempMaxStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMaxStationTable).ToArray();
 				
-				var percipStations = connection.Query<Station>("select Id, Number, GridPoint from " + StationDatabase.PrecipitationStationTable).ToArray();
+				var percipStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.PrecipitationStationTable).ToArray();
 				
                 var import = new Td3200Import(tempMinStations, tempMaxStations, percipStations) { Year = year };
 

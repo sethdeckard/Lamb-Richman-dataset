@@ -26,15 +26,15 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-				var stationDb = new StationDatabase(connection);
+				var stationDb = new GridStationDatabase(connection);
 				stationDb.CreateSchema();
 				
-				var station = new Station() 
+				var station = new GridStation() 
 				{
 					Id = 4,
 					GridPoint = 2
 				};
-			    station.Save(connection, StationDatabase.TemperatureMinStationTable);
+			    station.Save(connection, GridStationDatabase.TemperatureMinStationTable);
 				
 				var td3200Db = new Td3200Database(connection);
 				td3200Db.CreateSchema();
@@ -59,15 +59,15 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-				var stationDb = new StationDatabase(connection);
+				var stationDb = new GridStationDatabase(connection);
 				stationDb.CreateSchema();
 				
-				var station = new Station() 
+				var station = new GridStation() 
 				{
 					Id = 4,
 					GridPoint = 5
 				};
-			    station.Save(connection, StationDatabase.TemperatureMaxStationTable);
+			    station.Save(connection, GridStationDatabase.TemperatureMaxStationTable);
 				
 				var td3200Db = new Td3200Database(connection);
 				td3200Db.CreateSchema();
@@ -92,15 +92,15 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-				var stationDb = new StationDatabase(connection);
+				var stationDb = new GridStationDatabase(connection);
 				stationDb.CreateSchema();
 				
-				var station = new Station() 
+				var station = new GridStation() 
 				{
 					Id = 4,
 					GridPoint = 7
 				};
-			    station.Save(connection, StationDatabase.PrecipitationStationTable);
+			    station.Save(connection, GridStationDatabase.PrecipitationStationTable);
 				
 				var td3200Db = new Td3200Database(connection);
 				td3200Db.CreateSchema();

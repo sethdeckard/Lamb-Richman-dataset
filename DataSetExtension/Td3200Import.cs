@@ -9,12 +9,12 @@ namespace DataSetExtension
 {
     public class Td3200Import
     {
-        private readonly Station[] temperatureMinStations;
-		private readonly Station[] temperatureMaxStations;
-        private readonly Station[] precipitationStations;
+        private readonly GridStation[] temperatureMinStations;
+		private readonly GridStation[] temperatureMaxStations;
+        private readonly GridStation[] precipitationStations;
 		private IDbCommand command;
 
-        public Td3200Import(Station[] temperatureMinStations, Station[] temperatureMaxStations, Station[] precipitationStations)
+        public Td3200Import(GridStation[] temperatureMinStations, GridStation[] temperatureMaxStations, GridStation[] precipitationStations)
         {
             this.temperatureMinStations = temperatureMinStations;
 			this.temperatureMaxStations = temperatureMaxStations;

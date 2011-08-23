@@ -14,13 +14,13 @@ namespace DataSetExtension.Tests
         {
             var stream = new MemoryStream();
 
-            var stations = new List<Station>
+            var stations = new List<GridStation>
                              {
-                                 new Station { Id = 1, GridPoint = 2, Sequence = 0},
-                                 new Station { Id = 2, GridPoint = 2, Sequence = 1},
-                                 new Station { Id = 3, GridPoint = 2, Sequence = 2},
-                                 new Station { Id = 4, GridPoint = 2, Sequence = 3},
-                                 new Station { Id = 5, GridPoint = 2, Sequence = 4},
+                                 new GridStation { Id = 1, GridPoint = 2, Sequence = 0},
+                                 new GridStation { Id = 2, GridPoint = 2, Sequence = 1},
+                                 new GridStation { Id = 3, GridPoint = 2, Sequence = 2},
+                                 new GridStation { Id = 4, GridPoint = 2, Sequence = 3},
+                                 new GridStation { Id = 5, GridPoint = 2, Sequence = 4},
                              };
 
             var records = new List<IMeasurement>

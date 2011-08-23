@@ -8,10 +8,10 @@ namespace DataSetExtension
 	public class MeasurementWriter
 	{
         private readonly int year;
-        private readonly Station[] stations;
+        private readonly GridStation[] stations;
         private readonly StreamWriter writer;
 
-        public MeasurementWriter(Stream stream, Station[] stations, int year)
+        public MeasurementWriter(Stream stream, GridStation[] stations, int year)
         {
             this.stations = stations;
             this.year = year;

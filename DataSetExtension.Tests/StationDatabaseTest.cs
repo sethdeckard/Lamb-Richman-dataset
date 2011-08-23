@@ -23,12 +23,12 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-                var database = new StationDatabase(connection);
+                var database = new GridStationDatabase(connection);
                 database.CreateSchema();
 
-                connection.Query<Station>(PrecipitationQuery);
-                connection.Query<Station>(TemperatureMinQuery);			
-				connection.Query<Station>(TemperatureMaxQuery);
+                connection.Query<GridStation>(PrecipitationQuery);
+                connection.Query<GridStation>(TemperatureMinQuery);			
+				connection.Query<GridStation>(TemperatureMaxQuery);
             }
         }
     }

@@ -37,11 +37,11 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-                var database = new StationDatabase(connection);
+                var database = new GridStationDatabase(connection);
                 database.CreateSchema();
 
-                var import = new StationImport();
-                import.Import(writer.BaseStream, connection, StationDatabase.PrecipitationStationTable);
+                var import = new GridStationImport();
+                import.Import(writer.BaseStream, connection, GridStationDatabase.PrecipitationStationTable);
 				
                 var count = connection.Query<long>("select count(*) from PrecipitationStation;").First();
 

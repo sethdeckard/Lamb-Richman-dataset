@@ -1,22 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/CanadaDelimited.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/CanadaMeasurement.cs">
     <Files>
-      <File FileName="DataSetExtension.ImportConsole/Main.cs" Line="17" Column="34" />
-      <File FileName="DataSetExtension.ExportConsole/Main.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/Td3200Import.cs" Line="88" Column="68" />
-      <File FileName="DataSetExtension/Td3200.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/CanadaDelimited.cs" Line="12" Column="3" />
-      <File FileName="DataSetExtension.Tests/CanadaDelimitedTest.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/CanadaImport.cs" Line="7" Column="22" />
-      <File FileName="DataSetExtension.Tests/CanadaImportTest.cs" Line="7" Column="3" />
+      <File FileName="DataSetExtension/CanadaMeasurement.cs" Line="62" Column="50" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
-            <Node name="CanadaDelimited.cs" selected="True" />
+            <Node name="CanadaMeasurement.cs" selected="True" />
           </Node>
           <Node name="DataSetExtension.ConsoleApp" expanded="True" />
           <Node name="DataSetExtension.ExportConsole" expanded="True" />
@@ -40,14 +32,31 @@
           <Value>decimal.Round(global::System.Convert.ToDecimal(celsius), 1).ToString()</Value>
         </State>
       </Pad>
+      <Pad Id="ConnectionManagerPad">
+        <State selected="True" />
+      </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="DataSetExtension.Tests" expanded="True">
+            <Node name="DataSetExtension" expanded="True">
+              <Node name="Tests" expanded="True">
+                <Node name="CanadaMeasurementTest" expanded="True">
+                  <Node name="Parse" selected="True" />
+                </Node>
+                <Node name="ExportControllerTest" expanded="True" />
+                <Node name="GridStationTest" expanded="True" />
+                <Node name="StationDatabaseTest" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint enabled="false" file="/Users/seth/Projects/DataSetExtension/DataSetExtention.TestConsole/Main.cs" line="12" />
+      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension.Tests/CanadaMeasurementTest.cs" line="32" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

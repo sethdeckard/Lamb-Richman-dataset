@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -6,17 +6,17 @@ using Dapper;
 
 namespace DataSetExtension
 {
-    public class StationImport
+    public class GridStationImport
     {
 		private const int batchSize = 200;
 		
 		private StringBuilder statement;
 		
-        public List<Station> Imported { get; set; }
+        public List<GridStation> Imported { get; set; }
 
-        public StationImport()
+        public GridStationImport()
         {
-            Imported = new List<Station>();
+            Imported = new List<GridStation>();
         }
 
         public void Import(Stream stream, IDbConnection connection, string table)
@@ -26,7 +26,7 @@ namespace DataSetExtension
 			
             using (var reader = new StreamReader(stream))
             {
-                Station previous = null;
+                GridStation previous = null;
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
@@ -36,7 +36,7 @@ namespace DataSetExtension
                     }
                     else
                     {
-                        var station = new Station();
+                        var station = new GridStation();
 
                         if (previous == null)
                         {
@@ -72,7 +72,7 @@ namespace DataSetExtension
             }
         }
 		
-		private void AppendInsertStatement(string table, Station station) 
+		private void AppendInsertStatement(string table, GridStation station) 
 		{
 			statement.Append("insert into " + table);
 			statement.AppendLine("(Number,Name,GridPoint,Sequence,Latitude,Longitude,GridPointLatitude,GridPointLongitude,HistoricalRecordCount,RecordCount)");

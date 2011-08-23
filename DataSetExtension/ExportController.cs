@@ -34,12 +34,12 @@ namespace DataSetExtension
 					{
 						stream.Seek(0, SeekOrigin.End);
 						
-						var stations = GetStations(grid, StationDatabase.TemperatureMinStationTable);
+						var stations = GetStations(grid, GridStationDatabase.TemperatureMinStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1).ToFileTime();
 						var end = GetEndDate(year);
-						var query = string.Format(QueryFormat, Td3200Database.TemperatureMinTable, StationDatabase.TemperatureMinStationTable);
+						var query = string.Format(QueryFormat, Td3200Database.TemperatureMinTable, GridStationDatabase.TemperatureMinStationTable);
 						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 		
 		               ProcessMeasurements(year, grid, export, measurements);
@@ -58,12 +58,12 @@ namespace DataSetExtension
 					{
 						stream.Seek(0, SeekOrigin.End);
 						
-						var stations = GetStations(grid, StationDatabase.TemperatureMaxStationTable);
+						var stations = GetStations(grid, GridStationDatabase.TemperatureMaxStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1).ToFileTime();
 						var end = GetEndDate(year);
-						var query = string.Format(QueryFormat, Td3200Database.TemperatureMaxTable, StationDatabase.TemperatureMaxStationTable);
+						var query = string.Format(QueryFormat, Td3200Database.TemperatureMaxTable, GridStationDatabase.TemperatureMaxStationTable);
 						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 						
 						ProcessMeasurements(year, grid, export, measurements);
@@ -82,12 +82,12 @@ namespace DataSetExtension
 					{
 						stream.Seek(0, SeekOrigin.End);
 						
-						var stations = GetStations(grid, StationDatabase.PrecipitationStationTable);
+						var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1).ToFileTime();
 						var end = GetEndDate(year);
-						var query = string.Format(QueryFormat, Td3200Database.PrecipitationTable, StationDatabase.PrecipitationStationTable);
+						var query = string.Format(QueryFormat, Td3200Database.PrecipitationTable, GridStationDatabase.PrecipitationStationTable);
 						var measurements = connection.Query<Precipitation>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 		
 		                ProcessMeasurements(year, grid, export, measurements);
@@ -147,10 +147,10 @@ namespace DataSetExtension
 			return directory;
 		}
 		
-		private Station[] GetStations(int grid, string table) 
+		private GridStation[] GetStations(int grid, string table) 
 		{
 			var query = "select Id, Sequence, GridPoint from " + table + " where GridPoint = @GridPoint";
-            return connection.Query<Station>(query, new { GridPoint = grid }).ToArray();
+            return connection.Query<GridStation>(query, new { GridPoint = grid }).ToArray();
 		}
 
 		private long GetEndDate (int year)

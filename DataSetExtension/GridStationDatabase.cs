@@ -4,7 +4,7 @@ using Dapper;
 
 namespace DataSetExtension
 {
-    public class StationDatabase
+    public class GridStationDatabase
     {
         public const string PrecipitationStationTable = "PrecipitationStation";
 		public const string TemperatureMinStationTable = "TemperatureMinStation";
@@ -12,7 +12,7 @@ namespace DataSetExtension
 
         private readonly IDbConnection connection;
 
-        public StationDatabase(IDbConnection connection)
+        public GridStationDatabase(IDbConnection connection)
         {
             this.connection = connection;
         }

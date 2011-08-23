@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StationImportTest.cs" />
-    <Compile Include="StationTest.cs" />
     <Compile Include="StationDatabaseTest.cs" />
     <Compile Include="Td3200DatabaseTest.cs" />
     <Compile Include="Td3200ImportTest.cs" />
@@ -51,8 +50,10 @@
     <Compile Include="PrecipitationTest.cs" />
     <Compile Include="ExportControllerTest.cs" />
     <Compile Include="MeasurementWriterTest.cs" />
-    <Compile Include="CanadaDelimitedTest.cs" />
     <Compile Include="CanadaImportTest.cs" />
+    <Compile Include="GridStationTest.cs" />
+    <Compile Include="StationTest.cs" />
+    <Compile Include="CanadaMeasurementTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
