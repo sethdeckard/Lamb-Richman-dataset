@@ -1,9 +1,9 @@
 using System.Data;
-using Mono.Data.Sqlite;
 using System.IO;
 using System.Linq;
 using System.Text;
 using DataSetExtension;
+using Mono.Data.Sqlite;
 using Dapper;
 using NUnit.Framework;
 
@@ -31,15 +31,20 @@ namespace DataSetExtension.Tests
 
             var temperatureMaxStation = new GridStation { Id = 1, Number = "051458" }; 
             var precipitationStation = new GridStation { Id = 2, Number = "071458" };
-			var temperatureMinStation = new GridStation { Id = 1, Number = "051468" };
+			var temperatureMinStation = new GridStation { Id = 3, Number = "051468" };
             using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
             {
                 connection.Open();
 
-                var database = new Td3200Database(connection);
+                var database = new MeasurementDatabase(connection);
                 database.CreateSchema();
 
-                var import = new Td3200Import(new[] { temperatureMinStation }, new[] { temperatureMaxStation }, new[] { precipitationStation }) { Year = 1989 };
+                var import = new Td3200Import() 
+					{ 
+						TemperatureMinStations = new[] { temperatureMinStation }, 
+						TemperatureMaxStations = new[] { temperatureMaxStation }, 
+						PrecipitationStations = new[] { precipitationStation }
+					};
                 import.Import(writer.BaseStream, connection);
 
                 var count = connection.Query<long>("select count(*) from TemperatureMax;").First();
@@ -55,7 +60,7 @@ namespace DataSetExtension.Tests
                 Assert.That(id, Is.EqualTo(1));
 
 				id = connection.Query<long>("select StationId from TemperatureMin;").First();
-                Assert.That(id, Is.EqualTo(1));
+                Assert.That(id, Is.EqualTo(3));
 				
 				id = connection.Query<long>("select StationId from Precipitation;").First();
                 Assert.That(id, Is.EqualTo(2));

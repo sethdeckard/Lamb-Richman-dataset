@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace DataSetExtension.Tests
 {
     [TestFixture]
-    public class Td3200DatabaseTest
+    public class MeasurementDatabaseTest
     {
         [Test]
         public void CreateDatabase()
@@ -16,7 +16,7 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-                var database = new Td3200Database(connection);
+                var database = new MeasurementDatabase(connection);
                 database.CreateSchema();
 
                 connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, Value from TemperatureMax");

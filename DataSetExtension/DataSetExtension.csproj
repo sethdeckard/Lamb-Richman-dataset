@@ -41,19 +41,20 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Dapper\SqlMapper.cs" />
     <Compile Include="Td3200.cs" />
-    <Compile Include="Td3200Database.cs" />
     <Compile Include="Td3200Import.cs" />
     <Compile Include="Temperature.cs" />
     <Compile Include="Precipitation.cs" />
     <Compile Include="IMeasurement.cs" />
     <Compile Include="ExportController.cs" />
     <Compile Include="MeasurementWriter.cs" />
-    <Compile Include="CanadaImport.cs" />
     <Compile Include="GridStation.cs" />
     <Compile Include="GridStationImport.cs" />
     <Compile Include="GridStationDatabase.cs" />
     <Compile Include="Station.cs" />
     <Compile Include="CanadaMeasurement.cs" />
+    <Compile Include="CanadaImport.cs" />
+    <Compile Include="MeasurementImport.cs" />
+    <Compile Include="MeasurementDatabase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

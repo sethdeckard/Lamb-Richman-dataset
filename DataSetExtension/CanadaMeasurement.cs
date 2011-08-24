@@ -8,8 +8,6 @@ namespace DataSetExtension
 	{
         public long Id { get; set; }
  
-        public string Number { get; set; }
- 
         public long Date { get; set; }
  
         public DateTime DateTime
@@ -19,6 +17,8 @@ namespace DataSetExtension
         }
 
 		public long StationId { get; set; }
+		
+		public string StationNumber { get; set; }
 
 		public long Value { get; set; }
 
@@ -35,7 +35,7 @@ namespace DataSetExtension
  
             var list = new List<CanadaMeasurement>();
  
-           ParseRecords (line, element, list, month, year, number);
+            ParseRecords (line, element, list, month, year, number);
  
             return list.ToArray();
         }
@@ -56,7 +56,7 @@ namespace DataSetExtension
         	
 					var archive = new CanadaMeasurement
         	               	{
-        	                   	Number = number, 
+        	                   	StationNumber = number, 
         	                    DateTime = new DateTime(year, month, day),
         						Element = element,
         						Value = converted

@@ -58,7 +58,7 @@ namespace DataSetExtension.ConsoleApp
 			}	
 		}
 		
-		private static void ImportTd3200(string file, int year) 
+		private static void ImportTd3200(string file) 
 		{
 			Console.WriteLine("Importing TD3200 data...");
 			
@@ -70,11 +70,16 @@ namespace DataSetExtension.ConsoleApp
 				
 				var tempMaxStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMaxStationTable).ToArray();
 				
-				var percipStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.PrecipitationStationTable).ToArray();
+				var precipStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.PrecipitationStationTable).ToArray();
 				
-                var import = new Td3200Import(tempMinStations, tempMaxStations, percipStations) { Year = year };
+                var import = new Td3200Import 
+					{
+						TemperatureMinStations = tempMinStations, 
+						TemperatureMaxStations = tempMaxStations, 
+						PrecipitationStations = precipStations
+					};
 
-                var database = new Td3200Database(connection);
+                var database = new MeasurementDatabase(connection);
                 database.CreateSchema();
 
                 var stopwatch = new Stopwatch();

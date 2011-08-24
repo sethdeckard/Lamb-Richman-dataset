@@ -4,7 +4,7 @@ using Dapper;
 
 namespace DataSetExtension
 {
-    public class Td3200Database
+    public class MeasurementDatabase
     {
         public const string PrecipitationTable = "Precipitation";
         public const string TemperatureMaxTable = "TemperatureMax";
@@ -12,7 +12,7 @@ namespace DataSetExtension
 
         private readonly IDbConnection connection;
 
-        public Td3200Database(IDbConnection connection)
+        public MeasurementDatabase(IDbConnection connection)
         {
             this.connection = connection;
         }

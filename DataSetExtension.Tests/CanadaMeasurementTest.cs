@@ -16,7 +16,7 @@ namespace DataSetExtension.Tests
             Assert.That(results.Length, Is.EqualTo(28));
  
             var measurement = results[0];
-            Assert.That(measurement.Number, Is.EqualTo("3010890"));
+            Assert.That(measurement.StationNumber, Is.EqualTo("3010890"));
 			Assert.That(measurement.DateTime, Is.EqualTo(DateTime.Parse("02/01/2001")));
 			Assert.That(measurement.Value, Is.EqualTo(5));
 			Assert.That(measurement.Element, Is.EqualTo(Element.TemperatureMin));
@@ -28,7 +28,7 @@ namespace DataSetExtension.Tests
             Assert.That(results.Length, Is.EqualTo(28));
  
             measurement = results[0];
-            Assert.That(measurement.Number, Is.EqualTo("3012205"));
+            Assert.That(measurement.StationNumber, Is.EqualTo("3012205"));
 			Assert.That(measurement.Element, Is.EqualTo(Element.TemperatureMax));
  
             line = "3012208200404012000000 000000 000000 000000 000000 000008 000000 000000 000000 000000 000000T000004" + 
@@ -38,7 +38,7 @@ namespace DataSetExtension.Tests
 			Assert.That(results.Length, Is.EqualTo(30));
 			
             measurement = results[5];
-            Assert.That(measurement.Number, Is.EqualTo("3012208"));
+            Assert.That(measurement.StationNumber, Is.EqualTo("3012208"));
 			Assert.That(measurement.DateTime, Is.EqualTo(DateTime.Parse("04/06/2004")));
 			Assert.That(measurement.Value, Is.EqualTo(3));
 			Assert.That(measurement.Element, Is.EqualTo(Element.Precipitation));

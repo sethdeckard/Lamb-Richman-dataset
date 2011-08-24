@@ -36,7 +36,7 @@ namespace DataSetExtension.Tests
 				};
 			    station.Save(connection, GridStationDatabase.TemperatureMinStationTable);
 				
-				var td3200Db = new Td3200Database(connection);
+				var td3200Db = new MeasurementDatabase(connection);
 				td3200Db.CreateSchema();
 				
                 var export = new ExportController(connection, testPath);
@@ -69,7 +69,7 @@ namespace DataSetExtension.Tests
 				};
 			    station.Save(connection, GridStationDatabase.TemperatureMaxStationTable);
 				
-				var td3200Db = new Td3200Database(connection);
+				var td3200Db = new MeasurementDatabase(connection);
 				td3200Db.CreateSchema();
 				
                 var export = new ExportController(connection, testPath);
@@ -102,7 +102,7 @@ namespace DataSetExtension.Tests
 				};
 			    station.Save(connection, GridStationDatabase.PrecipitationStationTable);
 				
-				var td3200Db = new Td3200Database(connection);
+				var td3200Db = new MeasurementDatabase(connection);
 				td3200Db.CreateSchema();
 				
                 var export = new ExportController(connection, testPath);
