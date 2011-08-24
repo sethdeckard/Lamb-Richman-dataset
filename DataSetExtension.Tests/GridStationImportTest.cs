@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace DataSetExtension.Tests
 {
     [TestFixture]
-    public class StationImportTest
+    public class GridStationImportTest
     {
         [Test]
         public void Import()

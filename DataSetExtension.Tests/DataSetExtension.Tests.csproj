@@ -41,8 +41,6 @@
     <Reference Include="Mono.Data.Sqlite" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StationImportTest.cs" />
-    <Compile Include="StationDatabaseTest.cs" />
     <Compile Include="Td3200ImportTest.cs" />
     <Compile Include="Td3200Test.cs" />
     <Compile Include="TemperatureTest.cs" />
@@ -54,6 +52,8 @@
     <Compile Include="CanadaMeasurementTest.cs" />
     <Compile Include="CanadaImportTest.cs" />
     <Compile Include="MeasurementDatabaseTest.cs" />
+    <Compile Include="GridStationImportTest.cs" />
+    <Compile Include="GridStationDatabaseTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

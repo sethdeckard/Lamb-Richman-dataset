@@ -7,7 +7,7 @@ using Dapper;
 namespace DataSetExtension.Tests
 {
     [TestFixture]
-    public class StationDatabaseTest
+    public class GridStationDatabaseTest
     {
         private const string PrecipitationQuery = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
             "HistoricalRecordCount, RecordCount from PrecipitationStation";
