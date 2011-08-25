@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace DataSetExtension
 {
@@ -15,7 +16,7 @@ namespace DataSetExtension
                 while (!reader.EndOfStream)
                 {
                     var records = CanadaMeasurement.Parse(reader.ReadLine());	
-					var element = records[0].Element;
+					var element = records.First().Element;
 					
                     if (element == Element.TemperatureMax)
                     {

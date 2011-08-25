@@ -22,14 +22,8 @@ namespace DataSetExtension
 
         public long Longitude { get; set; }
 
-        /// <summary>
-        /// Rounded Latitude of the Grid Point
-        /// </summary>
         public long GridPointLatitude { get; set; }
 
-        /// <summary>
-        /// Rounded Longitude of the Grid Point
-        /// </summary>
         public long GridPointLongitude { get; set; }
 
         public long HistoricalRecordCount { get; set; }
