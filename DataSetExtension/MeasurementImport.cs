@@ -10,6 +10,8 @@ namespace DataSetExtension
 		protected IDbCommand Command { get; set; }
 		
 		public int Total { get; set; }
+		
+		public int Year { get; set; }
 
         public GridStation[] TemperatureMinStations { get; set; }
 		

@@ -53,9 +53,9 @@ namespace DataSetExtension
 		{
 			//31 34 00 -085 15 00
 				
-			var degrees = int.Parse(0, 3);
-			var minutes = int.Parse(4, 2);
-			var seconds = int.Parse(6, 2);
+			var degrees = int.Parse(value.Substring(0, 3));
+			var minutes = int.Parse(value.Substring(4, 2));
+			var seconds = int.Parse(value.Substring(6, 2));
 			
 			return ConvertDegreeAngle(degrees, minutes, seconds);
 		}

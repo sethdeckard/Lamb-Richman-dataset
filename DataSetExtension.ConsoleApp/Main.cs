@@ -17,10 +17,13 @@ namespace DataSetExtension.ConsoleApp
 		{
 			/*ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
 			ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/tmininfo.txt");
-			ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");*/
+			ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
 			
-			//ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2010.txt", 0);
-			//Export(@"/Users/seth/Documents/LRDataSet/output", 2009);
+			ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2001.txt");*/
+			
+			//ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all");
+			
+			Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
 			//Export(@"/Users/seth/Documents/LRDataSet/output", 2010);
 		}
 		
@@ -56,6 +59,46 @@ namespace DataSetExtension.ConsoleApp
 				
 				return import.Imported.Count;
 			}	
+		}
+		
+		private static void ImportCanada(string file)
+		{
+			Console.WriteLine("Importing Canada data...");
+			
+            using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
+            {
+                connection.Open();
+				
+				var tempMinStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMinStationTable).ToArray();
+				
+				var tempMaxStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMaxStationTable).ToArray();
+				
+				var precipStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.PrecipitationStationTable).ToArray();
+				
+                var import = new CanadaImport 
+					{
+						TemperatureMinStations = tempMinStations, 
+						TemperatureMaxStations = tempMaxStations, 
+						PrecipitationStations = precipStations
+					};
+
+                var database = new MeasurementDatabase(connection);
+                database.CreateSchema();
+
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+
+                import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection);
+				
+				stopwatch.Stop();
+				
+				Console.WriteLine(import.Total + " Canada records imported.");
+				Console.WriteLine("Total Canada Import time: " + stopwatch.Elapsed.ToString());
+				
+				Console.WriteLine("Running VACUUM command on database file...");
+				connection.Execute("vacuum;");
+				Console.WriteLine("Finished.");
+            }				
 		}
 		
 		private static void ImportTd3200(string file) 

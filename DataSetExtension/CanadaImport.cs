@@ -15,7 +15,12 @@ namespace DataSetExtension
             {
                 while (!reader.EndOfStream)
                 {
-                    var records = CanadaMeasurement.Parse(reader.ReadLine());	
+                    var records = CanadaMeasurement.Parse(reader.ReadLine());
+					if (records.Length == 0) 
+					{
+						continue;
+					}
+					
 					var element = records.First().Element;
 					
                     if (element == Element.TemperatureMax)
