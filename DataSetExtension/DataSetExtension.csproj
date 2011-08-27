@@ -55,6 +55,7 @@
     <Compile Include="CanadaImport.cs" />
     <Compile Include="MeasurementImport.cs" />
     <Compile Include="MeasurementDatabase.cs" />
+    <Compile Include="StationDatabase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

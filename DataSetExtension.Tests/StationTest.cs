@@ -17,8 +17,8 @@ namespace DataSetExtension.Tests
 			
 			Assert.That(station.Number, Is.EqualTo("010008"));
 			Assert.That(station.State, Is.EqualTo("AL"));
-			Assert.That(station.StartDate, Is.EqualTo(DateTime.Parse("08/26/1991")));
-			Assert.That(station.EndDate, Is.EqualTo(DateTime.Parse("05/01/1998")));
+			Assert.That(station.Start, Is.EqualTo(DateTime.Parse("08/26/1991")));
+			Assert.That(station.End, Is.EqualTo(DateTime.Parse("05/01/1998")));
 			Assert.That(station.Name, Is.EqualTo("ABBEVILLE 1 NNW"));
 			
 			Assert.That(station.County, Is.EqualTo("HENRY"));

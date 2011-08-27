@@ -15,18 +15,14 @@ namespace DataSetExtension
 		public string State { get; set; }
 		
 		public string Country { get; set; }
-		
-		public long StationId { get; set; }
-
-        public long Sequence { get; set; }
 
         public decimal Latitude { get; set; }
 
         public decimal Longitude { get; set; }		
 		
-		public DateTime StartDate { get; set;}
+		public DateTime Start { get; set;}
 		
-		public DateTime EndDate { get; set; }
+		public DateTime End { get; set; }
 		
 		public void Parse(string record) 
 		{
@@ -37,8 +33,8 @@ namespace DataSetExtension
 			State = record.Substring(59, 2).Trim();
 			County = record.Substring(62,31).Trim(); 
 			
-			StartDate = ParseDate(record.Substring(130, 9));
-			EndDate = ParseDate(record.Substring(139, 9));
+			Start = ParseDate(record.Substring(130, 9));
+			End = ParseDate(record.Substring(139, 9));
 			
 			Latitude = ParseLatitude(record.Substring(149, 9));
 			Longitude = ParseLongitude(record.Substring(158, 10));

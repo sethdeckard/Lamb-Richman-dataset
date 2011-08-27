@@ -54,6 +54,7 @@
     <Compile Include="MeasurementDatabaseTest.cs" />
     <Compile Include="GridStationImportTest.cs" />
     <Compile Include="GridStationDatabaseTest.cs" />
+    <Compile Include="StationDatabaseTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

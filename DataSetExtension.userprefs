@@ -1,21 +1,25 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.Tests/StationTest.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/StationDatabase.cs">
     <Files>
-      <File FileName="DataSetExtension/Station.cs" Line="54" Column="25" />
-      <File FileName="DataSetExtension.Tests/StationTest.cs" Line="28" Column="4" />
-      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="76" Column="13" />
+      <File FileName="DataSetExtension/Station.cs" Line="29" Column="40" />
+      <File FileName="DataSetExtension.Tests/StationTest.cs" Line="27" Column="55" />
+      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="17" Column="4" />
+      <File FileName="DataSetExtension/StationDatabase.cs" Line="31" Column="55" />
+      <File FileName="DataSetExtension.Tests/StationDatabaseTest.cs" Line="20" Column="41" />
+      <File FileName="DataSetExtension/GridStationDatabase.cs" Line="22" Column="13" />
+      <File FileName="DataSetExtension.Tests/GridStationDatabaseTest.cs" Line="17" Column="76" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="DataSetExtension" expanded="True" />
+          <Node name="DataSetExtension" expanded="True">
+            <Node name="StationDatabase.cs" selected="True" />
+          </Node>
           <Node name="DataSetExtension.ConsoleApp" expanded="True" />
           <Node name="DataSetExtension.ExportConsole" expanded="True" />
           <Node name="DataSetExtension.ImportConsole" expanded="True" />
-          <Node name="DataSetExtension.Tests" expanded="True">
-            <Node name="StationTest.cs" selected="True" />
-          </Node>
+          <Node name="DataSetExtension.Tests" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
@@ -30,6 +34,9 @@
         <State>
           <Value>decimal.Round(Convert.ToDecimal(celsius), 1).ToString()</Value>
           <Value>decimal.Round(global::System.Convert.ToDecimal(celsius), 1).ToString()</Value>
+          <Value>decimal.Round(Convert.ToDecimal(celsius), 1).ToString()</Value>
+          <Value>degrees + (minutes/60) + (seconds/3600)</Value>
+          <Value>degrees + (minutes/60) + (seconds/3600)</Value>
         </State>
       </Pad>
       <Pad Id="ConnectionManagerPad">
@@ -44,10 +51,12 @@
                 <Node name="CanadaMeasurementTest" expanded="True" />
                 <Node name="ExportControllerTest" expanded="True" />
                 <Node name="GridStationTest" expanded="True" />
-                <Node name="StationTest" expanded="True">
-                  <Node name="Parse" selected="True" />
+                <Node name="StationDatabaseTest" expanded="True">
+                  <Node name="CreateSchema" selected="True" />
                 </Node>
+                <Node name="StationTest" expanded="True" />
                 <Node name="Td3200ImportTest" expanded="True" />
+                <Node name="Td3200Test" expanded="True" />
               </Node>
             </Node>
           </Node>
