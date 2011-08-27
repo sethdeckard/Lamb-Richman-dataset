@@ -11,7 +11,7 @@ namespace DataSetExtension.Import
     {
         public override void Import(Stream stream, IDbConnection connection)
         {
-			CreateCommand(connection, MeasurementDatabase.TemperatureMinTable);
+			CreateCommand(connection);
 
             using (var reader = new StreamReader(stream, Encoding.ASCII))
             {

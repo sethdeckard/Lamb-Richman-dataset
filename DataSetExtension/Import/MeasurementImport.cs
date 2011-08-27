@@ -21,7 +21,7 @@ namespace DataSetExtension.Import
 		
 		public abstract void Import(Stream stream, IDbConnection connection);
 		
-		protected void CreateCommand(IDbConnection connection, string table)
+		protected void CreateCommand(IDbConnection connection)
 		{
 			Command = connection.CreateCommand();
 			Command.Transaction = connection.BeginTransaction();
