@@ -2,11 +2,12 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using DataSetExtension;
+using DataSetExtension.Import;
 using Mono.Data.Sqlite;
 using Dapper;
 using NUnit.Framework;
 
-namespace DataSetExtension.Tests
+namespace DataSetExtension.Tests.Import
 {
 	[TestFixture]
 	public class CanadaImportTest

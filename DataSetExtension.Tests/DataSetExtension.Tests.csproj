@@ -41,7 +41,6 @@
     <Reference Include="Mono.Data.Sqlite" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Td3200ImportTest.cs" />
     <Compile Include="Td3200Test.cs" />
     <Compile Include="TemperatureTest.cs" />
     <Compile Include="PrecipitationTest.cs" />
@@ -50,11 +49,13 @@
     <Compile Include="GridStationTest.cs" />
     <Compile Include="StationTest.cs" />
     <Compile Include="CanadaMeasurementTest.cs" />
-    <Compile Include="CanadaImportTest.cs" />
     <Compile Include="MeasurementDatabaseTest.cs" />
-    <Compile Include="GridStationImportTest.cs" />
     <Compile Include="GridStationDatabaseTest.cs" />
     <Compile Include="StationDatabaseTest.cs" />
+    <Compile Include="Import\StationImportTest.cs" />
+    <Compile Include="Import\CanadaImportTest.cs" />
+    <Compile Include="Import\GridStationImportTest.cs" />
+    <Compile Include="Import\Td3200ImportTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -65,5 +66,8 @@
       <Project>{319D852D-23EB-4818-B320-DFB7808E6621}</Project>
       <Name>DataSetExtension</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Import\" />
   </ItemGroup>
 </Project>

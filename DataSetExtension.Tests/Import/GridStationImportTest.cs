@@ -5,10 +5,11 @@ using Mono.Data.Sqlite;
 using System.IO;
 using System.Linq;
 using DataSetExtension;
+using DataSetExtension.Import;
 using Dapper;
 using NUnit.Framework;
 
-namespace DataSetExtension.Tests
+namespace DataSetExtension.Tests.Import
 {
     [TestFixture]
     public class GridStationImportTest

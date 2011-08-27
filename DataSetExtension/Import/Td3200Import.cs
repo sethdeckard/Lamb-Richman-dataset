@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Dapper;
 
-namespace DataSetExtension
+namespace DataSetExtension.Import
 {
     public class Td3200Import : MeasurementImport
     {

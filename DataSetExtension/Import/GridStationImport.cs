@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using Dapper;
 
-namespace DataSetExtension
+namespace DataSetExtension.Import
 {
     public class GridStationImport
     {
