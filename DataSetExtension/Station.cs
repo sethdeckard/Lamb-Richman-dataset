@@ -20,9 +20,9 @@ namespace DataSetExtension
 
         public long Sequence { get; set; }
 
-        public float Latitude { get; set; }
+        public decimal Latitude { get; set; }
 
-        public float Longitude { get; set; }		
+        public decimal Longitude { get; set; }		
 		
 		public DateTime StartDate { get; set;}
 		
@@ -40,22 +40,33 @@ namespace DataSetExtension
 			StartDate = ParseDate(record.Substring(130, 9));
 			EndDate = ParseDate(record.Substring(139, 9));
 			
-			Latitude = ParseDegreeAngle(record.Substring(149, 9));
-			Longitude = ParseDegreeAngle(record.Substring(158, 10));
+			Latitude = ParseLatitude(record.Substring(149, 9));
+			Longitude = ParseLongitude(record.Substring(158, 10));
 		}
 		
-		private float ConvertDegreeAngle(int degrees, int minutes, int seconds)
+		private decimal ConvertDegreeAngle(decimal degrees, decimal minutes, decimal seconds)
 		{
-		    return degrees + (minutes/60) + (seconds/3600);
+			var sign = Math.Sign(degrees);
+			minutes *= sign;
+			seconds *= sign;
+			
+		    return Math.Round(degrees + (decimal)(minutes/60) + (decimal)(seconds/3600), 6);
 		}
 		
-		private float ParseDegreeAngle(string value)
+		private decimal ParseLatitude(string value)
 		{
-			//31 34 00 -085 15 00
-				
-			var degrees = int.Parse(value.Substring(0, 3));
-			var minutes = int.Parse(value.Substring(4, 2));
-			var seconds = int.Parse(value.Substring(6, 2));
+			var degrees = decimal.Parse(value.Substring(0, 3));
+			var minutes = decimal.Parse(value.Substring(3, 2));
+			var seconds = decimal.Parse(value.Substring(6, 2));
+			
+			return ConvertDegreeAngle(degrees, minutes, seconds);
+		}
+		
+		private decimal ParseLongitude(string longitude)
+		{
+			var degrees = decimal.Parse(longitude.Substring(0, 4));
+			var minutes = decimal.Parse(longitude.Substring(5, 2));
+			var seconds = decimal.Parse(longitude.Substring(8, 2));
 			
 			return ConvertDegreeAngle(degrees, minutes, seconds);
 		}

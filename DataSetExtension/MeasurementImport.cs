@@ -58,6 +58,7 @@ namespace DataSetExtension
 			
 			var results = (from record in records
         	            join station in TemperatureMaxStations on record.StationNumber equals station.Number
+						where Year == 0 || record.DateTime.Year == Year
         	            select new {record, station}).ToArray();
         	
         	foreach (var result in results)
@@ -79,6 +80,7 @@ namespace DataSetExtension
 			
 			var results = (from record in records
                           join station in TemperatureMinStations on record.StationNumber equals station.Number
+						  where Year == 0 || record.DateTime.Year == Year
                           select new { record, station }).ToArray();
 
 			foreach(var result in results) 
@@ -100,6 +102,7 @@ namespace DataSetExtension
 			
 			var results = (from record in records
                            join station in PrecipitationStations on record.StationNumber equals station.Number
+						   where Year == 0 || record.DateTime.Year == Year
                            select new { record, station }).ToArray();
 
 			foreach(var result in results) 

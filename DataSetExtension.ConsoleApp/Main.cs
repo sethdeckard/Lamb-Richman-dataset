@@ -61,7 +61,7 @@ namespace DataSetExtension.ConsoleApp
 			}	
 		}
 		
-		private static void ImportCanada(string file)
+		private static void ImportCanada(string file, int year)
 		{
 			Console.WriteLine("Importing Canada data...");
 			
@@ -79,7 +79,8 @@ namespace DataSetExtension.ConsoleApp
 					{
 						TemperatureMinStations = tempMinStations, 
 						TemperatureMaxStations = tempMaxStations, 
-						PrecipitationStations = precipStations
+						PrecipitationStations = precipStations,
+						Year = year
 					};
 
                 var database = new MeasurementDatabase(connection);

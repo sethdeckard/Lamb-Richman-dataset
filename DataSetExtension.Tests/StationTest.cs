@@ -23,8 +23,8 @@ namespace DataSetExtension.Tests
 			
 			Assert.That(station.County, Is.EqualTo("HENRY"));
 			Assert.That(station.Country, Is.EqualTo("UNITED STATES"));
-			Assert.That(station.Latitude, Is.EqualTo(31.583333));
-			Assert.That(station.Longitude, Is.EqualTo(-85.283333));
+			Assert.That(station.Longitude, Is.EqualTo(-85.283333M));
+			Assert.That(station.Latitude, Is.EqualTo(31.583333M));
 		}
 	}
 }
