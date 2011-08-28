@@ -8,10 +8,8 @@ namespace DataSetExtension
 		
 		string StationNumber { get; set; }
 		
-		long Date { get; set; }
+		DateTime Date { get; set; }
 		
-		DateTime DateTime { get; set; }
-
         long Value { get; set; }
 
         string ToString(long sequence);

@@ -8,13 +8,7 @@ namespace DataSetExtension
 	{
         public long Id { get; set; }
  
-        public long Date { get; set; }
- 
-        public DateTime DateTime
-        {
-            get { return DateTime.FromFileTime(Date); }
-            set { Date = value.ToFileTime(); }
-        }
+        public DateTime Date { get; set; }
 
 		public long StationId { get; set; }
 		
@@ -57,7 +51,7 @@ namespace DataSetExtension
 					var archive = new CanadaMeasurement
         	               	{
         	                   	StationNumber = number, 
-        	                    DateTime = new DateTime(year, month, day),
+        	                    Date = new DateTime(year, month, day),
         						Element = element,
         						Value = converted
         	                };

@@ -25,10 +25,10 @@ namespace DataSetExtension.Tests
 
             var records = new List<IMeasurement>
                               {
-                                  new Td3200 { StationId = 2, DateTime = DateTime.Parse("1/1/2001"), Value = 3 },
-                                  new Td3200 { StationId = 4, DateTime = DateTime.Parse("1/2/2001"), Value = 3 },
-                                  new Td3200 { StationId = 5, DateTime = DateTime.Parse("1/3/2001"), Value = 3 },
-                                  new Td3200 { StationId = 1, DateTime = DateTime.Parse("1/3/2001"), Value = 3 },
+                                  new Td3200 { StationId = 2, Date = DateTime.Parse("1/1/2001"), Value = 3 },
+                                  new Td3200 { StationId = 4, Date = DateTime.Parse("1/2/2001"), Value = 3 },
+                                  new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3 },
+                                  new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3 },
                               };
 
             var writer = new MeasurementWriter(stream, stations.ToArray(), 2001);

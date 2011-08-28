@@ -16,18 +16,18 @@ namespace DataSetExtension.ConsoleApp
 		
 		public static void Main(string[] args)
 		{
-			/*ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
+			ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
 			ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/tmininfo.txt");
 			ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
 			
-			ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2001.txt");*/
+			//ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2001.txt");
 			
 			//ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all");
 			
 			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
 			//Export(@"/Users/seth/Documents/LRDataSet/output", 2010);
 			
-			ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2001, 1, 1));
+			//ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2001, 1, 1));
 		}
 		
 		private static IDbConnection CreateConnection() 
@@ -80,7 +80,7 @@ namespace DataSetExtension.ConsoleApp
 		
 		private static int ImportGridStations(string file, string table) 
 		{
-			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
+			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off"))
             {
                 connection.Open();
 

@@ -13,7 +13,7 @@ namespace DataSetExtension
 			
 			return string.Format(
 				"{0} 00 {1} {2}", 
-				DateTime.ToString("yyMMdd"), 
+				Date.ToString("yyMMdd"), 
 				alphabet.Substring((int)sequence, 1), 
 				formatted);
 		}

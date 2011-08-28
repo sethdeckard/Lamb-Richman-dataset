@@ -12,13 +12,7 @@ namespace DataSetExtension
 
         public string StationNumber { get; set; }
         
-        public long Date { get; set; }
-		
-		public DateTime DateTime 
-		{ 
-			get { return DateTime.FromFileTime(Date); }
-			set { Date = value.ToFileTime(); }
-		}
+        public DateTime Date { get; set; }
 
         public long Value { get; set; }
 
@@ -64,7 +58,7 @@ namespace DataSetExtension
                 var day = int.Parse(record.Substring(0, 2));
                 var date = new DateTime(year, month, day);
 				var value = int.Parse(record.Substring(4, 6));
-                var result = new Td3200 { StationNumber = station, DateTime = date, Value = value };
+                var result = new Td3200 { StationNumber = station, Date = date, Value = value };
                 list.Add(result);
             }
         }

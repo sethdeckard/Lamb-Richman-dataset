@@ -15,7 +15,7 @@ namespace DataSetExtension.Tests.Import
 		[Test]
 		public void Import()
 		{
-			using (var connection = CreateConnection())
+			using (var connection = TestUtility.CreateConnection())
 			{
 				connection.Open();
 				
@@ -37,7 +37,7 @@ namespace DataSetExtension.Tests.Import
 		[Test]
 		public void ImportWithStartYear()
 		{
-			using (var connection = CreateConnection())
+			using (var connection = TestUtility.CreateConnection())
 			{
 				connection.Open();
 				
@@ -58,17 +58,6 @@ namespace DataSetExtension.Tests.Import
 				Assert.That(import.Total, Is.EqualTo(6));
 			}
 		}	
-		
-		private IDbConnection CreateConnection() 
-		{
-			var builder = new SqliteConnectionStringBuilder
-			{
-				DataSource = ":memory:",
-				DateTimeFormat = SQLiteDateFormats.Ticks
-			};			
-			
-			return new SqliteConnection(builder.ToString());
-		}
 		
 		private Stream GetTestStream() 
 		{
