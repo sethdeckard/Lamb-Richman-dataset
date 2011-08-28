@@ -1,0 +1,63 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ConsoleApp/Main.cs">
+    <Files>
+      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="19" Column="4" />
+      <File FileName="DataSetExtension/MeasurementDatabase.cs" Line="1" Column="1" />
+      <File FileName="DataSetExtension.Tests/PrecipitationTest.cs" Line="1" Column="1" />
+      <File FileName="DataSetExtension.Tests/StationDatabaseTest.cs" Line="26" Column="2" />
+      <File FileName="DataSetExtension/Td3200.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="DataSetExtension" expanded="True">
+            <Node name="Import" expanded="True" />
+          </Node>
+          <Node name="DataSetExtension.ConsoleApp" expanded="True">
+            <Node name="Main.cs" selected="True" />
+          </Node>
+          <Node name="DataSetExtension.ExportConsole" expanded="True" />
+          <Node name="DataSetExtension.ImportConsole" expanded="True" />
+          <Node name="DataSetExtension.Tests" expanded="True">
+            <Node name="Import" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True">
+          <Node name="DataSetExtension" expanded="True">
+            <Node name="References" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>decimal.Round(Convert.ToDecimal(celsius), 1).ToString()</Value>
+          <Value>decimal.Round(global::System.Convert.ToDecimal(celsius), 1).ToString()</Value>
+          <Value>decimal.Round(Convert.ToDecimal(celsius), 1).ToString()</Value>
+          <Value>degrees + (minutes/60) + (seconds/3600)</Value>
+          <Value>degrees + (minutes/60) + (seconds/3600)</Value>
+        </State>
+      </Pad>
+      <Pad Id="ConnectionManagerPad">
+        <State selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True" selected="True">
+          <Node name="DataSetExtension.Tests" expanded="True">
+            <Node name="DataSetExtension" expanded="True">
+              <Node name="Tests" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint enabled="false" file="/Users/seth/Projects/DataSetExtension/DataSetExtention.TestConsole/Main.cs" line="12" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
