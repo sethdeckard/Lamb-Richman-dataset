@@ -28,7 +28,6 @@ namespace DataSetExtension
             statement.AppendLine("Id INTEGER PRIMARY KEY AUTOINCREMENT,");
             statement.AppendLine("Number TEXT,");
             statement.AppendLine("Name TEXT,");
-			statement.AppendLine("Country TEXT,");
 			statement.AppendLine("State TEXT,");
 			statement.AppendLine("County TEXT,");
             statement.AppendLine("Latitude DECIMAL,");

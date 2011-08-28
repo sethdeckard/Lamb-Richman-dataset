@@ -25,6 +25,12 @@ namespace DataSetExtension.Tests
 			Assert.That(station.Country, Is.EqualTo("UNITED STATES"));
 			Assert.That(station.Longitude, Is.EqualTo(-85.283333M));
 			Assert.That(station.Latitude, Is.EqualTo(31.583333M));
+			
+			station = new Station();
+			station.Parse("092570 07                  DAWG1      UNITED STATES        GA TERRELL                        +5    " + 
+				"DAWSON                         20021002 99991231  31 46 55 -084 26 59   355  ");
+			
+			Assert.That(station.End, Is.Null);
 		}
 	}
 }

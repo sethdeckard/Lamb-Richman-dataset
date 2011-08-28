@@ -19,7 +19,7 @@ namespace DataSetExtension.Tests
                 var database = new StationDatabase(connection);
                 database.CreateSchema();
 
-                connection.Query<GridStation>("select Id, Number, Name, Country, State, County, Latitude, Longitude, Start, End from Station");
+                connection.Query<GridStation>("select Id, Number, Name, State, County, Latitude, Longitude, Start, End from Station");
             }			
 		}
 	}

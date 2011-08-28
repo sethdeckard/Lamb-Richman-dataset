@@ -5,9 +5,11 @@
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
-            <Node name="Station.cs" selected="True" />
+            <Node name="Import" expanded="True" />
           </Node>
-          <Node name="DataSetExtension.ConsoleApp" expanded="True" />
+          <Node name="DataSetExtension.ConsoleApp" expanded="True">
+            <Node name="Main.cs" selected="True" />
+          </Node>
           <Node name="DataSetExtension.ExportConsole" expanded="True" />
           <Node name="DataSetExtension.ImportConsole" expanded="True" />
           <Node name="DataSetExtension.Tests" expanded="True" />
@@ -18,7 +20,6 @@
           <Node name="DataSetExtension" expanded="True">
             <Node name="References" expanded="True" />
           </Node>
-          <Node name="DataSetExtension.Tests" expanded="True" />
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
@@ -34,22 +35,7 @@
         <State selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True">
-          <Node name="DataSetExtension.Tests" expanded="True">
-            <Node name="DataSetExtension" expanded="True">
-              <Node name="Tests" expanded="True">
-                <Node name="CanadaImportTest" expanded="True" />
-                <Node name="CanadaMeasurementTest" expanded="True" />
-                <Node name="ExportControllerTest" expanded="True" />
-                <Node name="GridStationTest" expanded="True" />
-                <Node name="StationDatabaseTest" expanded="True" />
-                <Node name="StationTest" expanded="True" />
-                <Node name="Td3200ImportTest" expanded="True" />
-                <Node name="Td3200Test" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
