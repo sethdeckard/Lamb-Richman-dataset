@@ -7,6 +7,10 @@ namespace DataSetExtension.Import
 {
 	public class StationImport
 	{
+		public DateTime Start { get; set; }
+		
+		public int Total { get; set; }
+		
 		public void Import(Stream stream, IDbConnection connection)
 		{
 			var command = CreateCommand(connection);
@@ -23,8 +27,8 @@ namespace DataSetExtension.Import
 					var station = new Station();
 					station.Parse(reader.ReadLine());
 					
-					if (station.Country == "UNITED STATES")
-					{;
+					if (station.Country == "UNITED STATES" && (Start == DateTime.MinValue || station.Start >= Start))
+					{
 						((IDataParameter)command.Parameters[":number"]).Value = station.Number;
 						((IDataParameter)command.Parameters[":name"]).Value = station.Name;
 						((IDataParameter)command.Parameters[":state"]).Value = station.State;
@@ -35,6 +39,8 @@ namespace DataSetExtension.Import
 						((IDataParameter)command.Parameters[":end"]).Value = station.End;
 						
 						command.ExecuteNonQuery();
+						
+						Total += 1;
 					}
 				}
 			}

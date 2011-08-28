@@ -22,9 +22,9 @@ namespace DataSetExtension
 		
 		public DateTime Start { get; set;}
 		
-		public DateTime End { get; set; }
+		public DateTime? End { get; set; }
 		
-		public void Parse(string record) 
+		public void Parse(string record)
 		{
 			Number = record.Substring(0, 6).Trim();
 			Name = record.Substring(99, 31).Trim();
@@ -35,6 +35,11 @@ namespace DataSetExtension
 			
 			Start = ParseDate(record.Substring(130, 9));
 			End = ParseDate(record.Substring(139, 9));
+			
+			if (End == new DateTime(9999, 12, 31)) 
+			{
+				End = null;	
+			}
 			
 			Latitude = ParseLatitude(record.Substring(149, 9));
 			Longitude = ParseLongitude(record.Substring(158, 10));

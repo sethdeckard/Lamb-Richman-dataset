@@ -24,29 +24,61 @@ namespace DataSetExtension.ConsoleApp
 			
 			//ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all");
 			
-			Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
+			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
 			//Export(@"/Users/seth/Documents/LRDataSet/output", 2010);
+			
+			ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2001, 1, 1));
+		}
+		
+		private static IDbConnection CreateConnection() 
+		{
+			var builder = new SqliteConnectionStringBuilder
+			{
+				DataSource = DatabaseName,
+				Version = 3,
+				JournalMode = SQLiteJournalModeEnum.Off,
+				SyncMode = SynchronizationModes.Off,
+				DateTimeFormat = SQLiteDateFormats.Ticks				
+			};
+			
+			return new SqliteConnection(builder.ToString());
 		}
 		
 		private static void ImportPrecipitationStations(string file) 
 		{
-			var count = ImportStations(file, GridStationDatabase.PrecipitationStationTable);
+			var count = ImportGridStations(file, GridStationDatabase.PrecipitationStationTable);
 			Console.WriteLine(count + " precipitation stations imported");
 		}
 		
 		private static void ImportTemperatureMinStations(string file) 
 		{
-			var count = ImportStations(file, GridStationDatabase.TemperatureMinStationTable);
+			var count = ImportGridStations(file, GridStationDatabase.TemperatureMinStationTable);
 			Console.WriteLine(count + " temperature min stations imported");
 		}
 		
 		private static void ImportTemperatureMaxStations(string file) 
 		{
-			var count = ImportStations(file, GridStationDatabase.TemperatureMaxStationTable);
+			var count = ImportGridStations(file, GridStationDatabase.TemperatureMaxStationTable);
 			Console.WriteLine(count + " temperature max stations imported");
 		}
 		
-		private static int ImportStations(string file, string table) 
+		private static void ImportStations(string file, DateTime start)
+		{
+			using (IDbConnection connection = CreateConnection())
+            {
+                connection.Open();
+
+                var database = new StationDatabase(connection);
+                database.CreateSchema();
+
+                var import = new StationImport();
+                import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection);	
+				
+				Console.WriteLine(import.Total + " master stations imported");
+			}			
+		}
+		
+		private static int ImportGridStations(string file, string table) 
 		{
 			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
             {

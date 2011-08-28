@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.IO;
 using System.Linq;
 using Mono.Data.Sqlite;
@@ -14,12 +15,7 @@ namespace DataSetExtension.Tests.Import
 		[Test]
 		public void Import()
 		{
-			var builder = new SqliteConnectionStringBuilder
-			{
-				DataSource = ":memory:",
-				DateTimeFormat = SQLiteDateFormats.Ticks
-			};
-			using (var connection = new SqliteConnection(builder.ToString()))
+			using (var connection = CreateConnection())
 			{
 				connection.Open();
 				
@@ -34,7 +30,44 @@ namespace DataSetExtension.Tests.Import
 				var count = connection.Query<long>("select count(*) from Station;").First();
 
                 Assert.That(count, Is.EqualTo(17));
+				Assert.That(import.Total, Is.EqualTo(17));
 			}
+		}
+
+		[Test]
+		public void ImportWithStartYear()
+		{
+			using (var connection = CreateConnection())
+			{
+				connection.Open();
+				
+				var database = new StationDatabase(connection);
+				database.CreateSchema();
+			
+				var import = new StationImport
+				{
+					Start = new DateTime(1998, 1, 1)
+				};
+				
+				var stream = GetTestStream();
+				import.Import(stream, connection);
+				
+				var count = connection.Query<long>("select count(*) from Station;").First();
+
+                Assert.That(count, Is.EqualTo(6));
+				Assert.That(import.Total, Is.EqualTo(6));
+			}
+		}	
+		
+		private IDbConnection CreateConnection() 
+		{
+			var builder = new SqliteConnectionStringBuilder
+			{
+				DataSource = ":memory:",
+				DateTimeFormat = SQLiteDateFormats.Ticks
+			};			
+			
+			return new SqliteConnection(builder.ToString());
 		}
 		
 		private Stream GetTestStream() 

@@ -1,16 +1,26 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/Station.cs">
+    <Files>
+      <File FileName="DataSetExtension.Tests/Import/StationImportTest.cs" Line="35" Column="1" />
+      <File FileName="DataSetExtension/Import/StationImport.cs" Line="1" Column="1" />
+      <File FileName="DataSetExtension/Station.cs" Line="37" Column="1" />
+      <File FileName="DataSetExtension.ExportConsole/Main.cs" Line="1" Column="1" />
+      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="75" Column="7" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
+            <Node name="Import" expanded="True" />
             <Node name="Station.cs" selected="True" />
           </Node>
           <Node name="DataSetExtension.ConsoleApp" expanded="True" />
           <Node name="DataSetExtension.ExportConsole" expanded="True" />
           <Node name="DataSetExtension.ImportConsole" expanded="True" />
-          <Node name="DataSetExtension.Tests" expanded="True" />
+          <Node name="DataSetExtension.Tests" expanded="True">
+            <Node name="Import" expanded="True" />
+          </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
@@ -38,13 +48,9 @@
           <Node name="DataSetExtension.Tests" expanded="True">
             <Node name="DataSetExtension" expanded="True">
               <Node name="Tests" expanded="True">
-                <Node name="CanadaImportTest" expanded="True" />
-                <Node name="CanadaMeasurementTest" expanded="True" />
-                <Node name="ExportControllerTest" expanded="True" />
-                <Node name="GridStationTest" expanded="True" />
-                <Node name="StationDatabaseTest" expanded="True" />
-                <Node name="StationTest" expanded="True" />
-                <Node name="Td3200ImportTest" expanded="True" />
+                <Node name="Import" expanded="True">
+                  <Node name="StationImportTest" expanded="True" />
+                </Node>
                 <Node name="Td3200Test" expanded="True" />
               </Node>
             </Node>
