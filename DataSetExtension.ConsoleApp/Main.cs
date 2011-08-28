@@ -80,7 +80,7 @@ namespace DataSetExtension.ConsoleApp
 		
 		private static int ImportGridStations(string file, string table) 
 		{
-			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
+			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off"))
             {
                 connection.Open();
 

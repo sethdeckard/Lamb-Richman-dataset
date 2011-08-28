@@ -17,7 +17,7 @@ namespace DataSetExtension.Tests
  
             var measurement = results[0];
             Assert.That(measurement.StationNumber, Is.EqualTo("3010890"));
-			Assert.That(measurement.DateTime, Is.EqualTo(DateTime.Parse("02/01/2001")));
+			Assert.That(measurement.Date, Is.EqualTo(DateTime.Parse("02/01/2001")));
 			Assert.That(measurement.Value, Is.EqualTo(5));
 			Assert.That(measurement.Element, Is.EqualTo(Element.TemperatureMin));
            
@@ -39,7 +39,7 @@ namespace DataSetExtension.Tests
 			
             measurement = results[5];
             Assert.That(measurement.StationNumber, Is.EqualTo("3012208"));
-			Assert.That(measurement.DateTime, Is.EqualTo(DateTime.Parse("04/06/2004")));
+			Assert.That(measurement.Date, Is.EqualTo(DateTime.Parse("04/06/2004")));
 			Assert.That(measurement.Value, Is.EqualTo(3));
 			Assert.That(measurement.Element, Is.EqualTo(Element.Precipitation));
 			

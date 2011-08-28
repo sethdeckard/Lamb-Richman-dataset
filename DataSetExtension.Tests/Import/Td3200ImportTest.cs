@@ -33,7 +33,7 @@ namespace DataSetExtension.Tests.Import
             var temperatureMaxStation = new GridStation { Id = 1, Number = "051458" }; 
             var precipitationStation = new GridStation { Id = 2, Number = "071458" };
 			var temperatureMinStation = new GridStation { Id = 3, Number = "051468" };
-            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
+            using (IDbConnection connection = TestUtility.CreateConnection())
             {
                 connection.Open();
 

@@ -12,6 +12,8 @@ namespace DataSetExtension.ExportConsole
 {
 	class MainClass
 	{
+		private const string DatabaseName = "DataSetExtension.sqlite";
+		
         static void Main(string[] args)
         {
             var command = "help";
@@ -101,9 +103,21 @@ namespace DataSetExtension.ExportConsole
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
 		
+		private static IDbConnection CreateConnection() 
+		{
+			var builder = new SqliteConnectionStringBuilder
+			{
+				DataSource = DatabaseName,
+				Version = 3,
+				DateTimeFormat = SQLiteDateFormats.Ticks				
+			};
+			
+			return new SqliteConnection(builder.ToString());
+		}
+		
 		private static void Export(string basePath, int year) 
 		{
-			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3"))
+			using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
 				

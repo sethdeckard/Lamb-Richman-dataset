@@ -15,7 +15,7 @@ namespace DataSetExtension.Tests.Import
 		[Test]
 		public void Import()
 		{
-			using (var connection = CreateConnection())
+			using (var connection = TestUtility.CreateConnection())
 			{
 				connection.Open();
 				
@@ -68,7 +68,7 @@ namespace DataSetExtension.Tests.Import
 			};			
 			
 			return new SqliteConnection(builder.ToString());
-		}
+		}	
 		
 		private Stream GetTestStream() 
 		{

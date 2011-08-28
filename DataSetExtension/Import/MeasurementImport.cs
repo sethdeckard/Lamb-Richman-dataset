@@ -58,7 +58,7 @@ namespace DataSetExtension.Import
 			
 			var results = (from record in records
         	            join station in TemperatureMaxStations on record.StationNumber equals station.Number
-						where Year == 0 || record.DateTime.Year == Year
+						where Year == 0 || record.Date.Year == Year
         	            select new {record, station}).ToArray();
         	
         	foreach (var result in results)
@@ -67,7 +67,7 @@ namespace DataSetExtension.Import
 				((IDataParameter)Command.Parameters[":id"]).Value = result.record.StationId;
 				((IDataParameter)Command.Parameters[":number"]).Value = result.record.StationNumber;
 				((IDataParameter)Command.Parameters[":date"]).Value = result.record.Date;
-				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.DateTime.ToShortDateString();
+				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.Date.ToShortDateString();
 				((IDataParameter)Command.Parameters[":value"]).Value = result.record.Value;
 				
 				Command.ExecuteNonQuery();
@@ -80,7 +80,7 @@ namespace DataSetExtension.Import
 			
 			var results = (from record in records
                           join station in TemperatureMinStations on record.StationNumber equals station.Number
-						  where Year == 0 || record.DateTime.Year == Year
+						  where Year == 0 || record.Date.Year == Year
                           select new { record, station }).ToArray();
 
 			foreach(var result in results) 
@@ -89,7 +89,7 @@ namespace DataSetExtension.Import
 				((IDataParameter)Command.Parameters[":id"]).Value = result.record.StationId;
 				((IDataParameter)Command.Parameters[":number"]).Value = result.record.StationNumber;
 				((IDataParameter)Command.Parameters[":date"]).Value = result.record.Date;
-				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.DateTime.ToShortDateString();
+				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.Date.ToShortDateString();
 				((IDataParameter)Command.Parameters[":value"]).Value = result.record.Value;
 				
 				Command.ExecuteNonQuery();
@@ -102,7 +102,7 @@ namespace DataSetExtension.Import
 			
 			var results = (from record in records
                            join station in PrecipitationStations on record.StationNumber equals station.Number
-						   where Year == 0 || record.DateTime.Year == Year
+						   where Year == 0 || record.Date.Year == Year
                            select new { record, station }).ToArray();
 
 			foreach(var result in results) 
@@ -111,7 +111,7 @@ namespace DataSetExtension.Import
 				((IDataParameter)Command.Parameters[":id"]).Value = result.record.StationId;
 				((IDataParameter)Command.Parameters[":number"]).Value = result.record.StationNumber;
 				((IDataParameter)Command.Parameters[":date"]).Value = result.record.Date;
-				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.DateTime.ToShortDateString();
+				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.Date.ToShortDateString();
 				((IDataParameter)Command.Parameters[":value"]).Value = result.record.Value;
 				
 				Command.ExecuteNonQuery();

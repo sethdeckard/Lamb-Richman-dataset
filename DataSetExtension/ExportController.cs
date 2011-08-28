@@ -111,8 +111,8 @@ namespace DataSetExtension
 			for (var month = 1; month <= 12; month++)
         	{
         		var subset = from measurement in measurements
-        			where measurement.Date >= new DateTime(year, month, 1).ToFileTime() &&
-        			measurement.Date <= new DateTime(year, month, DateTime.DaysInMonth(year, month)).ToFileTime()
+        			where measurement.Date >= new DateTime(year, month, 1) &&
+        			measurement.Date <= new DateTime(year, month, DateTime.DaysInMonth(year, month))
         			select measurement;
         			
         	    export.Write(subset.ToArray(), month);

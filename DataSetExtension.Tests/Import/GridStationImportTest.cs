@@ -34,7 +34,7 @@ namespace DataSetExtension.Tests.Import
 
             writer.BaseStream.Position = 0;
 
-            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
+            using (IDbConnection connection = TestUtility.CreateConnection())
             {
                 connection.Open();
 

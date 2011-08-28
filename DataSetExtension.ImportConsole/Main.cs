@@ -13,6 +13,8 @@ namespace DataSetExtension.ImportConsole
 {
 	class MainClass
 	{
+		private const string DatabaseName = "DataSetExtension.sqlite";
+		
         static void Main(string[] args)
         {
             var command = "help";
@@ -99,6 +101,20 @@ namespace DataSetExtension.ImportConsole
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
 		
+		private static IDbConnection CreateConnection() 
+		{
+			var builder = new SqliteConnectionStringBuilder
+			{
+				DataSource = DatabaseName,
+				Version = 3,
+				DateTimeFormat = SQLiteDateFormats.Ticks,
+				JournalMode = SQLiteJournalModeEnum.Off,
+				SyncMode = SynchronizationModes.Off
+			};
+			
+			return new SqliteConnection(builder.ToString());
+		}
+		
 		private static void ImportPrecipitationStations(string file) 
 		{
 			var count = ImportStations(file, GridStationDatabase.PrecipitationStationTable);
@@ -119,7 +135,7 @@ namespace DataSetExtension.ImportConsole
 		
 		private static int ImportStations(string file, string table) 
 		{
-			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
+			using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
 
@@ -137,7 +153,7 @@ namespace DataSetExtension.ImportConsole
 		{
 			Console.WriteLine("Importing TD3200 data...");
 			
-            using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
+            using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
 				
