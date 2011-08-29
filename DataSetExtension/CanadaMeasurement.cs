@@ -4,18 +4,8 @@ using System.IO;
 
 namespace DataSetExtension
 {
-	public class CanadaMeasurement : IMeasurement
+	public class CanadaMeasurement : Measurement, IMeasurement
 	{
-        public long Id { get; set; }
- 
-        public DateTime Date { get; set; }
-
-		public long StationId { get; set; }
-		
-		public string StationNumber { get; set; }
-
-		public long Value { get; set; }
-
         public Element Element { get; set; }
  
         public static CanadaMeasurement[] Parse(string line)

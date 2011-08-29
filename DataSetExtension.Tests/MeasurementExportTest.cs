@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace DataSetExtension.Tests
 {
 	[TestFixture]
-	public class MeasurementWriterTest
+	public class MeasurementExportTest
 	{
         [Test]
         public void Write()
@@ -31,7 +31,7 @@ namespace DataSetExtension.Tests
                                   new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3 },
                               };
 
-            var writer = new MeasurementWriter(stream, stations.ToArray(), 2001);
+            var writer = new MeasurementExport(stream, stations.ToArray(), 2001);
             writer.Write(records.ToArray(), 1);
 
             stream.Position = 0;

@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 
 namespace DataSetExtension
 {
@@ -43,6 +44,11 @@ namespace DataSetExtension
 			
 			Latitude = ParseLatitude(record.Substring(149, 9));
 			Longitude = ParseLongitude(record.Substring(158, 10));
+		}
+		
+		public void Save(IDbConnection connection)
+		{
+			throw new NotImplementedException();	
 		}
 		
 		private decimal ConvertDegreeAngle(decimal degrees, decimal minutes, decimal seconds)

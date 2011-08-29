@@ -10,7 +10,7 @@ namespace DataSetExtension
 		public DateTime Date { get; set; }	
 	}
 	
-	public class MeasurementWriter
+	public class MeasurementExport
 	{
         private readonly int year;
         private readonly GridStation[] stations;
@@ -20,7 +20,7 @@ namespace DataSetExtension
 		
 		public List<DateTime> Missing { get; set; }
 
-        public MeasurementWriter(Stream stream, GridStation[] stations, int year)
+        public MeasurementExport(Stream stream, GridStation[] stations, int year)
         {
             this.stations = stations;
             this.year = year;
@@ -51,6 +51,10 @@ namespace DataSetExtension
 
                 if (!found)
                 {
+					//TODO: QueryMeasurementLocator, if no records are returned then add to missign collection,
+					//get rid of event approach
+					
+					
 					OnMeasurementMissing(new MeasurementMissingEventArgs { Date = date });
 					Missing.Add(date);
                 }

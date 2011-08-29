@@ -45,7 +45,6 @@
     <Compile Include="Precipitation.cs" />
     <Compile Include="IMeasurement.cs" />
     <Compile Include="ExportController.cs" />
-    <Compile Include="MeasurementWriter.cs" />
     <Compile Include="GridStation.cs" />
     <Compile Include="GridStationDatabase.cs" />
     <Compile Include="Station.cs" />
@@ -57,6 +56,9 @@
     <Compile Include="Import\GridStationImport.cs" />
     <Compile Include="Import\MeasurementImport.cs" />
     <Compile Include="Import\Td3200Import.cs" />
+    <Compile Include="MeasurementLocator.cs" />
+    <Compile Include="MeasurementExport.cs" />
+    <Compile Include="Measurement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

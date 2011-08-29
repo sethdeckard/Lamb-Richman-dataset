@@ -35,7 +35,7 @@ namespace DataSetExtension
 						stream.Seek(0, SeekOrigin.End);
 						
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMinStationTable);
-		                var export = new MeasurementWriter(stream, stations, year);
+		                var export = new MeasurementExport(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
@@ -59,7 +59,7 @@ namespace DataSetExtension
 						stream.Seek(0, SeekOrigin.End);
 						
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMaxStationTable);
-		                var export = new MeasurementWriter(stream, stations, year);
+		                var export = new MeasurementExport(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
@@ -83,7 +83,7 @@ namespace DataSetExtension
 						stream.Seek(0, SeekOrigin.End);
 						
 						var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
-		                var export = new MeasurementWriter(stream, stations, year);
+		                var export = new MeasurementExport(stream, stations, year);
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
@@ -106,7 +106,7 @@ namespace DataSetExtension
 			return new StreamWriter(File.Create(Path.Combine(basePath, file)));
 		}
 
-		private void ProcessMeasurements(int year, int grid, MeasurementWriter export, IMeasurement[] measurements)
+		private void ProcessMeasurements(int year, int grid, MeasurementExport export, IMeasurement[] measurements)
 		{
 			for (var month = 1; month <= 12; month++)
         	{

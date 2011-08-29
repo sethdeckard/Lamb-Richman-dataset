@@ -4,18 +4,8 @@ using System.IO;
 
 namespace DataSetExtension
 {
-    public class Td3200 : IMeasurement
+    public class Td3200 : Measurement, IMeasurement
     {
-        public long Id { get; set; }
-
-        public long StationId { get; set; }
-
-        public string StationNumber { get; set; }
-        
-        public DateTime Date { get; set; }
-
-        public long Value { get; set; }
-
         public static Td3200[] Parse(string record)
         {
             var header = record.Substring(4, 30);
