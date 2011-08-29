@@ -145,7 +145,7 @@ namespace DataSetExtension.ImportConsole
                 var import = new GridStationImport();
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, table);	
 				
-				return import.Imported.Count;
+				return import.Total;
 			}	
 		}
 		

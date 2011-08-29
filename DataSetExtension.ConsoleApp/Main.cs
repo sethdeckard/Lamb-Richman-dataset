@@ -16,18 +16,17 @@ namespace DataSetExtension.ConsoleApp
 		
 		public static void Main(string[] args)
 		{
+			/*ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2001, 1, 1));
+			
 			ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
 			ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/tmininfo.txt");
 			ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
 			
 			ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2001.txt");
 			
-			//ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all");
+			ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all", 2001);*/
 			
 			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
-			//Export(@"/Users/seth/Documents/LRDataSet/output", 2010);
-			
-			//ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2001, 1, 1));
 		}
 		
 		private static IDbConnection CreateConnection() 
@@ -80,7 +79,7 @@ namespace DataSetExtension.ConsoleApp
 		
 		private static int ImportGridStations(string file, string table) 
 		{
-			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
+			using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
 
@@ -90,7 +89,7 @@ namespace DataSetExtension.ConsoleApp
                 var import = new GridStationImport();
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, table);	
 				
-				return import.Imported.Count;
+				return import.Total;
 			}	
 		}
 		
@@ -98,7 +97,7 @@ namespace DataSetExtension.ConsoleApp
 		{
 			Console.WriteLine("Importing Canada data...");
 			
-            using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
+            using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
 				
@@ -139,7 +138,7 @@ namespace DataSetExtension.ConsoleApp
 		{
 			Console.WriteLine("Importing TD3200 data...");
 			
-            using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;Journal Mode=Off;Synchronous=Off"))
+            using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
 				
@@ -177,7 +176,7 @@ namespace DataSetExtension.ConsoleApp
 		
 		private static void Export(string basePath, int year) 
 		{
-			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3"))
+			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;DateTimeFormat=Ticks"))
             {
                 connection.Open();
 				

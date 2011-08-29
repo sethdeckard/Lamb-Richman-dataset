@@ -37,7 +37,7 @@ namespace DataSetExtension
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMinStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
-						var start = new DateTime(year, 1, 1).ToFileTime();
+						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, MeasurementDatabase.TemperatureMinTable, GridStationDatabase.TemperatureMinStationTable);
 						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
@@ -61,7 +61,7 @@ namespace DataSetExtension
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMaxStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
-						var start = new DateTime(year, 1, 1).ToFileTime();
+						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, MeasurementDatabase.TemperatureMaxTable, GridStationDatabase.TemperatureMaxStationTable);
 						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
@@ -85,7 +85,7 @@ namespace DataSetExtension
 						var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
 		                var export = new MeasurementWriter(stream, stations, year);
 						
-						var start = new DateTime(year, 1, 1).ToFileTime();
+						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, MeasurementDatabase.PrecipitationTable, GridStationDatabase.PrecipitationStationTable);
 						var measurements = connection.Query<Precipitation>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
@@ -153,9 +153,9 @@ namespace DataSetExtension
             return connection.Query<GridStation>(query, new { GridPoint = grid }).ToArray();
 		}
 
-		private long GetEndDate (int year)
+		private DateTime GetEndDate (int year)
 		{
-			return new DateTime(year, 12, DateTime.DaysInMonth(year, 12)).ToFileTime();;
+			return new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
 		}
 	}
 }

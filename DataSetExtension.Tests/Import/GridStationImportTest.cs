@@ -47,6 +47,8 @@ namespace DataSetExtension.Tests.Import
                 var count = connection.Query<long>("select count(*) from PrecipitationStation;").First();
 
                 Assert.That(count, Is.EqualTo(6));
+				
+				Assert.That(import.Total, Is.EqualTo(6));
             }
         }
     }

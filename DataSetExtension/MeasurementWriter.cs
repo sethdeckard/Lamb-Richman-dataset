@@ -5,11 +5,20 @@ using System.Linq;
 
 namespace DataSetExtension
 {
+	public class MeasurementMissingEventArgs : EventArgs
+	{
+		public DateTime Date { get; set; }	
+	}
+	
 	public class MeasurementWriter
 	{
         private readonly int year;
         private readonly GridStation[] stations;
         private readonly StreamWriter writer;
+		
+		public event EventHandler<MeasurementMissingEventArgs> MeasurementMissing;
+		
+		public List<DateTime> Missing { get; set; }
 
         public MeasurementWriter(Stream stream, GridStation[] stations, int year)
         {
@@ -19,8 +28,6 @@ namespace DataSetExtension
             writer = new StreamWriter(stream);
             Missing = new List<DateTime>();
         }
-
-        public List<DateTime> Missing { get; set; }
 
         public void Write(IMeasurement[] records, int month)
         {
@@ -44,11 +51,22 @@ namespace DataSetExtension
 
                 if (!found)
                 {
-                    Missing.Add(date);
+					OnMeasurementMissing(new MeasurementMissingEventArgs { Date = date });
+					Missing.Add(date);
                 }
             }
 
             writer.Flush();
         }
+		
+        protected virtual void OnMeasurementMissing(MeasurementMissingEventArgs e)
+        {
+            EventHandler<MeasurementMissingEventArgs> handler = MeasurementMissing;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }		
 	}
 }

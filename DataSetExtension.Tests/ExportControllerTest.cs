@@ -48,7 +48,9 @@ namespace DataSetExtension.Tests
 
 				Assert.That(File.Exists(Path.Combine(testPath, "tmin", "gr002")));
 				
-				Assert.That(File.Exists(Path.Combine(testPath, "tmin-missing-2006.log")));
+				var log = Path.Combine(testPath, "tmin-missing-2006.log");
+				Assert.That(File.Exists(log));
+				Assert.That(File.ReadAllText(log).Length, Is.GreaterThan(0));
             }
         }
 		
@@ -81,7 +83,9 @@ namespace DataSetExtension.Tests
 
 				Assert.That(File.Exists(Path.Combine(testPath, "tmax", "gr005")));
 				
-				Assert.That(File.Exists(Path.Combine(testPath, "tmax-missing-2006.log")));
+				var log = Path.Combine(testPath, "tmax-missing-2006.log");
+				Assert.That(File.Exists(log));
+				Assert.That(File.ReadAllText(log).Length, Is.GreaterThan(0));
             }
         }
 		
@@ -114,7 +118,9 @@ namespace DataSetExtension.Tests
 
 				Assert.That(File.Exists(Path.Combine(testPath, "prcp", "gr007")));
 				
-				Assert.That(File.Exists(Path.Combine(testPath, "prcp-missing-2006.log")));
+				var log = Path.Combine(testPath, "prcp-missing-2006.log");
+				Assert.That(File.Exists(log));
+				Assert.That(File.ReadAllText(log).Length, Is.GreaterThan(0));
             }
         }
 		

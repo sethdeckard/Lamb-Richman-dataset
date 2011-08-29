@@ -32,7 +32,7 @@ namespace DataSetExtension
             statement.AppendLine("Id INTEGER PRIMARY KEY AUTOINCREMENT,");
             statement.AppendLine("StationId INTEGER,");
             statement.AppendLine("StationNumber TEXT,");
-            statement.AppendLine("Date INTEGER,");
+            statement.AppendLine("Date DATETIME,");
 			statement.AppendLine("DateString TEXT,");
             statement.AppendLine("Value INTEGER");
             statement.AppendLine(");");
