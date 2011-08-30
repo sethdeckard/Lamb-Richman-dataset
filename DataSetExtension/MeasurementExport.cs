@@ -18,8 +18,6 @@ namespace DataSetExtension
 		
 		public event EventHandler<MeasurementMissingEventArgs> MeasurementMissing;
 		
-		public List<DateTime> Missing { get; set; }
-
         public MeasurementExport(Stream stream, GridStation[] stations, int year)
         {
             this.stations = stations;
@@ -28,6 +26,10 @@ namespace DataSetExtension
             writer = new StreamWriter(stream);
             Missing = new List<DateTime>();
         }
+				
+		public List<DateTime> Missing { get; set; }
+		
+		public MeasurementLocator<IMeasurement> Locator { get; set; }
 
         public void Write(IMeasurement[] records, int month)
         {
@@ -51,7 +53,7 @@ namespace DataSetExtension
 
                 if (!found)
                 {
-					//TODO: QueryMeasurementLocator, if no records are returned then add to missign collection,
+					//TODO: Query MeasurementLocator, if no records are returned then add to missign collection,
 					//get rid of event approach
 					
 					

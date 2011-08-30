@@ -15,14 +15,56 @@ namespace DataSetExtension
 
         public long Value { get; set; }
 		
-		public void Save(IDbConnection connection)
-		{
-			throw new NotImplementedException();
-		}
-		
 		public void Save(IDbConnection connection, string table)
 		{
-			throw new NotImplementedException();
+			var command = CreateCommand(connection);
+			command.CommandText = GetCommandText(table);
+			
+			Save(connection, command);
+		}
+		
+		public void Save(IDbConnection connection, IDbCommand command)
+		{
+			((IDataParameter)command.Parameters[":id"]).Value = StationId;
+			((IDataParameter)command.Parameters[":number"]).Value = StationNumber;
+			((IDataParameter)command.Parameters[":date"]).Value = Date;
+			((IDataParameter)command.Parameters[":dateString"]).Value = Date.ToShortDateString();
+			((IDataParameter)command.Parameters[":value"]).Value = Value;			
+			
+			command.ExecuteNonQuery();
+		}
+		
+		internal static IDbCommand CreateCommand(IDbConnection connection)
+		{
+			var command = connection.CreateCommand();
+			command.Transaction = connection.BeginTransaction();
+			
+			var idParameter = command.CreateParameter();
+			idParameter.ParameterName = ":id";
+			command.Parameters.Add(idParameter);
+			
+			var numberParameter = command.CreateParameter();
+			numberParameter.ParameterName = ":number";
+			command.Parameters.Add(numberParameter);
+			
+			var dateParameter = command.CreateParameter();
+			dateParameter.ParameterName = ":date";
+			command.Parameters.Add(dateParameter);
+			
+			var dateString = command.CreateParameter();
+			dateString.ParameterName = ":dateString";
+			command.Parameters.Add(dateString);
+			
+			var valueParameter = command.CreateParameter();
+			valueParameter.ParameterName = ":value";
+			command.Parameters.Add(valueParameter);
+			
+			return command;
+		}
+		
+		protected string GetCommandText(string table) 
+		{
+			return "insert into " + table + "(StationId,StationNumber,Date,DateString,Value) Values(:id, :number, :date, :dateString, :value);";
 		}
 	}
 }

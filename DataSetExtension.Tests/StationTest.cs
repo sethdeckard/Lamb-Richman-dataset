@@ -1,4 +1,8 @@
 using System;
+using System.Data;
+using System.Linq;
+using DataSetExtension;
+using Dapper;
 using NUnit.Framework;
 
 namespace DataSetExtension.Tests
@@ -31,6 +35,109 @@ namespace DataSetExtension.Tests
 				"DAWSON                         20021002 99991231  31 46 55 -084 26 59   355  ");
 			
 			Assert.That(station.End, Is.Null);
+		}
+		
+		[Test]
+		public void Save()
+		{
+			using (var connection = TestUtility.CreateConnection())
+			{
+				connection.Open();
+				
+				var database = new StationDatabase(connection);
+				database.CreateSchema();
+				
+				var station = new Station 
+				{
+					Name = "TestName",
+					Number = "1234",
+					State = "OK",
+					County = "CountyTest",
+					Latitude = 34.22M,
+					Longitude = -67.44M
+				};
+				
+				station.Save(connection);
+				
+				var saved = connection.Query<Station>("select Name, Number, State, County, Latitude, Longitude from Station").First();
+				
+				Assert.That(saved.Number, Is.EqualTo(station.Number));
+			}
+		}
+		
+		[Test]
+		public void SaveWithCommand()
+		{
+			using (var connection = TestUtility.CreateConnection())
+			{
+				connection.Open();
+				
+				var database = new StationDatabase(connection);
+				database.CreateSchema();
+				
+				var station = new Station 
+				{
+					Name = "TestName",
+					Number = "1234",
+					State = "OK",
+					County = "CountyTest",
+					Latitude = 34.22M,
+					Longitude = -67.44M
+				};
+				
+				station.Save(connection, CreateCommand(connection));
+				
+				var saved = connection.Query<Station>("select Name, Number, State, County, Latitude, Longitude from Station").First();
+				
+				Assert.That(saved.Number, Is.EqualTo(station.Number));
+			}
+		}
+		
+		private static IDbCommand CreateCommand(IDbConnection connection)
+		{
+			var command = connection.CreateCommand();
+			var sql = "insert into Station(Number, Name, State, County, Latitude, Longitude, Start, End) " + 
+				"Values(:number, :name, :state, :county, :latitude, :longitude, :start, :end);";
+			command.CommandText = sql;
+			command.Transaction = connection.BeginTransaction();
+			
+			var idParameter = command.CreateParameter();
+			idParameter.ParameterName = ":id";
+			command.Parameters.Add(idParameter);
+			
+			var numberParameter = command.CreateParameter();
+			numberParameter.ParameterName = ":number";
+			command.Parameters.Add(numberParameter);
+			
+			var nameParameter = command.CreateParameter();
+			nameParameter.ParameterName = ":name";
+			command.Parameters.Add(nameParameter);
+			
+			var stateParameter = command.CreateParameter();
+			stateParameter.ParameterName = ":state";
+			command.Parameters.Add(stateParameter);
+			
+			var countyParameter = command.CreateParameter();
+			countyParameter.ParameterName = ":county";
+			command.Parameters.Add(countyParameter);
+			
+			var latitudeParameter = command.CreateParameter();
+			latitudeParameter.ParameterName = ":latitude";
+			command.Parameters.Add(latitudeParameter);
+			
+			var longitudeParameter = command.CreateParameter();
+			longitudeParameter.ParameterName = ":longitude";
+			command.Parameters.Add(longitudeParameter);
+			
+			var startParameter = command.CreateParameter();
+			startParameter.ParameterName = ":start";
+			command.Parameters.Add(startParameter);
+			
+			var endParameter = command.CreateParameter();
+			endParameter.ParameterName = ":end";
+			command.Parameters.Add(endParameter);
+			
+			return command;
 		}
 	}
 }

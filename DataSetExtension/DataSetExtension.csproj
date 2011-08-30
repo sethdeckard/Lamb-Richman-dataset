@@ -59,6 +59,7 @@
     <Compile Include="MeasurementLocator.cs" />
     <Compile Include="MeasurementExport.cs" />
     <Compile Include="Measurement.cs" />
+    <Compile Include="GridSummaryWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -48,7 +48,68 @@ namespace DataSetExtension
 		
 		public void Save(IDbConnection connection)
 		{
-			throw new NotImplementedException();	
+			Save(connection, CreateCommand(connection));
+		}
+		
+		public void Save(IDbConnection connection, IDbCommand command) 
+		{
+			((IDataParameter)command.Parameters[":number"]).Value = Number;
+			((IDataParameter)command.Parameters[":name"]).Value = Name;
+			((IDataParameter)command.Parameters[":state"]).Value = State;
+			((IDataParameter)command.Parameters[":county"]).Value = County;
+			((IDataParameter)command.Parameters[":latitude"]).Value = Latitude;
+			((IDataParameter)command.Parameters[":longitude"]).Value = Longitude;
+			((IDataParameter)command.Parameters[":start"]).Value = Start;
+			((IDataParameter)command.Parameters[":end"]).Value = End;
+			
+			command.ExecuteNonQuery();			
+		}
+		
+		internal static IDbCommand CreateCommand(IDbConnection connection)
+		{
+			var command = connection.CreateCommand();
+			var sql = "insert into Station(Number, Name, State, County, Latitude, Longitude, Start, End) " + 
+				"Values(:number, :name, :state, :county, :latitude, :longitude, :start, :end);";
+			command.CommandText = sql;
+			command.Transaction = connection.BeginTransaction();
+			
+			var idParameter = command.CreateParameter();
+			idParameter.ParameterName = ":id";
+			command.Parameters.Add(idParameter);
+			
+			var numberParameter = command.CreateParameter();
+			numberParameter.ParameterName = ":number";
+			command.Parameters.Add(numberParameter);
+			
+			var nameParameter = command.CreateParameter();
+			nameParameter.ParameterName = ":name";
+			command.Parameters.Add(nameParameter);
+			
+			var stateParameter = command.CreateParameter();
+			stateParameter.ParameterName = ":state";
+			command.Parameters.Add(stateParameter);
+			
+			var countyParameter = command.CreateParameter();
+			countyParameter.ParameterName = ":county";
+			command.Parameters.Add(countyParameter);
+			
+			var latitudeParameter = command.CreateParameter();
+			latitudeParameter.ParameterName = ":latitude";
+			command.Parameters.Add(latitudeParameter);
+			
+			var longitudeParameter = command.CreateParameter();
+			longitudeParameter.ParameterName = ":longitude";
+			command.Parameters.Add(longitudeParameter);
+			
+			var startParameter = command.CreateParameter();
+			startParameter.ParameterName = ":start";
+			command.Parameters.Add(startParameter);
+			
+			var endParameter = command.CreateParameter();
+			endParameter.ParameterName = ":end";
+			command.Parameters.Add(endParameter);
+			
+			return command;
 		}
 		
 		private decimal ConvertDegreeAngle(decimal degrees, decimal minutes, decimal seconds)
