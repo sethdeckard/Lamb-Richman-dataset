@@ -57,7 +57,7 @@ namespace DataSetExtension.Tests
 				};
 				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
 				
-				var locator = new MeasurementLocator<Temperature>(connection, MeasurementDatabase.TemperatureMaxTable);
+				var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable);
 			
 				var date = DateTime.Parse("12/31/2010");
 				var results = locator.Find(34, 31, date);
@@ -67,5 +67,7 @@ namespace DataSetExtension.Tests
 				Assert.That(results.First().Date, Is.EqualTo(date));
 			}
 		}
+		
+		
 	}
 }

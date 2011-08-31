@@ -5,29 +5,59 @@ using Dapper;
 
 namespace DataSetExtension
 {
-	public class MeasurementLocator<T> where T : IMeasurement
+	public interface IMeasurementLocator
 	{
-		private readonly string table;
+		Measurement[] Find(decimal latitude, decimal longitude, DateTime date);	
+	}
+	
+	public class MeasurementLocator : IMeasurementLocator
+	{
+		private const int MileRadius = 100;
 		private readonly IDbConnection connection;
+		private readonly string query;
+		
+		public MeasurementLocator()
+		{
+		}
 		
 		public MeasurementLocator(IDbConnection connection, string table)
 		{
 			this.connection = connection;
-			this.table = table;
+
+			this.query = "select StationNumber, Date, Value from " + table + 
+				" inner join Station s on s.Number = StationNumber " +
+				" where Latitude > @MinLatitude and Latitude < @MaxLatitude" +
+				" and Longitude > @MinLongitude and Longitude < @MaxLongitude;";
 		}
 		
-		public T[] Find(decimal latitude, decimal longitude, DateTime date)
+		public virtual Measurement[] Find(decimal latitude, decimal longitude, DateTime date)
 		{
-			decimal latitudeMin = 0;
-			decimal latitudeMax = 0;
-			decimal longitudeMin = 0;
-			decimal longitudeMax = 0;
+			var boundry = GetBoundry(latitude, longitude);
 			
-			var parameters = new { LatitudeMin = latitudeMin, LatitudeMax = latitudeMax, LongitudeMin = longitudeMin, LongitudeMax = longitudeMax };
+			var parameters = new 
+			{ 
+				MinLatitude = boundry.MinLatitude, 
+				MaxLatitude = boundry.MaxLatitude, 
+				MinLongitude = boundry.MinLongitude,
+				MaxLongitude = boundry.MaxLongitude 
+			};
 			
-			return connection.Query<T>("select StationNumber, Date, Value from " + table + 
-				" inner join Station s on s.Number = StationNumber " +
-				" where Latitude > @LatitudeMin and Latitude < @LatitudeMax", parameters).ToArray();
+			return connection.Query<Measurement>(query, parameters).ToArray();
 		}
+		
+        private static Boundry GetBoundry(decimal latitude, decimal longitude)
+        {
+            var radius = MileRadius / 69.09M;
+ 
+            return new Boundry 
+            { 
+                MinLatitude = latitude - radius, 
+                MaxLatitude = latitude + radius, 
+                MinLongitude = longitude - radius, 
+                MaxLongitude = longitude + radius 
+            };
+        }
 	}
+	
+
 }

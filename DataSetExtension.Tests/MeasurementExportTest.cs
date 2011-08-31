@@ -30,8 +30,10 @@ namespace DataSetExtension.Tests
                                   new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3 },
                                   new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3 },
                               };
-
-            var writer = new MeasurementExport(stream, stations.ToArray(), 2001);
+			
+			var locator = new FakeMeasurementLocator();
+			
+            var writer = new MeasurementExport(stream, stations.ToArray(), 2001) { Locator = locator };
             writer.Write(records.ToArray(), 1);
 
             stream.Position = 0;
@@ -45,5 +47,13 @@ namespace DataSetExtension.Tests
 
             Assert.That(writer.Missing.Count, Is.EqualTo(28));
         }
+	}
+
+	public class FakeMeasurementLocator : IMeasurementLocator
+	{
+		public Measurement[] Find(decimal latitude, decimal longitude, DateTime date) 
+		{
+			return new Measurement[] { };
+		}
 	}
 }

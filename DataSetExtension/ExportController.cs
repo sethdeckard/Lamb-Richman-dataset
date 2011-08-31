@@ -23,7 +23,9 @@ namespace DataSetExtension
             this.connection = connection;
             basePath = path;
         }
-
+		
+		public IMeasurementLocator Locator { get; set; }
+		
         public void ExportTemperatureMin(int year)
         {
 			using (log = CreateLogWriter(string.Format("tmin-missing-{0}.log", year)))
@@ -83,7 +85,7 @@ namespace DataSetExtension
 						stream.Seek(0, SeekOrigin.End);
 						
 						var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
-		                var export = new MeasurementExport(stream, stations, year);
+		                var export = new MeasurementExport(stream, stations, year) { Locator = Locator };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);

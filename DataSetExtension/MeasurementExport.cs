@@ -9,7 +9,7 @@ namespace DataSetExtension
 	{
 		public DateTime Date { get; set; }	
 	}
-	
+		
 	public class MeasurementExport
 	{
         private readonly int year;
@@ -29,7 +29,7 @@ namespace DataSetExtension
 				
 		public List<DateTime> Missing { get; set; }
 		
-		public MeasurementLocator<IMeasurement> Locator { get; set; }
+		public IMeasurementLocator Locator { get; set; }
 
         public void Write(IMeasurement[] records, int month)
         {
@@ -37,8 +37,11 @@ namespace DataSetExtension
             {
                 var date = new DateTime(year, month, day);
                 var found = false;
+				long sequence = 0;
                 foreach (var station in stations.OrderBy(station => station.Sequence))
                 {
+					sequence = station.Sequence;
+					
                     var query = from record in records 
                                 where record.Date == date && record.StationId == station.Id 
                                 select record;
@@ -53,12 +56,24 @@ namespace DataSetExtension
 
                 if (!found)
                 {
-					//TODO: Query MeasurementLocator, if no records are returned then add to missign collection,
-					//get rid of event approach
+					if (stations.Count() == 0)
+					{
+						continue;
+					}
 					
+					//todo: get rid of event approach
+					var first = stations.First();
 					
-					OnMeasurementMissing(new MeasurementMissingEventArgs { Date = date });
-					Missing.Add(date);
+					var results = Locator.Find(first.GridPointLatitude, first.GridPointLongitude, date);
+					if (results.Length == 0)
+					{
+						OnMeasurementMissing(new MeasurementMissingEventArgs { Date = date });
+						Missing.Add(date);	
+						
+						continue;
+					}
+					
+					//writer.WriteLine(results.First().ToString(sequence));
                 }
             }
 
