@@ -26,8 +26,8 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-				var stationDb = new GridStationDatabase(connection);
-				stationDb.CreateSchema();
+				var gridDb = new GridStationDatabase(connection);
+				gridDb.CreateSchema();
 				
 				var station = new GridStation() 
 				{
@@ -38,6 +38,9 @@ namespace DataSetExtension.Tests
 				
 				var td3200Db = new MeasurementDatabase(connection);
 				td3200Db.CreateSchema();
+				
+				var stationDb = new StationDatabase(connection);
+				stationDb.CreateSchema();
 				
                 var export = new ExportController(connection, testPath);
                 export.ExportTemperatureMin(2006);
@@ -61,8 +64,8 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-				var stationDb = new GridStationDatabase(connection);
-				stationDb.CreateSchema();
+				var gridDb = new GridStationDatabase(connection);
+				gridDb.CreateSchema();
 				
 				var station = new GridStation() 
 				{
@@ -73,6 +76,9 @@ namespace DataSetExtension.Tests
 				
 				var td3200Db = new MeasurementDatabase(connection);
 				td3200Db.CreateSchema();
+				
+				var stationDb = new StationDatabase(connection);
+				stationDb.CreateSchema();
 				
                 var export = new ExportController(connection, testPath);
                 export.ExportTemperatureMax(2006);
@@ -96,8 +102,8 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-				var stationDb = new GridStationDatabase(connection);
-				stationDb.CreateSchema();
+				var gridDb = new GridStationDatabase(connection);
+				gridDb.CreateSchema();
 				
 				var station = new GridStation() 
 				{
@@ -108,6 +114,9 @@ namespace DataSetExtension.Tests
 				
 				var td3200Db = new MeasurementDatabase(connection);
 				td3200Db.CreateSchema();
+				
+				var stationDb = new StationDatabase(connection);
+				stationDb.CreateSchema();
 				
                 var export = new ExportController(connection, testPath);
                 export.ExportPrecipitation(2006);

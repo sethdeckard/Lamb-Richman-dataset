@@ -37,7 +37,8 @@ namespace DataSetExtension
 						stream.Seek(0, SeekOrigin.End);
 						
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMinStationTable);
-		                var export = new MeasurementExport(stream, stations, year);
+						var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMinTable);
+		                var export = new MeasurementExport(stream, stations, year) { Locator = locator };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
@@ -61,7 +62,8 @@ namespace DataSetExtension
 						stream.Seek(0, SeekOrigin.End);
 						
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMaxStationTable);
-		                var export = new MeasurementExport(stream, stations, year);
+						var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable);
+		                var export = new MeasurementExport(stream, stations, year) { Locator = locator };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
@@ -85,7 +87,8 @@ namespace DataSetExtension
 						stream.Seek(0, SeekOrigin.End);
 						
 						var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
-		                var export = new MeasurementExport(stream, stations, year) { Locator = Locator };
+						var locator = new MeasurementLocator(connection, MeasurementDatabase.PrecipitationTable);
+		                var export = new MeasurementExport(stream, stations, year) { Locator = locator };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
