@@ -32,8 +32,9 @@ namespace DataSetExtension.Tests
                               };
 			
 			var locator = new FakeMeasurementLocator();
+			var formatter = new SequenceFormatter();
 			
-            var writer = new MeasurementExport(stream, stations.ToArray(), 2001) { Locator = locator };
+            var writer = new MeasurementExport(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };
             writer.Write(records.ToArray(), 1);
 
             stream.Position = 0;
@@ -49,11 +50,11 @@ namespace DataSetExtension.Tests
         }
 	}
 
-	public class FakeMeasurementLocator : IMeasurementLocator
+	public class SequenceFormatter : IFormatter
 	{
-		public Measurement[] Find(decimal latitude, decimal longitude, DateTime date) 
+		public string Format(IMeasurement measurement, long sequence)
 		{
-			return new Measurement[] { };
-		}
+			return sequence.ToString();
+		}	
 	}
 }

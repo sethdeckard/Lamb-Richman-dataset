@@ -2,18 +2,18 @@ using System;
 
 namespace DataSetExtension
 {
-	public class Temperature : Td3200
+	public class TemperatureFormatter : IFormatter
 	{
-		public override string ToString(long sequence)
+		public string Format(IMeasurement measurement, long sequence)
 		{
 			var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			var celsius = ConvertFahrenheitToCelsius(Convert.ToDouble(Value));
+			var celsius = ConvertFahrenheitToCelsius(Convert.ToDouble(measurement.Value));
 			
 			var formatted = decimal.Round(Convert.ToDecimal(celsius), 1).ToString("#.0").PadLeft(5, ' ').Replace(".","");
 			
 			return string.Format(
 				"{0} 00 {1} {2}", 
-				Date.ToString("yyMMdd"), 
+				measurement.Date.ToString("yyMMdd"), 
 				alphabet.Substring((int)sequence, 1), 
 				formatted);
 		}

@@ -41,8 +41,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Dapper\SqlMapper.cs" />
     <Compile Include="Td3200.cs" />
-    <Compile Include="Temperature.cs" />
-    <Compile Include="Precipitation.cs" />
     <Compile Include="IMeasurement.cs" />
     <Compile Include="ExportController.cs" />
     <Compile Include="GridStation.cs" />
@@ -61,6 +59,8 @@
     <Compile Include="Measurement.cs" />
     <Compile Include="GridSummaryWriter.cs" />
     <Compile Include="Boundry.cs" />
+    <Compile Include="PrecipitationFormatter.cs" />
+    <Compile Include="TemperatureFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

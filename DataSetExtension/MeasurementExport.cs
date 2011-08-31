@@ -30,6 +30,8 @@ namespace DataSetExtension
 		public List<DateTime> Missing { get; set; }
 		
 		public IMeasurementLocator Locator { get; set; }
+		
+		public IFormatter Formatter { get; set; }
 
         public void Write(IMeasurement[] records, int month)
         {
@@ -48,7 +50,7 @@ namespace DataSetExtension
 
                     if (query.Count() > 0)
                     {
-                        writer.WriteLine(query.First().ToString(station.Sequence));
+                       	writer.WriteLine(Formatter.Format(query.First(), station.Sequence));
                         found = true;
                         break;
                     }
@@ -73,7 +75,7 @@ namespace DataSetExtension
 						continue;
 					}
 					
-					//writer.WriteLine(results.First().ToString(sequence));
+					writer.WriteLine(Formatter.Format(results.First(), sequence));
                 }
             }
 

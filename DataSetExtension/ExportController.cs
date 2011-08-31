@@ -38,12 +38,12 @@ namespace DataSetExtension
 						
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMinStationTable);
 						var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMinTable);
-		                var export = new MeasurementExport(stream, stations, year) { Locator = locator };
+		                var export = new MeasurementExport(stream, stations, year) { Locator = locator, Formatter = new TemperatureFormatter() };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, MeasurementDatabase.TemperatureMinTable, GridStationDatabase.TemperatureMinStationTable);
-						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
+						var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 		
 		               ProcessMeasurements(year, grid, export, measurements);
 					}
@@ -63,12 +63,12 @@ namespace DataSetExtension
 						
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMaxStationTable);
 						var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable);
-		                var export = new MeasurementExport(stream, stations, year) { Locator = locator };
+		                var export = new MeasurementExport(stream, stations, year) { Locator = locator, Formatter = new TemperatureFormatter() };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, MeasurementDatabase.TemperatureMaxTable, GridStationDatabase.TemperatureMaxStationTable);
-						var measurements = connection.Query<Temperature>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
+						var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 						
 						ProcessMeasurements(year, grid, export, measurements);
 					}
@@ -76,10 +76,15 @@ namespace DataSetExtension
 			}
 		}
 		
+		//use as template
 		public void ExportPrecipitation(int year) 
 		{
 			using (log = CreateLogWriter(string.Format("prcp-missing-{0}.log", year)))
 			{
+				//locator is created for entire operation
+				var locator = new MeasurementLocator(connection, MeasurementDatabase.PrecipitationTable);
+				var formatter = new PrecipitationFormatter();
+				
 	            for (var grid = GridMin; grid <= GridMax; grid++)
 	            {
 	                using (var stream = new FileStream(GetFile(grid, "prcp"), FileMode.OpenOrCreate, FileAccess.Write)) 
@@ -87,13 +92,13 @@ namespace DataSetExtension
 						stream.Seek(0, SeekOrigin.End);
 						
 						var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
-						var locator = new MeasurementLocator(connection, MeasurementDatabase.PrecipitationTable);
-		                var export = new MeasurementExport(stream, stations, year) { Locator = locator };
+						//might need a LoadStations method here on Locator
+		                var export = new MeasurementExport(stream, stations, year) { Locator = locator, Formatter = formatter };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
 						var query = string.Format(QueryFormat, MeasurementDatabase.PrecipitationTable, GridStationDatabase.PrecipitationStationTable);
-						var measurements = connection.Query<Precipitation>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
+						var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 		
 		                ProcessMeasurements(year, grid, export, measurements);
 					}

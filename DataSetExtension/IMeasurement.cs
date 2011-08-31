@@ -12,6 +12,6 @@ namespace DataSetExtension
 		
         long Value { get; set; }
 
-        string ToString(long sequence);
+        //string ToString(long sequence);
 	}
 }

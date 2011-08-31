@@ -60,6 +60,7 @@
     <Compile Include="MeasurementLocatorTest.cs" />
     <Compile Include="MeasurementTest.cs" />
     <Compile Include="GridSummaryWriterTest.cs" />
+    <Compile Include="FakeMeasurementLocator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

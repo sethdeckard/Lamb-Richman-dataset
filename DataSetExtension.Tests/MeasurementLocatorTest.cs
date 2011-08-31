@@ -50,7 +50,7 @@ namespace DataSetExtension.Tests
 				var measurementDatabase = new MeasurementDatabase(connection);
 				measurementDatabase.CreateSchema();
 				
-				var measurement = new Temperature
+				var measurement = new Measurement
 				{
 					Date = DateTime.Parse("12/31/2010"),
 					StationNumber = "445599"

@@ -3,7 +3,7 @@ using System.Data;
 
 namespace DataSetExtension
 {
-	public class Measurement
+	public class Measurement : IMeasurement
 	{
         public long Id { get; set; }
 

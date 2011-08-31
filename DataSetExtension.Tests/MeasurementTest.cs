@@ -19,7 +19,7 @@ namespace DataSetExtension.Tests
 				var database = new MeasurementDatabase(connection);
 				database.CreateSchema();
 				
-				var measurement = new Temperature 
+				var measurement = new Measurement 
 				{
 					Id = 1,
 					StationId = 22,
@@ -30,7 +30,7 @@ namespace DataSetExtension.Tests
 				
 				measurement.Save(connection, "TemperatureMax");
 				
-				var saved = connection.Query<Temperature>("select Id, StationId, StationNumber, Date, Value from TemperatureMax").First();
+				var saved = connection.Query<Measurement>("select Id, StationId, StationNumber, Date, Value from TemperatureMax").First();
 				
 				Assert.That(saved.Id, Is.EqualTo(measurement.Id));
 				Assert.That(saved.StationId, Is.EqualTo(measurement.StationId));
@@ -50,7 +50,7 @@ namespace DataSetExtension.Tests
 				var database = new MeasurementDatabase(connection);
 				database.CreateSchema();
 				
-				var measurement = new Temperature 
+				var measurement = new Measurement 
 				{
 					Id = 1,
 					StationId = 22,
@@ -65,7 +65,7 @@ namespace DataSetExtension.Tests
 				
 				//command.Transaction.Commit();
 				
-				var saved = connection.Query<Temperature>("select Id, StationId, StationNumber, Date, Value from TemperatureMax").First();
+				var saved = connection.Query<Measurement>("select Id, StationId, StationNumber, Date, Value from TemperatureMax").First();
 				
 				Assert.That(saved.Id, Is.EqualTo(measurement.Id));
 				Assert.That(saved.StationId, Is.EqualTo(measurement.StationId));

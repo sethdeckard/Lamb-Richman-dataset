@@ -20,10 +20,10 @@ namespace DataSetExtension
             return list.ToArray();
         }
 		
-		public virtual string ToString(long sequence) 
-		{
-			return sequence.ToString();
-		}
+		//private virtual string ToString(long sequence) 
+		//{
+		//	return sequence.ToString();
+		//}
 
         private static void ParseItems(string records, string station, int year, int month, List<Td3200> list)
         {
