@@ -57,17 +57,15 @@ namespace DataSetExtension.Tests
 				};
 				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
 				
-				var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable);
+				var tracker = new StationTracker();
+				var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable) { Tracker = tracker };			
 			
 				var date = DateTime.Parse("12/31/2010");
-				var results = locator.Find(34, 31, date);
+				var result = locator.Find(34, 31, date);
 				
-				Assert.That(results.Length, Is.EqualTo(1));
-				Assert.That(results.First().StationNumber, Is.EqualTo("445599"));
-				Assert.That(results.First().Date, Is.EqualTo(date));
+				Assert.That(result.StationNumber, Is.EqualTo("445599"));
+				Assert.That(result.Date, Is.EqualTo(date));
 			}
 		}
-		
-		
 	}
 }

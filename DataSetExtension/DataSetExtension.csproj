@@ -61,6 +61,9 @@
     <Compile Include="Boundry.cs" />
     <Compile Include="PrecipitationFormatter.cs" />
     <Compile Include="TemperatureFormatter.cs" />
+    <Compile Include="IMeasurementLocator.cs" />
+    <Compile Include="StationAddedEventArgs.cs" />
+    <Compile Include="StationTracker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -49,12 +49,4 @@ namespace DataSetExtension.Tests
             Assert.That(writer.Missing.Count, Is.EqualTo(28));
         }
 	}
-
-	public class SequenceFormatter : IFormatter
-	{
-		public string Format(IMeasurement measurement, long sequence)
-		{
-			return sequence.ToString();
-		}	
-	}
 }

@@ -5,18 +5,11 @@ using System.Linq;
 
 namespace DataSetExtension
 {
-	public class MeasurementMissingEventArgs : EventArgs
-	{
-		public DateTime Date { get; set; }	
-	}
-		
 	public class MeasurementExport
 	{
         private readonly int year;
         private readonly GridStation[] stations;
         private readonly StreamWriter writer;
-		
-		public event EventHandler<MeasurementMissingEventArgs> MeasurementMissing;
 		
         public MeasurementExport(Stream stream, GridStation[] stations, int year)
         {
@@ -42,8 +35,6 @@ namespace DataSetExtension
 				long sequence = 0;
                 foreach (var station in stations.OrderBy(station => station.Sequence))
                 {
-					sequence = station.Sequence;
-					
                     var query = from record in records 
                                 where record.Date == date && record.StationId == station.Id 
                                 select record;
@@ -54,42 +45,27 @@ namespace DataSetExtension
                         found = true;
                         break;
                     }
+				
+					sequence = station.Sequence;
                 }
 
-                if (!found)
-                {
-					if (stations.Count() == 0)
-					{
-						continue;
-					}
-					
-					//todo: get rid of event approach
+                if (!found && stations.Count() > 0)
+                {					
 					var first = stations.First();
 					
-					var results = Locator.Find(first.GridPointLatitude, first.GridPointLongitude, date);
-					if (results.Length == 0)
+					var measurement = Locator.Find(first.GridPointLatitude, first.GridPointLongitude, date);
+					if (measurement == null)
 					{
-						OnMeasurementMissing(new MeasurementMissingEventArgs { Date = date });
 						Missing.Add(date);	
 						
 						continue;
 					}
 					
-					writer.WriteLine(Formatter.Format(results.First(), sequence));
+					writer.WriteLine(Formatter.Format(measurement, sequence));
                 }
             }
 
             writer.Flush();
-        }
-		
-        protected virtual void OnMeasurementMissing(MeasurementMissingEventArgs e)
-        {
-            EventHandler<MeasurementMissingEventArgs> handler = MeasurementMissing;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
         }		
 	}
 }

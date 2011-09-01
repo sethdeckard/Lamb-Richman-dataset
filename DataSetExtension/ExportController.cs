@@ -76,13 +76,19 @@ namespace DataSetExtension
 			}
 		}
 		
-		//use as template
 		public void ExportPrecipitation(int year) 
 		{
 			using (log = CreateLogWriter(string.Format("prcp-missing-{0}.log", year)))
 			{
 				//locator is created for entire operation
-				var locator = new MeasurementLocator(connection, MeasurementDatabase.PrecipitationTable);
+				var tracker = new StationTracker();
+				tracker.StationAdded +=	PrecipitationStationAddedEventArgs;
+				
+				var locator = new MeasurementLocator(connection, MeasurementDatabase.PrecipitationTable)
+					{
+						Tracker = tracker
+					};
+				
 				var formatter = new PrecipitationFormatter();
 				
 	            for (var grid = GridMin; grid <= GridMax; grid++)
@@ -104,6 +110,11 @@ namespace DataSetExtension
 					}
 	            }
 			}
+		}
+		
+		void PrecipitationStationAddedEventArgs(object sender, StationAddedEventArgs e)
+		{
+			
 		}
 		
 		private string GetFile(int grid, string directory)

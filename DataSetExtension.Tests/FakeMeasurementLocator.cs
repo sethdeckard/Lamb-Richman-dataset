@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,9 +7,9 @@ namespace DataSetExtension.Tests
 {
 	public class FakeMeasurementLocator : IMeasurementLocator
 	{
-		public Measurement[] Find(decimal latitude, decimal longitude, DateTime date) 
+		public Measurement Find(decimal latitude, decimal longitude, DateTime date) 
 		{
-			return new Measurement[] { };
+			return null;
 		}
 	}
 }

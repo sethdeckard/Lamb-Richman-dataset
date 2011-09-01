@@ -5,17 +5,12 @@ using Dapper;
 
 namespace DataSetExtension
 {
-	public interface IMeasurementLocator
-	{
-		Measurement[] Find(decimal latitude, decimal longitude, DateTime date);	
-	}
-	
 	public class MeasurementLocator : IMeasurementLocator
 	{
 		private const int MileRadius = 100;
 		private readonly IDbConnection connection;
 		private readonly string query;
-		
+	
 		public MeasurementLocator()
 		{
 		}
@@ -30,7 +25,9 @@ namespace DataSetExtension
 				" and Longitude > @MinLongitude and Longitude < @MaxLongitude;";
 		}
 		
-		public virtual Measurement[] Find(decimal latitude, decimal longitude, DateTime date)
+		public StationTracker Tracker { get; set; }
+		
+		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date)
 		{
 			var boundry = GetBoundry(latitude, longitude);
 			
@@ -42,7 +39,16 @@ namespace DataSetExtension
 				MaxLongitude = boundry.MaxLongitude 
 			};
 			
-			return connection.Query<Measurement>(query, parameters).ToArray();
+			Measurement[] matches = connection.Query<Measurement>(query, parameters).ToArray();
+			
+			foreach (var measurement in matches.Where(measurement => Tracker.Validate(measurement.StationNumber, measurement.Date)))
+            {
+                Tracker.Update(measurement.StationNumber, date);
+ 
+                return measurement;
+            }
+ 
+            return null;
 		}
 		
         private static Boundry GetBoundry(decimal latitude, decimal longitude)
@@ -56,8 +62,6 @@ namespace DataSetExtension
                 MinLongitude = longitude - radius, 
                 MaxLongitude = longitude + radius 
             };
-        }
+        }	
 	}
-	
-
 }
