@@ -26,17 +26,17 @@ namespace DataSetExtension.Tests
 		public void Update()
 		{
 			var tracker = new StationTracker();
-			tracker.StationAdded += HandleTrackerStationAdded;
+			//tracker.StationAdded += HandleTrackerStationAdded;
 			
-			tracker.Update("123456", DateTime.Today);
+			Assert.That(tracker.Update("123456", DateTime.Today), Is.True);
 			
-			tracker.Update("888", DateTime.Today);
+			Assert.That(tracker.Update("888", DateTime.Today), Is.True);
 			
-			tracker.Update("888", DateTime.Today.AddDays(1));
+			Assert.That(tracker.Update("888", DateTime.Today.AddDays(1)), Is.False);
 			
-			tracker.Update("777", DateTime.Today);
+			Assert.That(tracker.Update("777", DateTime.Today), Is.True);
 			
-			Assert.That(calls, Is.EqualTo(3));
+			//Assert.That(calls, Is.EqualTo(3));
 		}
 		
 		void HandleTrackerStationAdded(object sender, StationAddedEventArgs e)

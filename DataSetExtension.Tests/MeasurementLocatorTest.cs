@@ -63,6 +63,8 @@ namespace DataSetExtension.Tests
 				var date = DateTime.Parse("12/31/2010");
 				var result = locator.Find(34, 31, date);
 				
+				Assert.That(locator.IsNew, Is.True);
+				
 				Assert.That(result.StationNumber, Is.EqualTo("445599"));
 				Assert.That(result.Date, Is.EqualTo(date));
 			}

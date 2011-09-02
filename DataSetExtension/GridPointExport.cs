@@ -8,19 +8,22 @@ namespace DataSetExtension
 	public class MeasurementExport
 	{
         private readonly int year;
-        private readonly GridStation[] stations;
+        private readonly List<GridStation> stations;
         private readonly StreamWriter writer;
 		
         public MeasurementExport(Stream stream, GridStation[] stations, int year)
         {
-            this.stations = stations;
+            this.stations = stations.ToList();
             this.year = year;
 
             writer = new StreamWriter(stream);
             Missing = new List<DateTime>();
+			Added = new List<GridStation>();
         }
 				
 		public List<DateTime> Missing { get; set; }
+		
+		public List<GridStation> Added { get; set; }
 		
 		public IMeasurementLocator Locator { get; set; }
 		
@@ -59,6 +62,20 @@ namespace DataSetExtension
 						Missing.Add(date);	
 						
 						continue;
+					}
+					
+					if (Locator.IsNew) 
+					{
+						var station = new GridStation 
+						{ 
+							GridPoint = first.GridPoint, 
+							GridPointLatitude = first.GridPointLatitude, 
+							GridPointLongitude = first.GridPointLongitude, 
+							Number = measurement.StationNumber,
+							Sequence = sequence,
+							RecordCount = 1
+						};
+						Added.Add(station);
 					}
 					
 					writer.WriteLine(Formatter.Format(measurement, sequence));

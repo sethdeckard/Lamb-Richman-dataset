@@ -78,43 +78,40 @@ namespace DataSetExtension
 		
 		public void ExportPrecipitation(int year) 
 		{
-			using (log = CreateLogWriter(string.Format("prcp-missing-{0}.log", year)))
-			{
-				//locator is created for entire operation
-				var tracker = new StationTracker();
-				tracker.StationAdded +=	PrecipitationStationAddedEventArgs;
-				
-				var locator = new MeasurementLocator(connection, MeasurementDatabase.PrecipitationTable)
-					{
-						Tracker = tracker
-					};
-				
-				var formatter = new PrecipitationFormatter();
-				
-	            for (var grid = GridMin; grid <= GridMax; grid++)
-	            {
-	                using (var stream = new FileStream(GetFile(grid, "prcp"), FileMode.OpenOrCreate, FileAccess.Write)) 
-					{
-						stream.Seek(0, SeekOrigin.End);
-						
-						var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
-						//might need a LoadStations method here on Locator
-		                var export = new MeasurementExport(stream, stations, year) { Locator = locator, Formatter = formatter };
-						
-						var start = new DateTime(year, 1, 1);
-						var end = GetEndDate(year);
-						var query = string.Format(QueryFormat, MeasurementDatabase.PrecipitationTable, GridStationDatabase.PrecipitationStationTable);
-						var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
-		
-		                ProcessMeasurements(year, grid, export, measurements);
-					}
-	            }
-			}
-		}
-		
-		void PrecipitationStationAddedEventArgs(object sender, StationAddedEventArgs e)
-		{
+			using (var addedLog = CreateLogWriter(string.Format("prcp-added-{0}.log", year)))
+			{	
+				using (log = CreateLogWriter(string.Format("prcp-missing-{0}.log", year)))
+				{
+					var tracker = new StationTracker();
+					var locator = new MeasurementLocator(connection, MeasurementDatabase.PrecipitationTable)
+						{
+							Tracker = tracker
+						};
+					
+					var formatter = new PrecipitationFormatter();
+					
+		            for (var grid = GridMin; grid <= GridMax; grid++)
+		            {
+		                using (var stream = new FileStream(GetFile(grid, "prcp"), FileMode.OpenOrCreate, FileAccess.Write)) 
+						{
+							stream.Seek(0, SeekOrigin.End);
+							
+							var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
+							//might need a LoadStations method here on Locator
+			                var export = new MeasurementExport(stream, stations, year) { Locator = locator, Formatter = formatter };
+							
+							var start = new DateTime(year, 1, 1);
+							var end = GetEndDate(year);
+							var query = string.Format(QueryFormat, MeasurementDatabase.PrecipitationTable, GridStationDatabase.PrecipitationStationTable);
+							var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 			
+			                ProcessMeasurements(year, grid, export, measurements);
+							
+							ProcessAddedStations(stations, MeasurementDatabase.PrecipitationTable);
+						}
+		            }
+				}		
+			}
 		}
 		
 		private string GetFile(int grid, string directory)
@@ -143,6 +140,13 @@ namespace DataSetExtension
 			{
         		LogMissing(grid, export.Missing);
 			}
+		}
+		
+		private void ProcessAddedStations(GridStation[] stations, string table)
+		{
+			//feel in Id, Name...save to DB.
+			
+			
 		}
 		
 		private void LogMissing(int grid, List<DateTime> missing) 

@@ -27,7 +27,9 @@ namespace DataSetExtension
 		
 		public StationTracker Tracker { get; set; }
 		
-		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date)
+		public bool IsNew { get; set; }
+		
+		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date) //return complex type
 		{
 			var boundry = GetBoundry(latitude, longitude);
 			
@@ -43,8 +45,8 @@ namespace DataSetExtension
 			
 			foreach (var measurement in matches.Where(measurement => Tracker.Validate(measurement.StationNumber, measurement.Date)))
             {
-                Tracker.Update(measurement.StationNumber, date);
- 
+                IsNew = Tracker.Update(measurement.StationNumber, date);
+				
                 return measurement;
             }
  
