@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace DataSetExtension
 {
-	public class MeasurementExport
+	public class GridPointExport
 	{
         private readonly int year;
         private readonly List<GridStation> stations;
         private readonly StreamWriter writer;
 		
-        public MeasurementExport(Stream stream, GridStation[] stations, int year)
+        public GridPointExport(Stream stream, GridStation[] stations, int year)
         {
             this.stations = stations.ToList();
             this.year = year;
@@ -23,12 +23,21 @@ namespace DataSetExtension
 				
 		public List<DateTime> Missing { get; set; }
 		
+		//get rid of added
 		public List<GridStation> Added { get; set; }
 		
 		public IMeasurementLocator Locator { get; set; }
 		
 		public IFormatter Formatter { get; set; }
-
+		
+		public GridStation[] GetUpdatedStations()
+		{
+			throw new NotImplementedException();
+			
+			//returns both existing and new stations (missing lat/long/name), updated with record counts.
+		}
+		
+		//update record counts, refactor into two methods
         public void Write(IMeasurement[] records, int month)
         {
             for (var day = 1; day <= DateTime.DaysInMonth(year, month); day++)
@@ -76,6 +85,7 @@ namespace DataSetExtension
 							RecordCount = 1
 						};
 						Added.Add(station);
+						//add to stations
 					}
 					
 					writer.WriteLine(Formatter.Format(measurement, sequence));
@@ -83,6 +93,6 @@ namespace DataSetExtension
             }
 
             writer.Flush();
-        }		
+        }	
 	}
 }

@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace DataSetExtension.Tests
 {
 	[TestFixture]
-	public class MeasurementExportTest
+	public class GridPointExportTest
 	{
         [Test]
         public void Write()
@@ -34,7 +34,7 @@ namespace DataSetExtension.Tests
 			var locator = new FakeMeasurementLocator();
 			var formatter = new SequenceFormatter();
 			
-            var writer = new MeasurementExport(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };
+            var writer = new GridPointExport(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };
             writer.Write(records.ToArray(), 1);
 
             stream.Position = 0;
@@ -75,7 +75,7 @@ namespace DataSetExtension.Tests
 			var locator = new FakeMeasurementLocator() { PassNull = true };
 			var formatter = new SequenceFormatter();
 			
-            var writer = new MeasurementExport(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };
+            var writer = new GridPointExport(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };
             writer.Write(records.ToArray(), 1);
 
             stream.Position = 0;

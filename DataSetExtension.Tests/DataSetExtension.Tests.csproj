@@ -56,13 +56,13 @@
     <Compile Include="Import\GridStationImportTest.cs" />
     <Compile Include="Import\Td3200ImportTest.cs" />
     <Compile Include="TestUtility.cs" />
-    <Compile Include="MeasurementExportTest.cs" />
     <Compile Include="MeasurementLocatorTest.cs" />
     <Compile Include="MeasurementTest.cs" />
     <Compile Include="GridSummaryWriterTest.cs" />
     <Compile Include="FakeMeasurementLocator.cs" />
     <Compile Include="StationTrackerTest.cs" />
     <Compile Include="SequenceFormatter.cs" />
+    <Compile Include="GridPointExportTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
