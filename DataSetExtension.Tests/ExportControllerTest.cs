@@ -130,6 +130,9 @@ namespace DataSetExtension.Tests
 				var log = Path.Combine(testPath, "prcp-missing-2006.log");
 				Assert.That(File.Exists(log));
 				Assert.That(File.ReadAllText(log).Length, Is.GreaterThan(0));
+				
+				log = Path.Combine(testPath, "prcp-added-2006.log");
+				Assert.That(File.Exists(log));
             }
         }
 		

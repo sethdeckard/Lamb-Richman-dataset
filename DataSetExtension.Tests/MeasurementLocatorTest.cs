@@ -58,7 +58,7 @@ namespace DataSetExtension.Tests
 				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
 				
 				var tracker = new StationTracker();
-				var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable) { Tracker = tracker };			
+				var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable, tracker);			
 			
 				var date = DateTime.Parse("12/31/2010");
 				var result = locator.Find(34, 31, date);

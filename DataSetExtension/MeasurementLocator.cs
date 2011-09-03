@@ -15,10 +15,11 @@ namespace DataSetExtension
 		{
 		}
 		
-		public MeasurementLocator(IDbConnection connection, string table)
+		public MeasurementLocator(IDbConnection connection, string table, StationTracker tracker)
 		{
 			this.connection = connection;
-
+			Tracker = tracker;
+			
 			this.query = "select StationNumber, Date, Value from " + table + 
 				" inner join Station s on s.Number = StationNumber " +
 				" where Latitude > @MinLatitude and Latitude < @MaxLatitude" +

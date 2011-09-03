@@ -77,7 +77,7 @@ namespace DataSetExtension
 							GridPointLatitude = first.GridPointLatitude, 
 							GridPointLongitude = first.GridPointLongitude, 
 							Number = measurement.StationNumber,
-							Sequence = sequence,
+							Sequence = sequence + 1,
 							RecordCount = 1,
 							IsNew = true
 						};
