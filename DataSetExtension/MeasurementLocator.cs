@@ -31,7 +31,7 @@ namespace DataSetExtension
 		
 		public bool IsNew { get; set; }
 		
-		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date) //return complex type
+		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date)
 		{
 			var boundry = GetBoundry(latitude, longitude);
 			

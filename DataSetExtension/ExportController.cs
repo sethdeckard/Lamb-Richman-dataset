@@ -116,7 +116,17 @@ namespace DataSetExtension
 								
 		private void UpdateStations(GridStation[] stations, string table, StreamWriter log)
 		{
-			
+			foreach (var station in stations)
+			{
+				if (station.IsNew) 
+				{
+					log.WriteLine(station.Number);
+					continue;
+				}
+	
+				
+				//update station properties
+			}
 		}
 		
 		private string GetFile(int grid, string directory)

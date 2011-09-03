@@ -26,7 +26,7 @@ namespace DataSetExtension.ConsoleApp
 			
 			ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all", 2001);*/
 			
-			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
+			Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
 		}
 		
 		private static IDbConnection CreateConnection() 
@@ -185,14 +185,14 @@ namespace DataSetExtension.ConsoleApp
 				Console.WriteLine("Exporting TemperatureMin...");
 				var stopwatch = new Stopwatch();
                 stopwatch.Start();
-				controller.ExportTemperatureMin(year);
+				//controller.ExportTemperatureMin(year);
 				stopwatch.Stop();
 				Console.WriteLine("Total TemperatureMin export time: " + stopwatch.Elapsed.ToString());
 				
 				Console.WriteLine("Exporting TemperatureMax...");
 				stopwatch = new Stopwatch();
                 stopwatch.Start();
-				controller.ExportTemperatureMax(year);
+				//controller.ExportTemperatureMax(year);
 				stopwatch.Stop();
 				Console.WriteLine("Total TemperatureMax export time: " + stopwatch.Elapsed.ToString());
 				

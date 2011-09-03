@@ -18,13 +18,9 @@ namespace DataSetExtension
 
             writer = new StreamWriter(stream);
             Missing = new List<DateTime>();
-			Added = new List<GridStation>();
         }
 				
 		public List<DateTime> Missing { get; set; }
-		
-		//get rid of added
-		public List<GridStation> Added { get; set; }
 		
 		public IMeasurementLocator Locator { get; set; }
 		
@@ -35,7 +31,7 @@ namespace DataSetExtension
 			return stations.ToArray();
 		}
 		
-		//update record counts, refactor into two methods
+		//refactor into two methods
         public void Write(IMeasurement[] records, int month)
         {
             for (var day = 1; day <= DateTime.DaysInMonth(year, month); day++)
@@ -85,8 +81,9 @@ namespace DataSetExtension
 							RecordCount = 1,
 							IsNew = true
 						};
-						Added.Add(station);
-					
+
+						//todod, update all properties
+						
 						stations.Add(station);
 					}
 					

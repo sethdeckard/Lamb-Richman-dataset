@@ -46,7 +46,6 @@ namespace DataSetExtension.Tests
                 Assert.That(reader.ReadLine(), Is.EqualTo("0"));
             }
 			
-			Assert.That(writer.Added.Count, Is.EqualTo(28));
 			Assert.That(writer.Missing.Count, Is.EqualTo(0));
         }
 
@@ -87,7 +86,6 @@ namespace DataSetExtension.Tests
                 Assert.That(reader.ReadLine(), Is.EqualTo("0"));
             }
 
-			Assert.That(writer.Added.Count, Is.EqualTo(0));
 			Assert.That(writer.Missing.Count, Is.EqualTo(28));
         }
 		
