@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace DataSetExtension
 {
-	public class GridPointExport
+	public class MeasurementWriter
 	{
         private readonly int year;
         private readonly List<GridStation> stations;
         private readonly StreamWriter writer;
 		
-        public GridPointExport(Stream stream, GridStation[] stations, int year)
+        public MeasurementWriter(Stream stream, GridStation[] stations, int year)
         {
             this.stations = stations.ToList();
             this.year = year;
@@ -32,9 +32,7 @@ namespace DataSetExtension
 		
 		public GridStation[] GetUpdatedStations()
 		{
-			throw new NotImplementedException();
-			
-			//returns both existing and new stations (missing lat/long/name), updated with record counts.
+			return stations.ToArray();
 		}
 		
 		//update record counts, refactor into two methods
@@ -54,6 +52,8 @@ namespace DataSetExtension
                     if (query.Count() > 0)
                     {
                        	writer.WriteLine(Formatter.Format(query.First(), station.Sequence));
+						station.RecordCount += 1;
+						
                         found = true;
                         break;
                     }
@@ -82,10 +82,12 @@ namespace DataSetExtension
 							GridPointLongitude = first.GridPointLongitude, 
 							Number = measurement.StationNumber,
 							Sequence = sequence,
-							RecordCount = 1
+							RecordCount = 1,
+							IsNew = true
 						};
 						Added.Add(station);
-						//add to stations
+					
+						stations.Add(station);
 					}
 					
 					writer.WriteLine(Formatter.Format(measurement, sequence));

@@ -23,6 +23,8 @@ namespace DataSetExtension
 				" inner join Station s on s.Number = StationNumber " +
 				" where Latitude > @MinLatitude and Latitude < @MaxLatitude" +
 				" and Longitude > @MinLongitude and Longitude < @MaxLongitude;";
+			
+			//todo locator should either load up all GridStations first or do a query to make sure it isn't used already
 		}
 		
 		public StationTracker Tracker { get; set; }

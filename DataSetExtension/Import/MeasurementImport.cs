@@ -52,70 +52,59 @@ namespace DataSetExtension.Import
 			Command.CommandText = "insert into " + table + "(StationId,StationNumber,Date,DateString,Value) Values(:id, :number, :date, :dateString, :value);";
 		}	
 		
-		protected void ImportTemperatureMax(IDbConnection connection, IMeasurement[] records)
+		protected void ImportTemperatureMax(IDbConnection connection, IMeasurement[] measurements)
 		{
 			SetCommandText(MeasurementDatabase.TemperatureMaxTable);
 			
-			var results = (from record in records
-        	            join station in TemperatureMaxStations on record.StationNumber equals station.Number
-						where Year == 0 || record.Date.Year == Year
-        	            select new {record, station}).ToArray();
-        	
-        	foreach (var result in results)
-        	{
-				result.record.StationId = result.station.Id;
-				((IDataParameter)Command.Parameters[":id"]).Value = result.record.StationId;
-				((IDataParameter)Command.Parameters[":number"]).Value = result.record.StationNumber;
-				((IDataParameter)Command.Parameters[":date"]).Value = result.record.Date;
-				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.Date.ToShortDateString();
-				((IDataParameter)Command.Parameters[":value"]).Value = result.record.Value;
-				
-				Command.ExecuteNonQuery();
-        	}
+			var results = FilterResults(TemperatureMaxStations, measurements);
+        	SaveResults(results);
 		}
 		
-		protected void ImportTemperatureMin(IDbConnection connection, IMeasurement[] records) 
+		protected void ImportTemperatureMin(IDbConnection connection, IMeasurement[] measurements) 
 		{
 			SetCommandText(MeasurementDatabase.TemperatureMinTable);
 			
-			var results = (from record in records
-                          join station in TemperatureMinStations on record.StationNumber equals station.Number
-						  where Year == 0 || record.Date.Year == Year
-                          select new { record, station }).ToArray();
+			var results = FilterResults(TemperatureMinStations, measurements);
+			SaveResults(results);
+		}
+		
+		protected void ImportPrecipitation(IDbConnection connection, IMeasurement[] measurements) 
+		{
+			SetCommandText(MeasurementDatabase.PrecipitationTable);
+			
+			var results = FilterResults(PrecipitationStations, measurements);
+			SaveResults(results);
+		}
+		
+		private Result[] FilterResults(GridStation[] stations, IMeasurement[] measurements) 
+		{
+			return (from record in measurements
+        	            join gridStation in stations on record.StationNumber equals gridStation.Number into gridStations
+						from station in gridStations.DefaultIfEmpty()
+						where Year == 0 || record.Date.Year == Year
+        	            select new Result { Measurement = record, Station = station}).ToArray();
+		}
 
-			foreach(var result in results) 
+		private void SaveResults(Result[] results)
+		{
+			foreach (var result in results)
 			{
-				result.record.StationId = result.station.Id;
-				((IDataParameter)Command.Parameters[":id"]).Value = result.record.StationId;
-				((IDataParameter)Command.Parameters[":number"]).Value = result.record.StationNumber;
-				((IDataParameter)Command.Parameters[":date"]).Value = result.record.Date;
-				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.Date.ToShortDateString();
-				((IDataParameter)Command.Parameters[":value"]).Value = result.record.Value;
+				result.Measurement.StationId = (result.Station != null) ? result.Station.Id : 0;
+				((IDataParameter)Command.Parameters[":id"]).Value = result.Measurement.StationId;
+				((IDataParameter)Command.Parameters[":number"]).Value = result.Measurement.StationNumber;
+				((IDataParameter)Command.Parameters[":date"]).Value = result.Measurement.Date;
+				((IDataParameter)Command.Parameters[":dateString"]).Value = result.Measurement.Date.ToShortDateString();
+				((IDataParameter)Command.Parameters[":value"]).Value = result.Measurement.Value;
 				
 				Command.ExecuteNonQuery();
 			}
 		}
 		
-		protected void ImportPrecipitation(IDbConnection connection, IMeasurement[] records) 
+		private class Result 
 		{
-			SetCommandText(MeasurementDatabase.PrecipitationTable);
+			public IMeasurement Measurement { get; set; }
 			
-			var results = (from record in records
-                           join station in PrecipitationStations on record.StationNumber equals station.Number
-						   where Year == 0 || record.Date.Year == Year
-                           select new { record, station }).ToArray();
-
-			foreach(var result in results) 
-			{
-				result.record.StationId = result.station.Id;
-				((IDataParameter)Command.Parameters[":id"]).Value = result.record.StationId;
-				((IDataParameter)Command.Parameters[":number"]).Value = result.record.StationNumber;
-				((IDataParameter)Command.Parameters[":date"]).Value = result.record.Date;
-				((IDataParameter)Command.Parameters[":dateString"]).Value = result.record.Date.ToShortDateString();
-				((IDataParameter)Command.Parameters[":value"]).Value = result.record.Value;
-				
-				Command.ExecuteNonQuery();
-			}		
+			public GridStation Station { get; set; }
 		}
 	}
 }

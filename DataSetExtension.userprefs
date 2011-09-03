@@ -1,29 +1,33 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/MeasurementExport.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/Import/MeasurementImport.cs">
     <Files>
-      <File FileName="DataSetExtension.Tests/MeasurementExportTest.cs" Line="75" Column="67" />
-      <File FileName="DataSetExtension/MeasurementLocator.cs" Line="18" Column="67" />
-      <File FileName="DataSetExtension/MeasurementExport.cs" Line="8" Column="22" />
-      <File FileName="DataSetExtension/ExportController.cs" Line="81" Column="57" />
-      <File FileName="DataSetExtension.Tests/FakeMeasurementLocator.cs" Line="19" Column="30" />
-      <File FileName="DataSetExtension/StationTracker.cs" Line="35" Column="19" />
-      <File FileName="DataSetExtension/IMeasurementLocator.cs" Line="14" Column="2" />
-      <File FileName="DataSetExtension.Tests/StationTrackerTest.cs" Line="39" Column="6" />
+      <File FileName="DataSetExtension/MeasurementWriter.cs" Line="35" Column="30" />
+      <File FileName="DataSetExtension.Tests/MeasurementWriterTest.cs" Line="138" Column="36" />
+      <File FileName="DataSetExtension/GridStation.cs" Line="29" Column="40" />
+      <File FileName="DataSetExtension/ExportController.cs" Line="119" Column="4" />
+      <File FileName="DataSetExtension/IMeasurementLocator.cs" Line="1" Column="1" />
+      <File FileName="DataSetExtension/MeasurementLocator.cs" Line="27" Column="112" />
+      <File FileName="DataSetExtension/Import/MeasurementImport.cs" Line="86" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
-            <Node name="MeasurementExport.cs" selected="True" />
+            <Node name="Import" expanded="True">
+              <Node name="MeasurementImport.cs" selected="True" />
+            </Node>
           </Node>
-          <Node name="DataSetExtension.Tests" expanded="True" />
+          <Node name="DataSetExtension.Tests" expanded="True">
+            <Node name="Import" expanded="True" />
+          </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True">
           <Node name="DataSetExtension" expanded="True">
             <Node name="References" expanded="True" />
+            <Node name="DataSetExtension" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -40,8 +44,8 @@
         <State selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True">
-          <Node name="DataSetExtension.Tests" expanded="True">
+        <State expanded="True">
+          <Node name="DataSetExtension.Tests" expanded="True" selected="True">
             <Node name="DataSetExtension" expanded="True">
               <Node name="Tests" expanded="True">
                 <Node name="CanadaMeasurementTest" expanded="True" />
@@ -51,20 +55,12 @@
                 <Node name="GridSummaryWriterTest" expanded="True" />
                 <Node name="Import" expanded="True">
                   <Node name="CanadaImportTest" expanded="True" />
-                  <Node name="GridStationImportTest" expanded="True" />
-                  <Node name="StationImportTest" expanded="True" />
                   <Node name="Td3200ImportTest" expanded="True" />
                 </Node>
                 <Node name="MeasurementDatabaseTest" expanded="True" />
-                <Node name="MeasurementExportTest" expanded="True" />
                 <Node name="MeasurementLocatorTest" expanded="True" />
                 <Node name="MeasurementTest" expanded="True" />
-                <Node name="PrecipitationTest" expanded="True" />
-                <Node name="StationDatabaseTest" expanded="True" />
-                <Node name="StationTest" expanded="True" />
-                <Node name="StationTrackerTest" expanded="True" />
-                <Node name="Td3200Test" expanded="True" />
-                <Node name="TemperatureTest" expanded="True" />
+                <Node name="MeasurementWriterTest" expanded="True" />
               </Node>
             </Node>
           </Node>

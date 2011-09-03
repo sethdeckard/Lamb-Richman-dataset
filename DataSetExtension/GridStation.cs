@@ -29,6 +29,8 @@ namespace DataSetExtension
         public long HistoricalRecordCount { get; set; }
 
         public long RecordCount { get; set; }
+		
+		public bool IsNew { get; set; }
 
         public virtual void Parse(string record)
         {

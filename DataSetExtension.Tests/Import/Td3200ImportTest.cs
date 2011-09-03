@@ -50,13 +50,13 @@ namespace DataSetExtension.Tests.Import
                 import.Import(writer.BaseStream, connection);
 				
                 var count = connection.Query<long>("select count(*) from TemperatureMax;").First();
-                Assert.That(count, Is.EqualTo(30));
+                Assert.That(count, Is.EqualTo(60));
 				
                 count = connection.Query<long>("select count(*) from TemperatureMin;").First();
-                Assert.That(count, Is.EqualTo(31));
+                Assert.That(count, Is.EqualTo(62));
 
                 count = connection.Query<long>("select count(*) from Precipitation;").First();
-                Assert.That(count, Is.EqualTo(4));
+                Assert.That(count, Is.EqualTo(8));
 
 				var id = connection.Query<long>("select StationId from TemperatureMax;").First();
                 Assert.That(id, Is.EqualTo(1));
@@ -67,8 +67,8 @@ namespace DataSetExtension.Tests.Import
 				id = connection.Query<long>("select StationId from Precipitation;").First();
                 Assert.That(id, Is.EqualTo(2));
 				
-				count = connection.Query<long>("select count(*) from TemperatureMin where StationNumber = '08145806'").First();
-				Assert.That(count, Is.EqualTo(0));
+				count = connection.Query<long>("select count(*) from TemperatureMin where StationNumber = '081458'").First();
+				Assert.That(count, Is.EqualTo(31));
             }
         }
     }

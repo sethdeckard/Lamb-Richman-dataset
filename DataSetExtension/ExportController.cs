@@ -38,7 +38,7 @@ namespace DataSetExtension
 						
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMinStationTable);
 						var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMinTable);
-		                var export = new GridPointExport(stream, stations, year) { Locator = locator, Formatter = new TemperatureFormatter() };
+		                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = new TemperatureFormatter() };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
@@ -63,7 +63,7 @@ namespace DataSetExtension
 						
 						var stations = GetStations(grid, GridStationDatabase.TemperatureMaxStationTable);
 						var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable);
-		                var export = new GridPointExport(stream, stations, year) { Locator = locator, Formatter = new TemperatureFormatter() };
+		                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = new TemperatureFormatter() };
 						
 						var start = new DateTime(year, 1, 1);
 						var end = GetEndDate(year);
@@ -98,7 +98,7 @@ namespace DataSetExtension
 							
 							var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
 							//might need a LoadStations method here on Locator
-			                var export = new GridPointExport(stream, stations, year) { Locator = locator, Formatter = formatter };
+			                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = formatter };
 							
 							var start = new DateTime(year, 1, 1);
 							var end = GetEndDate(year);
@@ -107,11 +107,16 @@ namespace DataSetExtension
 			
 			                ProcessMeasurements(year, grid, export, measurements);
 							
-							ProcessAddedStations(stations, MeasurementDatabase.PrecipitationTable);
+							UpdateStations(export.GetUpdatedStations(), GridStationDatabase.PrecipitationStationTable, addedLog);
 						}
 		            }
 				}		
 			}
+		}
+								
+		private void UpdateStations(GridStation[] stations, string table, StreamWriter log)
+		{
+			
 		}
 		
 		private string GetFile(int grid, string directory)
@@ -124,7 +129,7 @@ namespace DataSetExtension
 			return new StreamWriter(File.Create(Path.Combine(basePath, file)));
 		}
 
-		private void ProcessMeasurements(int year, int grid, GridPointExport export, IMeasurement[] measurements)
+		private void ProcessMeasurements(int year, int grid, MeasurementWriter export, IMeasurement[] measurements)
 		{
 			for (var month = 1; month <= 12; month++)
         	{
@@ -140,13 +145,6 @@ namespace DataSetExtension
 			{
         		LogMissing(grid, export.Missing);
 			}
-		}
-		
-		private void ProcessAddedStations(GridStation[] stations, string table)
-		{
-			//feel in Id, Name...save to DB.
-			
-			
 		}
 		
 		private void LogMissing(int grid, List<DateTime> missing) 
