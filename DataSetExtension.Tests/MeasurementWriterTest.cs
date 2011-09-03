@@ -25,13 +25,14 @@ namespace DataSetExtension.Tests
 
             var records = new List<IMeasurement>
                               {
-                                  new Td3200 { StationId = 2, Date = DateTime.Parse("1/1/2001"), Value = 3 },
-                                  new Td3200 { StationId = 4, Date = DateTime.Parse("1/2/2001"), Value = 3 },
-                                  new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3 },
-                                  new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3 },
+                                  new Td3200 { StationId = 2, Date = DateTime.Parse("1/1/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 4, Date = DateTime.Parse("1/2/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
                               };
 			
-			var locator = new FakeMeasurementLocator();
+			var tracker = new StationTracker();
+			var locator = new FakeMeasurementLocator { Tracker = tracker };
 			var formatter = new SequenceFormatter();
 			
             var writer = new MeasurementWriter(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };
@@ -47,6 +48,9 @@ namespace DataSetExtension.Tests
             }
 			
 			Assert.That(writer.Missing.Count, Is.EqualTo(0));
+			
+			//Assert.That(tracker.
+			//test that tracker.update was invoked
         }
 
         [Test]
@@ -65,13 +69,14 @@ namespace DataSetExtension.Tests
 
             var records = new List<IMeasurement>
                               {
-                                  new Td3200 { StationId = 2, Date = DateTime.Parse("1/1/2001"), Value = 3 },
-                                  new Td3200 { StationId = 4, Date = DateTime.Parse("1/2/2001"), Value = 3 },
-                                  new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3 },
-                                  new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3 },
+                                  new Td3200 { StationId = 2, Date = DateTime.Parse("1/1/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 4, Date = DateTime.Parse("1/2/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
                               };
 			
-			var locator = new FakeMeasurementLocator() { PassNull = true };
+			var tracker = new StationTracker();
+			var locator = new FakeMeasurementLocator() { PassNull = true, Tracker = tracker };
 			var formatter = new SequenceFormatter();
 			
             var writer = new MeasurementWriter(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };
@@ -105,13 +110,14 @@ namespace DataSetExtension.Tests
 
             var records = new List<IMeasurement>
                               {
-                                  new Td3200 { StationId = 2, Date = DateTime.Parse("1/1/2001"), Value = 3 },
-                                  new Td3200 { StationId = 4, Date = DateTime.Parse("1/2/2001"), Value = 3 },
-                                  new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3 },
-                                  new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3 },
+                                  new Td3200 { StationId = 2, Date = DateTime.Parse("1/1/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 4, Date = DateTime.Parse("1/2/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
                               };
 			
-			var locator = new FakeMeasurementLocator();
+			var tracker = new StationTracker();
+			var locator = new FakeMeasurementLocator() { Tracker = tracker };
 			var formatter = new SequenceFormatter();
 			
             var writer = new MeasurementWriter(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };

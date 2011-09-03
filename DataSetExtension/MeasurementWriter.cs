@@ -47,7 +47,12 @@ namespace DataSetExtension
 
                     if (query.Count() > 0)
                     {
-                       	writer.WriteLine(Formatter.Format(query.First(), station.Sequence));
+						var record = query.First();
+						
+						Locator.Tracker.Update(record.StationNumber, date);
+                       	
+						writer.WriteLine(Formatter.Format(record, station.Sequence));
+						
 						station.RecordCount += 1;
 						
                         found = true;
@@ -82,7 +87,7 @@ namespace DataSetExtension
 							IsNew = true
 						};
 
-						//todod, update all properties
+						//todo: update all properties
 						
 						stations.Add(station);
 					}

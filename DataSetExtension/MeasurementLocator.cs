@@ -23,25 +23,27 @@ namespace DataSetExtension
 			this.query = "select StationNumber, Date, Value from " + table + 
 				" inner join Station s on s.Number = StationNumber " +
 				" where Latitude > @MinLatitude and Latitude < @MaxLatitude" +
-				" and Longitude > @MinLongitude and Longitude < @MaxLongitude;";
+				" and Longitude > @MinLongitude and Longitude < @MaxLongitude"  + 
+				" and Date = @Date and StationId = 0;";
 			
-			//todo locator should either load up all GridStations first or do a query to make sure it isn't used already
+			//todo locator should either load up all GridStations first or do a query to make sure it isn't used already == where StationId = 0!
 		}
 		
-		public StationTracker Tracker { get; set; }
+		public StationTracker Tracker { get; set; } //make interface ITracker
 		
 		public bool IsNew { get; set; }
 		
 		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date)
 		{
-			var boundry = GetBoundry(latitude, longitude);
+			var boundry = GetBoundry(latitude, longitude * -1); //todo remove change of sign
 			
 			var parameters = new 
 			{ 
 				MinLatitude = boundry.MinLatitude, 
 				MaxLatitude = boundry.MaxLatitude, 
 				MinLongitude = boundry.MinLongitude,
-				MaxLongitude = boundry.MaxLongitude 
+				MaxLongitude = boundry.MaxLongitude, 
+				Date = date
 			};
 			
 			Measurement[] matches = connection.Query<Measurement>(query, parameters).ToArray();

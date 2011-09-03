@@ -23,7 +23,7 @@ namespace DataSetExtension.Tests
 				{
 					Number = "445591",
 					Latitude = 34.05M,
-					Longitude = 31.30M,
+					Longitude = -31.30M,
 					Start = DateTime.Parse("7/30/2012")
 				};
 				station.Save(connection);
@@ -32,7 +32,7 @@ namespace DataSetExtension.Tests
 				{
 					Number = "445595",
 					Latitude = 34.05M,
-					Longitude = 31.30M,
+					Longitude = -31.30M,
 					Start = DateTime.Parse("11/30/2009"),
 					End = DateTime.Parse("1/30/2010")
 				};
@@ -42,7 +42,7 @@ namespace DataSetExtension.Tests
 				{
 					Number = "445599",
 					Latitude = 34.05M,
-					Longitude = 31.30M,
+					Longitude = -31.30M,
 					Start = DateTime.Parse("11/30/2010")
 				};
 				station.Save(connection);
@@ -67,6 +67,8 @@ namespace DataSetExtension.Tests
 				
 				Assert.That(result.StationNumber, Is.EqualTo("445599"));
 				Assert.That(result.Date, Is.EqualTo(date));
+				
+				//todo: test that date parameter filtering is working right
 			}
 		}
 	}

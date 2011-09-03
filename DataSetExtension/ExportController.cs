@@ -11,7 +11,7 @@ namespace DataSetExtension
 	{
         private const int GridMin = 1;
         private const int GridMax = 766;
-		private const string QueryFormat = "select StationId, Date, Value from {0} inner join {1} on {1}.Id = {0}.StationId " + 
+		private const string QueryFormat = "select StationId, StationNumber, Date, Value from {0} inner join {1} on {1}.Id = {0}.StationId " + 
 			"where GridPoint = @GridPoint and Date >= @Start and Date <= @End";
 
         private readonly string basePath;
@@ -54,6 +54,8 @@ namespace DataSetExtension
 
         public void ExportTemperatureMax(int year)
         {
+			
+			
 			using (log = CreateLogWriter(string.Format("tmax-missing-{0}.log", year)))
 			{
 	            for (var grid = GridMin; grid <= GridMax; grid++)
@@ -79,43 +81,7 @@ namespace DataSetExtension
 		}
 		
 		public void ExportPrecipitation(int year) 
-		{
-			/*using (var addedLog = CreateLogWriter(string.Format("prcp-added-{0}.log", year)))
-			{	
-				using (log = CreateLogWriter(string.Format("prcp-missing-{0}.log", year)))
-				{
-					var tracker = new StationTracker();
-					var locator = new MeasurementLocator(connection, MeasurementDatabase.PrecipitationTable, tracker)
-						{
-							Tracker = tracker
-						};
-					
-					var formatter = new PrecipitationFormatter();
-					
-		            for (var grid = GridMin; grid <= GridMax; grid++)
-		            {
-		                using (var stream = new FileStream(GetFile(grid, "prcp"), FileMode.OpenOrCreate, FileAccess.Write)) 
-						{
-							stream.Seek(0, SeekOrigin.End);
-							
-							var stations = GetStations(grid, GridStationDatabase.PrecipitationStationTable);
-							//might need a LoadStations method here on Locator
-			                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = formatter };
-							
-							var start = new DateTime(year, 1, 1);
-							var end = GetEndDate(year);
-							var query = string.Format(QueryFormat, MeasurementDatabase.PrecipitationTable, GridStationDatabase.PrecipitationStationTable);
-							var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
-			
-			                ProcessMeasurements(year, grid, export, measurements);
-							
-							UpdateStations(export.GetUpdatedStations(), GridStationDatabase.PrecipitationStationTable, addedLog);
-						}
-		            }
-				}		
-			}*/
-			
-			
+		{	
 			var measurementTable = MeasurementDatabase.PrecipitationTable;
 			var stationTable = GridStationDatabase.PrecipitationStationTable;
 			var formatter = new PrecipitationFormatter();
@@ -139,7 +105,7 @@ namespace DataSetExtension
 							stream.Seek(0, SeekOrigin.End);
 							
 							var stations = GetStations(grid, stationTable);
-							//might need a LoadStations method here on Locator
+							//might need a LoadStations method here on Locator, or not..
 			                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = formatter };
 							
 							var start = new DateTime(year, 1, 1);
@@ -162,13 +128,14 @@ namespace DataSetExtension
 			{
 				if (station.IsNew) 
 				{
-					log.WriteLine(station.Number);
-					continue;
+					log.WriteLine(station.GridPoint + " " + station.Number);
 				}
 	
 				
-				//update station properties
+				//update/insert station properties
 			}
+			
+			log.Flush();
 		}
 		
 		private string GetFile(int grid, string directory)
@@ -224,7 +191,8 @@ namespace DataSetExtension
 		
 		private GridStation[] GetStations(int grid, string table) 
 		{
-			var query = "select Id, Sequence, GridPoint from " + table + " where GridPoint = @GridPoint";
+			var query = "select Id, Sequence, GridPoint, GridPointLatitude, GridPointLongitude, Latitude, " + 
+				"Longitude, Name, Number from " + table + " where GridPoint = @GridPoint";
             return connection.Query<GridStation>(query, new { GridPoint = grid }).ToArray();
 		}
 

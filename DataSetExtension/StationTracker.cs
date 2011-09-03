@@ -8,8 +8,6 @@ namespace DataSetExtension
     {
         private readonly Dictionary<string, List<DateTime>> used;
 
-		//public event EventHandler<StationAddedEventArgs> StationAdded;
- 
         public StationTracker()
         {
             used = new Dictionary<string, List<DateTime>>();
@@ -21,7 +19,6 @@ namespace DataSetExtension
 				(from value in used[number] where value == date select value).Count() == 0;
         }
  
-		//return bool if new
         public bool Update(string number, DateTime date)
         {
             if (used.ContainsKey(number))
@@ -32,20 +29,10 @@ namespace DataSetExtension
             }
             else
             {
-                //OnAdded(new StationAddedEventArgs { StationNumber = number });
- 
                 used.Add(number, new List<DateTime> { date });
 				
 				return true;
             }
         }
- 
-        /*protected void OnAdded(StationAddedEventArgs e)
-        {
-            if (StationAdded != null)
-            {
-                StationAdded(this, e);
-            }
-        }*/
     }
 }

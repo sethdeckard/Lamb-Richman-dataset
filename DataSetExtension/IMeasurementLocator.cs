@@ -9,6 +9,8 @@ namespace DataSetExtension
 	{
 		bool IsNew { get; set; }
 		
+		StationTracker Tracker { get; set; }
+		
 		Measurement Find(decimal latitude, decimal longitude, DateTime date);	
 	}
 }

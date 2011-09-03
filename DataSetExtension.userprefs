@@ -1,23 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/Import/MeasurementImport.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/MeasurementLocator.cs">
     <Files>
-      <File FileName="DataSetExtension/MeasurementWriter.cs" Line="35" Column="30" />
-      <File FileName="DataSetExtension.Tests/MeasurementWriterTest.cs" Line="138" Column="36" />
-      <File FileName="DataSetExtension/GridStation.cs" Line="29" Column="40" />
-      <File FileName="DataSetExtension/ExportController.cs" Line="119" Column="4" />
-      <File FileName="DataSetExtension/IMeasurementLocator.cs" Line="1" Column="1" />
-      <File FileName="DataSetExtension/MeasurementLocator.cs" Line="27" Column="112" />
-      <File FileName="DataSetExtension/Import/MeasurementImport.cs" Line="86" Column="4" />
+      <File FileName="DataSetExtension/GridStation.cs" Line="11" Column="29" />
+      <File FileName="DataSetExtension/ExportController.cs" Line="14" Column="72" />
+      <File FileName="DataSetExtension/StationTracker.cs" Line="27" Column="1" />
+      <File FileName="DataSetExtension/MeasurementWriter.cs" Line="69" Column="1" />
+      <File FileName="DataSetExtension/MeasurementLocator.cs" Line="49" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
-            <Node name="Import" expanded="True">
-              <Node name="MeasurementImport.cs" selected="True" />
-            </Node>
+            <Node name="Import" expanded="True" />
+            <Node name="MeasurementLocator.cs" selected="True" />
           </Node>
+          <Node name="DataSetExtension.ConsoleApp" expanded="True" />
           <Node name="DataSetExtension.Tests" expanded="True">
             <Node name="Import" expanded="True" />
           </Node>
@@ -44,8 +42,8 @@
         <State selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True">
-          <Node name="DataSetExtension.Tests" expanded="True" selected="True">
+        <State expanded="True" selected="True">
+          <Node name="DataSetExtension.Tests" expanded="True">
             <Node name="DataSetExtension" expanded="True">
               <Node name="Tests" expanded="True">
                 <Node name="CanadaMeasurementTest" expanded="True" />
@@ -70,9 +68,11 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/seth/Projects/DataSetExtension/DataSetExtention.TestConsole/Main.cs" line="12" />
       <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension.Tests/MeasurementTest.cs" line="68" />
       <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension.Tests/MeasurementTest.cs" line="50" />
+      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension/MeasurementLocator.cs" line="53" />
+      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension/MeasurementWriter.cs" line="77" />
+      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension/MeasurementLocator.cs" line="51" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

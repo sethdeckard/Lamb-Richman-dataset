@@ -12,6 +12,8 @@ namespace DataSetExtension.Tests
 		
 		public bool PassNull { get; set; }
 		
+		public StationTracker Tracker { get; set; }
+		
 		public Measurement Find(decimal latitude, decimal longitude, DateTime date) 
 		{
 			IsNew = true;
