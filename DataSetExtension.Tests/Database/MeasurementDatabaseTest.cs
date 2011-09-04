@@ -19,6 +19,8 @@ namespace DataSetExtension.Tests.Database
 
                 var database = new MeasurementDatabase(connection);
                 database.CreateSchema();
+				
+				database.CreateSchema();
 
                 connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, Value from TemperatureMax");
 

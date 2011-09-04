@@ -26,6 +26,8 @@ namespace DataSetExtension.Tests.Database
 
                 var database = new GridStationDatabase(connection);
                 database.CreateSchema();
+				
+				database.CreateSchema();
 
                 connection.Query<GridStation>(PrecipitationQuery);
                 connection.Query<GridStation>(TemperatureMinQuery);			

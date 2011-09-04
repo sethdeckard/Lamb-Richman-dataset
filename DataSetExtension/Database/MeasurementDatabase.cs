@@ -60,8 +60,8 @@ namespace DataSetExtension.Database
 		
 		private static string GenerateCreateIndexStatements(string table)
 		{
-			var statement = string.Format("CREATE INDEX \"Index_{0}_StationNumber\" ON \"{0}\" (\"StationNumber\" ASC, \"Date\" ASC);", table);
-			statement += string.Format("CREATE INDEX \"Index_{0}_StationId\" ON \"{0}\" (\"StationId\" ASC, \"Date\" ASC);", table);
+			var statement = string.Format("CREATE INDEX IF NOT EXISTS \"Index_{0}_StationNumber\" ON \"{0}\" (\"StationNumber\" ASC, \"Date\" ASC);", table);
+			statement += string.Format("CREATE INDEX IF NOT EXISTS \"Index_{0}_StationId\" ON \"{0}\" (\"StationId\" ASC, \"Date\" ASC);", table);
 			return statement;
 		}
     }

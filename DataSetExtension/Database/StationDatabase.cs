@@ -18,7 +18,7 @@ namespace DataSetExtension.Database
 		public void CreateSchema() 
 		{
 			connection.Execute(GenerateCreateTableStatement(TableName));
-			connection.Execute("CREATE INDEX \"Index_Station\" ON \"Station\" (\"Number\" ASC, \"Latitude\" ASC, \"Longitude\" ASC, \"Start\" ASC, \"End\" ASC);");
+			connection.Execute("CREATE INDEX IF NOT EXISTS \"Index_Station\" ON \"Station\" (\"Number\" ASC, \"Latitude\" ASC, \"Longitude\" ASC, \"Start\" ASC, \"End\" ASC);");
 		}
 		
 		public void UpdateIndex()

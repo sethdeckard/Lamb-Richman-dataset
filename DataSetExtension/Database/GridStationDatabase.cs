@@ -65,8 +65,8 @@ namespace DataSetExtension.Database
 		
 		private static string GenerateCreateIndexStatements(string table)
 		{
-			var statement = string.Format("CREATE INDEX \"Index_{0}_NumberGridPoint\" ON \"{0}\" (\"Number\" ASC, \"GridPoint\" ASC);", table);
-			return statement + string.Format("CREATE INDEX \"Index_{0}_Number\" ON \"{0}\" (\"Number\" ASC);", table);
+			var statement = string.Format("CREATE INDEX IF NOT EXISTS \"Index_{0}_NumberGridPoint\" ON \"{0}\" (\"Number\" ASC, \"GridPoint\" ASC);", table);
+			return statement + string.Format("CREATE INDEX IF NOT EXISTS \"Index_{0}_Number\" ON \"{0}\" (\"Number\" ASC);", table);
 		}
     }
 }

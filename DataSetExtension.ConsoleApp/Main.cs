@@ -75,6 +75,10 @@ namespace DataSetExtension.ConsoleApp
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection);	
 				
 				Console.WriteLine(import.Total + " master stations imported");
+				
+				Console.Write("updating index...");
+				database.UpdateIndex();
+				Console.WriteLine("done.");
 			}			
 		}
 		
@@ -89,6 +93,10 @@ namespace DataSetExtension.ConsoleApp
 
                 var import = new GridStationImport();
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, table);	
+				
+				Console.Write("updating indices...");
+				database.UpdateIndex();
+				Console.WriteLine("done.");
 				
 				return import.Total;
 			}	
@@ -129,6 +137,10 @@ namespace DataSetExtension.ConsoleApp
 				Console.WriteLine(import.Total + " Canada records imported.");
 				Console.WriteLine("Total Canada Import time: " + stopwatch.Elapsed.ToString());
 				
+				Console.Write("updating indices...");
+				database.UpdateIndex();
+				Console.WriteLine("done.");
+				
 				Console.WriteLine("Running VACUUM command on database file...");
 				connection.Execute("vacuum;");
 				Console.WriteLine("Finished.");
@@ -168,6 +180,10 @@ namespace DataSetExtension.ConsoleApp
 				
 				Console.WriteLine(import.Total + " TD3200 records imported.");
 				Console.WriteLine("Total TD3200 Import time: " + stopwatch.Elapsed.ToString());
+				
+				Console.Write("updating indices...");
+				database.UpdateIndex();
+				Console.WriteLine("done.");
 				
 				Console.WriteLine("Running VACUUM command on database file...");
 				connection.Execute("vacuum;");
