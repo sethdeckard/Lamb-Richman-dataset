@@ -20,9 +20,27 @@ namespace DataSetExtension
         public void CreateSchema()
         {
             connection.Execute(GenerateCreateTableStatement(PrecipitationStationTable));
+			connection.Execute(GenerateCreateIndexStatements(PrecipitationStationTable));
+			
             connection.Execute(GenerateCreateTableStatement(TemperatureMaxStationTable));
+			connection.Execute(GenerateCreateIndexStatements(TemperatureMaxStationTable));
+			
 			connection.Execute(GenerateCreateTableStatement(TemperatureMinStationTable));
-        }
+    		connection.Execute(GenerateCreateIndexStatements(TemperatureMinStationTable));
+		}
+		
+		public void UpdateIndex()
+		{
+			UpdateIndex(PrecipitationStationTable);
+			UpdateIndex(TemperatureMaxStationTable);
+			UpdateIndex(TemperatureMinStationTable);
+		}
+		
+		private void UpdateIndex(string table)
+		{
+			connection.Execute(string.Format("REINDEX Index_{0}_NumberGridPoint;", table));
+			connection.Execute(string.Format("REINDEX Index_{0}_Number;", table));
+		}
 		
         private static string GenerateCreateTableStatement(string table)
         {
@@ -44,5 +62,11 @@ namespace DataSetExtension
 
             return statement.ToString();
         }
+		
+		private static string GenerateCreateIndexStatements(string table)
+		{
+			var statement = string.Format("CREATE INDEX \"Index_{0}_NumberGridPoint\" ON \"{0}\" (\"Number\" ASC, \"GridPoint\" ASC);", table);
+			return statement + string.Format("CREATE INDEX \"Index_{0}_Number\" ON \"{0}\" (\"Number\" ASC);", table);
+		}
     }
 }

@@ -66,8 +66,9 @@ namespace DataSetExtension.Tests.Import
 				
 				id = connection.Query<long>("select StationId from Precipitation;").First();
                 Assert.That(id, Is.EqualTo(2));
+				
+				database.UpdateIndex();
             }
-			
 		}
 	}
 }

@@ -31,6 +31,8 @@ namespace DataSetExtension.Tests.Import
 
                 Assert.That(count, Is.EqualTo(17));
 				Assert.That(import.Total, Is.EqualTo(17));
+				
+				database.UpdateIndex();
 			}
 		}
 
@@ -56,6 +58,8 @@ namespace DataSetExtension.Tests.Import
 
                 Assert.That(count, Is.EqualTo(6));
 				Assert.That(import.Total, Is.EqualTo(6));
+				
+				database.UpdateIndex();
 			}
 		}	
 		

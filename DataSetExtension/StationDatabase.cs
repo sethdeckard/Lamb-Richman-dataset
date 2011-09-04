@@ -7,7 +7,7 @@ namespace DataSetExtension
 	public class StationDatabase
 	{
 		public const string TableName = "Station";
-		
+
 		private readonly IDbConnection connection;
 		
 		public StationDatabase(IDbConnection connection)
@@ -17,7 +17,13 @@ namespace DataSetExtension
 		
 		public void CreateSchema() 
 		{
-			connection.Execute(GenerateCreateTableStatement(TableName));			
+			connection.Execute(GenerateCreateTableStatement(TableName));
+			connection.Execute("CREATE INDEX \"Index_Station\" ON \"Station\" (\"Number\" ASC, \"Latitude\" ASC, \"Longitude\" ASC, \"Start\" ASC, \"End\" ASC);");
+		}
+		
+		public void UpdateIndex()
+		{
+			connection.Execute("REINDEX Index_Station;");
 		}
 		
 	    private static string GenerateCreateTableStatement(string table)

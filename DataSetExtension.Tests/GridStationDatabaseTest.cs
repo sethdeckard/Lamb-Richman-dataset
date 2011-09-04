@@ -31,5 +31,19 @@ namespace DataSetExtension.Tests
 				connection.Query<GridStation>(TemperatureMaxQuery);
             }
         }
+		
+        [Test]
+        public void UpdateIndex()
+        {
+            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
+            {
+                connection.Open();
+
+                var database = new GridStationDatabase(connection);
+                database.CreateSchema();
+
+                database.UpdateIndex();
+            }
+        }
     }
 }

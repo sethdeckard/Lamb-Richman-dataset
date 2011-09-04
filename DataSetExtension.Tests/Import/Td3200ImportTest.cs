@@ -69,6 +69,8 @@ namespace DataSetExtension.Tests.Import
 				
 				count = connection.Query<long>("select count(*) from TemperatureMin where StationNumber = '081458'").First();
 				Assert.That(count, Is.EqualTo(31));
+				
+				database.UpdateIndex();
             }
         }
     }

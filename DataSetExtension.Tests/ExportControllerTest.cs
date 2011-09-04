@@ -112,8 +112,8 @@ namespace DataSetExtension.Tests
 				};
 			    station.Save(connection, GridStationDatabase.PrecipitationStationTable);
 				
-				var td3200Db = new MeasurementDatabase(connection);
-				td3200Db.CreateSchema();
+				var measurementDb = new MeasurementDatabase(connection);
+				measurementDb.CreateSchema();
 				
 				var stationDb = new StationDatabase(connection);
 				stationDb.CreateSchema();

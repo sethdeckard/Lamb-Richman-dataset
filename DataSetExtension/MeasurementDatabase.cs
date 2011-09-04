@@ -20,9 +20,27 @@ namespace DataSetExtension
         public void CreateSchema()
         {
             connection.Execute(GenerateCreateTableStatement(PrecipitationTable));
+			connection.Execute(GenerateCreateIndexStatements(PrecipitationTable));
+			
             connection.Execute(GenerateCreateTableStatement(TemperatureMaxTable));
+			connection.Execute(GenerateCreateIndexStatements(TemperatureMaxTable));
+			
             connection.Execute(GenerateCreateTableStatement(TemperatureMinTable));
-        }
+        	connection.Execute(GenerateCreateIndexStatements(TemperatureMinTable));
+		}
+		
+		public void UpdateIndex()
+		{
+			UpdateIndex(PrecipitationTable);
+			UpdateIndex(TemperatureMaxTable);
+			UpdateIndex(TemperatureMinTable);
+		}
+		
+		private void UpdateIndex(string table)
+		{
+			connection.Execute(string.Format("REINDEX Index_{0}_StationNumber;", table));
+			connection.Execute(string.Format("REINDEX Index_{0}_StationId;", table));
+		}
 
         private static string GenerateCreateTableStatement(string table)
         {
@@ -39,5 +57,12 @@ namespace DataSetExtension
 
             return statement.ToString();
         }
+		
+		private static string GenerateCreateIndexStatements(string table)
+		{
+			var statement = string.Format("CREATE INDEX \"Index_{0}_StationNumber\" ON \"{0}\" (\"StationNumber\" ASC, \"Date\" ASC);", table);
+			statement += string.Format("CREATE INDEX \"Index_{0}_StationId\" ON \"{0}\" (\"StationId\" ASC, \"Date\" ASC);", table);
+			return statement;
+		}
     }
 }

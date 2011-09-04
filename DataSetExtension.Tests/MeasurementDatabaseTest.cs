@@ -26,5 +26,19 @@ namespace DataSetExtension.Tests
                 connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, Value from Precipitation");
             }
         }
+		
+        [Test]
+        public void UpdateIndex()
+        {
+            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
+            {
+                connection.Open();
+
+                var database = new MeasurementDatabase(connection);
+                database.CreateSchema();
+
+                database.UpdateIndex();
+            }
+        }
     }
 }

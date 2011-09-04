@@ -22,5 +22,19 @@ namespace DataSetExtension.Tests
                 connection.Query<GridStation>("select Id, Number, Name, State, County, Latitude, Longitude, Start, End from Station");
             }			
 		}
+		
+		[Test]
+		public void UpdateIndex()
+		{
+            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
+            {
+                connection.Open();
+
+                var database = new StationDatabase(connection);
+                database.CreateSchema();
+
+                database.UpdateIndex();
+            }			
+		}
 	}
 }
