@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Mono.Data.Sqlite;
 using DataSetExtension;
+using DataSetExtension.Database;
 using NUnit.Framework;
 
 namespace DataSetExtension.Tests

@@ -1,10 +1,11 @@
 using System.Data;
 using Mono.Data.Sqlite;
 using DataSetExtension;
+using DataSetExtension.Database;
 using NUnit.Framework;
 using Dapper;
 
-namespace DataSetExtension.Tests
+namespace DataSetExtension.Tests.Database
 {
     [TestFixture]
     public class GridStationDatabaseTest

@@ -2,7 +2,7 @@ using System.Data;
 using System.Text;
 using Dapper;
 
-namespace DataSetExtension
+namespace DataSetExtension.Database
 {
 	public class StationDatabase
 	{

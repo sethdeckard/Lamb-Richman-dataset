@@ -1,10 +1,11 @@
 using System.Data;
 using Mono.Data.Sqlite;
 using DataSetExtension;
+using DataSetExtension.Database;
 using Dapper;
 using NUnit.Framework;
 
-namespace DataSetExtension.Tests
+namespace DataSetExtension.Tests.Database
 {
     [TestFixture]
     public class MeasurementDatabaseTest

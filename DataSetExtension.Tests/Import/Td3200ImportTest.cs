@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using DataSetExtension;
+using DataSetExtension.Database;
 using DataSetExtension.Import;
 using Mono.Data.Sqlite;
 using Dapper;

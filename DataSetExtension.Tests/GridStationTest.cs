@@ -2,6 +2,7 @@ using System.Data;
 using System.Linq;
 using Mono.Data.Sqlite;
 using DataSetExtension;
+using DataSetExtension.Database;
 using NUnit.Framework;
 using Dapper;
 

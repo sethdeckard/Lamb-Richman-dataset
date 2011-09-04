@@ -44,11 +44,8 @@
     <Compile Include="IMeasurement.cs" />
     <Compile Include="ExportController.cs" />
     <Compile Include="GridStation.cs" />
-    <Compile Include="GridStationDatabase.cs" />
     <Compile Include="Station.cs" />
     <Compile Include="CanadaMeasurement.cs" />
-    <Compile Include="MeasurementDatabase.cs" />
-    <Compile Include="StationDatabase.cs" />
     <Compile Include="Import\StationImport.cs" />
     <Compile Include="Import\CanadaImport.cs" />
     <Compile Include="Import\GridStationImport.cs" />
@@ -63,10 +60,14 @@
     <Compile Include="IMeasurementLocator.cs" />
     <Compile Include="StationTracker.cs" />
     <Compile Include="MeasurementWriter.cs" />
-    <Compile Include="Database.cs" />
+    <Compile Include="Database\GridStationDatabase.cs" />
+    <Compile Include="Database\MeasurementDatabase.cs" />
+    <Compile Include="Database\StationDatabase.cs" />
+    <Compile Include="Database\ApplicationDatabase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Import\" />
+    <Folder Include="Database\" />
   </ItemGroup>
 </Project>

@@ -48,9 +48,6 @@
     <Compile Include="GridStationTest.cs" />
     <Compile Include="StationTest.cs" />
     <Compile Include="CanadaMeasurementTest.cs" />
-    <Compile Include="MeasurementDatabaseTest.cs" />
-    <Compile Include="GridStationDatabaseTest.cs" />
-    <Compile Include="StationDatabaseTest.cs" />
     <Compile Include="Import\StationImportTest.cs" />
     <Compile Include="Import\CanadaImportTest.cs" />
     <Compile Include="Import\GridStationImportTest.cs" />
@@ -63,7 +60,10 @@
     <Compile Include="StationTrackerTest.cs" />
     <Compile Include="SequenceFormatter.cs" />
     <Compile Include="MeasurementWriterTest.cs" />
-    <Compile Include="DatabaseTest.cs" />
+    <Compile Include="Database\MeasurementDatabaseTest.cs" />
+    <Compile Include="Database\GridStationDatabaseTest.cs" />
+    <Compile Include="Database\StationDatabaseTest.cs" />
+    <Compile Include="Database\ApplicationDatabaseTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -77,5 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Import\" />
+    <Folder Include="Database\" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Linq;
+using DataSetExtension.Database;
 using Dapper;
 using NUnit.Framework;
 

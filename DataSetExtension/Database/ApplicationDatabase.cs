@@ -2,11 +2,11 @@ using System;
 using System.Data;
 using Dapper;
 
-namespace DataSetExtension
+namespace DataSetExtension.Database
 {
-	public class Database
+	public class ApplicationDatabase
 	{
-		public Database(IDbConnection connection) 
+		public ApplicationDatabase(IDbConnection connection) 
 		{
 			Connection = connection;
 		}

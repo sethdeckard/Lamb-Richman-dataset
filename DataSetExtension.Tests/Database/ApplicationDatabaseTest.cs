@@ -1,12 +1,13 @@
 using System;
 using System.Data;
 using Mono.Data.Sqlite;
+using DataSetExtension.Database;
 using NUnit.Framework;
 
-namespace DataSetExtension.Tests
+namespace DataSetExtension.Tests.Database
 {
 	[TestFixture]
-	public class DatabaseTest
+	public class ApplicationDatabaseTest
 	{
 		[Test]
 		public void Compact() 
@@ -15,7 +16,7 @@ namespace DataSetExtension.Tests
             {
                 connection.Open();
 
-                var database = new Database(connection);
+                var database = new ApplicationDatabase(connection);
 				database.Compact();
             }				
 		}

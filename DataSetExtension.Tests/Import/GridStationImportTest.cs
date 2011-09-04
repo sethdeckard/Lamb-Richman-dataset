@@ -5,6 +5,7 @@ using Mono.Data.Sqlite;
 using System.IO;
 using System.Linq;
 using DataSetExtension;
+using DataSetExtension.Database;
 using DataSetExtension.Import;
 using Dapper;
 using NUnit.Framework;
