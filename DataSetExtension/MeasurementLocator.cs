@@ -25,11 +25,9 @@ namespace DataSetExtension
 				" where Latitude > @MinLatitude and Latitude < @MaxLatitude" +
 				" and Longitude > @MinLongitude and Longitude < @MaxLongitude"  + 
 				" and Date = @Date and StationId = 0;";
-			
-			//todo locator should either load up all GridStations first or do a query to make sure it isn't used already == where StationId = 0!
 		}
 		
-		public StationTracker Tracker { get; set; } //make interface ITracker
+		public StationTracker Tracker { get; set; }
 		
 		public bool IsNew { get; set; }
 		

@@ -52,7 +52,21 @@ namespace DataSetExtension.Tests
 				
 				var measurement = new Measurement
 				{
+					Date = DateTime.Parse("1/31/2010"),
+					StationNumber = "445599"
+				};
+				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
+				
+				measurement = new Measurement
+				{
 					Date = DateTime.Parse("12/31/2010"),
+					StationNumber = "445599"
+				};
+				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
+				
+				measurement = new Measurement
+				{
+					Date = DateTime.Parse("12/30/2010"),
 					StationNumber = "445599"
 				};
 				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
@@ -67,8 +81,6 @@ namespace DataSetExtension.Tests
 				
 				Assert.That(result.StationNumber, Is.EqualTo("445599"));
 				Assert.That(result.Date, Is.EqualTo(date));
-				
-				//todo: test that date parameter filtering is working right
 			}
 		}
 	}

@@ -61,7 +61,6 @@
     <Compile Include="PrecipitationFormatter.cs" />
     <Compile Include="TemperatureFormatter.cs" />
     <Compile Include="IMeasurementLocator.cs" />
-    <Compile Include="StationAddedEventArgs.cs" />
     <Compile Include="StationTracker.cs" />
     <Compile Include="MeasurementWriter.cs" />
   </ItemGroup>
