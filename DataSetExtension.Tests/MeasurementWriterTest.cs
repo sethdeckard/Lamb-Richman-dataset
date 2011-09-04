@@ -40,14 +40,36 @@ namespace DataSetExtension.Tests
 
             stream.Position = 0;
 
-            using (var reader = new StreamReader(stream))
-            {
+            var reader = new StreamReader(stream);
+            //{
                 Assert.That(reader.ReadLine(), Is.EqualTo("1"));
                 Assert.That(reader.ReadLine(), Is.EqualTo("3"));
                 Assert.That(reader.ReadLine(), Is.EqualTo("0"));
-            }
+            //}
 			
 			Assert.That(writer.Missing.Count, Is.EqualTo(0));
+			
+			stations = new List<GridStation>
+                             {
+                                 new GridStation { Id = 1, GridPoint = 3, Sequence = 0},
+                                 new GridStation { Id = 2, GridPoint = 3, Sequence = 1},
+                                 new GridStation { Id = 3, GridPoint = 3, Sequence = 2},
+                                 new GridStation { Id = 4, GridPoint = 3, Sequence = 3},
+                                 new GridStation { Id = 5, GridPoint = 3, Sequence = 4},
+                             };
+			
+			records = new List<IMeasurement>
+                              {
+                                  new Td3200 { StationId = 2, Date = DateTime.Parse("1/1/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 4, Date = DateTime.Parse("1/2/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 5, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
+                                  new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
+                              };
+			
+			locator.PassNull = true;
+            writer.Write(records.ToArray(), 1);
+			
+			Assert.That(writer.Missing.Count, Is.EqualTo(31));
 			
 			//Assert.That(tracker.
 			//test that tracker.update was invoked

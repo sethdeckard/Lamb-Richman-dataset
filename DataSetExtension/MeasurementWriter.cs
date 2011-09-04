@@ -42,7 +42,8 @@ namespace DataSetExtension
                 foreach (var station in stations.OrderBy(station => station.Sequence))
                 {
                     var query = from record in records 
-                                where record.Date == date && record.StationId == station.Id 
+                                where record.Date == date && record.StationId == station.Id &&
+								Locator.Tracker.Validate(record.StationNumber, date)
                                 select record;
 
                     if (query.Count() > 0)
