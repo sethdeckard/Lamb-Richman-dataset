@@ -31,7 +31,6 @@ namespace DataSetExtension
 			return stations.ToArray();
 		}
 		
-		//refactor into two methods
         public void Write(IMeasurement[] records, int month)
         {
             for (var day = 1; day <= DateTime.DaysInMonth(year, month); day++)
@@ -65,39 +64,42 @@ namespace DataSetExtension
 
                 if (!found && stations.Count() > 0)
                 {					
-					var first = stations.First();
-					
-					var measurement = Locator.Find(first.GridPointLatitude, first.GridPointLongitude, date);
-					if (measurement == null)
-					{
-						Missing.Add(date);	
-						
-						continue;
-					}
-					
-					if (Locator.IsNew) 
-					{
-						var station = new GridStation 
-						{ 
-							GridPoint = first.GridPoint, 
-							GridPointLatitude = first.GridPointLatitude, 
-							GridPointLongitude = first.GridPointLongitude, 
-							Number = measurement.StationNumber,
-							Sequence = sequence + 1,
-							RecordCount = 1,
-							IsNew = true
-						};
-
-						//todo: update all properties
-						
-						stations.Add(station);
-					}
-					
-					writer.WriteLine(Formatter.Format(measurement, sequence));
-                }
+					WriteMissing(stations.First(), date, sequence + 1);	
+				}
             }
 
             writer.Flush();
         }	
+		
+		private void WriteMissing(GridStation first, DateTime date, long sequence)
+		{
+			var measurement = Locator.Find(first.GridPointLatitude, first.GridPointLongitude, date);
+			if (measurement == null)
+			{
+				Missing.Add(date);	
+				
+				return;
+			}
+			
+			if (Locator.IsNew) 
+			{
+				var station = new GridStation 
+				{ 
+					GridPoint = first.GridPoint, 
+					GridPointLatitude = first.GridPointLatitude, 
+					GridPointLongitude = first.GridPointLongitude, 
+					Number = measurement.StationNumber,
+					Sequence = sequence,
+					RecordCount = 1,
+					IsNew = true
+				};
+
+				//todo: update all properties
+				
+				stations.Add(station);
+			}
+			
+			writer.WriteLine(Formatter.Format(measurement, sequence));			
+		}
 	}
 }
