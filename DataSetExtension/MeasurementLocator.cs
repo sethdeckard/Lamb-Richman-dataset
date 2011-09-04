@@ -33,7 +33,7 @@ namespace DataSetExtension
 		
 		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date)
 		{
-			var boundry = GetBoundry(latitude, longitude * -1); //todo remove change of sign
+			var boundry = GetBoundry(latitude, longitude * -1); //todo remove change of sign, move to import side?
 			
 			var parameters = new 
 			{ 

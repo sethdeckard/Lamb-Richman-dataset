@@ -63,6 +63,7 @@
     <Compile Include="StationTrackerTest.cs" />
     <Compile Include="SequenceFormatter.cs" />
     <Compile Include="MeasurementWriterTest.cs" />
+    <Compile Include="DatabaseTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

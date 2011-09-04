@@ -132,7 +132,7 @@ namespace DataSetExtension
 				}
 	
 				
-				//update/insert station properties
+				//todo update/insert station properties
 			}
 			
 			log.Flush();

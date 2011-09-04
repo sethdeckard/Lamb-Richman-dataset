@@ -7,7 +7,7 @@ namespace DataSetExtension
 	{
         public long Id { get; set; }
 
-        public long StationId { get; set; }
+        public long StationId { get; set; } //todo should be gridstationId
 
         public string StationNumber { get; set; }
         

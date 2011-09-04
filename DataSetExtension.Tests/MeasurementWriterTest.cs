@@ -41,11 +41,9 @@ namespace DataSetExtension.Tests
             stream.Position = 0;
 
             var reader = new StreamReader(stream);
-            //{
-                Assert.That(reader.ReadLine(), Is.EqualTo("1"));
-                Assert.That(reader.ReadLine(), Is.EqualTo("3"));
-                Assert.That(reader.ReadLine(), Is.EqualTo("0"));
-            //}
+            Assert.That(reader.ReadLine(), Is.EqualTo("1"));
+            Assert.That(reader.ReadLine(), Is.EqualTo("3"));
+            Assert.That(reader.ReadLine(), Is.EqualTo("0"));
 			
 			Assert.That(writer.Missing.Count, Is.EqualTo(0));
 			

@@ -63,6 +63,7 @@
     <Compile Include="IMeasurementLocator.cs" />
     <Compile Include="StationTracker.cs" />
     <Compile Include="MeasurementWriter.cs" />
+    <Compile Include="Database.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
