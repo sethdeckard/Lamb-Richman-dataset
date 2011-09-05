@@ -25,7 +25,7 @@ namespace DataSetExtension
 				" where Latitude >= @MinLatitude and Latitude <= @MaxLatitude" +
 				" and Longitude >= @MinLongitude and Longitude <= @MaxLongitude"  + 
 				" and Date = @Date and StationId = 0" +
-				" and Start <= @Date and (End is null or End >= @Date);"; //todo filter on start and endate of station
+				" and Start <= @Date and (End is null or End >= @Date);";
 		}
 		
 		public StationTracker Tracker { get; set; }
@@ -34,7 +34,7 @@ namespace DataSetExtension
 		
 		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date)
 		{
-			var boundry = GetBoundry(latitude, longitude * -1); //todo remove change of sign, move to import side?
+			var boundry = GetBoundry(latitude, longitude * -1);
 			
 			var parameters = new 
 			{ 
@@ -45,7 +45,7 @@ namespace DataSetExtension
 				Date = date
 			};
 			
-			Measurement[] matches = connection.Query<Measurement>(query, parameters).ToArray();
+			Measurement[] matches = connection.Query<Measurement>(query, parameters).ToArray(); //sort by distance to origin
 			
 			foreach (var measurement in matches.Where(measurement => Tracker.Validate(measurement.StationNumber, measurement.Date)))
             {
@@ -61,10 +61,6 @@ namespace DataSetExtension
         {
             var latitudeRadius = MileRadius / 69.09M;
 			var longitudeRadius = MileRadius / Convert.ToDecimal((Math.Cos(Convert.ToDouble(latitude)) * 69.172));
-			
-			//cos (latidue) * 69.172
-			
-			//69.1703234283616 * COS(Lat*0.0174532925199433)
  
             return new Boundry 
             { 
