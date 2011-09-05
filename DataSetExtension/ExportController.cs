@@ -29,56 +29,20 @@ namespace DataSetExtension
 		
         public void ExportTemperatureMin(int year)
         {
-			using (log = CreateLogWriter(string.Format("tmin-missing-{0}.log", year)))
-			{
-	            for (var grid = GridMin; grid <= GridMax; grid++)
-	            {			
-	                using (var stream = new FileStream(GetFile(grid, "tmin"), FileMode.OpenOrCreate, FileAccess.Write)) 
-					{
-						stream.Seek(0, SeekOrigin.End);
-						
-						var stations = GetStations(grid, GridStationDatabase.TemperatureMinStationTable);
-						var tracker = new StationTracker();
-						var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMinTable, tracker);
-		                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = new TemperatureFormatter() };
-						
-						var start = new DateTime(year, 1, 1);
-						var end = GetEndDate(year);
-						var query = string.Format(QueryFormat, MeasurementDatabase.TemperatureMinTable, GridStationDatabase.TemperatureMinStationTable);
-						var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
-		
-		               ProcessMeasurements(year, grid, export, measurements);
-					}
-	            }
-			}
+			var measurementTable = MeasurementDatabase.TemperatureMinTable;
+			var stationTable = GridStationDatabase.TemperatureMinStationTable;
+			var formatter = new TemperatureFormatter();
+			
+			Export(year, measurementTable, stationTable, formatter, "tmin");
         }
 
         public void ExportTemperatureMax(int year)
         {
+			var measurementTable = MeasurementDatabase.TemperatureMaxTable;
+			var stationTable = GridStationDatabase.TemperatureMaxStationTable;
+			var formatter = new TemperatureFormatter();
 			
-			
-			using (log = CreateLogWriter(string.Format("tmax-missing-{0}.log", year)))
-			{
-	            for (var grid = GridMin; grid <= GridMax; grid++)
-	            {			
-	                using (var stream = new FileStream(GetFile(grid, "tmax"), FileMode.OpenOrCreate, FileAccess.Write)) 
-					{
-						stream.Seek(0, SeekOrigin.End);
-						
-						var stations = GetStations(grid, GridStationDatabase.TemperatureMaxStationTable);
-						var tracker = new StationTracker();
-						var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable, tracker);
-		                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = new TemperatureFormatter() };
-						
-						var start = new DateTime(year, 1, 1);
-						var end = GetEndDate(year);
-						var query = string.Format(QueryFormat, MeasurementDatabase.TemperatureMaxTable, GridStationDatabase.TemperatureMaxStationTable);
-						var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
-						
-						ProcessMeasurements(year, grid, export, measurements);
-					}
-	            }
-			}
+			Export(year, measurementTable, stationTable, formatter, "tmax");
 		}
 		
 		public void ExportPrecipitation(int year) 
@@ -106,7 +70,6 @@ namespace DataSetExtension
 							stream.Seek(0, SeekOrigin.End);
 							
 							var stations = GetStations(grid, stationTable);
-							//might need a LoadStations method here on Locator, or not..
 			                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = formatter };
 							
 							var start = new DateTime(year, 1, 1);

@@ -22,9 +22,10 @@ namespace DataSetExtension
 			
 			this.query = "select StationNumber, Date, Value from " + table + 
 				" inner join Station s on s.Number = StationNumber " +
-				" where Latitude > @MinLatitude and Latitude < @MaxLatitude" +
-				" and Longitude > @MinLongitude and Longitude < @MaxLongitude"  + 
-				" and Date = @Date and StationId = 0;"; //todo filter on start and endate of station
+				" where Latitude >= @MinLatitude and Latitude <= @MaxLatitude" +
+				" and Longitude >= @MinLongitude and Longitude <= @MaxLongitude"  + 
+				" and Date = @Date and StationId = 0" +
+				" and Start <= @Date and (End is null or End >= @Date);"; //todo filter on start and endate of station
 		}
 		
 		public StationTracker Tracker { get; set; }
@@ -58,14 +59,19 @@ namespace DataSetExtension
 		
         private static Boundry GetBoundry(decimal latitude, decimal longitude)
         {
-            var radius = MileRadius / 69.09M;
+            var latitudeRadius = MileRadius / 69.09M;
+			var longitudeRadius = MileRadius / Convert.ToDecimal((Math.Cos(Convert.ToDouble(latitude)) * 69.172));
+			
+			//cos (latidue) * 69.172
+			
+			//69.1703234283616 * COS(Lat*0.0174532925199433)
  
             return new Boundry 
             { 
-                MinLatitude = latitude - radius, 
-                MaxLatitude = latitude + radius, 
-                MinLongitude = longitude - radius, 
-                MaxLongitude = longitude + radius 
+                MinLatitude = latitude - latitudeRadius, 
+                MaxLatitude = latitude + latitudeRadius, 
+                MinLongitude = longitude - longitudeRadius, 
+                MaxLongitude = longitude + longitudeRadius 
             };
         }	
 	}

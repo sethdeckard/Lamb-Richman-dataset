@@ -23,8 +23,8 @@ namespace DataSetExtension.Tests
 				var station = new Station
 				{
 					Number = "445591",
-					Latitude = 34.05M,
-					Longitude = -31.30M,
+					Latitude = 31.05M,
+					Longitude = -85.30M,
 					Start = DateTime.Parse("7/30/2012")
 				};
 				station.Save(connection);
@@ -32,8 +32,8 @@ namespace DataSetExtension.Tests
 				station = new Station
 				{
 					Number = "445595",
-					Latitude = 34.05M,
-					Longitude = -31.30M,
+					Latitude = 31.05M,
+					Longitude = -85.30M,
 					Start = DateTime.Parse("11/30/2009"),
 					End = DateTime.Parse("1/30/2010")
 				};
@@ -42,8 +42,8 @@ namespace DataSetExtension.Tests
 				station = new Station
 				{
 					Number = "445599",
-					Latitude = 34.05M,
-					Longitude = -31.30M,
+					Latitude = 31.05M,
+					Longitude = -85.30M,
 					Start = DateTime.Parse("11/30/2010")
 				};
 				station.Save(connection);
@@ -76,7 +76,7 @@ namespace DataSetExtension.Tests
 				var locator = new MeasurementLocator(connection, MeasurementDatabase.TemperatureMaxTable, tracker);			
 			
 				var date = DateTime.Parse("12/31/2010");
-				var result = locator.Find(34, 31, date);
+				var result = locator.Find(31, 85, date);
 				
 				Assert.That(locator.IsNew, Is.True);
 				
