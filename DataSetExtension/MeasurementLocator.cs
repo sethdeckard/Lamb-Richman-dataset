@@ -24,7 +24,7 @@ namespace DataSetExtension
 				" inner join Station s on s.Number = StationNumber " +
 				" where Latitude >= @MinLatitude and Latitude <= @MaxLatitude" +
 				" and Longitude >= @MinLongitude and Longitude <= @MaxLongitude"  + 
-				" and Date = @Date and StationId = 0" +
+				" and Date = @Date" +
 				" and Start <= @Date and (End is null or End >= @Date);";
 		}
 		
