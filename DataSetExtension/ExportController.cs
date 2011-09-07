@@ -25,8 +25,6 @@ namespace DataSetExtension
             basePath = path;
         }
 		
-		public IMeasurementLocator Locator { get; set; }
-		
         public void ExportTemperatureMin(int year)
         {
 			var measurementTable = MeasurementDatabase.TemperatureMinTable;
