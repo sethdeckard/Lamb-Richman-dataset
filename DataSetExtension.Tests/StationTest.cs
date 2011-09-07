@@ -94,6 +94,15 @@ namespace DataSetExtension.Tests
 			}
 		}
 		
+		[Test]
+		public void CalculateDistance()
+		{
+            var station = new Station { Latitude = 22, Longitude = -82 };
+            var distance = station.CalculateDistance(23, -85);
+ 
+            Assert.That(Math.Round(distance), Is.EqualTo(204));
+		}
+		
 		private static IDbCommand CreateCommand(IDbConnection connection)
 		{
 			var command = connection.CreateCommand();

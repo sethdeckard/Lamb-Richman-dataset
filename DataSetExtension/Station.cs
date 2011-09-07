@@ -5,6 +5,23 @@ namespace DataSetExtension
 {
 	public class Station
 	{
+		const double EarthRadiusInMiles = 3958.761;
+		        
+		readonly Func<double, double, double, double, double> calculateDistance = (lat1, lon1, lat2, lon2) => EarthRadiusInMiles * 2 *
+        (
+            Math.Asin(
+                Math.Min(1,
+                    Math.Sqrt(
+                        (
+                            Math.Pow(Math.Sin((DiffRadian(lat1, lat2)) / 2.0), 2.0) +
+                            Math.Cos(ToRadian(lat1)) * Math.Cos(ToRadian(lat2)) *
+                            Math.Pow(Math.Sin((DiffRadian(lon1, lon2)) / 2.0), 2.0)
+                        )
+                   )
+               )
+           )
+         );
+ 
 		public long Id { get; set; }
 		
         public string Number { get; set; }
@@ -17,7 +34,7 @@ namespace DataSetExtension
 		
 		public string Country { get; set; }
 
-        public decimal Latitude { get; set; }
+        public decimal Latitude { get; set; } //todo convert to doubles
 
         public decimal Longitude { get; set; }		
 		
@@ -64,9 +81,12 @@ namespace DataSetExtension
 			
 			command.ExecuteNonQuery();			
 		}
-		
-		
-		
+
+        public double CalculateDistance(double latitude, double longitude)
+        {
+            return calculateDistance(Convert.ToDouble(Latitude), Convert.ToDouble(Longitude), latitude, longitude);
+        }
+
 		internal static IDbCommand CreateCommand(IDbConnection connection)
 		{
 			var command = connection.CreateCommand();
@@ -113,6 +133,16 @@ namespace DataSetExtension
 			
 			return command;
 		}
+		
+        static double ToRadian(double val)
+        {
+            return val * (Math.PI / 180);
+        }
+ 
+        static double DiffRadian(double val1, double val2)
+        {
+            return ToRadian(val2) - ToRadian(val1);
+        }
 		
 		private decimal ConvertDegreeAngle(decimal degrees, decimal minutes, decimal seconds)
 		{

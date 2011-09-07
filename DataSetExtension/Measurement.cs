@@ -10,6 +10,8 @@ namespace DataSetExtension
         public long StationId { get; set; } //todo should be gridstationId
 
         public string StationNumber { get; set; }
+		
+		public Station Station { get; set; }
         
         public DateTime Date { get; set; }
 

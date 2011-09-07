@@ -20,8 +20,8 @@ namespace DataSetExtension
 			this.connection = connection;
 			Tracker = tracker;
 			
-			this.query = "select StationNumber, Date, Value from " + table + 
-				" inner join Station s on s.Number = StationNumber " +
+			this.query = "select m.*, s.*, StationNumber, Date, Value from " + table + 
+				" m inner join Station s on s.Number = StationNumber " +
 				" where Latitude >= @MinLatitude and Latitude <= @MaxLatitude" +
 				" and Longitude >= @MinLongitude and Longitude <= @MaxLongitude"  + 
 				" and Date = @Date" +
@@ -44,8 +44,16 @@ namespace DataSetExtension
 				MaxLongitude = boundry.MaxLongitude, 
 				Date = date
 			};
+	
+			var results = connection.Query<Measurement, Station, Measurement>(
+			query, 
+			(measurement, station) => { measurement.Station = station; return measurement; }, 
+			parameters,
+			splitOn: "Number, StationNumber");
 			
-			Measurement[] matches = connection.Query<Measurement>(query, parameters).ToArray(); //sort by distance to origin
+			Measurement[] matches = (from measurement in results
+									orderby measurement.Station.CalculateDistance(Convert.ToDouble(latitude), Convert.ToDouble(longitude) * -1)
+									select measurement).ToArray();
 			
 			foreach (var measurement in matches.Where(measurement => Tracker.Validate(measurement.StationNumber, measurement.Date)))
             {

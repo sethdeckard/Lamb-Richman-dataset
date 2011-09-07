@@ -48,6 +48,15 @@ namespace DataSetExtension.Tests
 				};
 				station.Save(connection);
 				
+				station = new Station
+				{
+					Number = "445500",
+					Latitude = 31.06M,
+					Longitude = -85.30M,
+					Start = DateTime.Parse("11/30/2010")
+				};
+				station.Save(connection);
+				
 				var measurementDatabase = new MeasurementDatabase(connection);
 				measurementDatabase.CreateSchema();
 				
@@ -61,7 +70,16 @@ namespace DataSetExtension.Tests
 				measurement = new Measurement
 				{
 					Date = DateTime.Parse("12/31/2010"),
-					StationNumber = "445599"
+					StationNumber = "445500",
+					Value = 1
+				};
+				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
+				
+				measurement = new Measurement
+				{
+					Date = DateTime.Parse("12/31/2010"),
+					StationNumber = "445599",
+					Value = 2
 				};
 				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
 				
@@ -82,6 +100,7 @@ namespace DataSetExtension.Tests
 				
 				Assert.That(result.StationNumber, Is.EqualTo("445599"));
 				Assert.That(result.Date, Is.EqualTo(date));
+				Assert.That(result.Value, Is.EqualTo(2));
 			}
 		}
 	}
