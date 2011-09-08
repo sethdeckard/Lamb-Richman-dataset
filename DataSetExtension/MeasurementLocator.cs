@@ -19,18 +19,8 @@ namespace DataSetExtension
 		public MeasurementLocator(IDbConnection connection, string table, StationTracker tracker)
 		{
 			this.connection = connection;
-			Tracker = tracker;
-			
-			var writer = new StringWriter();
-			writer.WriteLine("select m.Id, m.StationId, m.StationNumber, m.Date, m.Value, m.Id,");
-			writer.WriteLine("s.Id, s.Number, s.Name, s.State, s.County, s.Latitude, s.Longitude, s.Start, s.End");
-			writer.WriteLine("from Station s inner join " + table + " m on s.Number = m.StationNumber");
-			writer.WriteLine("where Latitude >= @MinLatitude and Latitude <= @MaxLatitude");
-			writer.WriteLine("and Longitude >= @MinLongitude and Longitude <= @MaxLongitude");
-			writer.WriteLine("and Date = @Date");
-			writer.WriteLine("and Start <= @Date");
-			writer.WriteLine("and (End is null or End >= @Date);");
-			query = writer.ToString();
+			Tracker = tracker;	
+			query = CreateQuery(table);
 		}
 		
 		public StationTracker Tracker { get; set; }
@@ -83,5 +73,19 @@ namespace DataSetExtension
                 MaxLongitude = longitude + longitudeRadius 
             };
         }	
+
+		static string CreateQuery(string table)
+		{
+			var writer = new StringWriter();
+			writer.WriteLine("select m.Id, m.StationId, m.StationNumber, m.Date, m.Value, m.Id,");
+			writer.WriteLine("s.Id, s.Number, s.Name, s.State, s.County, s.Latitude, s.Longitude, s.Start, s.End");
+			writer.WriteLine("from Station s inner join {0} m on s.Number = m.StationNumber", table);
+			writer.WriteLine("where Latitude >= @MinLatitude and Latitude <= @MaxLatitude");
+			writer.WriteLine("and Longitude >= @MinLongitude and Longitude <= @MaxLongitude");
+			writer.WriteLine("and Date = @Date");
+			writer.WriteLine("and Start <= @Date");
+			writer.WriteLine("and (End is null or End >= @Date);");
+			return writer.ToString();
+		}
 	}
 }

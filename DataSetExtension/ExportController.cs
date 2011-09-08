@@ -22,13 +22,7 @@ namespace DataSetExtension
         {
             this.connection = connection;
             basePath = path;
-			
-			var writer = new StringWriter();
-			writer.WriteLine("select m.StationId, m.StationNumber, m.Date, m.Value");
-			writer.WriteLine("from {0} s inner join {1} m on s.Id = m.StationId");
-			writer.WriteLine("where s.GridPoint = @GridPoint and m.Date >= @Start and m.Date <= @End");
-			
-			this.query = writer.ToString();
+			query = CreateQuery();
         }
 		
         public void ExportTemperatureMin(int year)
@@ -167,6 +161,16 @@ namespace DataSetExtension
 		private DateTime GetEndDate (int year)
 		{
 			return new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+		}
+		
+		static string CreateQuery() 
+		{
+			var writer = new StringWriter();
+			writer.WriteLine("select m.StationId, m.StationNumber, m.Date, m.Value");
+			writer.WriteLine("from {0} s inner join {1} m on s.Id = m.StationId");
+			writer.WriteLine("where s.GridPoint = @GridPoint and m.Date >= @Start and m.Date <= @End");
+			
+			return writer.ToString();	
 		}
 	}
 }
