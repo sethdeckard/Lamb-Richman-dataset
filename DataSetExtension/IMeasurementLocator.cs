@@ -11,6 +11,6 @@ namespace DataSetExtension
 		
 		StationTracker Tracker { get; set; }
 		
-		Measurement Find(decimal latitude, decimal longitude, DateTime date);	
+		Measurement Find(double latitude, double longitude, DateTime date);	
 	}
 }

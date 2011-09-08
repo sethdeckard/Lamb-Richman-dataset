@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.IO;
 using System.Linq;
 using Dapper;
 
@@ -20,19 +21,23 @@ namespace DataSetExtension
 			this.connection = connection;
 			Tracker = tracker;
 			
-			this.query = "select m.*, s.*, StationNumber, Date, Value from " + table + 
-				" m inner join Station s on s.Number = StationNumber " +
-				" where Latitude >= @MinLatitude and Latitude <= @MaxLatitude" +
-				" and Longitude >= @MinLongitude and Longitude <= @MaxLongitude"  + 
-				" and Date = @Date" +
-				" and Start <= @Date and (End is null or End >= @Date);";
+			var writer = new StringWriter();
+			writer.WriteLine("select m.Id, m.StationId, m.StationNumber, m.Date, m.Value, m.Id,");
+			writer.WriteLine("s.Id, s.Number, s.Name, s.State, s.County, s.Latitude, s.Longitude, s.Start, s.End");
+			writer.WriteLine("from Station s inner join " + table + " m on s.Number = m.StationNumber");
+			writer.WriteLine("where Latitude >= @MinLatitude and Latitude <= @MaxLatitude");
+			writer.WriteLine("and Longitude >= @MinLongitude and Longitude <= @MaxLongitude");
+			writer.WriteLine("and Date = @Date");
+			writer.WriteLine("and Start <= @Date");
+			writer.WriteLine("and (End is null or End >= @Date);");
+			query = writer.ToString();
 		}
 		
 		public StationTracker Tracker { get; set; }
 		
 		public bool IsNew { get; set; }
 		
-		public virtual Measurement Find(decimal latitude, decimal longitude, DateTime date)
+		public virtual Measurement Find(double latitude, double longitude, DateTime date)
 		{
 			var boundry = GetBoundry(latitude, longitude * -1);
 			
@@ -65,10 +70,10 @@ namespace DataSetExtension
             return null;
 		}
 		
-        private static Boundry GetBoundry(decimal latitude, decimal longitude)
+        private static Boundry GetBoundry(double latitude, double longitude)
         {
-            var latitudeRadius = MileRadius / 69.09M;
-			var longitudeRadius = MileRadius / Convert.ToDecimal((Math.Cos(Convert.ToDouble(latitude)) * 69.172));
+            var latitudeRadius = MileRadius / 69.09;
+			var longitudeRadius = MileRadius / (Math.Cos(latitude) * 69.172);
  
             return new Boundry 
             { 

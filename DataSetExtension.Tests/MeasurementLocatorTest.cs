@@ -101,6 +101,8 @@ namespace DataSetExtension.Tests
 				Assert.That(result.StationNumber, Is.EqualTo("445599"));
 				Assert.That(result.Date, Is.EqualTo(date));
 				Assert.That(result.Value, Is.EqualTo(2));
+				
+				//todo expand test with more variation of distances
 			}
 		}
 	}

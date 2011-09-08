@@ -12,9 +12,8 @@ namespace DataSetExtension
 	{
         private const int GridMin = 1;
         private const int GridMax = 766;
-		private const string QueryFormat = "select StationId, StationNumber, Date, Value from {0} inner join {1} on {1}.Id = {0}.StationId " + 
-			"where GridPoint = @GridPoint and Date >= @Start and Date <= @End";
-
+		
+		private readonly string query;
         private readonly string basePath;
         private readonly IDbConnection connection;
 		private StreamWriter log;
@@ -23,6 +22,13 @@ namespace DataSetExtension
         {
             this.connection = connection;
             basePath = path;
+			
+			var writer = new StringWriter();
+			writer.WriteLine("select m.StationId, m.StationNumber, m.Date, m.Value");
+			writer.WriteLine("from {0} s inner join {1} m on s.Id = m.StationId");
+			writer.WriteLine("where s.GridPoint = @GridPoint and m.Date >= @Start and m.Date <= @End");
+			
+			this.query = writer.ToString();
         }
 		
         public void ExportTemperatureMin(int year)
@@ -72,7 +78,7 @@ namespace DataSetExtension
 							
 							var start = new DateTime(year, 1, 1);
 							var end = GetEndDate(year);
-							var query = string.Format(QueryFormat, measurementTable, stationTable);
+							var query = string.Format(this.query, stationTable, measurementTable);
 							var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 			
 			                ProcessMeasurements(year, grid, export, measurements);
