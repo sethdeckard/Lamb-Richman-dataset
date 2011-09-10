@@ -145,13 +145,13 @@ namespace DataSetExtension.Tests
 			
 			var updated = writer.GetUpdatedStations();
 			
-			Assert.That(updated.Length, Is.EqualTo(33));
+			Assert.That(updated.Length, Is.EqualTo(6));
 			
 			var count = (from station in updated
 						where station.IsNew
 						select station).Count();
 			
-			Assert.That(count, Is.EqualTo(28));
+			Assert.That(count, Is.EqualTo(1));
 			
 			count = (from station in updated
 					where station.RecordCount == 101

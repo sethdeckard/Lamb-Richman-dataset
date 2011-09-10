@@ -81,7 +81,8 @@ namespace DataSetExtension
 				return;
 			}
 			
-			if (Locator.IsNew) 
+			int index = stations.FindIndex(station => station.Number == measurement.StationNumber);
+			if (index < 0) 
 			{
 				var station = new GridStation 
 				{ 
@@ -95,6 +96,10 @@ namespace DataSetExtension
 				};
 				
 				stations.Add(station);
+			} 
+			else 
+			{
+				stations[index].RecordCount += 1;
 			}
 			
 			writer.WriteLine(Formatter.Format(measurement, sequence));			
