@@ -68,16 +68,16 @@ namespace DataSetExtension
 							stream.Seek(0, SeekOrigin.End);
 							
 							var stations = GetStations(grid, stationTable);
-			                var export = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = formatter };
+			                var writer = new MeasurementWriter(stream, stations, year) { Locator = locator, Formatter = formatter };
 							
 							var start = new DateTime(year, 1, 1);
 							var end = GetEndDate(year);
 							var query = string.Format(this.query, stationTable, measurementTable);
 							var measurements = connection.Query<Measurement>(query, new { GridPoint = grid, Start = start, End = end }).ToArray();
 			
-			                ProcessMeasurements(year, grid, export, measurements);
+			                ProcessMeasurements(year, grid, writer, measurements);
 							
-							UpdateStations(export.GetUpdatedStations(), stationTable, addedLog);
+							UpdateStations(writer.GetUpdatedStations(), stationTable, addedLog);
 						}
 		            }
 				}		

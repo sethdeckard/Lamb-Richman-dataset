@@ -93,8 +93,6 @@ namespace DataSetExtension
 					RecordCount = 1,
 					IsNew = true
 				};
-
-				//todo: update all properties
 				
 				stations.Add(station);
 			}

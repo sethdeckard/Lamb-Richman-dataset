@@ -41,13 +41,13 @@ namespace DataSetExtension
 			};
 	
 			var results = connection.Query<Measurement, Station, Measurement>(
-			query, 
-			(measurement, station) => { measurement.Station = station; return measurement; }, 
-			parameters,
-			splitOn: "Number, StationNumber");
+				query, 
+				(measurement, station) => { measurement.Station = station; return measurement; }, 
+				parameters, 
+				splitOn: "Number, StationNumber");
 			
 			Measurement[] matches = (from measurement in results
-									orderby measurement.Station.CalculateDistance(Convert.ToDouble(latitude), Convert.ToDouble(longitude) * -1)
+									orderby measurement.Station.CalculateDistance(latitude, longitude * -1)
 									select measurement).ToArray();
 			
 			foreach (var measurement in matches.Where(measurement => Tracker.Validate(measurement.StationNumber, measurement.Date)))
