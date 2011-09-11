@@ -91,10 +91,12 @@ namespace DataSetExtension
 				if (station.IsNew) 
 				{
 					log.WriteLine(station.GridPoint + " " + station.Number);
+					station.Save(connection, table);
+					
+					continue;
 				}
-	
 				
-				//todo update/insert station properties
+				station.Save(connection, table);	
 			}
 			
 			log.Flush();

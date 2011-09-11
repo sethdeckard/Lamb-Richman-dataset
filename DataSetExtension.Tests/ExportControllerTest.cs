@@ -32,7 +32,6 @@ namespace DataSetExtension.Tests
 				
 				var station = new GridStation() 
 				{
-					Id = 4,
 					GridPoint = 2
 				};
 			    station.Save(connection, GridStationDatabase.TemperatureMinStationTable);
@@ -70,7 +69,6 @@ namespace DataSetExtension.Tests
 				
 				var station = new GridStation() 
 				{
-					Id = 4,
 					GridPoint = 5
 				};
 			    station.Save(connection, GridStationDatabase.TemperatureMaxStationTable);
@@ -108,13 +106,29 @@ namespace DataSetExtension.Tests
 				
 				var station = new GridStation() 
 				{
-					Id = 4,
-					GridPoint = 7
+					GridPoint = 7,
+					StationId = 2,
+					Number = "445599"
+				};
+			    station.Save(connection, GridStationDatabase.PrecipitationStationTable);
+				
+				station = new GridStation()
+				{
+					GridPoint = 7,
+					StationId = 3
 				};
 			    station.Save(connection, GridStationDatabase.PrecipitationStationTable);
 				
 				var measurementDb = new MeasurementDatabase(connection);
 				measurementDb.CreateSchema();
+				
+				var measurement = new Measurement
+				{
+					Date = DateTime.Parse("1/31/2006"),
+					StationNumber = "445599",
+					StationId = 2
+				};
+				measurement.Save(connection, MeasurementDatabase.PrecipitationTable);
 				
 				var stationDb = new StationDatabase(connection);
 				stationDb.CreateSchema();
@@ -134,6 +148,11 @@ namespace DataSetExtension.Tests
 				
 				log = Path.Combine(testPath, "prcp-added-2006.log");
 				Assert.That(File.Exists(log));
+				
+				var query = "select count(*) from PrecipitationStation where RecordCount > 0";
+				var count = connection.Query<long>(query).First();
+				
+				Assert.That(count, Is.GreaterThan(0));
             }
         }
 		

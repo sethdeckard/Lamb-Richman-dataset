@@ -88,5 +88,44 @@ namespace DataSetExtension.Tests
 				Assert.That(result.GridPoint, Is.EqualTo(2));
             }			
 		}
+		
+		[Test]
+		public void SaveExisting() 
+		{
+            using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
+            {
+                connection.Open();
+				
+				var database = new GridStationDatabase(connection);
+				database.CreateSchema();
+
+                var station = new GridStation() 
+				{
+					GridPoint = 2,
+					GridPointLatitude = 1001,
+					GridPointLongitude = 1002
+				};
+				
+				station.Save(connection, "TemperatureMinStation");
+				
+                station = new GridStation() 
+				{
+					Id = 1,
+					GridPoint = 2,
+					GridPointLatitude = 1001,
+					GridPointLongitude = 1002
+				};
+				
+				station.Save(connection, "TemperatureMinStation");
+
+                var query = connection.Query<GridStation>(Query);
+				var result = query.First();
+				
+				Assert.That(result.Id, Is.GreaterThan(0));
+				Assert.That(result.GridPoint, Is.EqualTo(2));
+				
+				Assert.That(query.Count(), Is.EqualTo(1));
+            }			
+		}
     }
 }

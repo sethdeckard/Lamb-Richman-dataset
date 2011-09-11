@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace DataSetExtension.Tests
 {
 	[TestFixture]
-	public class TemperatureTest
+	public class TemperatureFormatterTest
 	{
 		[Test]
 		public void ToStringTest()

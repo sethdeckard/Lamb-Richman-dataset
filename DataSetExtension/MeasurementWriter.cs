@@ -92,7 +92,9 @@ namespace DataSetExtension
 					Number = measurement.StationNumber,
 					Sequence = sequence,
 					RecordCount = 1,
-					IsNew = true
+					IsNew = true,
+					Name = measurement.Station.Name + ", " + measurement.Station.State 
+					//todo set lat/long, convert from decimal to D, M, S (rounded to minutes)
 				};
 				
 				stations.Add(station);

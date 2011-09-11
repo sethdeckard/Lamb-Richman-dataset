@@ -18,7 +18,16 @@ namespace DataSetExtension.Tests
 		{
 			IsNew = true;
 			
-			return (PassNull) ? null : new Measurement { StationNumber = "TestStationNumber" };
+			return (PassNull) ? null : CreateMeasurement();	
+		}
+		
+		private Measurement CreateMeasurement() 
+		{
+			return new Measurement 
+				{ 
+					StationNumber = "1", 
+					Station = new Station { Name =  "TestStation", State = "ST" } 
+				};
 		}
 	}
 }

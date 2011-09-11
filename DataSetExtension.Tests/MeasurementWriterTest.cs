@@ -44,6 +44,8 @@ namespace DataSetExtension.Tests
             Assert.That(reader.ReadLine(), Is.EqualTo("1"));
             Assert.That(reader.ReadLine(), Is.EqualTo("3"));
             Assert.That(reader.ReadLine(), Is.EqualTo("0"));
+			Assert.That(reader.ReadLine(), Is.EqualTo("5"));
+			Assert.That(reader.ReadLine(), Is.EqualTo("6"));
 			
 			Assert.That(writer.Missing.Count, Is.EqualTo(0));
 			
@@ -69,8 +71,7 @@ namespace DataSetExtension.Tests
 			
 			Assert.That(writer.Missing.Count, Is.EqualTo(31));
 			
-			//Assert.That(tracker.
-			//test that tracker.update was invoked
+			//todo test that tracker.update was invoked
         }
 
         [Test]
@@ -164,6 +165,12 @@ namespace DataSetExtension.Tests
 				  	select station).Count();
 			
 			Assert.That(count, Is.EqualTo(2));
+			
+			count = (from station in updated
+				    where station.Name == "TestStation, ST"
+				    select station).Count();
+			
+			Assert.That(count, Is.EqualTo(1));
 		}
 	}
 }

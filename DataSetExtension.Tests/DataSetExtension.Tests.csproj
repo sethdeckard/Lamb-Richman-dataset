@@ -42,8 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Td3200Test.cs" />
-    <Compile Include="TemperatureTest.cs" />
-    <Compile Include="PrecipitationTest.cs" />
     <Compile Include="ExportControllerTest.cs" />
     <Compile Include="GridStationTest.cs" />
     <Compile Include="StationTest.cs" />
@@ -66,6 +64,8 @@
     <Compile Include="Database\ApplicationDatabaseTest.cs" />
     <Compile Include="GridStationExportTest.cs" />
     <Compile Include="FakeGridSummaryWriter.cs" />
+    <Compile Include="PrecipitationFormatterTest.cs" />
+    <Compile Include="TemperatureFormatterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
