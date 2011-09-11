@@ -1,14 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension/GridSummaryWriter.cs">
+    <Files>
+      <File FileName="DataSetExtension/GridSummaryWriter.cs" Line="14" Column="9" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
-            <Node name="Import" expanded="True" />
-            <Node name="ExportController.cs" selected="True" />
+            <Node name="Database" expanded="True" />
+            <Node name="Import" expanded="True" selected="True" />
           </Node>
-          <Node name="DataSetExtension.ConsoleApp" expanded="True" />
           <Node name="DataSetExtension.Tests" expanded="True" />
         </State>
       </Pad>
@@ -29,11 +31,8 @@
           <Value>degrees + (minutes/60) + (seconds/3600)</Value>
         </State>
       </Pad>
-      <Pad Id="ConnectionManagerPad">
-        <State selected="True" />
-      </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True">
+        <State expanded="True">
           <Node name="DataSetExtension.Tests" expanded="True">
             <Node name="DataSetExtension" expanded="True">
               <Node name="Tests" expanded="True">
@@ -44,27 +43,21 @@
                   <Node name="MeasurementDatabaseTest" expanded="True" />
                   <Node name="StationDatabaseTest" expanded="True" />
                 </Node>
-                <Node name="ExportControllerTest" expanded="True" />
+                <Node name="ExportControllerTest" expanded="True">
+                  <Node name="ExportTemperatureMin" selected="True" />
+                </Node>
                 <Node name="GridStationTest" expanded="True" />
                 <Node name="GridSummaryWriterTest" expanded="True" />
                 <Node name="Import" expanded="True">
                   <Node name="CanadaImportTest" expanded="True" />
-                  <Node name="GridStationImportTest" expanded="True" />
-                  <Node name="StationImportTest" expanded="True" />
-                  <Node name="Td3200ImportTest" expanded="True" />
                 </Node>
-                <Node name="MeasurementLocatorTest" expanded="True" />
-                <Node name="MeasurementTest" expanded="True" />
-                <Node name="MeasurementWriterTest" expanded="True" />
-                <Node name="PrecipitationTest" expanded="True" />
-                <Node name="StationTest" expanded="True" />
-                <Node name="StationTrackerTest" expanded="True" />
-                <Node name="Td3200Test" expanded="True" />
-                <Node name="TemperatureTest" expanded="True" />
               </Node>
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="ConnectionManagerPad">
+        <State selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

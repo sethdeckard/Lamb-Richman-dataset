@@ -64,6 +64,8 @@
     <Compile Include="Database\MeasurementDatabase.cs" />
     <Compile Include="Database\StationDatabase.cs" />
     <Compile Include="Database\ApplicationDatabase.cs" />
+    <Compile Include="GridStationExport.cs" />
+    <Compile Include="IGridSummaryWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DataSetExtension
 {
-	public class GridSummaryWriter
+	public class GridSummaryWriter : IGridSummaryWriter
 	{
       	private const string HeaderFormat = "{0}{1} {2} {3}{4} {5} {6}{7}";
         private const string LineFormat = "           {0}{1} {2} {3}{4}";

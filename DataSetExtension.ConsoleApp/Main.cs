@@ -27,7 +27,9 @@ namespace DataSetExtension.ConsoleApp
 			
 			ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all", 2001);*/
 			
-			Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
+			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
+			
+			ExportGridStations(@"/Users/seth/Documents/LRDataSet/output", 2001);
 		}
 		
 		private static IDbConnection CreateConnection() 
@@ -219,6 +221,43 @@ namespace DataSetExtension.ConsoleApp
 				controller.ExportPrecipitation(year);
 				stopwatch.Stop();
 				Console.WriteLine("Total Precipitation export time: " + stopwatch.Elapsed.ToString());
+			}
+		}
+		
+		private static void ExportGridStations(string basePath, int year) 
+		{
+			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;DateTimeFormat=Ticks"))
+            {
+                connection.Open();
+				
+				var export = new GridStationExport(connection);
+				
+				Console.Write("Creating tmininfo...");
+				var file = string.Format("tmininfo-{0}.txt", year);
+				using (var stream = File.Create(Path.Combine(basePath, file)))
+				{
+					var writer = new GridSummaryWriter(stream);
+					export.ExportTemperatureMin(writer);
+				}
+				Console.WriteLine("done.");
+				
+				Console.Write("Creating tmaxinfo...");
+				file = string.Format("tmaxinfo-{0}.txt", year);
+				using (var stream = File.Create(Path.Combine(basePath, file)))
+				{
+					var writer = new GridSummaryWriter(stream);
+					export.ExportTemperatureMax(writer);
+				}
+				Console.WriteLine("done.");
+				
+				Console.Write("Creating prcpinfo...");
+				file = string.Format("prcpinfo-{0}.txt", year);
+				using (var stream = File.Create(Path.Combine(basePath, file)))
+				{
+					var writer = new GridSummaryWriter(stream);
+					export.ExportTemperatureMax(writer);
+				}
+				Console.WriteLine("done.");
 			}
 		}
 	}

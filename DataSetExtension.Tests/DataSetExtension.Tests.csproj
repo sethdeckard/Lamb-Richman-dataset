@@ -64,6 +64,8 @@
     <Compile Include="Database\GridStationDatabaseTest.cs" />
     <Compile Include="Database\StationDatabaseTest.cs" />
     <Compile Include="Database\ApplicationDatabaseTest.cs" />
+    <Compile Include="GridStationExportTest.cs" />
+    <Compile Include="FakeGridSummaryWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
