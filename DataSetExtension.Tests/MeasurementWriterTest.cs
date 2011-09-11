@@ -171,6 +171,18 @@ namespace DataSetExtension.Tests
 				    select station).Count();
 			
 			Assert.That(count, Is.EqualTo(1));
+			
+			count = (from station in updated
+					where station.Latitude == 3251
+					select station).Count();
+			
+			Assert.That(count, Is.EqualTo(1));
+			
+			count = (from station in updated
+				  	where station.Longitude == 8917
+				   	select station).Count();
+			
+			Assert.That(count, Is.EqualTo(1));
 		}
 	}
 }

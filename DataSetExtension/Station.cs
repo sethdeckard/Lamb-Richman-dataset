@@ -36,7 +36,7 @@ namespace DataSetExtension
 
         public decimal Latitude { get; set; } //todo convert to doubles
 
-        public decimal Longitude { get; set; }		
+        public decimal Longitude { get; set; }
 		
 		public DateTime Start { get; set;}
 		
@@ -86,6 +86,16 @@ namespace DataSetExtension
         {
             return calculateDistance(Convert.ToDouble(Latitude), Convert.ToDouble(Longitude), latitude, longitude);
         }
+		
+		public long GetLatitudeDegrees() 
+		{
+			return ConvertDecimalToDegreesMinutes(Latitude);
+		}
+		
+		public long GetLongitudeDegrees()
+		{
+			return ConvertDecimalToDegreesMinutes(Math.Abs(Longitude));
+		}
 
 		internal static IDbCommand CreateCommand(IDbConnection connection)
 		{
@@ -144,7 +154,15 @@ namespace DataSetExtension
             return ToRadian(val2) - ToRadian(val1);
         }
 		
-		private decimal ConvertDegreeAngle(decimal degrees, decimal minutes, decimal seconds)
+	 	static long ConvertDecimalToDegreesMinutes(decimal value)
+		{
+			var degrees = Math.Floor(value);		
+			var minutes = ((value - degrees) * 60);
+			
+			return Convert.ToInt64(degrees * 100 + Math.Floor(minutes));			
+		}
+		
+		static decimal ConvertDegreeAngleToDecimalDegrees(decimal degrees, decimal minutes, decimal seconds)
 		{
 			var sign = Math.Sign(degrees);
 			minutes *= sign;
@@ -153,25 +171,25 @@ namespace DataSetExtension
 		    return Math.Round(degrees + (decimal)(minutes/60) + (decimal)(seconds/3600), 6);
 		}
 		
-		private decimal ParseLatitude(string value)
+		static decimal ParseLatitude(string value)
 		{
 			var degrees = decimal.Parse(value.Substring(0, 3));
 			var minutes = decimal.Parse(value.Substring(3, 2));
 			var seconds = decimal.Parse(value.Substring(6, 2));
 			
-			return ConvertDegreeAngle(degrees, minutes, seconds);
+			return ConvertDegreeAngleToDecimalDegrees(degrees, minutes, seconds);
 		}
 		
-		private decimal ParseLongitude(string longitude)
+		static decimal ParseLongitude(string longitude)
 		{
 			var degrees = decimal.Parse(longitude.Substring(0, 4));
 			var minutes = decimal.Parse(longitude.Substring(5, 2));
 			var seconds = decimal.Parse(longitude.Substring(8, 2));
 			
-			return ConvertDegreeAngle(degrees, minutes, seconds);
+			return ConvertDegreeAngleToDecimalDegrees(degrees, minutes, seconds);
 		}
 		
-		private DateTime ParseDate(string value)
+		static DateTime ParseDate(string value)
 		{
 			var year = int.Parse(value.Substring(0, 4));
 			var month = int.Parse(value.Substring(4, 2));

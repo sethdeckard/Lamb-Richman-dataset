@@ -26,7 +26,13 @@ namespace DataSetExtension.Tests
 			return new Measurement 
 				{ 
 					StationNumber = "1", 
-					Station = new Station { Name =  "TestStation", State = "ST" } 
+					Station = new Station 
+								{ 
+									Name =  "TestStation", 
+									State = "ST", 
+									Latitude = 32.85M,
+									Longitude = -89.29M
+								} 
 				};
 		}
 	}

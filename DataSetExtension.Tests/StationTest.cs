@@ -103,6 +103,25 @@ namespace DataSetExtension.Tests
             Assert.That(Math.Round(distance), Is.EqualTo(204));
 		}
 		
+		[Test]
+		public void GetLatitudeDegrees()
+		{
+			var station = new Station { Latitude = 34.79M };
+			var latitude = station.GetLatitudeDegrees();
+			
+			Assert.That(latitude, Is.EqualTo(3447));
+		}
+		
+		[Test]
+		public void GetLongitudeDegrees() 
+		{
+			var station = new Station { Longitude = -84.28M };
+			
+			var longitude = station.GetLongitudeDegrees();
+			
+			Assert.That(longitude, Is.EqualTo(8416));			
+		}
+		
 		private static IDbCommand CreateCommand(IDbConnection connection)
 		{
 			var command = connection.CreateCommand();
