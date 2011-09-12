@@ -1,6 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ConsoleApp/Main.cs">
+    <Files>
+      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="2" Column="19" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -8,7 +11,9 @@
             <Node name="Dapper" expanded="True" />
             <Node name="Database" expanded="True" />
             <Node name="Import" expanded="True" />
-            <Node name="GridStation.cs" selected="True" />
+          </Node>
+          <Node name="DataSetExtension.ConsoleApp" expanded="True">
+            <Node name="Main.cs" selected="True" />
           </Node>
           <Node name="DataSetExtension.Tests" expanded="True">
             <Node name="Database" expanded="True" />
@@ -53,16 +58,16 @@
                   <Node name="CanadaImportTest" expanded="True" />
                   <Node name="GridStationImportTest" expanded="True" />
                   <Node name="StationImportTest" expanded="True" />
-                  <Node name="Td3200ImportTest" expanded="True">
-                    <Node name="Import" selected="True" />
-                  </Node>
+                  <Node name="Td3200ImportTest" expanded="True" />
                 </Node>
                 <Node name="MeasurementLocatorTest" expanded="True" />
                 <Node name="MeasurementTest" expanded="True" />
-                <Node name="MeasurementWriterTest" expanded="True" />
+                <Node name="MeasurementWriterTest" expanded="True" selected="True" />
+                <Node name="PrecipitationFormatterTest" expanded="True" />
                 <Node name="StationTest" expanded="True" />
                 <Node name="StationTrackerTest" expanded="True" />
                 <Node name="Td3200Test" expanded="True" />
+                <Node name="TemperatureFormatterTest" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -74,7 +79,9 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/seth/Projects/DataSetExtension/DataSetExtension.Tests/MeasurementWriterTest.cs" line="149" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

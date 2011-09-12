@@ -11,7 +11,5 @@ namespace DataSetExtension
 		DateTime Date { get; set; }
 		
         long Value { get; set; }
-
-        //string ToString(long sequence);
 	}
 }
