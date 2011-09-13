@@ -8,7 +8,7 @@ namespace DataSetExtension
 {
 	public class MeasurementLocator : IMeasurementLocator
 	{
-		private const int MileRadius = 100;
+		private const double MileRadius = 100;
 		private readonly IDbConnection connection;
 		private readonly string query;
 	
@@ -39,12 +39,11 @@ namespace DataSetExtension
 				MaxLongitude = boundry.MaxLongitude, 
 				Date = date
 			};
-	
+			
 			var results = connection.Query<Measurement, Station, Measurement>(
 				query, 
 				(measurement, station) => { measurement.Station = station; return measurement; }, 
-				parameters, 
-				splitOn: "Number, StationNumber");
+				parameters);
 			
 			Measurement[] matches = (from measurement in results
 									orderby measurement.Station.CalculateDistance(latitude, longitude * -1)
@@ -63,7 +62,10 @@ namespace DataSetExtension
         private static Boundry GetBoundry(double latitude, double longitude)
         {
             var latitudeRadius = MileRadius / 69.09;
-			var longitudeRadius = MileRadius / (Math.Cos(latitude) * 69.172);
+			
+			double multiplier = Math.Cos(Math.PI * latitude / 180D);
+			
+			var longitudeRadius = MileRadius / (multiplier * 69.174);
  
             return new Boundry 
             { 
@@ -77,7 +79,7 @@ namespace DataSetExtension
 		static string CreateQuery(string table)
 		{
 			var writer = new StringWriter();
-			writer.WriteLine("select m.Id, m.StationId, m.StationNumber, m.Date, m.Value, m.Id,");
+			writer.WriteLine("select m.Id, m.StationId, m.StationNumber, m.Date, m.Value,");
 			writer.WriteLine("s.Id, s.Number, s.Name, s.State, s.County, s.Latitude, s.Longitude, s.Start, s.End");
 			writer.WriteLine("from Station s inner join {0} m on s.Number = m.StationNumber", table);
 			writer.WriteLine("where Latitude >= @MinLatitude and Latitude <= @MaxLatitude");

@@ -41,8 +41,8 @@ namespace DataSetExtension
                 foreach (var station in stations.OrderBy(station => station.Sequence))
                 {
                     var query = from record in records 
-                                where record.Date == date && record.StationId == station.Id &&
-								Locator.Tracker.Validate(record.StationNumber, date)
+                                where record.Date == date && record.StationId == station.Id 
+								&& Locator.Tracker.Validate(record.StationNumber, date)
                                 select record;
 
                     if (query.Count() > 0)
@@ -73,7 +73,7 @@ namespace DataSetExtension
 		
 		private void WriteMissing(GridStation first, DateTime date, long sequence)
 		{
-			var measurement = Locator.Find(first.GridPointLatitude, first.GridPointLongitude, date);
+			var measurement = Locator.Find(Convert.ToDouble(first.GridPointLatitude), Convert.ToDouble(first.GridPointLongitude), date);
 			if (measurement == null)
 			{
 				Missing.Add(date);	

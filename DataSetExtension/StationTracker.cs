@@ -15,11 +15,12 @@ namespace DataSetExtension
  
         public bool Validate(string number, DateTime date)
         {
+			//return true;
             return !used.ContainsKey(number) || 
 				(from value in used[number] where value == date select value).Count() == 0;
         }
  
-        public bool Update(string number, DateTime date)
+        public bool Update(string number, DateTime date) //todo return void, remove dependencies
         {
             if (used.ContainsKey(number))
             {

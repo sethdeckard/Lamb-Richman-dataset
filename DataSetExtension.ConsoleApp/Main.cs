@@ -27,7 +27,7 @@ namespace DataSetExtension.ConsoleApp
 			
 			ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all", 2001);*/
 			
-			Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
+			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
 			
 			ExportGridStations(@"/Users/seth/Documents/LRDataSet/output", 2001);
 		}
@@ -255,7 +255,7 @@ namespace DataSetExtension.ConsoleApp
 				using (var stream = File.Create(Path.Combine(basePath, file)))
 				{
 					var writer = new GridSummaryWriter(stream);
-					export.ExportTemperatureMax(writer);
+					export.ExportPrecipitation(writer);
 				}
 				Console.WriteLine("done.");
 			}

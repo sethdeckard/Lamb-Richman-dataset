@@ -112,7 +112,7 @@ namespace DataSetExtension
 			return new StreamWriter(File.Create(Path.Combine(basePath, file)));
 		}
 
-		private void ProcessMeasurements(int year, int grid, MeasurementWriter export, IMeasurement[] measurements)
+		private void ProcessMeasurements(int year, int grid, MeasurementWriter writer, IMeasurement[] measurements)
 		{
 			for (var month = 1; month <= 12; month++)
         	{
@@ -121,12 +121,12 @@ namespace DataSetExtension
         			measurement.Date <= new DateTime(year, month, DateTime.DaysInMonth(year, month))
         			select measurement;
         			
-        	    export.Write(subset.ToArray(), month);
+        	    writer.Write(subset.ToArray(), month);
         	}
         	
-			if (export.Missing.Count > 0) 
+			if (writer.Missing.Count > 0) 
 			{
-        		LogMissing(grid, export.Missing);
+        		LogMissing(grid, writer.Missing);
 			}
 		}
 		
@@ -156,7 +156,9 @@ namespace DataSetExtension
 		private GridStation[] GetStations(int grid, string table) 
 		{
 			var query = "select Id, Sequence, GridPoint, GridPointLatitude, GridPointLongitude, Latitude, " + 
-				"Longitude, Name, Number from " + table + " where GridPoint = @GridPoint";
+				"Longitude, Name, Number, HistoricalRecordCount, RecordCount " + 
+				" from " + table + " where GridPoint = @GridPoint";
+			
             return connection.Query<GridStation>(query, new { GridPoint = grid }).ToArray();
 		}
 
