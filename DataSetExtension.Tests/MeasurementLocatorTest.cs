@@ -23,9 +23,18 @@ namespace DataSetExtension.Tests
 				var station = new Station
 				{
 					Number = "445591",
-					Latitude = 31.05M,
-					Longitude = -85.30M,
+					Latitude = 32.4473874656245M,
+					Longitude = -83.3134799242268M,
 					Start = DateTime.Parse("7/30/2012")
+				};
+				station.Save(connection);
+				
+				station = new Station
+				{
+					Number = "123",
+					Latitude = 29.5527M,
+					Longitude = -87.6718866M,
+					Start = DateTime.Parse("7/30/2010")
 				};
 				station.Save(connection);
 				
@@ -42,8 +51,8 @@ namespace DataSetExtension.Tests
 				station = new Station
 				{
 					Number = "445599",
-					Latitude = 31.05M,
-					Longitude = -85.30M,
+					Latitude = 31.01M,
+					Longitude = -85.1M,
 					Start = DateTime.Parse("11/30/2010")
 				};
 				station.Save(connection);
@@ -57,6 +66,15 @@ namespace DataSetExtension.Tests
 				};
 				station.Save(connection);
 				
+				station = new Station
+				{
+					Number = "xxx",
+					Latitude = 32.44737M,
+					Longitude = -82.328119M,
+					Start = DateTime.Parse("11/30/2010")
+				};
+				station.Save(connection);
+									
 				var measurementDatabase = new MeasurementDatabase(connection);
 				measurementDatabase.CreateSchema();
 				
@@ -71,6 +89,22 @@ namespace DataSetExtension.Tests
 				{
 					Date = DateTime.Parse("12/31/2010"),
 					StationNumber = "445500",
+					Value = 1
+				};
+				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
+				
+				measurement = new Measurement
+				{
+					Date = DateTime.Parse("12/31/2010"),
+					StationNumber = "123",
+					Value = 1
+				};
+				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
+				
+				measurement = new Measurement
+				{
+					Date = DateTime.Parse("12/31/2010"),
+					StationNumber = "xxx",
 					Value = 1
 				};
 				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
@@ -102,7 +136,18 @@ namespace DataSetExtension.Tests
 				Assert.That(result.Date, Is.EqualTo(date));
 				Assert.That(result.Value, Is.EqualTo(2));
 				
-				//todo expand test with more variation of distances
+				result = locator.Find(31, 85, date);
+				Assert.That(result.StationNumber, Is.EqualTo("445500"));
+				
+				result = locator.Find(31, 85, date);
+				Assert.That(result.StationNumber, Is.EqualTo("xxx"));
+				
+				result = locator.Find(31, 85, date);
+				Assert.That(result.StationNumber, Is.EqualTo("123"));
+			
+				Assert.That(locator.Find(31, 85, date), Is.Null);
+				
+				//todo, use mock tracker
 			}
 		}
 	}

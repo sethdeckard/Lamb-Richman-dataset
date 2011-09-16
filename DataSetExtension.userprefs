@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ConsoleApp/Main.cs">
     <Files>
-      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="2" Column="19" />
+      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="27" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -36,6 +36,7 @@
           <Value>decimal.Round(Convert.ToDecimal(celsius), 1).ToString()</Value>
           <Value>degrees + (minutes/60) + (seconds/3600)</Value>
           <Value>degrees + (minutes/60) + (seconds/3600)</Value>
+          <Value>date.Ticks</Value>
         </State>
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
@@ -60,9 +61,9 @@
                   <Node name="StationImportTest" expanded="True" />
                   <Node name="Td3200ImportTest" expanded="True" />
                 </Node>
-                <Node name="MeasurementLocatorTest" expanded="True" />
+                <Node name="MeasurementLocatorTest" expanded="True" selected="True" />
                 <Node name="MeasurementTest" expanded="True" />
-                <Node name="MeasurementWriterTest" expanded="True" selected="True" />
+                <Node name="MeasurementWriterTest" expanded="True" />
                 <Node name="PrecipitationFormatterTest" expanded="True" />
                 <Node name="StationTest" expanded="True" />
                 <Node name="StationTrackerTest" expanded="True" />

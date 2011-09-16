@@ -15,7 +15,6 @@ namespace DataSetExtension
  
         public bool Validate(string number, DateTime date)
         {
-			//return true;
             return !used.ContainsKey(number) || 
 				(from value in used[number] where value == date select value).Count() == 0;
         }

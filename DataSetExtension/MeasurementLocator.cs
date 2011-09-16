@@ -62,10 +62,7 @@ namespace DataSetExtension
         private static Boundry GetBoundry(double latitude, double longitude)
         {
             var latitudeRadius = MileRadius / 69.09;
-			
-			double multiplier = Math.Cos(Math.PI * latitude / 180D);
-			
-			var longitudeRadius = MileRadius / (multiplier * 69.174);
+			var longitudeRadius = MileRadius / (ConvertDegreesToRadians(latitude) * 69.174);
  
             return new Boundry 
             { 
@@ -74,9 +71,14 @@ namespace DataSetExtension
                 MinLongitude = longitude - longitudeRadius, 
                 MaxLongitude = longitude + longitudeRadius 
             };
-        }	
+        }
+		
+		private static double ConvertDegreesToRadians(double value)
+		{
+			return value * (Math.PI/ 180D);
+		}
 
-		static string CreateQuery(string table)
+		private static string CreateQuery(string table)
 		{
 			var writer = new StringWriter();
 			writer.WriteLine("select m.Id, m.StationId, m.StationNumber, m.Date, m.Value,");

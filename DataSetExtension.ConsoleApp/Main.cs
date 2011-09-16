@@ -17,19 +17,19 @@ namespace DataSetExtension.ConsoleApp
 		
 		public static void Main(string[] args)
 		{
-			/*ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2001, 1, 1));
+			ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2002, 1, 1));
 			
 			ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
 			ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/tmininfo.txt");
 			ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
 			
-			ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2001.txt");
+			ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2002.txt");
+		
+			ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all", 2002);
 			
-			ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all", 2001);*/
+			Export(@"/Users/seth/Documents/LRDataSet/output/2002", 2002);
 			
-			//Export(@"/Users/seth/Documents/LRDataSet/output", 2001);
-			
-			ExportGridStations(@"/Users/seth/Documents/LRDataSet/output", 2001);
+			ExportGridStations(@"/Users/seth/Documents/LRDataSet/output/2002", 2002);
 		}
 		
 		private static IDbConnection CreateConnection() 
