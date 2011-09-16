@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ConsoleApp/Main.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ConsoleApp/Commands.cs">
     <Files>
-      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="27" Column="2" />
+      <File FileName="DataSetExtension.ConsoleApp/Commands.cs" Line="253" Column="4" />
+      <File FileName="DataSetExtension.ConsoleApp/Main.cs" Line="15" Column="3" />
+      <File FileName="DataSetExtension.ConsoleApp/Automation.cs" Line="26" Column="87" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,7 +15,7 @@
             <Node name="Import" expanded="True" />
           </Node>
           <Node name="DataSetExtension.ConsoleApp" expanded="True">
-            <Node name="Main.cs" selected="True" />
+            <Node name="Commands.cs" selected="True" />
           </Node>
           <Node name="DataSetExtension.Tests" expanded="True">
             <Node name="Database" expanded="True" />
