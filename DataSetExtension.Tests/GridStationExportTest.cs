@@ -28,7 +28,8 @@ namespace DataSetExtension.Tests
 					GridPointLatitude = 23,
 					GridPointLongitude = 80,
 					Sequence = 1,
-					RecordCount = 29292
+					RecordCount = 29292,
+					HistoricalRecordCount = 10
 				};
 			    station.Save(connection, GridStationDatabase.TemperatureMaxStationTable);	
 				
@@ -42,7 +43,8 @@ namespace DataSetExtension.Tests
 					GridPointLatitude = 23,
 					GridPointLongitude = 80,
 					Sequence = 0,
-					RecordCount = 978
+					RecordCount = 978,
+					HistoricalRecordCount = 13
 				};
 			    station.Save(connection, GridStationDatabase.TemperatureMaxStationTable);	
 				
@@ -69,6 +71,7 @@ namespace DataSetExtension.Tests
 				var actual = writer.Stations[0];
 				Assert.That(actual.GridPoint, Is.EqualTo(station.GridPoint));
 				Assert.That(actual.Sequence, Is.EqualTo(0));
+				Assert.That(actual.HistoricalRecordCount, Is.EqualTo(13));
 			}
 		}
 		

@@ -45,7 +45,7 @@ namespace DataSetExtension
 		{
 			var builder = new StringBuilder();
 			builder.AppendLine("select Name, Number, GridPoint, GridPointLatitude, GridPointLongitude, ");
-			builder.AppendLine("Latitude, Longitude, RecordCount, Sequence");
+			builder.AppendLine("Latitude, Longitude, RecordCount, HistoricalRecordCount, Sequence");
 			builder.AppendLine("from " + table);
 			builder.AppendLine("where GridPoint = @GridPoint");
 			

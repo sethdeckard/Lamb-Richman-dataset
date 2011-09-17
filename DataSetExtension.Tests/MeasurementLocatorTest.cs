@@ -147,7 +147,7 @@ namespace DataSetExtension.Tests
 			
 				Assert.That(locator.Find(31, 85, date), Is.Null);
 				
-				//todo, use mock tracker
+				//todo, consider using mock tracker
 			}
 		}
 	}

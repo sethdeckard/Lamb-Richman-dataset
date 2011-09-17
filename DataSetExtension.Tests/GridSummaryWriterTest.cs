@@ -22,6 +22,7 @@ namespace DataSetExtension.Tests
                                         Name = "TestName1",
                                         Number = "083020",
                                         RecordCount = 41042,
+										HistoricalRecordCount = 10,
                                         GridPointLatitude = 35,
                                         GridPointLongitude = 88,
                                         Sequence = 0,
@@ -34,6 +35,7 @@ namespace DataSetExtension.Tests
                                         Name = "Marathin Shores, FL",
                                         Number = "085351",
                                         RecordCount = 4310,
+										HistoricalRecordCount = 10,
                                         GridPointLatitude = 35,
                                         GridPointLongitude = 88,
                                         Sequence = 0,
@@ -46,7 +48,8 @@ namespace DataSetExtension.Tests
                                         Name = "Royal Palms Rngr Stat, FL",
                                         Number = "087760",
                                         RecordCount = 692,
-                                        GridPointLatitude = 35,
+                                        HistoricalRecordCount = 10,
+										GridPointLatitude = 35,
                                         GridPointLongitude = 88,
                                         Sequence = 0,
                                         Latitude = 2523,
@@ -64,6 +67,19 @@ namespace DataSetExtension.Tests
             Assert.That(reader.ReadLine(), Is.EqualTo("           Marathin Shores, FL            085351 2444  8103    4310"));
             Assert.That(reader.ReadLine(), Is.EqualTo("           Royal Palms Rngr Stat, FL      087760 2523  8036     692"));
             Assert.That(reader.ReadLine(), Is.EqualTo("                                                     TOTAL:   46044"));
+			
+			stream = new MemoryStream();
+			writer = new GridSummaryWriter(stream) { IncludeHistoricalCount = true };
+            writer.Write(items.ToArray());
+ 
+            stream.Position = 0;
+            reader = new StreamReader(stream);
+ 
+            Assert.That(reader.ReadLine(), Is.EqualTo(""));
+            Assert.That(reader.ReadLine(), Is.EqualTo("  2 35  88 TestName1                      083020 2509  8055   41052"));
+            Assert.That(reader.ReadLine(), Is.EqualTo("           Marathin Shores, FL            085351 2444  8103    4320"));
+            Assert.That(reader.ReadLine(), Is.EqualTo("           Royal Palms Rngr Stat, FL      087760 2523  8036     702"));
+            Assert.That(reader.ReadLine(), Is.EqualTo("                                                     TOTAL:   46074"));
         }
     }
 }

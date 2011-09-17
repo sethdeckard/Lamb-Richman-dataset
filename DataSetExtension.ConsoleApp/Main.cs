@@ -15,7 +15,12 @@ namespace DataSetExtension.ConsoleApp
 	{
 		public static void Main(string[] args)
 		{
-			new Automation().Run();
+			new Automation
+				{ 
+					InputDirectory = @"/Users/seth/Documents/LRDataSet/data",
+					BackupDirectory = @"/Users/seth/Documents/LRDataSet/database-backups",
+					OutputDirectory = @"/Users/seth/Documents/LRDataSet/output"
+				}.Run();
 			
 			/*Commands.ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2002, 1, 1));
 			

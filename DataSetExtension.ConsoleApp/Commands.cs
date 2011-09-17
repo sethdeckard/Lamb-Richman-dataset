@@ -215,35 +215,77 @@ namespace DataSetExtension.ConsoleApp
 				
 				var export = new GridStationExport(connection);
 				
-				Console.Write("Creating tmininfo...");
-				var file = string.Format("tmininfo-{0}.txt", year);
-				using (var stream = File.Create(Path.Combine(basePath, file)))
-				{
-					var writer = new GridSummaryWriter(stream);
-					export.ExportTemperatureMin(writer);
-				}
-				Console.WriteLine("done.");
+				ExportTemperatureMinGridStations(export, year, basePath);
 				
-				Console.Write("Creating tmaxinfo...");
-				file = string.Format("tmaxinfo-{0}.txt", year);
-				using (var stream = File.Create(Path.Combine(basePath, file)))
-				{
-					var writer = new GridSummaryWriter(stream);
-					export.ExportTemperatureMax(writer);
-				}
-				Console.WriteLine("done.");
+				ExportTemperatureMaxGridStations(export, year, basePath);
 				
-				Console.Write("Creating prcpinfo...");
-				file = string.Format("prcpinfo-{0}.txt", year);
-				using (var stream = File.Create(Path.Combine(basePath, file)))
-				{
-					var writer = new GridSummaryWriter(stream);
-					export.ExportPrecipitation(writer);
-				}
-				Console.WriteLine("done.");
+				ExportPrecipitationGridStations(export, year, basePath);
 			}
 		}
+		
+		private static void ExportTemperatureMinGridStations(GridStationExport export, int year, string basePath)
+		{
+			Console.Write("Creating tmininfo...");
 			
+			var file = string.Format("tmininfo-{0}.txt", year);
+			using (var stream = File.Create(Path.Combine(basePath, file)))
+			{
+				var writer = new GridSummaryWriter(stream);
+				export.ExportTemperatureMin(writer);
+			}
+			
+			file = string.Format("tmininfo-{0}-historical.txt", year);
+			using (var stream = File.Create(Path.Combine(basePath, file)))
+			{
+				var writer = new GridSummaryWriter(stream) { IncludeHistoricalCount = true };
+				export.ExportTemperatureMin(writer);
+			}
+			
+			Console.WriteLine("done.");			
+		}
+		
+		private static void ExportTemperatureMaxGridStations(GridStationExport export, int year, string basePath)
+		{
+			Console.Write("Creating tmaxinfo...");
+	
+			var file = string.Format("tmaxinfo-{0}.txt", year);
+			using (var stream = File.Create(Path.Combine(basePath, file)))
+			{
+				var writer = new GridSummaryWriter(stream);
+				export.ExportTemperatureMax(writer);
+			}
+			
+			file = string.Format("tmaxinfo-{0}-historical.txt", year);
+			using (var stream = File.Create(Path.Combine(basePath, file)))
+			{
+				var writer = new GridSummaryWriter(stream) { IncludeHistoricalCount = true };
+				export.ExportTemperatureMax(writer);
+			}
+	
+			Console.WriteLine("done.");			
+		}
+		
+		private static void ExportPrecipitationGridStations(GridStationExport export, int year, string basePath)
+		{
+			Console.Write("Creating prcpinfo...");
+			
+			var file = string.Format("prcpinfo-{0}.txt", year);
+			using (var stream = File.Create(Path.Combine(basePath, file)))
+			{
+				var writer = new GridSummaryWriter(stream);
+				export.ExportPrecipitation(writer);
+			}
+			
+			file = string.Format("prcpinfo-{0}-historical.txt", year);
+			using (var stream = File.Create(Path.Combine(basePath, file)))
+			{
+				var writer = new GridSummaryWriter(stream) { IncludeHistoricalCount = true };
+				export.ExportPrecipitation(writer);
+			}
+			
+			Console.WriteLine("done.");				
+		}
+		
 		public static void DeleteDatabase() 
 		{
 			Console.WriteLine("Deleting database...");
@@ -254,7 +296,7 @@ namespace DataSetExtension.ConsoleApp
 		public static void CopyDatabase(string path)
 		{
 			Console.WriteLine("Copying database to " + path);
-			File.Copy(DatabaseName, path, true);	
+			File.Copy(DatabaseName, Path.Combine(path, DatabaseName), true);	
 			Console.WriteLine(" done.");
 		}
 	}

@@ -17,6 +17,8 @@ namespace DataSetExtension
         {
             writer = new StreamWriter(stream); 
         }
+		
+		public bool IncludeHistoricalCount { get; set; }
  
         public void Write(GridStation[] details)
         {
@@ -27,6 +29,11 @@ namespace DataSetExtension
             var header = true;
             foreach (var detail in details.OrderBy(detail => detail.Sequence))
             {
+				if (IncludeHistoricalCount)
+				{
+					detail.RecordCount += detail.HistoricalRecordCount;	
+				}
+				
                 if (header)
                 {
                     var line = string.Format(
