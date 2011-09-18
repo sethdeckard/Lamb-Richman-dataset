@@ -17,22 +17,24 @@ namespace DataSetExtension.ConsoleApp
 		{
 			new Automation
 				{ 
-					InputDirectory = @"/Users/seth/Documents/LRDataSet/data",
-					BackupDirectory = @"/Users/seth/Documents/LRDataSet/database-backups",
-					OutputDirectory = @"/Users/seth/Documents/LRDataSet/output"
+					InputDirectory = "data",
+					BackupDirectory = "backups",
+					OutputDirectory = "output"
 				}.Run();
 			
-			/*Commands.ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2002, 1, 1));
+			//Commands.ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/output/tmininfo-2001.txt");
 			
-			Commands.ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/prcpinfo.txt");
-			Commands.ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/tmininfo.txt");
-			Commands.ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/tmaxinfo.txt");
+			//Commands.ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2002, 1, 1));
 			
-			Commands.ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2002.txt");
-			Commands.ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all", 2002);
+			//Commands.ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/test/prcpinfo-2001.txt");
+			//Commands.ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/test/tmininfo-2001.txt");
+			//Commands.ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/test/tmaxinfo-2001.txt");
 			
-			Commands.Export(@"/Users/seth/Documents/LRDataSet/output/2002", 2002);	
-			Commands.ExportGridStations(@"/Users/seth/Documents/LRDataSet/output/2002", 2002);*/
+			//Commands.ImportTd3200(@"/Users/seth/Documents/LRDataSet/data/TimeSeries_2002.txt");
+			//Commands.ImportCanada(@"/Users/seth/Documents/LRDataSet/canada-data/canada.all", 2002);
+			
+			//Commands.Export(@"/Users/seth/Documents/LRDataSet/output/2002", 2002);
+			//Commands.ExportGridStations(@"/Users/seth/Documents/LRDataSet/test", 2002);
 		}
 	}
 }

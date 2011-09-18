@@ -55,7 +55,9 @@ namespace DataSetExtension.ConsoleApp
 
                 var database = new StationDatabase(connection);
                 database.CreateSchema();
-
+				
+				Console.WriteLine("Importing US master station list...");
+				
                 var import = new StationImport();
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection);	
 				
@@ -293,10 +295,10 @@ namespace DataSetExtension.ConsoleApp
 			Console.WriteLine("done.");
 		}
 		
-		public static void CopyDatabase(string path)
+		public static void CopyDatabase(string path, string name)
 		{
 			Console.WriteLine("Copying database to " + path);
-			File.Copy(DatabaseName, Path.Combine(path, DatabaseName), true);	
+			File.Copy(DatabaseName, Path.Combine(path, name), true);	
 			Console.WriteLine(" done.");
 		}
 	}

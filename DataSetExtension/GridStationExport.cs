@@ -34,7 +34,7 @@ namespace DataSetExtension
 		{
 			var query = BuildQuery(table);
 			
-			for (long i = 1; i < 766; i++) 
+			for (long i = 1; i <= 766; i++) 
 			{
 				var stations = connection.Query<GridStation>(query, new { GridPoint = i }).OrderBy(station => station.Sequence);
 				writer.Write(stations.ToArray());
