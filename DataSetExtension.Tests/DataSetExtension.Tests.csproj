@@ -66,6 +66,8 @@
     <Compile Include="FakeGridSummaryWriter.cs" />
     <Compile Include="PrecipitationFormatterTest.cs" />
     <Compile Include="TemperatureFormatterTest.cs" />
+    <Compile Include="CanadaStationTest.cs" />
+    <Compile Include="Import\CanadaStationImportTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

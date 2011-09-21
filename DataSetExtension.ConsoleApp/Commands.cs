@@ -31,6 +31,7 @@ namespace DataSetExtension.ConsoleApp
 		
 		public static void ImportPrecipitationStations(string file) 
 		{
+		
 			var count = ImportGridStations(file, GridStationDatabase.PrecipitationStationTable);
 			Console.WriteLine(count + " precipitation stations imported");
 		}
@@ -61,7 +62,29 @@ namespace DataSetExtension.ConsoleApp
                 var import = new StationImport();
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection);	
 				
-				Console.WriteLine(import.Total + " master stations imported");
+				Console.WriteLine(import.Total + " master US stations imported");
+				
+				Console.Write("updating index...");
+				database.UpdateIndex();
+				Console.WriteLine("done.");
+			}			
+		}
+		
+		public static void ImportCanadaStations(string file)
+		{
+			using (IDbConnection connection = CreateConnection())
+            {
+                connection.Open();
+
+                var database = new StationDatabase(connection);
+                database.CreateSchema();
+				
+				Console.WriteLine("Importing Canada master station list...");
+				
+                var import = new CanadaStationImport();
+                import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection);	
+				
+				Console.WriteLine(import.Total + " master Canada stations imported");
 				
 				Console.Write("updating index...");
 				database.UpdateIndex();
@@ -290,14 +313,14 @@ namespace DataSetExtension.ConsoleApp
 		
 		public static void DeleteDatabase() 
 		{
-			Console.WriteLine("Deleting database...");
+			Console.Write("Deleting database...");
 			File.Delete(DatabaseName);	
 			Console.WriteLine("done.");
 		}
 		
 		public static void CopyDatabase(string path, string name)
 		{
-			Console.WriteLine("Copying database to " + path);
+			Console.Write("Copying database to " + path);
 			File.Copy(DatabaseName, Path.Combine(path, name), true);	
 			Console.WriteLine(" done.");
 		}

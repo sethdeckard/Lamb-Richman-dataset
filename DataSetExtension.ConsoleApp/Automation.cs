@@ -21,6 +21,7 @@ namespace DataSetExtension.ConsoleApp
 			{
 				Console.WriteLine("Processing " + i);
 				
+				Commands.ImportCanadaStations(Path.Combine(InputDirectory, "canada-stations.txt"));
 				Commands.ImportStations(Path.Combine(InputDirectory, "COOP.TXT.2007may"), new DateTime(i, 1, 1));
 				
 				var previous = i - 1;
