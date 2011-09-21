@@ -1,23 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataSetExtension.ConsoleApp/Commands.cs">
-    <Files>
-      <File FileName="DataSetExtension.ConsoleApp/Commands.cs" Line="34" Column="3" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="DataSetExtension" expanded="True">
-            <Node name="Dapper" expanded="True" />
             <Node name="Database" expanded="True" />
             <Node name="Import" expanded="True" />
           </Node>
-          <Node name="DataSetExtension.ConsoleApp" expanded="True">
-            <Node name="Commands.cs" selected="True" />
-          </Node>
+          <Node name="DataSetExtension.ConsoleApp" expanded="True" />
           <Node name="DataSetExtension.Tests" expanded="True">
             <Node name="Database" expanded="True" />
             <Node name="Import" expanded="True" />
+            <Node name="CanadaStationTest.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -45,6 +40,9 @@
             <Node name="DataSetExtension" expanded="True">
               <Node name="Tests" expanded="True">
                 <Node name="CanadaMeasurementTest" expanded="True" />
+                <Node name="CanadaStationTest" expanded="True">
+                  <Node name="Parse" selected="True" />
+                </Node>
                 <Node name="Database" expanded="True">
                   <Node name="ApplicationDatabaseTest" expanded="True" />
                   <Node name="GridStationDatabaseTest" expanded="True" />
@@ -53,12 +51,11 @@
                 </Node>
                 <Node name="ExportControllerTest" expanded="True" />
                 <Node name="GridStationExportTest" expanded="True" />
-                <Node name="GridStationTest" expanded="True">
-                  <Node name="SaveExisting" selected="True" />
-                </Node>
+                <Node name="GridStationTest" expanded="True" />
                 <Node name="GridSummaryWriterTest" expanded="True" />
                 <Node name="Import" expanded="True">
                   <Node name="CanadaImportTest" expanded="True" />
+                  <Node name="CanadaStationImportTest" expanded="True" />
                   <Node name="GridStationImportTest" expanded="True" />
                   <Node name="StationImportTest" expanded="True" />
                   <Node name="Td3200ImportTest" expanded="True" />
