@@ -11,7 +11,7 @@ namespace DataSetExtension
 			Number = columns[0];
 			Name = columns[1];
 			Latitude = decimal.Parse(columns[2]);
-			Longitude = decimal.Parse(columns[3]);
+			Longitude = decimal.Parse(columns[3]) * -1;
 		}
 	}
 }

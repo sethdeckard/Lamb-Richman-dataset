@@ -5,9 +5,9 @@ namespace DataSetExtension
 {
 	public class Station
 	{
-		const double EarthRadiusInMiles = 3958.761;
+		const double EarthMileRadius = 3958.761;
 		        
-		readonly Func<double, double, double, double, double> calculateDistance = (lat1, lon1, lat2, lon2) => EarthRadiusInMiles * 2 *
+		readonly Func<double, double, double, double, double> calculateDistance = (lat1, lon1, lat2, lon2) => EarthMileRadius * 2 *
         (
             Math.Asin(
                 Math.Min(1,

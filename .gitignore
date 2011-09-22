@@ -15,6 +15,7 @@ log.txt
 #monodevelop
 *.pidb
 *.test-cache
+*.userprefs
 
 #output
 *.obj

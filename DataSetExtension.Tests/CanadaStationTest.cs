@@ -16,7 +16,7 @@ namespace DataSetExtension.Tests
 			Assert.That(station.Number, Is.EqualTo("3010410"));
 			Assert.That(station.Name, Is.EqualTo("Aurora Lo"));
 			Assert.That(station.Latitude, Is.EqualTo(52.65M));
-			Assert.That(station.Longitude, Is.EqualTo(115.7166667M));
+			Assert.That(station.Longitude, Is.EqualTo(-115.7166667M));
 			Assert.That(station.Start.Date, Is.EqualTo(new DateTime(1, 1, 1)));
 		}
 	}
