@@ -45,8 +45,8 @@ namespace DataSetExtension.Tests
                                 new GridStation
                                     {
                                         GridPoint = 2,
-                                        Name = "Royal Palms Rngr Stat, FL",
-                                        Number = "087760",
+                                        Name = "Shearwater Automatic Climate Station,",
+                                        Number = "8087760",
                                         RecordCount = 692,
                                         HistoricalRecordCount = 10,
 										GridPointLatitude = 35,
@@ -65,7 +65,7 @@ namespace DataSetExtension.Tests
             Assert.That(reader.ReadLine(), Is.EqualTo(""));
             Assert.That(reader.ReadLine(), Is.EqualTo("  2 35  88 TestName1                      083020 2509  8055   41042"));
             Assert.That(reader.ReadLine(), Is.EqualTo("           Marathin Shores, FL            085351 2444  8103    4310"));
-            Assert.That(reader.ReadLine(), Is.EqualTo("           Royal Palms Rngr Stat, FL      087760 2523  8036     692"));
+            Assert.That(reader.ReadLine(), Is.EqualTo("           Shearwater Automatic Climate S8087760 2523  8036     692"));
             Assert.That(reader.ReadLine(), Is.EqualTo("                                                     TOTAL:   46044"));
 			
 			stream = new MemoryStream();
@@ -78,7 +78,7 @@ namespace DataSetExtension.Tests
             Assert.That(reader.ReadLine(), Is.EqualTo(""));
             Assert.That(reader.ReadLine(), Is.EqualTo("  2 35  88 TestName1                      083020 2509  8055   41052"));
             Assert.That(reader.ReadLine(), Is.EqualTo("           Marathin Shores, FL            085351 2444  8103    4320"));
-            Assert.That(reader.ReadLine(), Is.EqualTo("           Royal Palms Rngr Stat, FL      087760 2523  8036     702"));
+            Assert.That(reader.ReadLine(), Is.EqualTo("           Shearwater Automatic Climate S8087760 2523  8036     702"));
             Assert.That(reader.ReadLine(), Is.EqualTo("                                                     TOTAL:   46074"));
         }
     }

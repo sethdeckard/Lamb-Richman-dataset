@@ -34,6 +34,8 @@ namespace DataSetExtension
 					detail.RecordCount += detail.HistoricalRecordCount;	
 				}
 				
+				var name = detail.Name.PadRight(30, ' ').Substring(0, 30);
+				
                 if (header)
                 {
                     var line = string.Format(
@@ -41,7 +43,7 @@ namespace DataSetExtension
                         detail.GridPoint.ToString().PadLeft(3, ' '),
                         detail.GridPointLatitude.ToString().PadLeft(3, ' '),
                         detail.GridPointLongitude.ToString().PadLeft(3, ' '),
-                        detail.Name.PadRight(30, ' '),
+                        name,
                         detail.Number.PadLeft(7, ' '),
                         detail.Latitude,
                         detail.Longitude.ToString().PadLeft(5, ' '),
@@ -54,7 +56,7 @@ namespace DataSetExtension
                 {
                     var line = string.Format(
                        LineFormat,
-                        detail.Name.PadRight(30, ' '),
+                        name,
                         detail.Number.PadLeft(7, ' '),
                         detail.Latitude,
                         detail.Longitude.ToString().PadLeft(5, ' '),

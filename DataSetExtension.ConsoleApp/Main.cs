@@ -26,7 +26,7 @@ namespace DataSetExtension.ConsoleApp
 			
 			//Commands.ImportStations(@"/Users/seth/Documents/LRDataSet/COOP.TXT.2007may", new DateTime(2002, 1, 1));
 			
-			//Commands.ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/test/prcpinfo-2001.txt");
+			//Commands.ImportPrecipitationStations(@"/Users/seth/Documents/LRDataSet/test/prcpinfo-2005.txt");
 			//Commands.ImportTemperatureMinStations(@"/Users/seth/Documents/LRDataSet/test/tmininfo-2001.txt");
 			//Commands.ImportTemperatureMaxStations(@"/Users/seth/Documents/LRDataSet/test/tmaxinfo-2001.txt");
 			
