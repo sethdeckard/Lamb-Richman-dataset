@@ -24,6 +24,8 @@ namespace DataSetExtension.Tests
             Assert.That(first.StationNumber, Is.EqualTo("055048"));
 
             Assert.That(first.Date, Is.EqualTo(DateTime.Parse("02/01/1961")));
+			
+			Assert.That(first.ObservationHour, Is.EqualTo(18));
 
             Assert.That(first.Value, Is.EqualTo(48));
 
@@ -49,6 +51,8 @@ namespace DataSetExtension.Tests
             Assert.That(first.StationNumber, Is.EqualTo("055048"));
 
             Assert.That(first.Date, Is.EqualTo(DateTime.Parse("02/01/1961")));
+			
+			Assert.That(first.ObservationHour, Is.EqualTo(18));
 
             Assert.That(first.Value, Is.EqualTo(48));
 
@@ -74,6 +78,8 @@ namespace DataSetExtension.Tests
             Assert.That(first.StationNumber, Is.EqualTo("051609"));
 
             Assert.That(first.Date, Is.EqualTo(DateTime.Parse("09/01/1971")));
+			
+			Assert.That(first.ObservationHour, Is.EqualTo(18));
 
             Assert.That(first.Value, Is.EqualTo(0));
 

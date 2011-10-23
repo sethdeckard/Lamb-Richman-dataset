@@ -78,6 +78,9 @@ namespace DataSetExtension
 			{
 				Missing.Add(date);	
 				
+				var missing = new Measurement { Date = date, ObservationHour = 99 };
+				writer.WriteLine(Formatter.Format(missing, -1));
+				
 				return;
 			}
 			

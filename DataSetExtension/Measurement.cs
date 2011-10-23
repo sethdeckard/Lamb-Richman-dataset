@@ -14,6 +14,8 @@ namespace DataSetExtension
 		public Station Station { get; set; }
         
         public DateTime Date { get; set; }
+		
+		public long ObservationHour { get; set; }
 
         public long Value { get; set; }
 		
@@ -31,6 +33,7 @@ namespace DataSetExtension
 			((IDataParameter)command.Parameters[":number"]).Value = StationNumber;
 			((IDataParameter)command.Parameters[":date"]).Value = Date;
 			((IDataParameter)command.Parameters[":dateString"]).Value = Date.ToShortDateString();
+			((IDataParameter)command.Parameters[":hour"]).Value = ObservationHour;
 			((IDataParameter)command.Parameters[":value"]).Value = Value;			
 			
 			command.ExecuteNonQuery();
@@ -57,6 +60,10 @@ namespace DataSetExtension
 			dateString.ParameterName = ":dateString";
 			command.Parameters.Add(dateString);
 			
+			var hourParameter = command.CreateParameter();
+			hourParameter.ParameterName = ":hour";
+			command.Parameters.Add(hourParameter);
+			
 			var valueParameter = command.CreateParameter();
 			valueParameter.ParameterName = ":value";
 			command.Parameters.Add(valueParameter);
@@ -66,7 +73,10 @@ namespace DataSetExtension
 		
 		protected string GetCommandText(string table) 
 		{
-			return "insert into " + table + "(StationId,StationNumber,Date,DateString,Value) Values(:id, :number, :date, :dateString, :value);";
+			return "insert into " + 
+				table + 
+				"(StationId,StationNumber,Date,DateString,ObservationHour,Value) " + 
+				"Values(:id, :number, :date, :dateString, :hour, :value);";
 		}
 	}
 }

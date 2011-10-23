@@ -42,6 +42,10 @@ namespace DataSetExtension.Import
 			var dateString = Command.CreateParameter();
 			dateString.ParameterName = ":dateString";
 			Command.Parameters.Add(dateString);
+	
+			var hourParameter = Command.CreateParameter();
+			hourParameter.ParameterName = ":hour";
+			Command.Parameters.Add(hourParameter);
 			
 			var valueParameter = Command.CreateParameter();
 			valueParameter.ParameterName = ":value";
@@ -50,7 +54,8 @@ namespace DataSetExtension.Import
 
 		protected void SetCommandText(string table) 
 		{
-			Command.CommandText = "insert into " + table + "(StationId,StationNumber,Date,DateString,Value) Values(:id, :number, :date, :dateString, :value);";
+			Command.CommandText = "insert into " + table + 
+				"(StationId,StationNumber,Date,DateString,ObservationHour,Value) Values(:id, :number, :date, :dateString, :hour, :value);";
 		}	
 		
 		protected void ImportTemperatureMax(IDbConnection connection, IMeasurement[] measurements)
@@ -95,6 +100,7 @@ namespace DataSetExtension.Import
 				((IDataParameter)Command.Parameters[":number"]).Value = result.Measurement.StationNumber;
 				((IDataParameter)Command.Parameters[":date"]).Value = result.Measurement.Date;
 				((IDataParameter)Command.Parameters[":dateString"]).Value = result.Measurement.Date.ToShortDateString();
+				((IDataParameter)Command.Parameters[":hour"]).Value = result.Measurement.ObservationHour;
 				((IDataParameter)Command.Parameters[":value"]).Value = result.Measurement.Value;
 				
 				Command.ExecuteNonQuery();

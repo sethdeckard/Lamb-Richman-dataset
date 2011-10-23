@@ -52,6 +52,7 @@ namespace DataSetExtension.Database
             statement.AppendLine("StationNumber TEXT,");
             statement.AppendLine("Date DATETIME,");
 			statement.AppendLine("DateString TEXT,");
+			statement.AppendLine("ObservationHour INTEGER,");
             statement.AppendLine("Value INTEGER");
             statement.AppendLine(");");
 

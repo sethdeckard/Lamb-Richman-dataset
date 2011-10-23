@@ -81,7 +81,7 @@ namespace DataSetExtension
 		private static string CreateQuery(string table)
 		{
 			var writer = new StringWriter();
-			writer.WriteLine("select m.Id, m.StationId, m.StationNumber, m.Date, m.Value,");
+			writer.WriteLine("select m.Id, m.StationId, m.StationNumber, m.Date, m.ObservationHour, m.Value,");
 			writer.WriteLine("s.Id, s.Number, s.Name, s.State, s.County, s.Latitude, s.Longitude, s.Start, s.End");
 			writer.WriteLine("from Station s inner join {0} m on s.Number = m.StationNumber", table);
 			writer.WriteLine("where Latitude >= @MinLatitude and Latitude <= @MaxLatitude");

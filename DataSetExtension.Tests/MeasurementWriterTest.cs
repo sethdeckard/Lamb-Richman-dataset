@@ -45,7 +45,6 @@ namespace DataSetExtension.Tests
             Assert.That(reader.ReadLine(), Is.EqualTo("3"));
             Assert.That(reader.ReadLine(), Is.EqualTo("0"));
 			Assert.That(reader.ReadLine(), Is.EqualTo("5"));
-			Assert.That(reader.ReadLine(), Is.EqualTo("6"));
 			
 			Assert.That(writer.Missing.Count, Is.EqualTo(0));
 			
@@ -66,10 +65,18 @@ namespace DataSetExtension.Tests
                                   new Td3200 { StationId = 1, Date = DateTime.Parse("1/3/2001"), Value = 3, StationNumber = "1" },
                               };
 			
+			stream = new MemoryStream();
 			locator.PassNull = true;
+			writer = new MeasurementWriter(stream, stations.ToArray(), 2001) { Locator = locator, Formatter = formatter };
             writer.Write(records.ToArray(), 1);
 			
 			Assert.That(writer.Missing.Count, Is.EqualTo(31));
+			
+			stream.Position = 0;
+			
+			reader = new StreamReader(stream);
+			
+			Assert.That(reader.ReadToEnd().Length, Is.EqualTo(93));
 			
 			//todo test that tracker.update was invoked
         }

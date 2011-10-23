@@ -71,6 +71,9 @@ namespace DataSetExtension.Tests.Import
 				count = connection.Query<long>("select count(*) from TemperatureMin where StationNumber = '081458'").First();
 				Assert.That(count, Is.EqualTo(31));
 				
+				var instance = connection.Query<Td3200>("select ObservationHour from TemperatureMin where StationNumber = '081458' limit 1;").First();
+				Assert.That(instance.ObservationHour, Is.EqualTo(8)); //todo check other properties
+				
 				database.UpdateIndex();
             }
         }

@@ -113,7 +113,8 @@ namespace DataSetExtension.Tests
 				{
 					Date = DateTime.Parse("12/31/2010"),
 					StationNumber = "445599",
-					Value = 2
+					Value = 2,
+					ObservationHour = 13
 				};
 				measurement.Save(connection, MeasurementDatabase.TemperatureMaxTable);
 				
@@ -134,6 +135,7 @@ namespace DataSetExtension.Tests
 				
 				Assert.That(result.StationNumber, Is.EqualTo("445599"));
 				Assert.That(result.Date, Is.EqualTo(date));
+				Assert.That(result.ObservationHour, Is.EqualTo(13));
 				Assert.That(result.Value, Is.EqualTo(2));
 				
 				result = locator.Find(31, 85, date);

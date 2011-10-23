@@ -22,11 +22,11 @@ namespace DataSetExtension.Tests.Database
 				
 				database.CreateSchema();
 
-                connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, Value from TemperatureMax");
+                connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, ObservationHour, Value from TemperatureMax");
 
-                connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, Value from TemperatureMin");
+                connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, ObservationHour, Value from TemperatureMin");
 
-                connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, Value from Precipitation");
+                connection.Query<Td3200>("select Id, StationId, StationNumber, Date, DateString, ObservationHour, Value from Precipitation");
             }
         }
 		

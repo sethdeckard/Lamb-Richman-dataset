@@ -26,17 +26,19 @@ namespace DataSetExtension.Tests
 					StationId = 22,
 					StationNumber = "1234",
 					Date = DateTime.Parse("01/12/2011"),
+					ObservationHour = 18,
 					Value = 335
 				};
 				
 				measurement.Save(connection, "TemperatureMax");
 				
-				var saved = connection.Query<Measurement>("select Id, StationId, StationNumber, Date, Value from TemperatureMax").First();
+				var saved = connection.Query<Measurement>("select Id, StationId, StationNumber, Date, ObservationHour, Value from TemperatureMax").First();
 				
 				Assert.That(saved.Id, Is.EqualTo(measurement.Id));
 				Assert.That(saved.StationId, Is.EqualTo(measurement.StationId));
 				Assert.That(saved.StationNumber, Is.EqualTo(measurement.StationNumber));
 				Assert.That(saved.Date, Is.EqualTo(measurement.Date));
+				Assert.That(saved.ObservationHour, Is.EqualTo(measurement.ObservationHour));
 				Assert.That(saved.Value, Is.EqualTo(measurement.Value));
 			}				
 		}
@@ -57,6 +59,7 @@ namespace DataSetExtension.Tests
 					StationId = 22,
 					StationNumber = "1234",
 					Date = DateTime.Parse("01/12/2011"),
+					ObservationHour = 19,
 					Value = 335
 				};
 				
@@ -64,14 +67,13 @@ namespace DataSetExtension.Tests
 				
 				measurement.Save(connection, command);
 				
-				//command.Transaction.Commit();
-				
-				var saved = connection.Query<Measurement>("select Id, StationId, StationNumber, Date, Value from TemperatureMax").First();
+				var saved = connection.Query<Measurement>("select Id, StationId, StationNumber, Date, ObservationHour, Value from TemperatureMax").First();
 				
 				Assert.That(saved.Id, Is.EqualTo(measurement.Id));
 				Assert.That(saved.StationId, Is.EqualTo(measurement.StationId));
 				Assert.That(saved.StationNumber, Is.EqualTo(measurement.StationNumber));
 				Assert.That(saved.Date, Is.EqualTo(measurement.Date));
+				Assert.That(saved.ObservationHour, Is.EqualTo(measurement.ObservationHour));
 				Assert.That(saved.Value, Is.EqualTo(measurement.Value));
 			}				
 		}	
@@ -79,8 +81,8 @@ namespace DataSetExtension.Tests
 		private static IDbCommand CreateCommand(IDbConnection connection)
 		{
 			var command = connection.CreateCommand();
-			command.CommandText = "insert into TemperatureMax(StationId,StationNumber,Date,DateString,Value)" +
-				" Values(:id, :number, :date, :dateString, :value);";
+			command.CommandText = "insert into TemperatureMax(StationId,StationNumber,Date,DateString,ObservationHour,Value)" +
+				" Values(:id, :number, :date, :dateString, :hour, :value);";
 			command.Transaction = connection.BeginTransaction();
 			
 			var idParameter = command.CreateParameter();
@@ -98,6 +100,10 @@ namespace DataSetExtension.Tests
 			var dateString = command.CreateParameter();
 			dateString.ParameterName = ":dateString";
 			command.Parameters.Add(dateString);
+			
+			var hourParameter = command.CreateParameter();
+			hourParameter.ParameterName = ":hour";
+			command.Parameters.Add(hourParameter);
 			
 			var valueParameter = command.CreateParameter();
 			valueParameter.ParameterName = ":value";

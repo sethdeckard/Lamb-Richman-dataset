@@ -19,11 +19,6 @@ namespace DataSetExtension
 
             return list.ToArray();
         }
-		
-		//private virtual string ToString(long sequence) 
-		//{
-		//	return sequence.ToString();
-		//}
 
         private static void ParseItems(string records, string station, int year, int month, List<Td3200> list)
         {
@@ -46,11 +41,12 @@ namespace DataSetExtension
                 }
 
                 var day = int.Parse(record.Substring(0, 2));
+				var hour = int.Parse(record.Substring(2, 2));
                 var date = new DateTime(year, month, day);
 				var value = int.Parse(record.Substring(4, 6));
-                var result = new Td3200 { StationNumber = station, Date = date, Value = value };
+                var result = new Td3200 { StationNumber = station, Date = date, Value = value, ObservationHour = hour };
                 list.Add(result);
             }
         }
     }
-}
+} 

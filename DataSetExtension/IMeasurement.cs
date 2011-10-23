@@ -10,6 +10,8 @@ namespace DataSetExtension
 		
 		DateTime Date { get; set; }
 		
+		long ObservationHour { get; set; }
+		
         long Value { get; set; }
 	}
 }
