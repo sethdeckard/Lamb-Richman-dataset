@@ -8,6 +8,7 @@ using DataSetExtension;
 using DataSetExtension.Database;
 using DataSetExtension.Import;
 using Dapper;
+using System.Text;
 
 namespace DataSetExtension.ConsoleApp
 {
@@ -323,6 +324,22 @@ namespace DataSetExtension.ConsoleApp
 			Console.Write("Copying database to " + path);
 			File.Copy(DatabaseName, Path.Combine(path, name), true);	
 			Console.WriteLine(" done.");
+		}
+		
+		public static void ClearHistoricalCounts() 
+		{	
+			using (IDbConnection connection = new SqliteConnection(@"Data Source=DataSetExtension.sqlite;Version=3;DateTimeFormat=Ticks"))
+            {
+				var command = connection.CreateCommand();
+				var query = new StringBuilder();
+				query.AppendLine("update PrecipitationStation set HistoricalRecordCount = 0;");
+				query.AppendLine("update TemperatureMinStation set HistoricalRecordCount = 0;");
+				query.AppendLine("update TemperatureMaxStation set HistoricalRecordCount = 0;");
+				command.CommandText = query.ToString();
+				
+                connection.Open();
+				command.ExecuteNonQuery();
+			}				
 		}
 	}
 }

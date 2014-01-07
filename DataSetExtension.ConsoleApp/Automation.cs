@@ -17,7 +17,7 @@ namespace DataSetExtension.ConsoleApp
 			var stopwatch = new Stopwatch();
 			stopwatch.Start();
 			
-			for (int i = 2001; i < 2011; i++) 
+			for (int i = 1999; i < 2001; i++) 
 			{
 				Console.WriteLine("Processing " + i);
 				
@@ -28,6 +28,11 @@ namespace DataSetExtension.ConsoleApp
 				Commands.ImportPrecipitationStations(Path.Combine(OutputDirectory, "prcpinfo-" + previous + "-historical.txt"));
 				Commands.ImportTemperatureMinStations(Path.Combine(OutputDirectory, "tmininfo-" + previous + "-historical.txt"));
 				Commands.ImportTemperatureMaxStations(Path.Combine(OutputDirectory, "tmaxinfo-" + previous + "-historical.txt"));
+				
+				if (i == 1999) 
+				{
+					Commands.ClearHistoricalCounts();	
+				}
 				
 				Commands.ImportTd3200(Path.Combine(InputDirectory, "TimeSeries_" + i +".txt"));
 				Commands.ImportCanada(Path.Combine(InputDirectory, "canada.all"), i);
