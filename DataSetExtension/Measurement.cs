@@ -5,7 +5,7 @@ namespace DataSetExtension
 {
 	public class Measurement : IMeasurement
 	{
-        public long Id { get; set; }
+    	public long Id { get; set; }
 
         public long StationId { get; set; } //todo should be gridstationId
 

@@ -8,14 +8,14 @@ namespace DataSetExtension
     public class GridStation
     {
         public long Id { get; set; }
-		
+    
         public string Number { get; set; }
 
         public string Name { get; set; }
 
         public long GridPoint { get; set; }
-		
-		public long StationId { get; set; }
+    
+        public long StationId { get; set; }
 
         public long Sequence { get; set; }
 
@@ -30,8 +30,8 @@ namespace DataSetExtension
         public long HistoricalRecordCount { get; set; }
 
         public long RecordCount { get; set; }
-		
-		public bool IsNew { get; set; }
+    
+        public bool IsNew { get; set; }
 
         public virtual void Parse(string record)
         {
@@ -59,66 +59,66 @@ namespace DataSetExtension
             GridPointLongitude = parent.GridPointLongitude;
             Sequence = parent.Sequence + 1;
         }
-		
-		public virtual void Save(IDbConnection connection, string table)
-		{
-			if (Id > 0) 
-			{
-				Update(connection, table);	
-			}
-			else 
-			{
-				Insert(connection, table);
-			}
-		}
-		
-		private void Update(IDbConnection connection, string table)
-		{
-            var query = new StringBuilder();
-			query.AppendLine("update " + table);
-            query.AppendLine("set Number = @Number, Name = @Name, GridPoint = @GridPoint, Sequence = @Sequence,");
-			query.AppendLine("Latitude = @Latitude, Longitude = @Longitude, GridPointLatitude = @GridPointLatitude,");
-			query.AppendLine("GridPointLongitude = @GridPointLongitude, HistoricalRecordCount = @HistoricalRecordCount,");
-			query.AppendLine("RecordCount = @RecordCount");
-			query.AppendLine("where Id = @Id;");
-			
-			var parameters = new
-              {
-                  Number, 
-                  Name, 
-                  GridPoint, 
-                  Sequence, 
-                  Latitude, 
-                  Longitude, 
-                  GridPointLatitude,
-                  GridPointLongitude,
-                  HistoricalRecordCount,
-                  RecordCount,
-				  Id = Id
-              };
-			
-            connection.Execute(query.ToString(), parameters);		
-		}
-		
-		private void Insert(IDbConnection connection, string table)
-		{
-            var query = "insert into " + table +
-                        "(Number,Name,GridPoint,Sequence,Latitude,Longitude,GridPointLatitude,GridPointLongitude,HistoricalRecordCount,RecordCount)";
-            query += "values(@Number,@Name,@GridPoint,@Sequence,@Latitude,@Longitude,@GridPointLatitude,@GridPointLongitude,@HistoricalRecordCount,@RecordCount)";
+    
+        public virtual void Save(IDbConnection connection, string table)
+        {
+          if (Id > 0) 
+          {
+            Update(connection, table);  
+          }
+          else 
+          {
+            Insert(connection, table);
+          }
+        }
+    
+        private void Update(IDbConnection connection, string table)
+        {
+                var query = new StringBuilder();
+          query.AppendLine("update " + table);
+                query.AppendLine("set Number = @Number, Name = @Name, GridPoint = @GridPoint, Sequence = @Sequence,");
+          query.AppendLine("Latitude = @Latitude, Longitude = @Longitude, GridPointLatitude = @GridPointLatitude,");
+          query.AppendLine("GridPointLongitude = @GridPointLongitude, HistoricalRecordCount = @HistoricalRecordCount,");
+          query.AppendLine("RecordCount = @RecordCount");
+          query.AppendLine("where Id = @Id;");
+          
+          var parameters = new
+                  {
+                      Number, 
+                      Name, 
+                      GridPoint, 
+                      Sequence, 
+                      Latitude, 
+                      Longitude, 
+                      GridPointLatitude,
+                      GridPointLongitude,
+                      HistoricalRecordCount,
+                      RecordCount,
+              Id = Id
+                  };
+          
+                connection.Execute(query.ToString(), parameters);   
+        }
+    
+        private void Insert(IDbConnection connection, string table)
+        {
+                var query = "insert into " + table +
+                            "(Number,Name,GridPoint,Sequence,Latitude,Longitude,GridPointLatitude,GridPointLongitude,HistoricalRecordCount,RecordCount)";
+                query += "values(@Number,@Name,@GridPoint,@Sequence,@Latitude,@Longitude,@GridPointLatitude,@GridPointLongitude,@HistoricalRecordCount,@RecordCount)";
 
-            connection.Execute(query, new
-                                          {
-                                              Number, 
-                                              Name, 
-                                              GridPoint, 
-                                              Sequence, 
-                                              Latitude, 
-                                              Longitude, 
-                                              GridPointLatitude,
-                                              GridPointLongitude,
-                                              HistoricalRecordCount,
-                                              RecordCount
-                                          });	
-		}
+                connection.Execute(query, new
+                                              {
+                                                  Number, 
+                                                  Name, 
+                                                  GridPoint, 
+                                                  Sequence, 
+                                                  Latitude, 
+                                                  Longitude, 
+                                                  GridPointLatitude,
+                                                  GridPointLongitude,
+                                                  HistoricalRecordCount,
+                                                  RecordCount
+                                              }); 
+        }
     }
 }
