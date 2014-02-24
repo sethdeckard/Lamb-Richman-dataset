@@ -11,9 +11,9 @@ namespace DataSetExtension.Tests
     [TestFixture]
     public class GridStationTest 
     { 
-		private const string Query = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
+        private const string Query = "select Id, Number, Name, GridPoint, Sequence, Latitude, Longitude, GridPointLatitude, GridPointLongitude, " + 
             "HistoricalRecordCount, RecordCount from TemperatureMinStation";
-		
+        
         [Test]
         public void Parse()
         {
@@ -62,70 +62,70 @@ namespace DataSetExtension.Tests
             Assert.That(station.Longitude, Is.EqualTo(8103));
             Assert.That(station.Sequence, Is.EqualTo(1));
         }
-		
-		[Test]
-		public void Save() 
-		{
+        
+        [Test]
+        public void Save() 
+        {
             using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
             {
                 connection.Open();
-				
-				var database = new GridStationDatabase(connection);
-				database.CreateSchema();
+                
+                var database = new GridStationDatabase(connection);
+                database.CreateSchema();
 
                 var station = new GridStation() 
-				{
-					GridPoint = 2,
-					GridPointLatitude = 1001,
-					GridPointLongitude = 1002
-				};
-				
-				station.Save(connection, "TemperatureMinStation");
+                {
+                    GridPoint = 2,
+                    GridPointLatitude = 1001,
+                    GridPointLongitude = 1002
+                };
+                
+                station.Save(connection, "TemperatureMinStation");
 
                 var result = connection.Query<GridStation>(Query).First();
-				
-				Assert.That(result.Id, Is.GreaterThan(0));
-				Assert.That(result.GridPoint, Is.EqualTo(2));
-            }			
-		}
-		
-		[Test]
-		public void SaveExisting() 
-		{
+                
+                Assert.That(result.Id, Is.GreaterThan(0));
+                Assert.That(result.GridPoint, Is.EqualTo(2));
+            }           
+        }
+        
+        [Test]
+        public void SaveExisting() 
+        {
             using (IDbConnection connection = new SqliteConnection("Data source=:memory:"))
             {
                 connection.Open();
-				
-				var database = new GridStationDatabase(connection);
-				database.CreateSchema();
+                
+                var database = new GridStationDatabase(connection);
+                database.CreateSchema();
 
                 var station = new GridStation() 
-				{
-					GridPoint = 2,
-					GridPointLatitude = 1001,
-					GridPointLongitude = 1002
-				};
-				
-				station.Save(connection, "TemperatureMinStation");
-				
+                {
+                    GridPoint = 2,
+                    GridPointLatitude = 1001,
+                    GridPointLongitude = 1002
+                };
+                
+                station.Save(connection, "TemperatureMinStation");
+                
                 station = new GridStation() 
-				{
-					Id = 1,
-					GridPoint = 2,
-					GridPointLatitude = 1001,
-					GridPointLongitude = 1002
-				};
-				
-				station.Save(connection, "TemperatureMinStation");
+                {
+                    Id = 1,
+                    GridPoint = 2,
+                    GridPointLatitude = 1001,
+                    GridPointLongitude = 1002
+                };
+                
+                station.Save(connection, "TemperatureMinStation");
 
                 var query = connection.Query<GridStation>(Query);
-				var result = query.First();
-				
-				Assert.That(result.Id, Is.GreaterThan(0));
-				Assert.That(result.GridPoint, Is.EqualTo(2));
-				
-				Assert.That(query.Count(), Is.EqualTo(1));
-            }			
-		}
+                var result = query.First();
+                
+                Assert.That(result.Id, Is.GreaterThan(0));
+                Assert.That(result.GridPoint, Is.EqualTo(2));
+                
+                Assert.That(query.Count(), Is.EqualTo(1));
+            }           
+        }
     }
 }

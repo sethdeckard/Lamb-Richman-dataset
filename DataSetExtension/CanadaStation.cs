@@ -2,16 +2,16 @@ using System;
 
 namespace DataSetExtension
 {
-	public class CanadaStation : Station
-	{
-		public new void Parse(string record)
-		{
-			var columns = record.Split(new[] { '\t' });
-			
-			Number = columns[0];
-			Name = columns[1];
-			Latitude = decimal.Parse(columns[2]);
-			Longitude = decimal.Parse(columns[3]) * -1;
-		}
-	}
+    public class CanadaStation : Station
+    {
+        public new void Parse(string record)
+        {
+            var columns = record.Split(new[] { '\t' });
+            
+            Number = columns[0];
+            Name = columns[1];
+            Latitude = decimal.Parse(columns[2]);
+            Longitude = decimal.Parse(columns[3]) * -1;
+        }
+    }
 }

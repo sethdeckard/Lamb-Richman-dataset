@@ -6,11 +6,11 @@ using System.Linq;
 using NUnit.Framework;
 namespace DataSetExtension.Tests
 {
-	public class SequenceFormatter : IFormatter
-	{
-		public string Format(IMeasurement measurement, long sequence)
-		{
-			return sequence.ToString();
-		}	
-	}
+    public class SequenceFormatter : IFormatter
+    {
+        public string Format(IMeasurement measurement, long sequence)
+        {
+            return sequence.ToString();
+        }   
+    }
 }

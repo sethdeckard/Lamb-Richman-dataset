@@ -7,3 +7,6 @@ Sometimes a COOP station will not have data for a particular day for a number of
 
 ###Missing Canada Data###
 Due to budget cuts there was missing Canada data at the time of extension, the data is said to exist on backup tape but needs to be made available online.
+
+###Copyright###
+Copyright (C) 2011  Seth Deckard, See LICENSE.txt for details.

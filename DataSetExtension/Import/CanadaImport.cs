@@ -5,24 +5,24 @@ using System.Linq;
 
 namespace DataSetExtension.Import
 {
-	public class CanadaImport : MeasurementImport
-	{
-		public override void Import(Stream stream, IDbConnection connection) 
-		{
-			CreateCommand(connection);
+    public class CanadaImport : MeasurementImport
+    {
+        public override void Import(Stream stream, IDbConnection connection) 
+        {
+            CreateCommand(connection);
 
             using (var reader = new StreamReader(stream))
             {
                 while (!reader.EndOfStream)
                 {
                     var records = CanadaMeasurement.Parse(reader.ReadLine());
-					if (records.Length == 0) 
-					{
-						continue;
-					}
-					
-					var element = records.First().Element;
-					
+                    if (records.Length == 0) 
+                    {
+                        continue;
+                    }
+                    
+                    var element = records.First().Element;
+                    
                     if (element == Element.TemperatureMax)
                     {
                        ImportTemperatureMax(connection, records);
@@ -30,19 +30,19 @@ namespace DataSetExtension.Import
 
                     if (element == Element.TemperatureMin)
                     {
-						ImportTemperatureMin(connection, records);
+                        ImportTemperatureMin(connection, records);
                     }
 
                     if (element == Element.Precipitation)
                     {
-						ImportPrecipitation(connection, records);
+                        ImportPrecipitation(connection, records);
                     }
-					
-					Total += 1;
+                    
+                    Total += 1;
                 }
-				
-				Command.Transaction.Commit();
+                
+                Command.Transaction.Commit();
             }
-		}
-	}
+        }
+    }
 }
