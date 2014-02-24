@@ -1,4 +1,4 @@
-#Lamb-Richmond Dataset Extension# 
+#Lamb-Richmond Dataset Extension#
 
 LR Dataset Extension is a library that extends the Lamb-Richmond dataset using COOP station data from the US (NOAA/NWS) and Canada (when available).  The dataset provides a set of max/min temperature and precipitation from 50 uniform grid points over the US and Canada, east of the Rocky Mountains. This dataset is ideal for machine learning applications related to climate science.  The library extended the existing dataset from 2000 to 2010, including filling in some gaps in the 90s.
 
