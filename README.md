@@ -29,7 +29,7 @@ While multiple years could be processed at once this is not recommended due to t
 * DataSetExtension.ConsoleApp - App used to automate the entire process for multiple years, code MUST be modified before usage.
 
 ###Requirements and Dependencies###
-The project was built in Mono on OS X but should work on Windows as well. It uses SQLite and Dapper for data storage during processing.
+The project was built in Mono on OS X but should work on Windows as well. It uses SQLite and Dapper for data storage during processing.  Why Mono? It is the first and last Mono app I have ever written for OS X, just an excercise to see what it would be like.
 
 
 ###Copyright###
