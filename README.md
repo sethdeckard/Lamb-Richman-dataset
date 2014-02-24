@@ -1,12 +1,12 @@
 #Lamb-Richman Dataset Extension#
 
-LR Dataset Extension is a library that extends the Lamb-Richman dataset using COOP station data from the US (NOAA/NWS) and Canada (when available).  Created by Dr. Peter Lamb and Dr Michael Richman of the University of Oklahoma School of Meteorology, the climate dataset provides max/min temperature and precipitation data from 50 uniform grid points over the US and Canada, east of the Rocky Mountains. This dataset is ideal for machine learning applications related to climate science.  The library extended the existing dataset from 2000 to 2010, including filling in some gaps in the 90s. Fully automating a time consuming semi-manual process, it can be used to automate the extension of additional years.
+LR Dataset Extension is a library that extends the Lamb-Richman dataset using COOP station data from the US (NOAA/NWS) and Canada (when available).  Created by Dr. Peter Lamb and Dr Michael Richman of the University of Oklahoma School of Meteorology, the climate dataset provides max/min temperature and precipitation data from 50 uniform grid points over the US and Canada, east of the Rocky Mountains. This dataset is ideal for machine learning applications related to climate science.  The library extended the existing dataset (1949-2000) from 2001 to 2010, including filling in some gaps in the 90s. Fully automating a time consuming semi-manual process, it can be used to automate the extension of additional years.
 
 ###Station Substitution###
 Sometimes a COOP station will not have data for a particular day for a number of various reasons, or the measurement will have a flag that denotes it's likely an error.  In this case the library selects the nearest station (based on latitude and longitude) that has data for that day and uses it as a substitute station.
 
 ###Missing Canada Data###
-Due to budget cuts there was missing Canada data at the time of extension, the data is said to exist on backup tape but needs to be made available online.
+Due to budget cuts there was missing Canada data at the time of extension, the data is said to exist on backup tape but needs to be made available online. When this data becomes available online these years can be processed again.
 
 ###Process###
 The overall process consists of the following steps:
