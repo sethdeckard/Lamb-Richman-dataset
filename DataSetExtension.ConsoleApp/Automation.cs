@@ -12,12 +12,16 @@ namespace DataSetExtension.ConsoleApp
         
         public string BackupDirectory { get; set; }
         
+		/// <summary>
+		/// Handles multiple years at once, saving off a backup database for each year.
+		/// Expects certain file name conventions.
+		/// </summary>
         public void Run() 
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             
-            for (int i = 1999; i < 2001; i++) 
+			for (int i = 1999; i < 2010; i++) //years being processed
             {
                 Console.WriteLine("Processing " + i);
                 
@@ -44,7 +48,7 @@ namespace DataSetExtension.ConsoleApp
             
                 Commands.CopyDatabase(BackupDirectory, i + "-exported.sqlite");
                 
-                Commands.DeleteDatabase();
+				Commands.DeleteDatabase(); //delete database to start fresh with next year
                 
                 Console.WriteLine(i + " complete.");
             }

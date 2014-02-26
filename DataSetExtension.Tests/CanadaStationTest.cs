@@ -11,7 +11,7 @@ namespace DataSetExtension.Tests
         public void Parse()
         {
             var station = new CanadaStation();
-            station.Parse("3010410  Aurora Lo   52.65   115.7166667");
+            station.Parse("3010410\tAurora Lo\t52.65\t115.7166667");
             
             Assert.That(station.Number, Is.EqualTo("3010410"));
             Assert.That(station.Name, Is.EqualTo("Aurora Lo"));
