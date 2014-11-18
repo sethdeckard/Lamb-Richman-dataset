@@ -59,18 +59,18 @@ namespace DataSetExtension.Tests.Import
                 count = connection.Query<long>("select count(*) from Precipitation;").First();
                 Assert.That(count, Is.EqualTo(8));
 
-				var id = connection.Query<long>("select StationId from TemperatureMax;").First();
-                Assert.That(id, Is.EqualTo(1));
+				count = connection.Query<long>("select count(*) from TemperatureMax where StationId = 1;").First();
+                Assert.That(count, Is.EqualTo(30));
 
-				id = connection.Query<long>("select StationId from TemperatureMin;").First();
-                Assert.That(id, Is.EqualTo(3));
+				count = connection.Query<long>("select count(*) from TemperatureMin where StationId = 3;").First();
+				Assert.That(count, Is.EqualTo(31));
 				
-				id = connection.Query<long>("select StationId from Precipitation;").First();
-                Assert.That(id, Is.EqualTo(2));
+				count = connection.Query<long>("select count(*) from Precipitation where StationId = 2;").First();
+				Assert.That(count, Is.EqualTo(4));
 				
 				count = connection.Query<long>("select count(*) from TemperatureMin where StationNumber = '081458'").First();
 				Assert.That(count, Is.EqualTo(31));
-				
+
 				var instance = connection.Query<Td3200>("select ObservationHour from TemperatureMin where StationNumber = '081458' limit 1;").First();
 				Assert.That(instance.ObservationHour, Is.EqualTo(8)); //todo check other properties
 				
