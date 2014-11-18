@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/sethdeckard/Lamb-Richman-dataset.svg?branch=master)](https://travis-ci.org/sethdeckard/Lamb-Richman-dataset)
 #Lamb-Richman Dataset Extension#
 
 LR Dataset Extension is a library that generates or extends the Lamb-Richman dataset using COOP station data from the US (NOAA/NWS) and Canada (when available).  Created by Dr. Peter Lamb and Dr Michael Richman of the University of Oklahoma School of Meteorology, the climate dataset provides max/min temperature and precipitation data from 50 uniform grid points over the US and Canada, east of the Rocky Mountains. This dataset is ideal for machine learning applications related to climate science.  The library extended the existing dataset (1949-2000) from 2001 to 2010 and it can be used to automate the extension of additional years or regenerate the entire dataset again.
@@ -32,7 +33,13 @@ Due to budget cuts there was missing Canada data at the time of extension, the d
 
 
 ###Requirements and Dependencies###
-The project was built in Mono on OS X but should work on Windows as well. It uses SQLite and Dapper for data storage during processing. All the tests passed on Mono 3.2.7.
+The project was built in Mono on OS X, in theory it should work on Windows as well but this has not been tested yet. It uses SQLite and Dapper for data storage during processing. All the tests pass on Mono 3.10.0.
+
+    #build project
+    xbuild
+    
+    #run unit tests
+    ./run-tests.sh
 
 
 ###Copyright###
