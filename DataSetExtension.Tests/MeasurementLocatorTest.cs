@@ -23,8 +23,8 @@ namespace DataSetExtension.Tests
                 var station = new Station
                 {
                     Number = "445591",
-                    Latitude = 32.4473874656245M,
-                    Longitude = -83.3134799242268M,
+                    Latitude = 32.4473874656245D,
+                    Longitude = -83.3134799242268D,
                     Start = DateTime.Parse("7/30/2012")
                 };
                 station.Save(connection);
@@ -32,8 +32,8 @@ namespace DataSetExtension.Tests
                 station = new Station
                 {
                     Number = "123",
-                    Latitude = 29.5527M,
-                    Longitude = -87.6718866M,
+                    Latitude = 29.5527D,
+                    Longitude = -87.6718866D,
                     Start = DateTime.Parse("7/30/2010")
                 };
                 station.Save(connection);
@@ -41,8 +41,8 @@ namespace DataSetExtension.Tests
                 station = new Station
                 {
                     Number = "445595",
-                    Latitude = 31.05M,
-                    Longitude = -85.30M,
+                    Latitude = 31.05D,
+                    Longitude = -85.30D,
                     Start = DateTime.Parse("11/30/2009"),
                     End = DateTime.Parse("1/30/2010")
                 };
@@ -51,8 +51,8 @@ namespace DataSetExtension.Tests
                 station = new Station
                 {
                     Number = "445599",
-                    Latitude = 31.01M,
-                    Longitude = -85.1M,
+                    Latitude = 31.01D,
+                    Longitude = -85.1D,
                     Start = DateTime.Parse("11/30/2010")
                 };
                 station.Save(connection);
@@ -60,8 +60,8 @@ namespace DataSetExtension.Tests
                 station = new Station
                 {
                     Number = "445500",
-                    Latitude = 31.06M,
-                    Longitude = -85.30M,
+                    Latitude = 31.06D,
+                    Longitude = -85.30D,
                     Start = DateTime.Parse("11/30/2010")
                 };
                 station.Save(connection);
@@ -69,8 +69,8 @@ namespace DataSetExtension.Tests
                 station = new Station
                 {
                     Number = "xxx",
-                    Latitude = 32.44737M,
-                    Longitude = -82.328119M,
+                    Latitude = 32.44737D,
+                    Longitude = -82.328119D,
                     Start = DateTime.Parse("11/30/2010")
                 };
                 station.Save(connection);

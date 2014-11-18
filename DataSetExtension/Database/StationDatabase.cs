@@ -36,8 +36,8 @@ namespace DataSetExtension.Database
             statement.AppendLine("Name TEXT,");
             statement.AppendLine("State TEXT,");
             statement.AppendLine("County TEXT,");
-            statement.AppendLine("Latitude DECIMAL,");
-            statement.AppendLine("Longitude DECIMAL,");
+            statement.AppendLine("Latitude DOUBLE,");
+			statement.AppendLine("Longitude DOUBLE,");
             statement.AppendLine("Start DATETIME,");
             statement.AppendLine("End DATETIME");
             statement.AppendLine(");");

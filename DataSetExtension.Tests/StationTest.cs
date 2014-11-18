@@ -54,8 +54,8 @@ namespace DataSetExtension.Tests
                     Number = "1234",
                     State = "OK",
                     County = "CountyTest",
-                    Latitude = 34.22M,
-                    Longitude = -67.44M
+                    Latitude = 34.22D,
+                    Longitude = -67.44D
                 };
                 
                 station.Save(connection);
@@ -82,8 +82,8 @@ namespace DataSetExtension.Tests
                     Number = "1234",
                     State = "OK",
                     County = "CountyTest",
-                    Latitude = 34.22M,
-                    Longitude = -67.44M
+                    Latitude = 34.22D,
+                    Longitude = -67.44D
                 };
                 
                 station.Save(connection, CreateCommand(connection));
@@ -106,7 +106,7 @@ namespace DataSetExtension.Tests
         [Test]
         public void GetLatitudeDegrees()
         {
-            var station = new Station { Latitude = 34.79M };
+            var station = new Station { Latitude = 34.79D };
             var latitude = station.GetLatitudeDegrees();
             
             Assert.That(latitude, Is.EqualTo(3447));
@@ -115,7 +115,7 @@ namespace DataSetExtension.Tests
         [Test]
         public void GetLongitudeDegrees() 
         {
-            var station = new Station { Longitude = -84.28M };
+            var station = new Station { Longitude = -84.28D };
             
             var longitude = station.GetLongitudeDegrees();
             
