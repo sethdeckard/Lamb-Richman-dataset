@@ -106,7 +106,7 @@ namespace DataSetExtension.Tests
         [Test]
         public void GetLatitudeDegrees()
         {
-            var station = new Station { Latitude = 34.79D };
+            var station = new Station { Latitude = 34.79 };
             var latitude = station.GetLatitudeDegrees();
             
             Assert.That(latitude, Is.EqualTo(3447));
@@ -115,7 +115,7 @@ namespace DataSetExtension.Tests
         [Test]
         public void GetLongitudeDegrees() 
         {
-            var station = new Station { Longitude = -84.28D };
+            var station = new Station { Longitude = -84.28 };
             
             var longitude = station.GetLongitudeDegrees();
             

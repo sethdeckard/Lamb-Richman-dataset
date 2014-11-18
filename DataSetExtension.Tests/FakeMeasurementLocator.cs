@@ -30,8 +30,8 @@ namespace DataSetExtension.Tests
                                 { 
                                     Name =  "TestStation", 
                                     State = "ST", 
-                                    Latitude = 32.85D,
-                                    Longitude = -89.29D
+                                    Latitude = 32.85,
+                                    Longitude = -89.29
                                 } 
                 };
         }
