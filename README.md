@@ -1,12 +1,6 @@
 #Lamb-Richman Dataset Extension#
 
-LR Dataset Extension is a library that extends the Lamb-Richman dataset using COOP station data from the US (NOAA/NWS) and Canada (when available).  Created by Dr. Peter Lamb and Dr Michael Richman of the University of Oklahoma School of Meteorology, the climate dataset provides max/min temperature and precipitation data from 50 uniform grid points over the US and Canada, east of the Rocky Mountains. This dataset is ideal for machine learning applications related to climate science.  The library extended the existing dataset (1949-2000) from 2001 to 2010. Fully automating a time consuming semi-manual process, it can be used to automate the extension of additional years.
-
-###Station Substitution###
-Sometimes a COOP station will not have data for a particular day for a number of various reasons, or the measurement will have a flag that denotes it's likely an error.  In this case the library selects the nearest station (based on latitude and longitude) that has data for that day and uses it as a substitute station.
-
-###Missing Canada Data###
-Due to budget cuts there was missing Canada data at the time of extension, the data is said to exist on backup tape but needs to be made available online. When this data becomes available online these years can be processed again.
+LR Dataset Extension is a library that generates or extends the Lamb-Richman dataset using COOP station data from the US (NOAA/NWS) and Canada (when available).  Created by Dr. Peter Lamb and Dr Michael Richman of the University of Oklahoma School of Meteorology, the climate dataset provides max/min temperature and precipitation data from 50 uniform grid points over the US and Canada, east of the Rocky Mountains. This dataset is ideal for machine learning applications related to climate science.  The library extended the existing dataset (1949-2000) from 2001 to 2010 and it can be used to automate the extension of additional years or regenerate the entire dataset again.
 
 ###Process###
 The overall process consists of the following steps:
@@ -21,7 +15,8 @@ The overall process consists of the following steps:
 
 While multiple years could be processed at once in a single database, this is not recommended due to the volume of data.  Instead I use  DataExtension.ConsoleApp to automate the process so a backup database state would be saved off for each year processed, handling one year a time, this makes checking the data for errors more feasible.
 
-* DataSetExtension - The library
+###Project Structure
+* DataSetExtension - The core library
 * DataSetExtension.Database - Namespace that contains database management classes for each set of data (SQLite)
 * DataSetExtension.Import - Namespace that contains import classes for each format
 * DataSetExtension.ImportConsole - A console app that aids in import-related tasks
@@ -29,9 +24,16 @@ While multiple years could be processed at once in a single database, this is no
 * DataSetExtension.Tests - Unit tests for the library
 * DataSetExtension.ConsoleApp - App used to automate the entire process for multiple years, code MUST be modified before usage.
 
+###Station Substitution###
+Sometimes a COOP station will not have data for a particular day for a number of various reasons, or the measurement will have a flag that denotes it's likely an error.  In this case the library selects the nearest station (based on latitude and longitude) that has data for that day and uses it as a substitute station.
+
+###Missing Canada Data###
+Due to budget cuts there was missing Canada data at the time of extension, the data is said to exist on backup tape but needs to be made available online. When this data becomes available online these years can be processed again.
+
+
 ###Requirements and Dependencies###
-The project was built in Mono on OS X but should work on Windows as well. It uses SQLite and Dapper for data storage during processing.  Why Mono? It is the first and last Mono app I have ever written for OS X, just an excercise to see what it would be like. All the tests passed on Mono 3.2.7.
+The project was built in Mono on OS X but should work on Windows as well. It uses SQLite and Dapper for data storage during processing. All the tests passed on Mono 3.2.7.
 
 
 ###Copyright###
-Copyright (C) 2011  Seth Deckard, See LICENSE.txt for details.
+Copyright (C) 2014  Seth Deckard, See LICENSE.txt for details.
