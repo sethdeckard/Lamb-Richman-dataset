@@ -11,7 +11,7 @@ namespace DataSetExtension.Import
     {
         public override void Import(Stream stream, IDbConnection connection)
         {
-			CreateCommand(connection);
+            CreateCommand(connection);
 
             using (var reader = new StreamReader(stream, Encoding.ASCII))
             {
@@ -25,18 +25,18 @@ namespace DataSetExtension.Import
 
                     if (line.Contains("TMIN"))
                     {
-						ImportTemperatureMin(connection, Td3200.Parse(line));
+                        ImportTemperatureMin(connection, Td3200.Parse(line));
                     }
 
                     if (line.Contains("PRCP"))
                     {
-						ImportPrecipitation(connection, Td3200.Parse(line));
+                        ImportPrecipitation(connection, Td3200.Parse(line));
                     }
-					
-					Total += 1;
+
+                    Total += 1;
                 }
-				
-				Command.Transaction.Commit();
+
+                Command.Transaction.Commit();
             }
         }
     }
