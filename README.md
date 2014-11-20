@@ -1,14 +1,14 @@
 [![Build Status](https://travis-ci.org/sethdeckard/Lamb-Richman-dataset.svg?branch=master)](https://travis-ci.org/sethdeckard/Lamb-Richman-dataset)
 #Lamb-Richman Dataset Extension#
 
-LR Dataset Extension is a library that generates or extends the Lamb-Richman dataset using COOP station data from the US (NOAA/NWS) and Canada (when available).  Created by Dr. Peter Lamb and Dr Michael Richman of the University of Oklahoma School of Meteorology, the climate dataset provides max/min temperature and precipitation data from 50 uniform grid points over the US and Canada, east of the Rocky Mountains. This dataset is ideal for machine learning applications related to climate science.  The library extended the existing dataset (1949-2000) from 2001 to 2010 and it can be used to automate the extension of additional years or regenerate the entire dataset again.
+LR Dataset Extension is a library that generates or extends the Lamb-Richman dataset using COOP station data from the US (NOAA/NWS) and Canada (when available).  Created by Dr. Peter Lamb and Dr Michael Richman of the University of Oklahoma School of Meteorology, the climate dataset provides max/min temperature and precipitation data from 766 uniform grid points over the US and Canada, east of the Rocky Mountains. This dataset is ideal for machine learning applications related to climate science.  The library extended the existing dataset (1949-2000) from 2001 to 2010 and it can be used to automate the extension of additional years or regenerate the entire dataset again.
 
 ###Process###
 The overall process consists of the following steps:
 
 1. Import master US station list (only performed once, contains location of stations).
 2. Import master Canada station list (only once, contains location of stations).
-3. Import grid station info from previous export of each type (tmininfo.txt, tmaxinfo.txt, prcpinfo.txt). These were the stations actually selected as the 50 uniform grid points for each type and they will be used again except when a substitute takes place.
+3. Import grid station info from previous export of each type (tmininfo.txt, tmaxinfo.txt, prcpinfo.txt). These were the stations actually selected as the 766 uniform grid points for each type and they will be used again except when a substitute takes place.
 4. Import US COOP data from stations for a single year (TD3200 format).
 5. Import Canada raw data for the same year.
 6. Export data for that year.
