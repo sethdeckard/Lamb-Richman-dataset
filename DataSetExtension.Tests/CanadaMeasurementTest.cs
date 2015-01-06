@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace DataSetExtension.Tests
 {
- 	[TestFixture]
+    [TestFixture]
     public class CanadaMeasurementTest
     {
         [Test]
@@ -17,9 +17,9 @@ namespace DataSetExtension.Tests
  
             var measurement = results[0];
             Assert.That(measurement.StationNumber, Is.EqualTo("3010890"));
-			Assert.That(measurement.Date, Is.EqualTo(DateTime.Parse("02/01/2001")));
-			Assert.That(measurement.Value, Is.EqualTo(5));
-			Assert.That(measurement.Element, Is.EqualTo(Element.TemperatureMin));
+            Assert.That(measurement.Date, Is.EqualTo(DateTime.Parse("02/01/2001")));
+            Assert.That(measurement.Value, Is.EqualTo(5));
+            Assert.That(measurement.Element, Is.EqualTo(Element.TemperatureMin));
            
             line = "3012205200202001-00028 -00025 000015 000020 000037 000022 -00024 -00043 -00024 000050 000028 000049" + 
                 " 000013 000044 000071 000026 000048 000003 -00016 000032 -00005 -00028 -00112 -00136 -00134 " + 
@@ -29,23 +29,23 @@ namespace DataSetExtension.Tests
  
             measurement = results[0];
             Assert.That(measurement.StationNumber, Is.EqualTo("3012205"));
-			Assert.That(measurement.Element, Is.EqualTo(Element.TemperatureMax));
+            Assert.That(measurement.Element, Is.EqualTo(Element.TemperatureMax));
  
             line = "3012208200404012000000 000000 000000 000000 000000 000008 000000 000000 000000 000000 000000T000004" + 
                 " 000028 000162 000008 000004 000000 000000 000000T000000 000000 000000T000002 000000 000000 000000" + 
                 " 000100 000000T000000 000000 -99999M";
             results = CanadaMeasurement.Parse(line);
-			Assert.That(results.Length, Is.EqualTo(30));
-			
+            Assert.That(results.Length, Is.EqualTo(30));
+            
             measurement = results[5];
             Assert.That(measurement.StationNumber, Is.EqualTo("3012208"));
-			Assert.That(measurement.Date, Is.EqualTo(DateTime.Parse("04/06/2004")));
-			Assert.That(measurement.Value, Is.EqualTo(3));
-			Assert.That(measurement.Element, Is.EqualTo(Element.Precipitation));
-			
-			measurement = results[10];
-			Assert.That(measurement.Value, Is.EqualTo(1));
-			
+            Assert.That(measurement.Date, Is.EqualTo(DateTime.Parse("04/06/2004")));
+            Assert.That(measurement.Value, Is.EqualTo(3));
+            Assert.That(measurement.Element, Is.EqualTo(Element.Precipitation));
+            
+            measurement = results[10];
+            Assert.That(measurement.Value, Is.EqualTo(1));
+            
         }
     }
 }
