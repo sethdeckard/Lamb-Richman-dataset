@@ -18,4 +18,3 @@ namespace DataSetExtension.Tests
         }
     }
 }
-
