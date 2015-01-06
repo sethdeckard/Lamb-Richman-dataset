@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace DataSetExtension
 {
-	public class GridSummaryWriter : IGridSummaryWriter
-	{
-      	private const string HeaderFormat = "{0}{1} {2} {3}{4} {5} {6}{7}";
+    public class GridSummaryWriter : IGridSummaryWriter
+    {
+        private const string HeaderFormat = "{0}{1} {2} {3}{4} {5} {6}{7}";
         private const string LineFormat = "           {0}{1} {2} {3}{4}";
         private const string EditLine = "                                                     EDITS:       0";
         private const string TotalLine = "                                                     TOTAL:";
@@ -17,8 +17,8 @@ namespace DataSetExtension
         {
             writer = new StreamWriter(stream); 
         }
-		
-		public bool IncludeHistoricalCount { get; set; }
+        
+        public bool IncludeHistoricalCount { get; set; }
  
         public void Write(GridStation[] details)
         {
@@ -29,13 +29,13 @@ namespace DataSetExtension
             var header = true;
             foreach (var detail in details.OrderBy(detail => detail.Sequence))
             {
-				if (IncludeHistoricalCount)
-				{
-					detail.RecordCount += detail.HistoricalRecordCount;	
-				}
-				
-				var name = detail.Name.PadRight(30, ' ').Substring(0, 30);
-				
+                if (IncludeHistoricalCount)
+                {
+                    detail.RecordCount += detail.HistoricalRecordCount; 
+                }
+                
+                var name = detail.Name.PadRight(30, ' ').Substring(0, 30);
+                
                 if (header)
                 {
                     var line = string.Format(
@@ -71,5 +71,5 @@ namespace DataSetExtension
  
             writer.Flush();
         }
-	}
+    }
 }

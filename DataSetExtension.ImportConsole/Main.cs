@@ -12,10 +12,10 @@ using Dapper;
 
 namespace DataSetExtension.ImportConsole
 {
-	class MainClass
-	{
-		private const string DatabaseName = "DataSetExtension.sqlite";
-		
+    class MainClass
+    {
+        private const string DatabaseName = "DataSetExtension.sqlite";
+        
         static void Main(string[] args)
         {
             var command = "help";
@@ -53,19 +53,19 @@ namespace DataSetExtension.ImportConsole
             }
             else if (command == "ca")
             {
-				throw new NotImplementedException("Canadian import is not implemented.");
+                throw new NotImplementedException("Canadian import is not implemented.");
             }
             else if (command == "tmininfo")
             {
-				ImportTemperatureMinStations(file);
+                ImportTemperatureMinStations(file);
             }
             else if (command == "tmaxinfo")
             {
-				ImportTemperatureMaxStations(file);
+                ImportTemperatureMaxStations(file);
             }
             else if (command == "prcpinfo")
             {
-				ImportTemperatureMinStations(file);
+                ImportTemperatureMinStations(file);
             }
             else
             {
@@ -101,42 +101,42 @@ namespace DataSetExtension.ImportConsole
             Console.WriteLine("database populated with stations to skip the station *info import steps.");
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
-		
-		private static IDbConnection CreateConnection() 
-		{
-			var builder = new SqliteConnectionStringBuilder
-			{
-				DataSource = DatabaseName,
-				Version = 3,
-				DateTimeFormat = SQLiteDateFormats.Ticks,
-				JournalMode = SQLiteJournalModeEnum.Off,
-				SyncMode = SynchronizationModes.Off
-			};
-			
-			return new SqliteConnection(builder.ToString());
-		}
-		
-		private static void ImportPrecipitationStations(string file) 
-		{
-			var count = ImportStations(file, GridStationDatabase.PrecipitationStationTable);
-			Console.WriteLine(count + " precipitation stations imported");
-		}
-		
-		private static void ImportTemperatureMinStations(string file) 
-		{
-			var count = ImportStations(file, GridStationDatabase.TemperatureMinStationTable);
-			Console.WriteLine(count + " temperature min stations imported");
-		}
-		
-		private static void ImportTemperatureMaxStations(string file) 
-		{
-			var count = ImportStations(file, GridStationDatabase.TemperatureMaxStationTable);
-			Console.WriteLine(count + " temperature max stations imported");
-		}
-		
-		private static int ImportStations(string file, string table) 
-		{
-			using (IDbConnection connection = CreateConnection())
+        
+        private static IDbConnection CreateConnection() 
+        {
+            var builder = new SqliteConnectionStringBuilder
+            {
+                DataSource = DatabaseName,
+                Version = 3,
+                DateTimeFormat = SQLiteDateFormats.Ticks,
+                JournalMode = SQLiteJournalModeEnum.Off,
+                SyncMode = SynchronizationModes.Off
+            };
+            
+            return new SqliteConnection(builder.ToString());
+        }
+        
+        private static void ImportPrecipitationStations(string file) 
+        {
+            var count = ImportStations(file, GridStationDatabase.PrecipitationStationTable);
+            Console.WriteLine(count + " precipitation stations imported");
+        }
+        
+        private static void ImportTemperatureMinStations(string file) 
+        {
+            var count = ImportStations(file, GridStationDatabase.TemperatureMinStationTable);
+            Console.WriteLine(count + " temperature min stations imported");
+        }
+        
+        private static void ImportTemperatureMaxStations(string file) 
+        {
+            var count = ImportStations(file, GridStationDatabase.TemperatureMaxStationTable);
+            Console.WriteLine(count + " temperature max stations imported");
+        }
+        
+        private static int ImportStations(string file, string table) 
+        {
+            using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
 
@@ -144,32 +144,32 @@ namespace DataSetExtension.ImportConsole
                 database.CreateSchema();
 
                 var import = new GridStationImport();
-                import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, table);	
-				
-				return import.Total;
-			}	
-		}
-		
-		private static void ImportTd3200(string file) 
-		{
-			Console.WriteLine("Importing TD3200 data...");
-			
+                import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection, table); 
+                
+                return import.Total;
+            }   
+        }
+        
+        private static void ImportTd3200(string file) 
+        {
+            Console.WriteLine("Importing TD3200 data...");
+            
             using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
-				
-				var tempMinStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMinStationTable).ToArray();
-				
-				var tempMaxStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMaxStationTable).ToArray();
-				
-				var precipStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.PrecipitationStationTable).ToArray();
-				
+                
+                var tempMinStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMinStationTable).ToArray();
+                
+                var tempMaxStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.TemperatureMaxStationTable).ToArray();
+                
+                var precipStations = connection.Query<GridStation>("select Id, Number, GridPoint from " + GridStationDatabase.PrecipitationStationTable).ToArray();
+                
                 var import = new Td3200Import 
-					{
-						TemperatureMinStations = tempMinStations, 
-						TemperatureMaxStations = tempMaxStations, 
-						PrecipitationStations = precipStations
-					};
+                    {
+                        TemperatureMinStations = tempMinStations, 
+                        TemperatureMaxStations = tempMaxStations, 
+                        PrecipitationStations = precipStations
+                    };
 
                 var database = new MeasurementDatabase(connection);
                 database.CreateSchema();
@@ -178,16 +178,16 @@ namespace DataSetExtension.ImportConsole
                 stopwatch.Start();
 
                 import.Import(new FileStream(file, FileMode.Open, FileAccess.Read), connection);
-				
-				stopwatch.Stop();
-				
-				Console.WriteLine(import.Total + " TD3200 records imported.");
-				Console.WriteLine("Total TD3200 Import time: " + stopwatch.Elapsed.ToString());
-				
-				Console.WriteLine("Running VACUUM command on database file...");
-				connection.Execute("vacuum;");
-				Console.WriteLine("Finished.");
+                
+                stopwatch.Stop();
+                
+                Console.WriteLine(import.Total + " TD3200 records imported.");
+                Console.WriteLine("Total TD3200 Import time: " + stopwatch.Elapsed.ToString());
+                
+                Console.WriteLine("Running VACUUM command on database file...");
+                connection.Execute("vacuum;");
+                Console.WriteLine("Finished.");
             }
-		}
-	}
+        }
+    }
 }

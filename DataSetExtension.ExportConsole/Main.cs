@@ -10,10 +10,10 @@ using Dapper;
 
 namespace DataSetExtension.ExportConsole
 {
-	class MainClass
-	{
-		private const string DatabaseName = "DataSetExtension.sqlite";
-		
+    class MainClass
+    {
+        private const string DatabaseName = "DataSetExtension.sqlite";
+        
         static void Main(string[] args)
         {
             var command = "help";
@@ -102,48 +102,48 @@ namespace DataSetExtension.ExportConsole
             Console.WriteLine("attempting to be exported, run the import command to perform these tasks first.");
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
-		
-		private static IDbConnection CreateConnection() 
-		{
-			var builder = new SqliteConnectionStringBuilder
-			{
-				DataSource = DatabaseName,
-				Version = 3,
-				DateTimeFormat = SQLiteDateFormats.Ticks				
-			};
-			
-			return new SqliteConnection(builder.ToString());
-		}
-		
-		private static void Export(string basePath, int year) 
-		{
-			using (IDbConnection connection = CreateConnection())
+        
+        private static IDbConnection CreateConnection() 
+        {
+            var builder = new SqliteConnectionStringBuilder
+            {
+                DataSource = DatabaseName,
+                Version = 3,
+                DateTimeFormat = SQLiteDateFormats.Ticks                
+            };
+            
+            return new SqliteConnection(builder.ToString());
+        }
+        
+        private static void Export(string basePath, int year) 
+        {
+            using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
-				
-				var controller = new ExportController(connection, basePath);
-				
-				Console.WriteLine("Exporting TemperatureMin...");
-				var stopwatch = new Stopwatch();
+                
+                var controller = new ExportController(connection, basePath);
+                
+                Console.WriteLine("Exporting TemperatureMin...");
+                var stopwatch = new Stopwatch();
                 stopwatch.Start();
-				controller.ExportTemperatureMin(year);
-				stopwatch.Stop();
-				Console.WriteLine("Total TemperatureMin export time: " + stopwatch.Elapsed.ToString());
-				
-				Console.WriteLine("Exporting TemperatureMax...");
-				stopwatch = new Stopwatch();
+                controller.ExportTemperatureMin(year);
+                stopwatch.Stop();
+                Console.WriteLine("Total TemperatureMin export time: " + stopwatch.Elapsed.ToString());
+                
+                Console.WriteLine("Exporting TemperatureMax...");
+                stopwatch = new Stopwatch();
                 stopwatch.Start();
-				controller.ExportTemperatureMax(year);
-				stopwatch.Stop();
-				Console.WriteLine("Total TemperatureMax export time: " + stopwatch.Elapsed.ToString());
-				
-				Console.WriteLine("Exporting Precipitation...");
-				stopwatch = new Stopwatch();
+                controller.ExportTemperatureMax(year);
+                stopwatch.Stop();
+                Console.WriteLine("Total TemperatureMax export time: " + stopwatch.Elapsed.ToString());
+                
+                Console.WriteLine("Exporting Precipitation...");
+                stopwatch = new Stopwatch();
                 stopwatch.Start();
-				controller.ExportPrecipitation(year);
-				stopwatch.Stop();
-				Console.WriteLine("Total Precipitation export time: " + stopwatch.Elapsed.ToString());
-			}
-		}
-	}
+                controller.ExportPrecipitation(year);
+                stopwatch.Stop();
+                Console.WriteLine("Total Precipitation export time: " + stopwatch.Elapsed.ToString());
+            }
+        }
+    }
 }
