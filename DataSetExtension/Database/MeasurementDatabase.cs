@@ -20,27 +20,27 @@ namespace DataSetExtension.Database
         public void CreateSchema()
         {
             connection.Execute(GenerateCreateTableStatement(PrecipitationTable));
-			connection.Execute(GenerateCreateIndexStatements(PrecipitationTable));
-			
+            connection.Execute(GenerateCreateIndexStatements(PrecipitationTable));
+            
             connection.Execute(GenerateCreateTableStatement(TemperatureMaxTable));
-			connection.Execute(GenerateCreateIndexStatements(TemperatureMaxTable));
-			
+            connection.Execute(GenerateCreateIndexStatements(TemperatureMaxTable));
+            
             connection.Execute(GenerateCreateTableStatement(TemperatureMinTable));
-        	connection.Execute(GenerateCreateIndexStatements(TemperatureMinTable));
-		}
-		
-		public void UpdateIndex()
-		{
-			UpdateIndex(PrecipitationTable);
-			UpdateIndex(TemperatureMaxTable);
-			UpdateIndex(TemperatureMinTable);
-		}
-		
-		private void UpdateIndex(string table)
-		{
-			connection.Execute(string.Format("REINDEX Index_{0}_StationNumber;", table));
-			connection.Execute(string.Format("REINDEX Index_{0}_StationId;", table));
-		}
+            connection.Execute(GenerateCreateIndexStatements(TemperatureMinTable));
+        }
+        
+        public void UpdateIndex()
+        {
+            UpdateIndex(PrecipitationTable);
+            UpdateIndex(TemperatureMaxTable);
+            UpdateIndex(TemperatureMinTable);
+        }
+        
+        private void UpdateIndex(string table)
+        {
+            connection.Execute(string.Format("REINDEX Index_{0}_StationNumber;", table));
+            connection.Execute(string.Format("REINDEX Index_{0}_StationId;", table));
+        }
 
         private static string GenerateCreateTableStatement(string table)
         {
@@ -51,19 +51,19 @@ namespace DataSetExtension.Database
             statement.AppendLine("StationId INTEGER,");
             statement.AppendLine("StationNumber TEXT,");
             statement.AppendLine("Date DATETIME,");
-			statement.AppendLine("DateString TEXT,");
-			statement.AppendLine("ObservationHour INTEGER,");
+            statement.AppendLine("DateString TEXT,");
+            statement.AppendLine("ObservationHour INTEGER,");
             statement.AppendLine("Value INTEGER");
             statement.AppendLine(");");
 
             return statement.ToString();
         }
-		
-		private static string GenerateCreateIndexStatements(string table)
-		{
-			var statement = string.Format("CREATE INDEX IF NOT EXISTS \"Index_{0}_StationNumber\" ON \"{0}\" (\"StationNumber\" ASC, \"Date\" ASC);", table);
-			statement += string.Format("CREATE INDEX IF NOT EXISTS \"Index_{0}_StationId\" ON \"{0}\" (\"StationId\" ASC, \"Date\" ASC);", table);
-			return statement;
-		}
+        
+        private static string GenerateCreateIndexStatements(string table)
+        {
+            var statement = string.Format("CREATE INDEX IF NOT EXISTS \"Index_{0}_StationNumber\" ON \"{0}\" (\"StationNumber\" ASC, \"Date\" ASC);", table);
+            statement += string.Format("CREATE INDEX IF NOT EXISTS \"Index_{0}_StationId\" ON \"{0}\" (\"StationId\" ASC, \"Date\" ASC);", table);
+            return statement;
+        }
     }
 }
