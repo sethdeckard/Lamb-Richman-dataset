@@ -7,8 +7,8 @@ namespace DataSetExtension
     {
         const double EarthMileRadius = 3958.761;
                 
-		readonly Func<double, double, double, double, double> calculateDistance 
-			= (lat1, lon1, lat2, lon2) => EarthMileRadius * 2 *
+        readonly Func<double, double, double, double, double> calculateDistance 
+            = (lat1, lon1, lat2, lon2) => EarthMileRadius * 2 *
         (
             Math.Asin(
                 Math.Min(1,
@@ -37,7 +37,7 @@ namespace DataSetExtension
 
         public double Latitude { get; set; } 
 
-		public double Longitude { get; set; }
+        public double Longitude { get; set; }
         
         public DateTime Start { get; set;}
         
@@ -145,17 +145,17 @@ namespace DataSetExtension
             return command;
         }
         
-		static double ToRadian(double val)
+        static double ToRadian(double val)
         {
             return val * (Math.PI / 180);
         }
  
-		static double DiffRadian(double val1, double val2)
+        static double DiffRadian(double val1, double val2)
         {
             return ToRadian(val2) - ToRadian(val1);
         }
         
-		static long ConvertDecimalToDegreesMinutes(double value)
+        static long ConvertDecimalToDegreesMinutes(double value)
         {
             var degrees = Math.Floor(value);        
             var minutes = ((value - degrees) * 60);
@@ -163,29 +163,29 @@ namespace DataSetExtension
             return Convert.ToInt64(degrees * 100 + Math.Floor(minutes));            
         }
         
-		static double ConvertDegreeAngleToDecimalDegrees(double degrees, double minutes, double seconds)
+        static double ConvertDegreeAngleToDecimalDegrees(double degrees, double minutes, double seconds)
         {
             var sign = Math.Sign(degrees);
             minutes *= sign;
             seconds *= sign;
             
-			return Math.Round(degrees + (double)(minutes/60) + (double)(seconds/3600), 6);
+            return Math.Round(degrees + (double)(minutes/60) + (double)(seconds/3600), 6);
         }
         
-		static double ParseLatitude(string value)
+        static double ParseLatitude(string value)
         {
             var degrees = double.Parse(value.Substring(0, 3));
-			var minutes = double.Parse(value.Substring(3, 2));
-			var seconds = double.Parse(value.Substring(6, 2));
+            var minutes = double.Parse(value.Substring(3, 2));
+            var seconds = double.Parse(value.Substring(6, 2));
             
             return ConvertDegreeAngleToDecimalDegrees(degrees, minutes, seconds);
         }
         
-		static double ParseLongitude(string longitude)
+        static double ParseLongitude(string longitude)
         {
-			var degrees = double.Parse(longitude.Substring(0, 4));
-			var minutes = double.Parse(longitude.Substring(5, 2));
-			var seconds = double.Parse(longitude.Substring(8, 2));
+            var degrees = double.Parse(longitude.Substring(0, 4));
+            var minutes = double.Parse(longitude.Substring(5, 2));
+            var seconds = double.Parse(longitude.Substring(8, 2));
             
             return ConvertDegreeAngleToDecimalDegrees(degrees, minutes, seconds);
         }

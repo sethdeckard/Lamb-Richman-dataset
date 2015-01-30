@@ -2,8 +2,8 @@ using System;
 
 namespace DataSetExtension
 {
-	public interface IGridSummaryWriter
-	{
-		void Write(GridStation[] details);
-	}
+    public interface IGridSummaryWriter
+    {
+        void Write(GridStation[] details);
+    }
 }
