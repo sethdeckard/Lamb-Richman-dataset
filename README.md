@@ -41,7 +41,7 @@ The project was built in Mono on OS X, in theory it should work on Windows as we
     #run unit tests
     ./run-tests.sh
     
-    The onsole applications output help info to describe their usage.
+    The console applications output help info to describe their usage.
 
 
 ###Copyright###
