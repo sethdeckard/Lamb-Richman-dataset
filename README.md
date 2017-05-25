@@ -17,7 +17,7 @@ The overall process consists of the following steps:
 
 While multiple years could be processed at once in a single database, this is not recommended due to the volume of data.  Instead I use  DataExtension.ConsoleApp to automate the process so a backup database state would be saved off for each year processed, handling one year a time, this makes checking the data for errors more feasible.
 
-###Project Structure
+###Project Structure###
 * DataSetExtension - The core library
 * DataSetExtension.Database - Namespace that contains database management classes for each set of data (SQLite)
 * DataSetExtension.Import - Namespace that contains import classes for each format
