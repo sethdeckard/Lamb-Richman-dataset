@@ -5,4 +5,5 @@ mono:
   - 3.10.0
 solution: DataSetExtension.sln
 script:
-    - ./run_tests
+  - ./build
+  - ./tests
